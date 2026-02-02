@@ -1,0 +1,9 @@
+{
+  "outputDirectory": "site",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/beginner", "destination": "/beginner-path-v2.html" },
+    { "source": "/training", "destination": "/training-page-v2.html" },
+    { "source": "/modules", "destination": "/module-skills-v2.html" }
+  ]
+}
