@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Path - Agent Development</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .tab { padding: 1rem 1rem; font-size: 0.875rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+        .tab:hover { color: #1a1a1a; }
+        .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .info-box { background: #fef3c7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; border-left: 4px solid #f59e0b; }
+        .info-box h3 { font-size: 1rem; font-weight: 600; color: #92400e; margin-bottom: 0.5rem; }
+        .info-box p { color: #78350f; font-size: 0.9375rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+        .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .callout-limitation { background: #fff7ed; border-left: 3px solid #f97316; }
+        .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; }
+        .callout-breakthrough .callout-title { color: #16a34a; }
+        .callout-limitation .callout-title { color: #ea580c; }
+        .callout-breakthrough .callout-title::before { content: '✦'; }
+        .callout-limitation .callout-title::before { content: '⚠'; }
+        .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
+        .terminal-window { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin-bottom: 2rem; }
+        .terminal-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #febc2e; }
+        .terminal-dot.green { background: #28c840; }
+        .terminal-title { color: #999; font-size: 0.8125rem; margin-left: 0.5rem; font-family: monospace; }
+        .terminal-content { padding: 1.5rem; }
+        .module-list { list-style: none; }
+        .module-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #333; cursor: pointer; transition: background 0.2s; text-decoration: none; }
+        .module-item:last-child { border-bottom: none; }
+        .module-item:hover { background: rgba(255, 255, 255, 0.05); margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; }
+        .module-number { width: 28px; height: 28px; background: #f59e0b; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8125rem; font-weight: 600; flex-shrink: 0; }
+        .module-info { flex: 1; }
+        .module-title { color: white; font-weight: 500; font-size: 0.9375rem; margin-bottom: 0.25rem; }
+        .module-meta { color: #888; font-size: 0.8125rem; }
+        .module-arrow { color: #666; }
+        .progress-section { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .progress-title { font-weight: 600; font-size: 0.9375rem; }
+        .progress-percent { font-weight: 700; color: #f59e0b; }
+        .progress-bar { height: 8px; background: #f0f0f0; border-radius: 4px; overflow: hidden; margin-bottom: 1rem; }
+        .progress-fill { height: 100%; background: #f59e0b; border-radius: 4px; }
+        .progress-stats { display: flex; justify-content: space-between; font-size: 0.8125rem; color: #666; }
+        .criteria-section { margin-top: 2.5rem; }
+        .criteria-list { list-style: none; background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1rem 1.5rem; }
+        .criteria-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; }
+        .criteria-item:last-child { border-bottom: none; }
+        .criteria-check { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .nav-buttons { display: flex; gap: 1rem; margin-top: 2.5rem; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-primary { background: #f59e0b; color: white; }
+        .btn-primary:hover { background: #d97706; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .section-tabs { overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="../" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <nav class="section-tabs">
+        <a href="index.html" class="tab active">Overview</a>
+        <a href="module-3-1.html" class="tab">Deep Dive</a>
+        <a href="module-3-2.html" class="tab">Agent SDK</a>
+        <a href="module-3-3.html" class="tab">MCP</a>
+        <a href="module-3-4.html" class="tab">Multi-Agent</a>
+        <a href="module-3-5.html" class="tab">Gladly</a>
+        <a href="module-3-6.html" class="tab">Production</a>
+    </nav>
+
+    <main class="main">
+        <div class="section-indicator">ADVANCED PATH</div>
+        <h1 class="page-title">Agent Development</h1>
+        <p class="page-subtitle">Build production-ready AI agents for Gladly's 9-agent initiative</p>
+
+        <div class="info-box">
+            <h3>Who should take this?</h3>
+            <p>This path is for core AI Acceleration team members and agent owners. You should have completed the Intermediate Path, including building a working automation. This path prepares you to build and deploy production agents.</p>
+        </div>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">What You'll Gain</div>
+            <p>After completing this path, you'll be able to build functional agents using the Agent SDK, integrate agents with external services via MCP, coordinate multi-agent workflows, and deploy production agents to the sagansystems GitHub org.</p>
+        </div>
+
+        <h2 class="section-heading">Your Learning Journey</h2>
+        <p class="section-description">Complete these 6 modules to earn your Agent Developer certificate</p>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">Learning Modules</span>
+            </div>
+            <div class="terminal-content">
+                <ul class="module-list">
+                    <a href="module-3-1.html" class="module-item">
+                        <div class="module-number">1</div>
+                        <div class="module-info">
+                            <div class="module-title">Claude Code 101 Deep Dive</div>
+                            <div class="module-meta">30 min • Advanced features and patterns</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="module-3-2.html" class="module-item">
+                        <div class="module-number">2</div>
+                        <div class="module-info">
+                            <div class="module-title">Claude Agent SDK</div>
+                            <div class="module-meta">120 min • Build agents with official SDK</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="module-3-3.html" class="module-item">
+                        <div class="module-number">3</div>
+                        <div class="module-info">
+                            <div class="module-title">MCP Server Integration</div>
+                            <div class="module-meta">90 min • Connect agents to external services</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="module-3-4.html" class="module-item">
+                        <div class="module-number">4</div>
+                        <div class="module-info">
+                            <div class="module-title">Multi-Agent Orchestration</div>
+                            <div class="module-meta">90 min • Coordinate multiple agents</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="module-3-5.html" class="module-item">
+                        <div class="module-number">5</div>
+                        <div class="module-info">
+                            <div class="module-title">Gladly Deep Dive</div>
+                            <div class="module-meta">90 min • Gladly AI architecture and integration</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="module-3-6.html" class="module-item">
+                        <div class="module-number">6</div>
+                        <div class="module-info">
+                            <div class="module-title">Production Agent Development</div>
+                            <div class="module-meta">180 min • Build, test, and deploy</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </ul>
+            </div>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-header">
+                <span class="progress-title">Your Progress</span>
+                <span class="progress-percent">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <div class="progress-stats">
+                <span>0 of 6 modules complete</span>
+                <span>~10 hours remaining</span>
+            </div>
+        </div>
+
+        <section class="criteria-section">
+            <h2 class="section-heading">Completion Criteria</h2>
+            <p class="section-description">Complete all criteria to earn your Agent Developer certificate</p>
+
+            <ul class="criteria-list">
+                <li class="criteria-item">
+                    <div class="criteria-check"></div>
+                    Complete Gladly Deep Dive course
+                </li>
+                <li class="criteria-item">
+                    <div class="criteria-check"></div>
+                    Build functional agent using Agent SDK
+                </li>
+                <li class="criteria-item">
+                    <div class="criteria-check"></div>
+                    Integrate agent with at least one MCP server
+                </li>
+                <li class="criteria-item">
+                    <div class="criteria-check"></div>
+                    Demonstrate multi-agent coordination
+                </li>
+                <li class="criteria-item">
+                    <div class="criteria-check"></div>
+                    Deploy one production agent to sagansystems
+                </li>
+            </ul>
+        </section>
+
+        <div class="callout callout-limitation">
+            <div class="callout-title">Time Commitment</div>
+            <p>This path requires 15-20 hours spread over 4-6 weeks. The final module (Production Agent Development) involves building a real agent for Gladly's 9-agent initiative.</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="../learning-paths/" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back to Learning Paths
+            </a>
+            <a href="module-3-1.html" class="btn btn-primary">
+                Start Module 1
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

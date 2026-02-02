@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intermediate Path - Building with Claude</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .tab { padding: 1rem 1.5rem; font-size: 0.9375rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+        .tab:hover { color: #1a1a1a; }
+        .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+        .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .info-box p { color: #666; font-size: 0.9375rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+        .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .callout-limitation { background: #fff7ed; border-left: 3px solid #f97316; }
+        .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; }
+        .callout-breakthrough .callout-title { color: #16a34a; }
+        .callout-limitation .callout-title { color: #ea580c; }
+        .callout-breakthrough .callout-title::before { content: '✦'; }
+        .callout-limitation .callout-title::before { content: '⚠'; }
+        .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
+        .terminal-window { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin-bottom: 2rem; }
+        .terminal-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #febc2e; }
+        .terminal-dot.green { background: #28c840; }
+        .terminal-title { color: #999; font-size: 0.8125rem; margin-left: 0.5rem; font-family: monospace; }
+        .terminal-content { padding: 1.5rem; }
+        .module-list { list-style: none; }
+        .module-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #333; cursor: pointer; transition: background 0.2s; text-decoration: none; }
+        .module-item:last-child { border-bottom: none; }
+        .module-item:hover { background: rgba(255, 255, 255, 0.05); margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; }
+        .module-number { width: 28px; height: 28px; background: #8b5cf6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8125rem; font-weight: 600; flex-shrink: 0; }
+        .module-number.required { background: #f59e0b; }
+        .module-info { flex: 1; }
+        .module-title { color: white; font-weight: 500; font-size: 0.9375rem; margin-bottom: 0.25rem; }
+        .module-meta { color: #888; font-size: 0.8125rem; }
+        .module-badge { display: inline-block; background: #f59e0b; color: white; font-size: 0.625rem; padding: 0.125rem 0.375rem; border-radius: 3px; margin-left: 0.5rem; text-transform: uppercase; font-weight: 600; }
+        .module-arrow { color: #666; }
+        .progress-section { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .progress-title { font-weight: 600; font-size: 0.9375rem; }
+        .progress-percent { font-weight: 700; color: #8b5cf6; }
+        .progress-bar { height: 8px; background: #f0f0f0; border-radius: 4px; overflow: hidden; margin-bottom: 1rem; }
+        .progress-fill { height: 100%; background: #8b5cf6; border-radius: 4px; }
+        .progress-stats { display: flex; justify-content: space-between; font-size: 0.8125rem; color: #666; }
+        .criteria-section { margin-top: 2.5rem; }
+        .criteria-list { list-style: none; background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1rem 1.5rem; }
+        .criteria-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; }
+        .criteria-item:last-child { border-bottom: none; }
+        .criteria-check { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .nav-buttons { display: flex; gap: 1rem; margin-top: 2.5rem; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-primary { background: #8b5cf6; color: white; }
+        .btn-primary:hover { background: #7c3aed; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .section-tabs { overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="../" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <nav class="section-tabs">
+        <a href="index.html" class="tab active">Overview</a>
+        <a href="module-2-1.html" class="tab">Code in Action</a>
+        <a href="module-2-2.html" class="tab">Planning Mode</a>
+        <a href="module-2-3.html" class="tab">Skills</a>
+        <a href="module-2-4.html" class="tab">Projects</a>
+        <a href="module-2-5.html" class="tab">Automations</a>
+    </nav>
+
+    <main class="main">
+        <div class="section-indicator">INTERMEDIATE PATH</div>
+        <h1 class="page-title">Building with Claude</h1>
+        <p class="page-subtitle">Create Claude Skills and Projects to automate your own workflows</p>
+
+        <div class="info-box">
+            <h3>Who should take this?</h3>
+            <p>This path is for anyone contributing to agent development or wanting to automate their work. You should have completed the Beginner Path first to ensure you have the foundational knowledge needed.</p>
+        </div>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">What You'll Gain</div>
+            <p>After completing this path, you'll be able to use Claude Code's full capabilities, apply planning mode to reduce iteration cycles by 50%+, create reusable Claude Skills, and build your first working automations.</p>
+        </div>
+
+        <h2 class="section-heading">Your Learning Journey</h2>
+        <p class="section-description">Complete these 5 modules to earn your Claude Builder certificate</p>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">Learning Modules</span>
+            </div>
+            <div class="terminal-content">
+                <ul class="module-list">
+                    <a href="module-2-1.html" class="module-item">
+                        <div class="module-number required">1</div>
+                        <div class="module-info">
+                            <div class="module-title">Claude Code In Action <span class="module-badge">Required</span></div>
+                            <div class="module-meta">60 min • Anthropic's official Claude Code course</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="module-2-2.html" class="module-item">
+                        <div class="module-number required">2</div>
+                        <div class="module-info">
+                            <div class="module-title">Planning Mode Mastery <span class="module-badge">Critical</span></div>
+                            <div class="module-meta">60 min • Reduce iteration and improve output quality</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="module-2-3.html" class="module-item">
+                        <div class="module-number">3</div>
+                        <div class="module-info">
+                            <div class="module-title">Claude Skills Creation</div>
+                            <div class="module-meta">90 min • Build reusable workflows</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="module-2-4.html" class="module-item">
+                        <div class="module-number">4</div>
+                        <div class="module-info">
+                            <div class="module-title">Claude Projects Setup</div>
+                            <div class="module-meta">45 min • Create structured knowledge bases</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="module-2-5.html" class="module-item">
+                        <div class="module-number">5</div>
+                        <div class="module-info">
+                            <div class="module-title">Simple Automations</div>
+                            <div class="module-meta">90 min • Build your first working automation</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </ul>
+            </div>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-header">
+                <span class="progress-title">Your Progress</span>
+                <span class="progress-percent">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <div class="progress-stats">
+                <span>0 of 5 modules complete</span>
+                <span>~6 hours remaining</span>
+            </div>
+        </div>
+
+        <section class="criteria-section">
+            <h2 class="section-heading">Completion Criteria</h2>
+            <p class="section-description">Complete all criteria to earn your certificate</p>
+
+            <ul class="criteria-list">
+                <li class="criteria-item">
+                    <div class="criteria-check"></div>
+                    Complete Claude Code in Action course (certificate)
+                </li>
+                <li class="criteria-item">
+                    <div class="criteria-check"></div>
+                    Complete a project using full planning workflow
+                </li>
+                <li class="criteria-item">
+                    <div class="criteria-check"></div>
+                    Create and share one Claude Skill
+                </li>
+                <li class="criteria-item">
+                    <div class="criteria-check"></div>
+                    Build one working Claude Project
+                </li>
+                <li class="criteria-item">
+                    <div class="criteria-check"></div>
+                    Demo one automation to the team
+                </li>
+            </ul>
+        </section>
+
+        <div class="callout callout-limitation">
+            <div class="callout-title">Time Commitment</div>
+            <p>This path requires 8-12 hours spread over 2-3 weeks. We recommend completing 1-2 modules per week with hands-on practice between sessions.</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="../learning-paths/" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back to Learning Paths
+            </a>
+            <a href="module-2-1.html" class="btn btn-primary">
+                Start Module 1
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

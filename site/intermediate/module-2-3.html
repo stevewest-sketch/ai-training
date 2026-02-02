@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Skills Creation - Intermediate Path</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .tab { padding: 1rem 1.5rem; font-size: 0.9375rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+        .tab:hover { color: #1a1a1a; }
+        .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+        .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .info-box p { color: #666; font-size: 0.9375rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+        .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .callout-limitation { background: #fff7ed; border-left: 3px solid #f97316; }
+        .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; }
+        .callout-breakthrough .callout-title { color: #16a34a; }
+        .callout-limitation .callout-title { color: #ea580c; }
+        .callout-breakthrough .callout-title::before { content: '✦'; }
+        .callout-limitation .callout-title::before { content: '⚠'; }
+        .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
+        .video-container { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin-bottom: 2rem; }
+        .video-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .video-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .video-dot.red { background: #ff5f57; }
+        .video-dot.yellow { background: #febc2e; }
+        .video-dot.green { background: #28c840; }
+        .video-title { color: #999; font-size: 0.8125rem; margin-left: 0.5rem; font-family: monospace; }
+        .video-embed { position: relative; width: 100%; padding-bottom: 56.25%; background: #000; }
+        .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-meta { display: flex; gap: 1.5rem; margin-top: 1rem; flex-wrap: wrap; }
+        .video-meta-item { display: flex; align-items: center; gap: 0.5rem; color: #666; font-size: 0.875rem; }
+        .resource-card { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; transition: all 0.2s; }
+        .resource-card:hover { border-color: #8b5cf6; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1); }
+        .resource-icon { width: 48px; height: 48px; background: #f3e8ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
+        .resource-info { flex: 1; }
+        .resource-info h4 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.25rem; }
+        .resource-info p { font-size: 0.875rem; color: #666; }
+        .resource-link { color: #8b5cf6; text-decoration: none; font-weight: 500; font-size: 0.875rem; white-space: nowrap; }
+        .resource-link:hover { text-decoration: underline; }
+        .terminal-window { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin: 1.5rem 0; }
+        .terminal-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .terminal-content { padding: 1.5rem; color: #e5e5e5; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.875rem; line-height: 1.7; }
+        .terminal-content .comment { color: #6b7280; }
+        .terminal-content .string { color: #a5d6ff; }
+        .data-table-container { background: white; border: 1px solid #e5e5e5; border-radius: 12px; overflow: hidden; margin: 2rem 0; }
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th { background: #f9f9f9; padding: 0.875rem 1.25rem; text-align: left; font-size: 0.75rem; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #e5e5e5; }
+        .data-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; }
+        .data-table tr:last-child td { border-bottom: none; }
+        .phase-badge { display: inline-block; padding: 0.25rem 0.5rem; background: #f3e8ff; color: #7c3aed; border-radius: 4px; font-size: 0.8125rem; font-weight: 500; }
+        .example-list { list-style: none; background: white; border: 1px solid #e5e5e5; border-radius: 12px; overflow: hidden; }
+        .example-item { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; display: flex; align-items: flex-start; gap: 0.75rem; }
+        .example-item:last-child { border-bottom: none; }
+        .example-icon { width: 8px; height: 8px; background: #8b5cf6; border-radius: 50%; margin-top: 0.5rem; flex-shrink: 0; }
+        .example-item span { color: #4b5563; font-size: 0.9375rem; }
+        .knowledge-check { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .knowledge-check h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .knowledge-check h3::before { content: '📝'; }
+        .knowledge-check > p { color: #666; font-size: 0.9375rem; margin-bottom: 1rem; }
+        .check-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; }
+        .check-item:last-child { border-bottom: none; }
+        .check-box { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 4px; flex-shrink: 0; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-primary { background: #8b5cf6; color: white; }
+        .btn-primary:hover { background: #7c3aed; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .nav-buttons { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="../" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <nav class="section-tabs">
+        <a href="index.html" class="tab">Overview</a>
+        <a href="module-2-1.html" class="tab">Code in Action</a>
+        <a href="module-2-2.html" class="tab">Planning Mode</a>
+        <a href="module-2-3.html" class="tab active">Skills</a>
+        <a href="module-2-4.html" class="tab">Projects</a>
+        <a href="module-2-5.html" class="tab">Automations</a>
+    </nav>
+
+    <main class="main">
+        <div class="section-indicator">MODULE 3 OF 5</div>
+        <h1 class="page-title">Claude Skills Creation</h1>
+        <p class="page-subtitle">Build reusable workflows that automate recurring tasks</p>
+
+        <div class="info-box">
+            <h3>Why Skills Exist</h3>
+            <p>Claude Code doesn't retain contextual memory between sessions. Skills provide that persistent memory for repeatable processes, so you don't have to re-explain your workflows every time.</p>
+        </div>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">The Matrix Analogy</div>
+            <p>Skills are like uploading kung fu to Neo—you're giving Claude the knowledge to do a specific repeatable task instantly, without having to explain it every time. Just trigger the skill, and Claude already knows what to do.</p>
+        </div>
+
+        <h2 class="section-heading">Watch: Skills Explained</h2>
+        <p class="section-description">Learn the concepts behind Claude Skills</p>
+
+        <div class="video-container">
+            <div class="video-header">
+                <div class="video-dot red"></div>
+                <div class="video-dot yellow"></div>
+                <div class="video-dot green"></div>
+                <span class="video-title">Claude Skills Explained</span>
+            </div>
+            <div class="video-embed">
+                <iframe src="https://www.youtube.com/embed/MZZCW179nKM?start=1421" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="video-meta">
+            <div class="video-meta-item">⏱️ 25 minutes</div>
+            <div class="video-meta-item">📍 YouTube</div>
+        </div>
+
+        <h2 class="section-heading">Additional Resources</h2>
+
+        <div class="resource-card">
+            <div class="resource-icon">📚</div>
+            <div class="resource-info">
+                <h4>Skills Directory</h4>
+                <p>Browse trending skills created by the community for inspiration</p>
+            </div>
+            <a href="https://skills.sh/trending" target="_blank" class="resource-link">Browse Skills →</a>
+        </div>
+
+        <h2 class="section-heading">Skill Structure</h2>
+        <p class="section-description">Skills are markdown files with two critical sections</p>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">skill-example.md</span>
+            </div>
+            <div class="terminal-content">
+<span class="comment"># Description</span>
+<span class="string">"This skill analyzes customer Slack channels weekly
+and surfaces important discussions, questions, and
+sentiment patterns for account review."</span>
+
+<span class="comment"># Instructions</span>
+1. Connect to the specified Slack channels
+2. Pull messages from the past 7 days
+3. Identify key themes, questions, and concerns
+4. Generate a summary report with action items
+5. Output as markdown or send to Slack channel
+            </div>
+        </div>
+
+        <div class="callout callout-limitation">
+            <div class="callout-title">Key Insight</div>
+            <p>Focus most attention on tuning the <strong>description section</strong>—this determines when your skill fires. Claude scans all skill descriptions at the start of each conversation to decide which ones are relevant.</p>
+        </div>
+
+        <h2 class="section-heading">Automation Progression</h2>
+        <p class="section-description">Skills can evolve from manual triggers to fully automated workflows</p>
+
+        <div class="data-table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Phase</th>
+                        <th>Where to Run</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="phase-badge">Phase 1</span></td>
+                        <td>Chat / Cowork</td>
+                        <td>Manual trigger, learning the skill</td>
+                    </tr>
+                    <tr>
+                        <td><span class="phase-badge">Phase 2</span></td>
+                        <td>Claude Code</td>
+                        <td>Scheduled via cron job</td>
+                    </tr>
+                    <tr>
+                        <td><span class="phase-badge">Phase 3</span></td>
+                        <td>GitHub Actions + Slackbot</td>
+                        <td>Fully automated recurring runs</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="section-heading">Example Skills to Build</h2>
+        <p class="section-description">Practice by creating skills for these common use cases</p>
+
+        <ul class="example-list">
+            <li class="example-item">
+                <div class="example-icon"></div>
+                <span>Weekly Slack channel pulse analysis across customer accounts</span>
+            </li>
+            <li class="example-item">
+                <div class="example-icon"></div>
+                <span>Turn demo notes into structured follow-up emails</span>
+            </li>
+            <li class="example-item">
+                <div class="example-icon"></div>
+                <span>Generate changelog summaries from commit history</span>
+            </li>
+            <li class="example-item">
+                <div class="example-icon"></div>
+                <span>Create meeting prep briefs from calendar and Slack context</span>
+            </li>
+        </ul>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Pro Tips from Austin</div>
+            <p>Build the skill yourself from scratch to learn better—don't just copy someone else's. Add output actions like "send a message to Slack" or "create a Google Doc" to make skills immediately useful.</p>
+        </div>
+
+        <div class="knowledge-check">
+            <h3>Knowledge Check</h3>
+            <p>Create and share a working Claude Skill:</p>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Identify a task you do weekly that could be automated</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Start a new chat and say "help me create a skill"</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Answer Claude's clarifying questions about your workflow</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Review the generated skill.md and tune the description</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Test the skill in a new conversation</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Share your working skill with the team</span>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="module-2-2.html" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Previous: Planning Mode
+            </a>
+            <a href="module-2-4.html" class="btn btn-primary">
+                Next: Projects Setup
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

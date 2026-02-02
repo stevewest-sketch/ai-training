@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Automations - Intermediate Path</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .tab { padding: 1rem 1.5rem; font-size: 0.9375rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+        .tab:hover { color: #1a1a1a; }
+        .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+        .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .info-box p { color: #666; font-size: 0.9375rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+        .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .callout-limitation { background: #fff7ed; border-left: 3px solid #f97316; }
+        .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; }
+        .callout-breakthrough .callout-title { color: #16a34a; }
+        .callout-limitation .callout-title { color: #ea580c; }
+        .callout-breakthrough .callout-title::before { content: '✦'; }
+        .callout-limitation .callout-title::before { content: '⚠'; }
+        .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
+        .automation-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0; }
+        .automation-card { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; transition: all 0.2s; }
+        .automation-card:hover { border-color: #8b5cf6; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1); }
+        .automation-icon { width: 48px; height: 48px; background: #f3e8ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 1rem; }
+        .automation-card h4 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .automation-card p { font-size: 0.875rem; color: #666; }
+        .terminal-window { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin: 1.5rem 0; }
+        .terminal-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #febc2e; }
+        .terminal-dot.green { background: #28c840; }
+        .terminal-title { color: #999; font-size: 0.8125rem; margin-left: 0.5rem; font-family: monospace; }
+        .terminal-content { padding: 1.5rem; color: #e5e5e5; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.875rem; line-height: 1.8; }
+        .terminal-content .comment { color: #6b7280; }
+        .terminal-content .command { color: #a5d6ff; }
+        .steps-list { background: white; border: 1px solid #e5e5e5; border-radius: 12px; overflow: hidden; margin: 1.5rem 0; }
+        .step-item { padding: 1.25rem 1.5rem; border-bottom: 1px solid #f0f0f0; display: flex; gap: 1rem; }
+        .step-item:last-child { border-bottom: none; }
+        .step-number { width: 32px; height: 32px; background: #8b5cf6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.875rem; flex-shrink: 0; }
+        .step-content h4 { font-size: 0.9375rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.25rem; }
+        .step-content p { font-size: 0.875rem; color: #666; }
+        .knowledge-check { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .knowledge-check h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .knowledge-check h3::before { content: '📝'; }
+        .knowledge-check > p { color: #666; font-size: 0.9375rem; margin-bottom: 1rem; }
+        .check-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; }
+        .check-item:last-child { border-bottom: none; }
+        .check-box { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 4px; flex-shrink: 0; }
+        .completion-banner { background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%); border-radius: 12px; padding: 2rem; margin-top: 2.5rem; color: white; text-align: center; }
+        .completion-banner h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .completion-banner p { opacity: 0.9; margin-bottom: 1.5rem; }
+        .completion-banner .btn { background: white; color: #8b5cf6; }
+        .completion-banner .btn:hover { background: #f5f5f5; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-primary { background: #8b5cf6; color: white; }
+        .btn-primary:hover { background: #7c3aed; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        @media (max-width: 768px) {
+            .automation-cards { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .nav-buttons { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="../" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <nav class="section-tabs">
+        <a href="index.html" class="tab">Overview</a>
+        <a href="module-2-1.html" class="tab">Code in Action</a>
+        <a href="module-2-2.html" class="tab">Planning Mode</a>
+        <a href="module-2-3.html" class="tab">Skills</a>
+        <a href="module-2-4.html" class="tab">Projects</a>
+        <a href="module-2-5.html" class="tab active">Automations</a>
+    </nav>
+
+    <main class="main">
+        <div class="section-indicator">MODULE 5 OF 5</div>
+        <h1 class="page-title">Simple Automations</h1>
+        <p class="page-subtitle">Build your first working automation using Claude Code</p>
+
+        <div class="info-box">
+            <h3>Learning Objective</h3>
+            <p>By the end of this module, you'll build and demo a working automation that combines what you've learned about Claude Code, planning mode, skills, and projects.</p>
+        </div>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">The Capstone Module</div>
+            <p>This module brings everything together. You'll apply planning mode to design your automation, potentially create a skill to trigger it, and demonstrate it to the team.</p>
+        </div>
+
+        <h2 class="section-heading">Example Automations</h2>
+        <p class="section-description">Ideas for your first automation project</p>
+
+        <div class="automation-cards">
+            <div class="automation-card">
+                <div class="automation-icon">🎨</div>
+                <h4>Design Review</h4>
+                <p>Analyze design files and generate structured feedback based on brand guidelines.</p>
+            </div>
+            <div class="automation-card">
+                <div class="automation-icon">📊</div>
+                <h4>Architecture Diagrams</h4>
+                <p>Generate visual diagrams from code or documentation descriptions.</p>
+            </div>
+            <div class="automation-card">
+                <div class="automation-icon">✍️</div>
+                <h4>Writing Critique</h4>
+                <p>Analyze content against style guides and provide specific improvement suggestions.</p>
+            </div>
+        </div>
+
+        <h2 class="section-heading">Building Your Automation</h2>
+        <p class="section-description">Follow these steps to create your automation</p>
+
+        <div class="steps-list">
+            <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Choose Your Automation</h4>
+                    <p>Pick something you do regularly that would benefit from AI assistance. Start simple—you can always add complexity later.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Apply Planning Mode</h4>
+                    <p>Use the planning process from Module 2. Create a SPEC, interview with Claude, and get a solid plan before building.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Build Iteratively</h4>
+                    <p>Work with Claude Code to implement your automation. Test each component as you build.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Create a Skill (Optional)</h4>
+                    <p>If your automation should be repeatable, wrap it in a Claude Skill for easy triggering.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h4>Document & Demo</h4>
+                    <p>Write a brief README explaining what it does and how to use it. Then demo it to the team.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout callout-limitation">
+            <div class="callout-title">Keep It Simple</div>
+            <p>Your first automation doesn't need to be complex. A simple workflow that saves you 30 minutes a week is more valuable than an elaborate system you never finish building.</p>
+        </div>
+
+        <h2 class="section-heading">Demo Tips</h2>
+        <p class="section-description">How to present your automation effectively</p>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">demo-outline.md</span>
+            </div>
+            <div class="terminal-content">
+<span class="comment"># Demo Structure (5-10 minutes)</span>
+
+<span class="command">1. The Problem</span>
+   What task were you doing manually? How long did it take?
+
+<span class="command">2. The Solution</span>
+   Show the automation in action. Run it live if possible.
+
+<span class="command">3. How It Works</span>
+   Briefly explain the key components (skill, prompts, etc.)
+
+<span class="command">4. Results</span>
+   Time saved, quality improvements, or other benefits.
+
+<span class="command">5. What's Next</span>
+   Potential improvements or extensions you're considering.
+            </div>
+        </div>
+
+        <div class="knowledge-check">
+            <h3>Knowledge Check</h3>
+            <p>Complete your capstone automation project:</p>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Choose an automation project that solves a real problem</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Create a SPEC using the planning mode workflow</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Build the automation with Claude Code</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Test it with real data/inputs</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Document how it works (README or similar)</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Demo your automation to the team</span>
+            </div>
+        </div>
+
+        <div class="completion-banner">
+            <h3>Congratulations!</h3>
+            <p>You've completed the Intermediate Path. Ready to become an Agent Developer?</p>
+            <a href="../advanced/" class="btn">Continue to Advanced Path →</a>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="module-2-4.html" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Previous: Projects Setup
+            </a>
+            <a href="index.html" class="btn btn-primary">
+                Back to Overview
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

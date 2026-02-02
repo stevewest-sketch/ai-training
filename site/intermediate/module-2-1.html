@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code In Action - Intermediate Path</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .tab { padding: 1rem 1.5rem; font-size: 0.9375rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+        .tab:hover { color: #1a1a1a; }
+        .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .required-badge { display: inline-block; background: #f59e0b; color: white; font-size: 0.75rem; padding: 0.25rem 0.75rem; border-radius: 4px; font-weight: 600; text-transform: uppercase; margin-left: 0.75rem; vertical-align: middle; }
+        .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+        .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .info-box p { color: #666; font-size: 0.9375rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+        .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .callout-limitation { background: #fff7ed; border-left: 3px solid #f97316; }
+        .callout-important { background: #fef3c7; border-left: 3px solid #f59e0b; }
+        .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; }
+        .callout-breakthrough .callout-title { color: #16a34a; }
+        .callout-limitation .callout-title { color: #ea580c; }
+        .callout-important .callout-title { color: #b45309; }
+        .callout-breakthrough .callout-title::before { content: '✦'; }
+        .callout-limitation .callout-title::before { content: '⚠'; }
+        .callout-important .callout-title::before { content: '⭐'; }
+        .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
+        .resource-card { background: white; border: 2px solid #8b5cf6; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .resource-card .resource-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+        .resource-icon { width: 56px; height: 56px; background: #f3e8ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .resource-card h4 { font-size: 1.25rem; font-weight: 600; color: #1a1a1a; }
+        .resource-card > p { font-size: 0.9375rem; color: #666; margin-bottom: 1rem; }
+        .resource-meta { display: flex; gap: 1.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+        .resource-meta span { font-size: 0.875rem; color: #666; display: flex; align-items: center; gap: 0.5rem; }
+        .resource-link { display: inline-flex; align-items: center; gap: 0.5rem; background: #8b5cf6; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 500; transition: background 0.2s; }
+        .resource-link:hover { background: #7c3aed; }
+        .concepts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
+        .concept-card { background: white; border: 1px solid #e5e5e5; border-radius: 10px; padding: 1.25rem; }
+        .concept-card h4 { font-size: 0.9375rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .concept-card p { font-size: 0.875rem; color: #666; }
+        .knowledge-check { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .knowledge-check h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .knowledge-check h3::before { content: '📝'; }
+        .knowledge-check > p { color: #666; font-size: 0.9375rem; margin-bottom: 1rem; }
+        .check-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; }
+        .check-item:last-child { border-bottom: none; }
+        .check-box { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 4px; flex-shrink: 0; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-primary { background: #8b5cf6; color: white; }
+        .btn-primary:hover { background: #7c3aed; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        @media (max-width: 768px) {
+            .concepts-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .nav-buttons { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="../" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <nav class="section-tabs">
+        <a href="index.html" class="tab">Overview</a>
+        <a href="module-2-1.html" class="tab active">Code in Action</a>
+        <a href="module-2-2.html" class="tab">Planning Mode</a>
+        <a href="module-2-3.html" class="tab">Skills</a>
+        <a href="module-2-4.html" class="tab">Projects</a>
+        <a href="module-2-5.html" class="tab">Automations</a>
+    </nav>
+
+    <main class="main">
+        <div class="section-indicator">MODULE 1 OF 5</div>
+        <h1 class="page-title">Claude Code In Action <span class="required-badge">Required</span></h1>
+        <p class="page-subtitle">Master Claude Code's core tools and workflows</p>
+
+        <div class="callout callout-important">
+            <div class="callout-title">This is the most important training</div>
+            <p>This official Anthropic course covers everything you need to know about Claude Code directly from the source. Complete this course before moving to other modules.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>Learning Objective</h3>
+            <p>By the end of this module, you'll master Claude Code's core tools, context management, hotkeys, and be able to use Plan Mode and Thinking Mode for complex tasks.</p>
+        </div>
+
+        <h2 class="section-heading">Official Course</h2>
+        <p class="section-description">Complete this course on Anthropic's Skilljar platform to earn your certificate</p>
+
+        <div class="resource-card">
+            <div class="resource-header">
+                <div class="resource-icon">🎓</div>
+                <h4>Claude Code in Action</h4>
+            </div>
+            <p>Comprehensive course covering Claude Code's core capabilities, best practices, and real-world workflows directly from Anthropic.</p>
+            <div class="resource-meta">
+                <span>⏱️ 1 hour</span>
+                <span>📜 Certificate included</span>
+                <span>📍 Anthropic Skilljar</span>
+            </div>
+            <a href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank" class="resource-link">
+                Start Course →
+            </a>
+        </div>
+
+        <h2 class="section-heading">Key Concepts Covered</h2>
+        <p class="section-description">Topics you'll learn in this official course</p>
+
+        <div class="concepts-grid">
+            <div class="concept-card">
+                <h4>Core Tools</h4>
+                <p>File manipulation, command execution, code analysis, and working with your codebase.</p>
+            </div>
+            <div class="concept-card">
+                <h4>Context Management</h4>
+                <p>/init command, CLAUDE.md files, @ mentions, and how to give Claude the right context.</p>
+            </div>
+            <div class="concept-card">
+                <h4>Hotkeys & Commands</h4>
+                <p>Keyboard shortcuts and slash commands for efficient conversation flow.</p>
+            </div>
+            <div class="concept-card">
+                <h4>Plan & Thinking Mode</h4>
+                <p>Using planning mode for complex tasks and thinking mode for detailed reasoning.</p>
+            </div>
+        </div>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Why This Course Matters</div>
+            <p>This course teaches the official, Anthropic-recommended ways to use Claude Code. Learning these patterns early will make everything else in this path much easier.</p>
+        </div>
+
+        <div class="callout callout-limitation">
+            <div class="callout-title">Prerequisite</div>
+            <p>Make sure you have Claude Desktop installed and have completed the Beginner Path. You'll need hands-on access to Claude Code to follow along with the course exercises.</p>
+        </div>
+
+        <div class="knowledge-check">
+            <h3>Knowledge Check</h3>
+            <p>After completing the course, verify you can:</p>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Complete the course and obtain your certificate</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Navigate files and run commands in Claude Code</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Use /init to set up a project and create a CLAUDE.md file</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Switch between regular mode, plan mode, and thinking mode</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Use @ mentions to reference specific files in your prompts</span>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="index.html" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back to Overview
+            </a>
+            <a href="module-2-2.html" class="btn btn-primary">
+                Next: Planning Mode
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

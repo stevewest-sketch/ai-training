@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Effective Prompting - Beginner Path</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .tab { padding: 1rem 1.5rem; font-size: 0.9375rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+        .tab:hover { color: #1a1a1a; }
+        .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+        .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .info-box p { color: #666; font-size: 0.9375rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+        .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .callout-limitation { background: #fff7ed; border-left: 3px solid #f97316; }
+        .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; }
+        .callout-breakthrough .callout-title { color: #16a34a; }
+        .callout-limitation .callout-title { color: #ea580c; }
+        .callout-breakthrough .callout-title::before { content: '✦'; }
+        .callout-limitation .callout-title::before { content: '⚠'; }
+        .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
+        .resource-card { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; transition: all 0.2s; }
+        .resource-card:hover { border-color: #8b5cf6; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1); }
+        .resource-icon { width: 48px; height: 48px; background: #f3e8ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
+        .resource-info { flex: 1; }
+        .resource-info h4 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.25rem; }
+        .resource-info p { font-size: 0.875rem; color: #666; }
+        .resource-meta { display: flex; gap: 1rem; margin-top: 0.5rem; }
+        .resource-meta span { font-size: 0.75rem; color: #999; }
+        .resource-link { color: #8b5cf6; text-decoration: none; font-weight: 500; font-size: 0.875rem; white-space: nowrap; }
+        .resource-link:hover { text-decoration: underline; }
+        .terminal-window { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin: 1.5rem 0; }
+        .terminal-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #febc2e; }
+        .terminal-dot.green { background: #28c840; }
+        .terminal-title { color: #999; font-size: 0.8125rem; margin-left: 0.5rem; font-family: monospace; }
+        .terminal-content { padding: 1.5rem; color: #e5e5e5; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.875rem; line-height: 1.8; }
+        .terminal-content .label { color: #8b5cf6; font-weight: 600; }
+        .terminal-content .example { color: #a5d6ff; }
+        .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        .compare-card { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.25rem; }
+        .compare-card.bad { border-left: 3px solid #ef4444; }
+        .compare-card.good { border-left: 3px solid #22c55e; }
+        .compare-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+        .compare-card.bad .compare-label { color: #ef4444; }
+        .compare-card.good .compare-label { color: #22c55e; }
+        .compare-card p { font-size: 0.9375rem; color: #4b5563; font-style: italic; }
+        .knowledge-check { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .knowledge-check h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .knowledge-check h3::before { content: '📝'; }
+        .knowledge-check > p { color: #666; font-size: 0.9375rem; margin-bottom: 1rem; }
+        .check-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; }
+        .check-item:last-child { border-bottom: none; }
+        .check-box { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 4px; flex-shrink: 0; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-primary { background: #8b5cf6; color: white; }
+        .btn-primary:hover { background: #7c3aed; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        @media (max-width: 768px) {
+            .compare-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .nav-buttons { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="../" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <nav class="section-tabs">
+        <a href="../beginner-path-v2.html" class="tab">Overview</a>
+        <a href="module-1-1.html" class="tab">AI Fundamentals</a>
+        <a href="module-1-2.html" class="tab">Claude Desktop</a>
+        <a href="module-1-3.html" class="tab active">Prompting</a>
+        <a href="module-1-4.html" class="tab">Git</a>
+        <a href="module-1-5.html" class="tab">Agentic AI</a>
+    </nav>
+
+    <main class="main">
+        <div class="section-indicator">MODULE 3 OF 5</div>
+        <h1 class="page-title">Effective Prompting</h1>
+        <p class="page-subtitle">Write prompts that get high-quality results on the first try</p>
+
+        <div class="info-box">
+            <h3>Learning Objective</h3>
+            <p>By the end of this module, you'll understand how to structure prompts using a simple framework that dramatically improves the quality and relevance of AI responses.</p>
+        </div>
+
+        <h2 class="section-heading">Practice Tool</h2>
+        <p class="section-description">Use Prompt Cowboy to practice and improve your prompting skills</p>
+
+        <div class="resource-card">
+            <div class="resource-icon">🤠</div>
+            <div class="resource-info">
+                <h4>Prompt Cowboy</h4>
+                <p>Interactive tool for practicing and optimizing your prompts with real-time feedback</p>
+                <div class="resource-meta">
+                    <span>⏱️ 15 minutes</span>
+                    <span>🔧 Interactive Tool</span>
+                </div>
+            </div>
+            <a href="https://www.promptcowboy.ai/" target="_blank" class="resource-link">Open Tool →</a>
+        </div>
+
+        <h2 class="section-heading">The CTFC Framework</h2>
+        <p class="section-description">Structure your prompts with these four components for consistently better results</p>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">prompt-framework.md</span>
+            </div>
+            <div class="terminal-content">
+                <span class="label">CONTEXT:</span> <span class="example">[Who you are and what you're working on]</span><br><br>
+                <span class="label">TASK:</span> <span class="example">[Specific action you need]</span><br><br>
+                <span class="label">FORMAT:</span> <span class="example">[How you want the output structured]</span><br><br>
+                <span class="label">CONSTRAINTS:</span> <span class="example">[Any limitations or requirements]</span>
+            </div>
+        </div>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Why This Works</div>
+            <p>Giving Claude context helps it understand your perspective. Being specific about the task eliminates guesswork. Defining the format ensures you get usable output. Adding constraints prevents unwanted content.</p>
+        </div>
+
+        <h2 class="section-heading">Before & After Examples</h2>
+        <p class="section-description">See how applying the framework transforms prompt effectiveness</p>
+
+        <div class="compare-grid">
+            <div class="compare-card bad">
+                <div class="compare-label">❌ Vague Prompt</div>
+                <p>"Write me an email about the project update."</p>
+            </div>
+            <div class="compare-card good">
+                <div class="compare-label">✓ CTFC Prompt</div>
+                <p>"I'm a project manager updating stakeholders on Q1 progress. Write a professional email summarizing our 3 key wins and 1 risk area. Keep it under 200 words and end with next steps."</p>
+            </div>
+        </div>
+
+        <div class="compare-grid">
+            <div class="compare-card bad">
+                <div class="compare-label">❌ Vague Prompt</div>
+                <p>"Help me with this data."</p>
+            </div>
+            <div class="compare-card good">
+                <div class="compare-label">✓ CTFC Prompt</div>
+                <p>"I'm analyzing customer churn data for our monthly report. Calculate the churn rate from this CSV and create a summary table showing trends by month. Focus on accounts over $10k ARR only."</p>
+            </div>
+        </div>
+
+        <h2 class="section-heading">Key Prompting Principles</h2>
+        <p class="section-description">Additional tips for getting the best results</p>
+
+        <div class="callout callout-limitation">
+            <div class="callout-title">Be Specific About Output Format</div>
+            <p>If you need a list, say "bullet points." If you need a table, describe the columns. If you need code, specify the language. Don't make Claude guess.</p>
+        </div>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Provide Examples When Helpful</div>
+            <p>If you want a specific style or format, show Claude an example. "Write in a tone like this: [example]" is more effective than trying to describe the tone.</p>
+        </div>
+
+        <div class="callout callout-limitation">
+            <div class="callout-title">Iterate Based on Results</div>
+            <p>If the first response isn't quite right, tell Claude specifically what to change. "Make it more concise" or "Focus more on the technical details" helps Claude adjust.</p>
+        </div>
+
+        <div class="knowledge-check">
+            <h3>Knowledge Check</h3>
+            <p>Practice your prompting skills with these exercises:</p>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Write a prompt using the CTFC framework for a task in your daily work</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Take a vague prompt you've used before and rewrite it using the framework</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Use Prompt Cowboy to test and compare your before/after prompts</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>Submit your before/after prompt examples showing improvement</span>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="module-1-2.html" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Previous: Claude Desktop
+            </a>
+            <a href="module-1-4.html" class="btn btn-primary">
+                Next: Git Fundamentals
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

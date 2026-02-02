@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Paths - Claude Code Training</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        .logo-text {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1a1a1a;
+        }
+
+        /* Main Content */
+        .main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section Indicator */
+        .section-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #8b5cf6;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .section-indicator::before {
+            content: '◆';
+        }
+
+        /* Page Title */
+        .page-title {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .page-subtitle {
+            color: #666;
+            font-size: 1.125rem;
+            margin-bottom: 3rem;
+            max-width: 700px;
+        }
+
+        /* Path Cards Grid */
+        .paths-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .path-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .path-card:hover {
+            border-color: #8b5cf6;
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .path-card.beginner {
+            border-top: 4px solid #22c55e;
+        }
+
+        .path-card.intermediate {
+            border-top: 4px solid #8b5cf6;
+        }
+
+        .path-card.advanced {
+            border-top: 4px solid #f59e0b;
+        }
+
+        .path-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .path-card.beginner .path-badge {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .path-card.intermediate .path-badge {
+            background: #f3e8ff;
+            color: #7c3aed;
+        }
+
+        .path-card.advanced .path-badge {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .path-card h3 {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 1.375rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .path-card .duration {
+            font-size: 0.875rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .path-card p {
+            color: #4b5563;
+            font-size: 0.9375rem;
+            margin-bottom: 1.25rem;
+            flex-grow: 1;
+        }
+
+        .path-modules {
+            font-size: 0.8125rem;
+            color: #999;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+            margin-bottom: 1.25rem;
+        }
+
+        .path-card .btn {
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #7c3aed;
+        }
+
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #1a1a1a;
+        }
+
+        .btn-secondary:hover {
+            background: #eee;
+        }
+
+        /* Role Recommendations */
+        .section-heading {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .section-description {
+            color: #666;
+            font-size: 0.9375rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Data Table */
+        .data-table-container {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            background: #f9f9f9;
+            padding: 0.875rem 1.25rem;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .data-table td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9375rem;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover {
+            background: #fafafa;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: #f3f4f6;
+            color: #374151;
+            border-radius: 4px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+        }
+
+        /* Certification Preview */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .cert-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .cert-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+
+        .cert-card.beginner .cert-icon {
+            background: #dcfce7;
+        }
+
+        .cert-card.intermediate .cert-icon {
+            background: #f3e8ff;
+        }
+
+        .cert-card.advanced .cert-icon {
+            background: #fef3c7;
+        }
+
+        .cert-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .cert-card p {
+            font-size: 0.8125rem;
+            color: #666;
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #8b5cf6;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .paths-grid,
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .main {
+                padding: 2rem 1rem;
+            }
+            .page-title {
+                font-size: 2rem;
+            }
+            .data-table-container {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Back Link -->
+        <a href="../training-page-v2.html" class="back-link">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            Back to Training
+        </a>
+
+        <!-- Section Indicator -->
+        <div class="section-indicator">LEARNING PATHS</div>
+
+        <!-- Page Title -->
+        <h1 class="page-title">Claude Code Learning Paths</h1>
+        <p class="page-subtitle">Progressive learning journeys designed to take you from AI fundamentals to production-ready agent development. Choose your path based on your role and goals.</p>
+
+        <!-- Path Cards -->
+        <div class="paths-grid">
+            <!-- Beginner Path -->
+            <div class="path-card beginner">
+                <span class="path-badge">Beginner</span>
+                <h3>AI Foundations & Claude Essentials</h3>
+                <div class="duration">4-6 hours • 5 modules</div>
+                <p>Build foundational AI literacy and become a confident daily Claude user. Required for all Gladly employees.</p>
+                <div class="path-modules">Covers: AI Fundamentals, Claude Desktop, Prompting, Git, Agentic AI</div>
+                <a href="../beginner-path-v2.html" class="btn btn-primary">Start Path</a>
+            </div>
+
+            <!-- Intermediate Path -->
+            <div class="path-card intermediate">
+                <span class="path-badge">Intermediate</span>
+                <h3>Building with Claude</h3>
+                <div class="duration">8-12 hours • 5 modules</div>
+                <p>Create Claude Skills and Projects to automate your own workflows. For anyone contributing to agent development.</p>
+                <div class="path-modules">Covers: Claude Code in Action, Planning Mode, Skills, Projects, Automations</div>
+                <a href="../intermediate/" class="btn btn-primary">Start Path</a>
+            </div>
+
+            <!-- Advanced Path -->
+            <div class="path-card advanced">
+                <span class="path-badge">Advanced</span>
+                <h3>Agent Development</h3>
+                <div class="duration">15-20 hours • 6 modules</div>
+                <p>Build production-ready AI agents for Gladly's 9-agent initiative. For core AI team and agent owners.</p>
+                <div class="path-modules">Covers: Agent SDK, MCP Integration, Multi-Agent, Gladly Deep Dive</div>
+                <a href="../advanced/" class="btn btn-primary">Start Path</a>
+            </div>
+        </div>
+
+        <!-- Role Recommendations -->
+        <h2 class="section-heading">Recommended Path by Role</h2>
+        <p class="section-description">Find the right learning path based on your role at Gladly</p>
+
+        <div class="data-table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Recommended Path</th>
+                        <th>Priority Agents</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="role-badge">All Employees</span></td>
+                        <td>Beginner</td>
+                        <td>Use PMM Sidekick</td>
+                    </tr>
+                    <tr>
+                        <td><span class="role-badge">Marketing Managers</span></td>
+                        <td>Intermediate</td>
+                        <td>Content Engine, Social Media</td>
+                    </tr>
+                    <tr>
+                        <td><span class="role-badge">Marketing Ops</span></td>
+                        <td>Advanced</td>
+                        <td>Campaign Orchestration, Analytics</td>
+                    </tr>
+                    <tr>
+                        <td><span class="role-badge">PMMs</span></td>
+                        <td>Intermediate → Advanced</td>
+                        <td>PMM Sidekick, Competitive Intel</td>
+                    </tr>
+                    <tr>
+                        <td><span class="role-badge">Designers</span></td>
+                        <td>Intermediate</td>
+                        <td>Design Automation</td>
+                    </tr>
+                    <tr>
+                        <td><span class="role-badge">Web Team</span></td>
+                        <td>Advanced</td>
+                        <td>Web & Development</td>
+                    </tr>
+                    <tr>
+                        <td><span class="role-badge">Sales/CS</span></td>
+                        <td>Beginner + Intermediate</td>
+                        <td>Customer Presentations</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Certifications -->
+        <h2 class="section-heading">Earn Your Certification</h2>
+        <p class="section-description">Complete each path to earn a badge recognizing your Claude Code expertise</p>
+
+        <div class="cert-grid">
+            <div class="cert-card beginner">
+                <div class="cert-icon">🌱</div>
+                <h4>Claude Essentials</h4>
+                <p>Foundational AI literacy certified</p>
+            </div>
+            <div class="cert-card intermediate">
+                <div class="cert-icon">🔧</div>
+                <h4>Claude Builder</h4>
+                <p>Skills & automation creator</p>
+            </div>
+            <div class="cert-card advanced">
+                <div class="cert-icon">🚀</div>
+                <h4>Agent Developer</h4>
+                <p>Production agent certified</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
