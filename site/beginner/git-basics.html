@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude Code In Action - Intermediate Path</title>
+    <title>Git Fundamentals - Beginner Path</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,7 +21,6 @@
         .section-indicator::before { content: '◆'; }
         .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
         .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
-        .required-badge { display: inline-block; background: #f59e0b; color: white; font-size: 0.75rem; padding: 0.25rem 0.75rem; border-radius: 4px; font-weight: 600; text-transform: uppercase; margin-left: 0.75rem; vertical-align: middle; }
         .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
         .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
         .info-box p { color: #666; font-size: 0.9375rem; }
@@ -30,24 +29,29 @@
         .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
         .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
         .callout-limitation { background: #fff7ed; border-left: 3px solid #f97316; }
-        .callout-important { background: #fef3c7; border-left: 3px solid #f59e0b; }
         .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; }
         .callout-breakthrough .callout-title { color: #16a34a; }
         .callout-limitation .callout-title { color: #ea580c; }
-        .callout-important .callout-title { color: #b45309; }
         .callout-breakthrough .callout-title::before { content: '✦'; }
         .callout-limitation .callout-title::before { content: '⚠'; }
-        .callout-important .callout-title::before { content: '⭐'; }
         .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
-        .resource-card { background: white; border: 2px solid #8b5cf6; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
-        .resource-card .resource-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-        .resource-icon { width: 56px; height: 56px; background: #f3e8ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
-        .resource-card h4 { font-size: 1.25rem; font-weight: 600; color: #1a1a1a; }
-        .resource-card > p { font-size: 0.9375rem; color: #666; margin-bottom: 1rem; }
-        .resource-meta { display: flex; gap: 1.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-        .resource-meta span { font-size: 0.875rem; color: #666; display: flex; align-items: center; gap: 0.5rem; }
-        .resource-link { display: inline-flex; align-items: center; gap: 0.5rem; background: #8b5cf6; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 500; transition: background 0.2s; }
-        .resource-link:hover { background: #7c3aed; }
+        .video-container { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin-bottom: 2rem; }
+        .video-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .video-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .video-dot.red { background: #ff5f57; }
+        .video-dot.yellow { background: #febc2e; }
+        .video-dot.green { background: #28c840; }
+        .video-title { color: #999; font-size: 0.8125rem; margin-left: 0.5rem; font-family: monospace; }
+        .video-embed { position: relative; width: 100%; padding-bottom: 56.25%; background: #000; }
+        .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-meta { display: flex; gap: 1.5rem; margin-top: 1rem; flex-wrap: wrap; }
+        .video-meta-item { display: flex; align-items: center; gap: 0.5rem; color: #666; font-size: 0.875rem; }
+        .terminal-window { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin: 1.5rem 0; }
+        .terminal-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .terminal-content { padding: 1.5rem; color: #e5e5e5; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.875rem; line-height: 2; }
+        .terminal-content .comment { color: #6b7280; }
+        .terminal-content .command { color: #a5d6ff; }
+        .terminal-content .output { color: #86efac; }
         .concepts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
         .concept-card { background: white; border: 1px solid #e5e5e5; border-radius: 10px; padding: 1.25rem; }
         .concept-card h4 { font-size: 0.9375rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
@@ -85,113 +89,133 @@
 
     <nav class="section-tabs">
         <a href="index.html" class="tab">Overview</a>
-        <a href="module-2-1.html" class="tab active">Code in Action</a>
-        <a href="module-2-2.html" class="tab">Planning Mode</a>
-        <a href="module-2-3.html" class="tab">Skills</a>
-        <a href="module-2-4.html" class="tab">Projects</a>
-        <a href="module-2-5.html" class="tab">Automations</a>
+        <a href="ai-fundamentals.html" class="tab">AI Fundamentals</a>
+        <a href="claude-desktop.html" class="tab">Claude Desktop</a>
+        <a href="effective-prompting.html" class="tab">Prompting</a>
+        <a href="git-basics.html" class="tab active">Git</a>
+        <a href="agentic-concepts.html" class="tab">Agentic AI</a>
     </nav>
 
     <main class="main">
-        <div class="section-indicator">MODULE 1 OF 5</div>
-        <h1 class="page-title">Claude Code In Action <span class="required-badge">Required</span></h1>
-        <p class="page-subtitle">Master Claude Code's core tools and workflows</p>
-
-        <div class="callout callout-important">
-            <div class="callout-title">This is the most important training</div>
-            <p>This official Anthropic course covers everything you need to know about Claude Code directly from the source. Complete this course before moving to other modules.</p>
-        </div>
+        <div class="section-indicator">MODULE 4 OF 5</div>
+        <h1 class="page-title">Git Fundamentals</h1>
+        <p class="page-subtitle">Understand version control basics for collaborative development</p>
 
         <div class="info-box">
             <h3>Learning Objective</h3>
-            <p>By the end of this module, you'll master Claude Code's core tools, context management, hotkeys, and be able to use Plan Mode and Thinking Mode for complex tasks.</p>
-        </div>
-
-        <h2 class="section-heading">Official Course</h2>
-        <p class="section-description">Complete this course on Anthropic's Skilljar platform to earn your certificate</p>
-
-        <div class="resource-card">
-            <div class="resource-header">
-                <div class="resource-icon">🎓</div>
-                <h4>Claude Code in Action</h4>
-            </div>
-            <p>Comprehensive course covering Claude Code's core capabilities, best practices, and real-world workflows directly from Anthropic.</p>
-            <div class="resource-meta">
-                <span>⏱️ 1 hour</span>
-                <span>📜 Certificate included</span>
-                <span>📍 Anthropic Skilljar</span>
-            </div>
-            <a href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank" class="resource-link">
-                Start Course →
-            </a>
-        </div>
-
-        <h2 class="section-heading">Key Concepts Covered</h2>
-        <p class="section-description">Topics you'll learn in this official course</p>
-
-        <div class="concepts-grid">
-            <div class="concept-card">
-                <h4>Core Tools</h4>
-                <p>File manipulation, command execution, code analysis, and working with your codebase.</p>
-            </div>
-            <div class="concept-card">
-                <h4>Context Management</h4>
-                <p>/init command, CLAUDE.md files, @ mentions, and how to give Claude the right context.</p>
-            </div>
-            <div class="concept-card">
-                <h4>Hotkeys & Commands</h4>
-                <p>Keyboard shortcuts and slash commands for efficient conversation flow.</p>
-            </div>
-            <div class="concept-card">
-                <h4>Plan & Thinking Mode</h4>
-                <p>Using planning mode for complex tasks and thinking mode for detailed reasoning.</p>
-            </div>
+            <p>By the end of this module, you'll understand what version control is, why it matters for AI development, and be able to perform basic Git operations like commits and pushes.</p>
         </div>
 
         <div class="callout callout-breakthrough">
-            <div class="callout-title">Why This Course Matters</div>
-            <p>This course teaches the official, Anthropic-recommended ways to use Claude Code. Learning these patterns early will make everything else in this path much easier.</p>
+            <div class="callout-title">Why This Matters for AI</div>
+            <p>All Gladly agents will live in GitHub (sagansystems org). Claude Code integrates directly with Git, and version control enables safe experimentation—you can always go back if something breaks.</p>
+        </div>
+
+        <h2 class="section-heading">Watch: Introduction to Git</h2>
+        <p class="section-description">A brief introduction to Git from GitHub's official channel</p>
+
+        <div class="video-container">
+            <div class="video-header">
+                <div class="video-dot red"></div>
+                <div class="video-dot yellow"></div>
+                <div class="video-dot green"></div>
+                <span class="video-title">A Brief Introduction to Git</span>
+            </div>
+            <div class="video-embed">
+                <iframe src="https://www.youtube.com/embed/r8jQ9hVA2qs" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="video-meta">
+            <div class="video-meta-item">⏱️ 15 minutes</div>
+            <div class="video-meta-item">📍 YouTube (GitHub)</div>
+        </div>
+
+        <h2 class="section-heading">Key Concepts</h2>
+        <p class="section-description">Core Git terminology you need to understand</p>
+
+        <div class="concepts-grid">
+            <div class="concept-card">
+                <h4>Repository (Repo)</h4>
+                <p>A folder that Git tracks. It contains all your project files and the complete history of changes.</p>
+            </div>
+            <div class="concept-card">
+                <h4>Commit</h4>
+                <p>A snapshot of your changes at a point in time. Like a save point you can return to.</p>
+            </div>
+            <div class="concept-card">
+                <h4>Branch</h4>
+                <p>A parallel version of your code. Work on features without affecting the main codebase.</p>
+            </div>
+            <div class="concept-card">
+                <h4>Push / Pull</h4>
+                <p>Push sends your commits to GitHub. Pull downloads others' changes to your machine.</p>
+            </div>
+        </div>
+
+        <h2 class="section-heading">Essential Git Commands</h2>
+        <p class="section-description">The basic commands you'll use daily</p>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">terminal</span>
+            </div>
+            <div class="terminal-content">
+                <span class="comment"># Check the status of your changes</span><br>
+                <span class="command">git status</span><br><br>
+                <span class="comment"># Stage files for commit</span><br>
+                <span class="command">git add filename.txt</span><br>
+                <span class="command">git add .</span> <span class="comment"># stages all changes</span><br><br>
+                <span class="comment"># Commit your staged changes</span><br>
+                <span class="command">git commit -m "Add new feature"</span><br><br>
+                <span class="comment"># Push commits to GitHub</span><br>
+                <span class="command">git push</span><br><br>
+                <span class="comment"># Pull latest changes from GitHub</span><br>
+                <span class="command">git pull</span>
+            </div>
         </div>
 
         <div class="callout callout-limitation">
-            <div class="callout-title">Prerequisite</div>
-            <p>Make sure you have Claude Desktop installed and have completed the Beginner Path. You'll need hands-on access to Claude Code to follow along with the course exercises.</p>
+            <div class="callout-title">Claude Code + Git</div>
+            <p>When you use Claude Code, it can handle Git operations for you. You can ask Claude to "commit these changes" or "push to GitHub" and it will execute the commands. Understanding the basics helps you know what Claude is doing.</p>
         </div>
 
         <div class="knowledge-check">
             <h3>Knowledge Check</h3>
-            <p>After completing the course, verify you can:</p>
+            <p>Complete these hands-on tasks to demonstrate your Git skills:</p>
             <div class="check-item">
                 <div class="check-box"></div>
-                <span>Complete the course and obtain your certificate</span>
+                <span>Create a new repository on GitHub</span>
             </div>
             <div class="check-item">
                 <div class="check-box"></div>
-                <span>Navigate files and run commands in Claude Code</span>
+                <span>Clone the repository to your local machine</span>
             </div>
             <div class="check-item">
                 <div class="check-box"></div>
-                <span>Use /init to set up a project and create a CLAUDE.md file</span>
+                <span>Create a new file and check status with <code>git status</code></span>
             </div>
             <div class="check-item">
                 <div class="check-box"></div>
-                <span>Switch between regular mode, plan mode, and thinking mode</span>
+                <span>Stage, commit, and push your changes to GitHub</span>
             </div>
             <div class="check-item">
                 <div class="check-box"></div>
-                <span>Use @ mentions to reference specific files in your prompts</span>
+                <span>Verify your commit appears on GitHub.com</span>
             </div>
         </div>
 
         <div class="nav-buttons">
-            <a href="index.html" class="btn btn-secondary">
+            <a href="effective-prompting.html" class="btn btn-secondary">
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
-                Back to Overview
+                Previous: Effective Prompting
             </a>
-            <a href="module-2-2.html" class="btn btn-primary">
-                Next: Planning Mode
+            <a href="agentic-concepts.html" class="btn btn-primary">
+                Next: Agentic AI Concepts
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>

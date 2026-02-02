@@ -402,6 +402,62 @@
             color: white;
         }
 
+        /* Completion Form Section */
+        .completion-form-section {
+            margin-top: 3rem;
+            background: white;
+            border: 2px solid #8b5cf6;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .completion-form-header {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            padding: 1.5rem;
+            color: white;
+        }
+
+        .completion-form-header h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .completion-form-header p {
+            font-size: 0.9375rem;
+            opacity: 0.9;
+        }
+
+        .form-embed {
+            padding: 1.5rem;
+            background: #f9fafb;
+        }
+
+        .form-placeholder {
+            background: white;
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .form-placeholder-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-placeholder h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-placeholder p {
+            font-size: 0.875rem;
+            color: #666;
+        }
+
         /* Navigation Buttons */
         .nav-buttons {
             display: flex;
@@ -456,20 +512,20 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="logo">
+        <a href="../training.html" class="logo">
             <div class="logo-icon">CoE</div>
             <span class="logo-text">Center of Excellence</span>
-        </div>
+        </a>
     </header>
 
     <!-- Section Tabs -->
     <nav class="section-tabs">
-        <a href="#" class="tab active">Overview</a>
-        <a href="#" class="tab">Module 1</a>
-        <a href="#" class="tab">Module 2</a>
-        <a href="#" class="tab">Module 3</a>
-        <a href="#" class="tab">Module 4</a>
-        <a href="#" class="tab">Module 5</a>
+        <a href="index.html" class="tab active">Overview</a>
+        <a href="ai-fundamentals.html" class="tab">AI Fundamentals</a>
+        <a href="claude-desktop.html" class="tab">Claude Desktop</a>
+        <a href="effective-prompting.html" class="tab">Prompting</a>
+        <a href="git-basics.html" class="tab">Git</a>
+        <a href="agentic-concepts.html" class="tab">Agentic AI</a>
     </nav>
 
     <!-- Main Content -->
@@ -615,16 +671,33 @@
             <p>This path requires 4-6 hours spread over 1-2 weeks. We recommend completing 1-2 modules per day to allow time for hands-on practice between sessions.</p>
         </div>
 
+        <!-- Completion Form Section -->
+        <section class="completion-form-section">
+            <div class="completion-form-header">
+                <h3>Complete This Path</h3>
+                <p>Confirm you've completed all modules and criteria to receive your certificate</p>
+            </div>
+            <div class="form-embed">
+                <!-- Replace FORM_ID with your Google Form embed URL -->
+                <!-- Example: <iframe src="https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true" width="100%" height="800" frameborder="0">Loading...</iframe> -->
+                <div class="form-placeholder">
+                    <div class="form-placeholder-icon">📋</div>
+                    <h4>Completion Form Coming Soon</h4>
+                    <p>Google Form will be embedded here after Vercel deployment</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Navigation Buttons -->
         <div class="nav-buttons">
-            <a href="#" class="btn btn-secondary">
+            <a href="../training.html" class="btn btn-secondary">
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
                 Back to Training
             </a>
-            <a href="#" class="btn btn-primary">
-                Continue to Module 2
+            <a href="ai-fundamentals.html" class="btn btn-primary">
+                Start: AI Fundamentals
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>

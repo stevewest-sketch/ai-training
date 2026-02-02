@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Agent Orchestration - Advanced Path</title>
+    <title>Claude Agent SDK - Advanced Path</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,6 +35,17 @@
         .callout-breakthrough .callout-title::before { content: '✦'; }
         .callout-limitation .callout-title::before { content: '⚠'; }
         .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
+        .video-container { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin-bottom: 2rem; }
+        .video-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .video-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .video-dot.red { background: #ff5f57; }
+        .video-dot.yellow { background: #febc2e; }
+        .video-dot.green { background: #28c840; }
+        .video-title { color: #999; font-size: 0.8125rem; margin-left: 0.5rem; font-family: monospace; }
+        .video-embed { position: relative; width: 100%; padding-bottom: 56.25%; background: #000; }
+        .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-meta { display: flex; gap: 1.5rem; margin-top: 1rem; flex-wrap: wrap; }
+        .video-meta-item { display: flex; align-items: center; gap: 0.5rem; color: #666; font-size: 0.875rem; }
         .resource-card { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; transition: all 0.2s; }
         .resource-card:hover { border-color: #f59e0b; }
         .resource-icon { width: 48px; height: 48px; background: #fef3c7; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
@@ -42,13 +53,6 @@
         .resource-info h4 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.25rem; }
         .resource-info p { font-size: 0.875rem; color: #666; }
         .resource-link { color: #f59e0b; text-decoration: none; font-weight: 500; font-size: 0.875rem; }
-        .flow-diagram { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 2rem; margin: 1.5rem 0; }
-        .flow-title { font-size: 0.875rem; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; text-align: center; }
-        .flow-items { display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap; }
-        .flow-item { background: #f3e8ff; border-radius: 8px; padding: 1rem 1.5rem; text-align: center; min-width: 140px; }
-        .flow-item h4 { font-size: 0.875rem; font-weight: 600; color: #7c3aed; }
-        .flow-item p { font-size: 0.75rem; color: #666; margin-top: 0.25rem; }
-        .flow-arrow { color: #ccc; font-size: 1.5rem; }
         .concepts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
         .concept-card { background: white; border: 1px solid #e5e5e5; border-radius: 10px; padding: 1.25rem; }
         .concept-card h4 { font-size: 0.9375rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
@@ -66,79 +70,78 @@
         .btn-primary:hover { background: #d97706; }
         .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
         .btn-secondary:hover { background: #eee; }
-        @media (max-width: 768px) { .concepts-grid { grid-template-columns: 1fr; } .flow-items { flex-direction: column; } .flow-arrow { transform: rotate(90deg); } }
+        @media (max-width: 768px) { .concepts-grid { grid-template-columns: 1fr; } }
         @media (max-width: 640px) { .main { padding: 2rem 1rem; } .page-title { font-size: 2rem; } .nav-buttons { flex-direction: column; gap: 1rem; } }
     </style>
 </head>
 <body>
-    <header class="header"><a href="../" class="logo"><div class="logo-icon">CoE</div><span class="logo-text">Center of Excellence</span></a></header>
+    <header class="header"><a href="../training.html" class="logo"><div class="logo-icon">CoE</div><span class="logo-text">Center of Excellence</span></a></header>
     <nav class="section-tabs">
         <a href="index.html" class="tab">Overview</a>
-        <a href="module-3-1.html" class="tab">Deep Dive</a>
-        <a href="module-3-2.html" class="tab">Agent SDK</a>
-        <a href="module-3-3.html" class="tab">MCP</a>
-        <a href="module-3-4.html" class="tab active">Multi-Agent</a>
-        <a href="module-3-5.html" class="tab">Gladly</a>
-        <a href="module-3-6.html" class="tab">Production</a>
+        <a href="deep-dive.html" class="tab">Deep Dive</a>
+        <a href="agent-sdk.html" class="tab active">Agent SDK</a>
+        <a href="mcp-integration.html" class="tab">MCP</a>
+        <a href="multi-agent.html" class="tab">Multi-Agent</a>
+        <a href="gladly.html" class="tab">Gladly</a>
+        <a href="production.html" class="tab">Production</a>
     </nav>
     <main class="main">
-        <div class="section-indicator">MODULE 4 OF 6</div>
-        <h1 class="page-title">Multi-Agent Orchestration</h1>
-        <p class="page-subtitle">Coordinate multiple agents working together</p>
+        <div class="section-indicator">MODULE 2 OF 6</div>
+        <h1 class="page-title">Claude Agent SDK</h1>
+        <p class="page-subtitle">Build agents using Anthropic's official Agent SDK</p>
         <div class="info-box">
             <h3>Learning Objective</h3>
-            <p>By the end of this module, you'll understand agent swarm architecture, implement inter-agent communication, design workflow orchestration patterns, and handle conflicts between agents.</p>
+            <p>By the end of this module, you'll understand agent architecture patterns, be able to define tools with proper schemas, manage agent state, and test agents locally before deployment.</p>
         </div>
-        <h2 class="section-heading">Resources</h2>
-        <div class="resource-card">
-            <div class="resource-icon">🐙</div>
-            <div class="resource-info"><h4>Compound Engineering Plugin</h4><p>Agent swarm architecture and patterns</p></div>
-            <a href="https://github.com/EveryInc/compound-engineering-plugin" target="_blank" class="resource-link">View on GitHub →</a>
-        </div>
-        <div class="resource-card">
-            <div class="resource-icon">📝</div>
-            <div class="resource-info"><h4>Orchestration Patterns</h4><p>Multi-agent coordination patterns and examples</p></div>
-            <a href="https://gist.github.com/kieranklaassen/4f2aba89594a4aea4ad64d753984b2ea" target="_blank" class="resource-link">View Gist →</a>
-        </div>
-        <h2 class="section-heading">Agent Interconnections (9-Agent Spec)</h2>
-        <p class="section-description">How Gladly's agents will communicate with each other</p>
-        <div class="flow-diagram">
-            <div class="flow-title">Example: Content Distribution Flow</div>
-            <div class="flow-items">
-                <div class="flow-item"><h4>Content Engine</h4><p>Creates content</p></div>
-                <span class="flow-arrow">→</span>
-                <div class="flow-item"><h4>Design Automation</h4><p>Creates visuals</p></div>
-                <span class="flow-arrow">→</span>
-                <div class="flow-item"><h4>Social Media</h4><p>Publishes content</p></div>
+        <h2 class="section-heading">Watch: Agent SDK Workshop</h2>
+        <p class="section-description">Full workshop on building agents with the official SDK</p>
+        <div class="video-container">
+            <div class="video-header">
+                <div class="video-dot red"></div>
+                <div class="video-dot yellow"></div>
+                <div class="video-dot green"></div>
+                <span class="video-title">Agent SDK Full Workshop</span>
+            </div>
+            <div class="video-embed">
+                <iframe src="https://www.youtube.com/embed/TqC1qOfiVcQ" allowfullscreen></iframe>
             </div>
         </div>
-        <div class="callout callout-breakthrough">
-            <div class="callout-title">Other Agent Connections</div>
-            <p><strong>Competitive Intel → PMM Sidekick:</strong> Real-time competitive updates. <strong>Customer Content Hub → Multiple agents:</strong> Central source of truth for all content-generating agents.</p>
+        <div class="video-meta">
+            <div class="video-meta-item">⏱️ 60 minutes</div>
+            <div class="video-meta-item">📍 YouTube</div>
+        </div>
+        <h2 class="section-heading">Documentation</h2>
+        <div class="resource-card">
+            <div class="resource-icon">📖</div>
+            <div class="resource-info">
+                <h4>Agent SDK Documentation</h4>
+                <p>Official Anthropic documentation for the Agent SDK</p>
+            </div>
+            <a href="https://docs.anthropic.com" target="_blank" class="resource-link">Read Docs →</a>
         </div>
         <h2 class="section-heading">Key Concepts</h2>
         <div class="concepts-grid">
-            <div class="concept-card"><h4>Agent Swarm Architecture</h4><p>Patterns for organizing multiple specialized agents into coordinated teams.</p></div>
-            <div class="concept-card"><h4>Inter-Agent Communication</h4><p>How agents pass information, trigger each other, and share context.</p></div>
-            <div class="concept-card"><h4>Workflow Orchestration</h4><p>Designing sequences of agent actions with proper dependencies and handoffs.</p></div>
-            <div class="concept-card"><h4>Conflict Resolution</h4><p>Handling situations where agents have competing priorities or conflicting outputs.</p></div>
+            <div class="concept-card"><h4>Agent Architecture</h4><p>Core patterns for structuring agents including input processing, reasoning, and action execution.</p></div>
+            <div class="concept-card"><h4>Tool Definitions</h4><p>Creating tool schemas that define what actions your agent can take and their parameters.</p></div>
+            <div class="concept-card"><h4>State Management</h4><p>Tracking conversation context, user preferences, and operational state across interactions.</p></div>
+            <div class="concept-card"><h4>Local Testing</h4><p>Testing agents locally with mock data before deploying to production environments.</p></div>
         </div>
-        <div class="callout callout-limitation">
-            <div class="callout-title">Start Simple</div>
-            <p>Multi-agent systems add complexity. Start with two agents communicating, get that working reliably, then add more. Debug one connection at a time.</p>
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">The Foundation of Gladly's 9 Agents</div>
+            <p>Every agent in Gladly's initiative will be built using these SDK patterns. Master them here to contribute to any agent project.</p>
         </div>
         <div class="knowledge-check">
             <h3>Knowledge Check</h3>
-            <p>Demonstrate multi-agent coordination:</p>
-            <div class="check-item"><div class="check-box"></div><span>Study the Compound Engineering Plugin architecture</span></div>
-            <div class="check-item"><div class="check-box"></div><span>Design a workflow involving 2-3 agents</span></div>
-            <div class="check-item"><div class="check-box"></div><span>Implement inter-agent communication</span></div>
-            <div class="check-item"><div class="check-box"></div><span>Handle a conflict or error scenario</span></div>
-            <div class="check-item"><div class="check-box"></div><span>Demo the multi-agent workflow end-to-end</span></div>
+            <p>Build a functional agent using the SDK:</p>
+            <div class="check-item"><div class="check-box"></div><span>Complete the Agent SDK workshop video</span></div>
+            <div class="check-item"><div class="check-box"></div><span>Set up the SDK in a local development environment</span></div>
+            <div class="check-item"><div class="check-box"></div><span>Define at least 3 tools with proper schemas</span></div>
+            <div class="check-item"><div class="check-box"></div><span>Implement state management for your agent</span></div>
+            <div class="check-item"><div class="check-box"></div><span>Test your agent locally with sample inputs</span></div>
         </div>
         <div class="nav-buttons">
-            <a href="module-3-3.html" class="btn btn-secondary"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Previous: MCP Integration</a>
-            <a href="module-3-5.html" class="btn btn-primary">Next: Gladly Deep Dive <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+            <a href="deep-dive.html" class="btn btn-secondary"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Previous: Deep Dive</a>
+            <a href="mcp-integration.html" class="btn btn-primary">Next: MCP Integration <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
         </div>
     </main>
 </body>

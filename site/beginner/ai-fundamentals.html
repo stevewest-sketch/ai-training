@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude Projects Setup - Intermediate Path</title>
+    <title>AI Fundamentals - Beginner Path</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -41,23 +41,19 @@
         .resource-info { flex: 1; }
         .resource-info h4 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.25rem; }
         .resource-info p { font-size: 0.875rem; color: #666; }
+        .resource-meta { display: flex; gap: 1rem; margin-top: 0.5rem; }
+        .resource-meta span { font-size: 0.75rem; color: #999; display: flex; align-items: center; gap: 0.25rem; }
         .resource-link { color: #8b5cf6; text-decoration: none; font-weight: 500; font-size: 0.875rem; white-space: nowrap; }
         .resource-link:hover { text-decoration: underline; }
         .concepts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
         .concept-card { background: white; border: 1px solid #e5e5e5; border-radius: 10px; padding: 1.25rem; }
         .concept-card h4 { font-size: 0.9375rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
         .concept-card p { font-size: 0.875rem; color: #666; }
-        .steps-list { background: white; border: 1px solid #e5e5e5; border-radius: 12px; overflow: hidden; margin: 1.5rem 0; }
-        .step-item { padding: 1.25rem 1.5rem; border-bottom: 1px solid #f0f0f0; display: flex; gap: 1rem; }
-        .step-item:last-child { border-bottom: none; }
-        .step-number { width: 32px; height: 32px; background: #8b5cf6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.875rem; flex-shrink: 0; }
-        .step-content h4 { font-size: 0.9375rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.25rem; }
-        .step-content p { font-size: 0.875rem; color: #666; }
         .knowledge-check { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
         .knowledge-check h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
         .knowledge-check h3::before { content: '📝'; }
-        .knowledge-check > p { color: #666; font-size: 0.9375rem; margin-bottom: 1rem; }
-        .check-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; }
+        .knowledge-check p { color: #666; font-size: 0.9375rem; }
+        .check-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0; }
         .check-item:last-child { border-bottom: none; }
         .check-box { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 4px; flex-shrink: 0; }
         .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
@@ -66,12 +62,10 @@
         .btn-primary:hover { background: #7c3aed; }
         .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
         .btn-secondary:hover { background: #eee; }
-        @media (max-width: 768px) {
-            .concepts-grid { grid-template-columns: 1fr; }
-        }
         @media (max-width: 640px) {
             .main { padding: 2rem 1rem; }
             .page-title { font-size: 2rem; }
+            .concepts-grid { grid-template-columns: 1fr; }
             .nav-buttons { flex-direction: column; gap: 1rem; }
         }
     </style>
@@ -86,164 +80,101 @@
 
     <nav class="section-tabs">
         <a href="index.html" class="tab">Overview</a>
-        <a href="module-2-1.html" class="tab">Code in Action</a>
-        <a href="module-2-2.html" class="tab">Planning Mode</a>
-        <a href="module-2-3.html" class="tab">Skills</a>
-        <a href="module-2-4.html" class="tab active">Projects</a>
-        <a href="module-2-5.html" class="tab">Automations</a>
+        <a href="ai-fundamentals.html" class="tab active">AI Fundamentals</a>
+        <a href="claude-desktop.html" class="tab">Claude Desktop</a>
+        <a href="effective-prompting.html" class="tab">Prompting</a>
+        <a href="git-basics.html" class="tab">Git</a>
+        <a href="agentic-concepts.html" class="tab">Agentic AI</a>
     </nav>
 
     <main class="main">
-        <div class="section-indicator">MODULE 4 OF 5</div>
-        <h1 class="page-title">Claude Projects Setup</h1>
-        <p class="page-subtitle">Create Claude Projects as structured knowledge bases</p>
+        <div class="section-indicator">MODULE 1 OF 5</div>
+        <h1 class="page-title">AI Fundamentals</h1>
+        <p class="page-subtitle">Understand core AI/ML concepts and how Large Language Models work</p>
 
         <div class="info-box">
             <h3>Learning Objective</h3>
-            <p>By the end of this module, you'll know how to create Claude Projects that serve as persistent context containers, allowing you to work on complex tasks with consistent knowledge across sessions.</p>
+            <p>By the end of this module, you'll understand what Large Language Models are, how they process information, and the key concepts that determine their capabilities and limitations.</p>
         </div>
 
         <div class="callout callout-breakthrough">
-            <div class="callout-title">Recommendation from Sam</div>
-            <p>Start with Projects before building skill-based agents—they're more flexible while learning. Projects let you experiment with different contexts and instructions without committing to a specific automation.</p>
+            <div class="callout-title">Why This Matters</div>
+            <p>Understanding how AI "thinks" helps you work with it more effectively. You'll know why certain prompts work better than others and what Claude can and can't do.</p>
         </div>
 
-        <h2 class="section-heading">Documentation</h2>
-        <p class="section-description">Review the official Projects documentation</p>
+        <h2 class="section-heading">Course Resources</h2>
+        <p class="section-description">Complete the AI Foundations course on the Center of Excellence portal</p>
 
         <div class="resource-card">
-            <div class="resource-icon">📖</div>
+            <div class="resource-icon">🎓</div>
             <div class="resource-info">
-                <h4>Claude Projects Overview</h4>
-                <p>Official Anthropic documentation on creating and using Projects</p>
+                <h4>AI Foundations Course</h4>
+                <p>Comprehensive introduction to AI concepts, LLMs, and responsible AI usage</p>
+                <div class="resource-meta">
+                    <span>⏱️ 60 minutes</span>
+                    <span>📍 CoE Portal</span>
+                </div>
             </div>
-            <a href="https://docs.anthropic.com" target="_blank" class="resource-link">Read Docs →</a>
+            <a href="https://www.center-of-excellence.xyz/training" target="_blank" class="resource-link">Start Course →</a>
         </div>
 
         <h2 class="section-heading">Key Concepts</h2>
-        <p class="section-description">What makes Projects powerful</p>
+        <p class="section-description">Core ideas you'll learn in this module</p>
 
         <div class="concepts-grid">
             <div class="concept-card">
-                <h4>Persistent Context</h4>
-                <p>Projects remember uploaded files and instructions across conversations, so you don't restart from scratch.</p>
+                <h4>Large Language Models (LLMs)</h4>
+                <p>AI systems trained on vast text data that can understand and generate human-like language.</p>
             </div>
             <div class="concept-card">
-                <h4>Reference Materials</h4>
-                <p>Add documents, code files, and data that Claude can reference when answering questions or generating content.</p>
+                <h4>Tokens & Context Windows</h4>
+                <p>How AI breaks down text into pieces and the limit on how much it can "remember" in a conversation.</p>
             </div>
             <div class="concept-card">
-                <h4>Custom Instructions</h4>
-                <p>Set project-specific behavior like tone, format preferences, and domain-specific terminology.</p>
+                <h4>Temperature</h4>
+                <p>The setting that controls how creative vs. predictable AI responses are.</p>
             </div>
             <div class="concept-card">
-                <h4>Team Sharing</h4>
-                <p>Share projects with teammates so everyone works with the same context and instructions.</p>
-            </div>
-        </div>
-
-        <h2 class="section-heading">Creating a Project</h2>
-        <p class="section-description">Step-by-step guide to setting up your first project</p>
-
-        <div class="steps-list">
-            <div class="step-item">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h4>Open Projects in Claude</h4>
-                    <p>Click the Projects icon in the sidebar or go to claude.ai/projects to access your projects.</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h4>Create New Project</h4>
-                    <p>Click "New Project" and give it a descriptive name that reflects its purpose.</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h4>Add Reference Materials</h4>
-                    <p>Upload documents, paste text, or add files that Claude should know about. Think style guides, data files, or documentation.</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h4>Write Custom Instructions</h4>
-                    <p>Tell Claude how to behave in this project. Include role, tone, output preferences, and any domain-specific context.</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <div class="step-number">5</div>
-                <div class="step-content">
-                    <h4>Start a Conversation</h4>
-                    <p>Begin chatting with Claude in your project. It now has access to all your reference materials and follows your custom instructions.</p>
-                </div>
+                <h4>Responsible AI Usage</h4>
+                <p>Understanding AI limitations, bias considerations, and ethical usage guidelines.</p>
             </div>
         </div>
 
         <div class="callout callout-limitation">
-            <div class="callout-title">Projects vs. Skills</div>
-            <p><strong>Projects</strong> are best for ongoing work with consistent context—like a research project or content creation for a specific product. <strong>Skills</strong> are better for repeatable actions you trigger on demand—like generating a weekly report or processing data in a specific format.</p>
-        </div>
-
-        <h2 class="section-heading">Project Ideas</h2>
-        <p class="section-description">Examples of effective Claude Projects</p>
-
-        <div class="concepts-grid">
-            <div class="concept-card">
-                <h4>Product Knowledge Base</h4>
-                <p>Upload product docs, FAQs, and positioning guides. Ask Claude questions about the product anytime.</p>
-            </div>
-            <div class="concept-card">
-                <h4>Content Style Guide</h4>
-                <p>Add brand guidelines, voice/tone docs, and example content. Generate on-brand content consistently.</p>
-            </div>
-            <div class="concept-card">
-                <h4>Research Repository</h4>
-                <p>Compile research papers, interview notes, and data. Ask Claude to synthesize findings or find connections.</p>
-            </div>
-            <div class="concept-card">
-                <h4>Code Documentation</h4>
-                <p>Upload README files, API docs, and architecture diagrams. Get help understanding or extending the codebase.</p>
-            </div>
+            <div class="callout-title">Key Limitation to Understand</div>
+            <p>LLMs don't truly "understand" in the human sense—they predict likely next words based on patterns. This is why they can sometimes produce confident-sounding but incorrect information (hallucinations).</p>
         </div>
 
         <div class="knowledge-check">
             <h3>Knowledge Check</h3>
-            <p>Create a working Claude Project:</p>
+            <p>After completing the course, you should be able to:</p>
             <div class="check-item">
                 <div class="check-box"></div>
-                <span>Create a new project with a clear, descriptive name</span>
+                <span>Explain what a Large Language Model is and how it differs from traditional software</span>
             </div>
             <div class="check-item">
                 <div class="check-box"></div>
-                <span>Add at least 3 reference documents relevant to the project</span>
+                <span>Describe what tokens and context windows mean for AI conversations</span>
             </div>
             <div class="check-item">
                 <div class="check-box"></div>
-                <span>Write custom instructions defining Claude's role and behavior</span>
+                <span>Identify scenarios where AI might struggle or produce unreliable results</span>
             </div>
             <div class="check-item">
                 <div class="check-box"></div>
-                <span>Have a conversation that demonstrates Claude using the reference materials</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Share the project with a teammate (optional)</span>
+                <span>Pass the AI Fundamentals quiz with 80% or higher</span>
             </div>
         </div>
 
         <div class="nav-buttons">
-            <a href="module-2-3.html" class="btn btn-secondary">
+            <a href="index.html" class="btn btn-secondary">
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
-                Previous: Skills Creation
+                Back to Overview
             </a>
-            <a href="module-2-5.html" class="btn btn-primary">
-                Next: Simple Automations
+            <a href="claude-desktop.html" class="btn btn-primary">
+                Next: Claude Desktop
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Fundamentals - Beginner Path</title>
+    <title>Claude Code 101 Deep Dive - Advanced Path</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,11 +13,11 @@
         .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
         .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
         .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
-        .tab { padding: 1rem 1.5rem; font-size: 0.9375rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+        .tab { padding: 1rem 1rem; font-size: 0.875rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
         .tab:hover { color: #1a1a1a; }
         .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
         .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
-        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
         .section-indicator::before { content: '◆'; }
         .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
         .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
@@ -36,14 +36,12 @@
         .callout-limitation .callout-title::before { content: '⚠'; }
         .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
         .resource-card { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; transition: all 0.2s; }
-        .resource-card:hover { border-color: #8b5cf6; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1); }
-        .resource-icon { width: 48px; height: 48px; background: #f3e8ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
+        .resource-card:hover { border-color: #f59e0b; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1); }
+        .resource-icon { width: 48px; height: 48px; background: #fef3c7; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
         .resource-info { flex: 1; }
         .resource-info h4 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.25rem; }
         .resource-info p { font-size: 0.875rem; color: #666; }
-        .resource-meta { display: flex; gap: 1rem; margin-top: 0.5rem; }
-        .resource-meta span { font-size: 0.75rem; color: #999; display: flex; align-items: center; gap: 0.25rem; }
-        .resource-link { color: #8b5cf6; text-decoration: none; font-weight: 500; font-size: 0.875rem; white-space: nowrap; }
+        .resource-link { color: #f59e0b; text-decoration: none; font-weight: 500; font-size: 0.875rem; white-space: nowrap; }
         .resource-link:hover { text-decoration: underline; }
         .concepts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
         .concept-card { background: white; border: 1px solid #e5e5e5; border-radius: 10px; padding: 1.25rem; }
@@ -52,133 +50,89 @@
         .knowledge-check { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
         .knowledge-check h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
         .knowledge-check h3::before { content: '📝'; }
-        .knowledge-check p { color: #666; font-size: 0.9375rem; }
-        .check-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0; }
+        .knowledge-check > p { color: #666; font-size: 0.9375rem; margin-bottom: 1rem; }
+        .check-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; }
         .check-item:last-child { border-bottom: none; }
         .check-box { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 4px; flex-shrink: 0; }
         .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
         .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
-        .btn-primary { background: #8b5cf6; color: white; }
-        .btn-primary:hover { background: #7c3aed; }
+        .btn-primary { background: #f59e0b; color: white; }
+        .btn-primary:hover { background: #d97706; }
         .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
         .btn-secondary:hover { background: #eee; }
-        @media (max-width: 640px) {
-            .main { padding: 2rem 1rem; }
-            .page-title { font-size: 2rem; }
-            .concepts-grid { grid-template-columns: 1fr; }
-            .nav-buttons { flex-direction: column; gap: 1rem; }
-        }
+        @media (max-width: 768px) { .concepts-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 640px) { .main { padding: 2rem 1rem; } .page-title { font-size: 2rem; } .nav-buttons { flex-direction: column; gap: 1rem; } }
     </style>
 </head>
 <body>
     <header class="header">
-        <a href="../" class="logo">
+        <a href="../training.html" class="logo">
             <div class="logo-icon">CoE</div>
             <span class="logo-text">Center of Excellence</span>
         </a>
     </header>
-
     <nav class="section-tabs">
-        <a href="../beginner-path-v2.html" class="tab">Overview</a>
-        <a href="module-1-1.html" class="tab active">AI Fundamentals</a>
-        <a href="module-1-2.html" class="tab">Claude Desktop</a>
-        <a href="module-1-3.html" class="tab">Prompting</a>
-        <a href="module-1-4.html" class="tab">Git</a>
-        <a href="module-1-5.html" class="tab">Agentic AI</a>
+        <a href="index.html" class="tab">Overview</a>
+        <a href="deep-dive.html" class="tab active">Deep Dive</a>
+        <a href="agent-sdk.html" class="tab">Agent SDK</a>
+        <a href="mcp-integration.html" class="tab">MCP</a>
+        <a href="multi-agent.html" class="tab">Multi-Agent</a>
+        <a href="gladly.html" class="tab">Gladly</a>
+        <a href="production.html" class="tab">Production</a>
     </nav>
-
     <main class="main">
-        <div class="section-indicator">MODULE 1 OF 5</div>
-        <h1 class="page-title">AI Fundamentals</h1>
-        <p class="page-subtitle">Understand core AI/ML concepts and how Large Language Models work</p>
-
+        <div class="section-indicator">MODULE 1 OF 6</div>
+        <h1 class="page-title">Claude Code 101 Deep Dive</h1>
+        <p class="page-subtitle">Advanced Claude Code features and patterns</p>
         <div class="info-box">
             <h3>Learning Objective</h3>
-            <p>By the end of this module, you'll understand what Large Language Models are, how they process information, and the key concepts that determine their capabilities and limitations.</p>
+            <p>By the end of this module, you'll master advanced Claude Code features including custom commands, hooks, memory patterns with CLAUDE.md files, and sophisticated error handling and recovery techniques.</p>
         </div>
-
-        <div class="callout callout-breakthrough">
-            <div class="callout-title">Why This Matters</div>
-            <p>Understanding how AI "thinks" helps you work with it more effectively. You'll know why certain prompts work better than others and what Claude can and can't do.</p>
-        </div>
-
-        <h2 class="section-heading">Course Resources</h2>
-        <p class="section-description">Complete the AI Foundations course on the Center of Excellence portal</p>
-
+        <h2 class="section-heading">Course Resource</h2>
+        <p class="section-description">Complete the advanced Claude Code 101 course</p>
         <div class="resource-card">
             <div class="resource-icon">🎓</div>
             <div class="resource-info">
-                <h4>AI Foundations Course</h4>
-                <p>Comprehensive introduction to AI concepts, LLMs, and responsible AI usage</p>
-                <div class="resource-meta">
-                    <span>⏱️ 60 minutes</span>
-                    <span>📍 CoE Portal</span>
-                </div>
+                <h4>Claude Code 101</h4>
+                <p>Advanced features, patterns, and best practices for power users</p>
             </div>
             <a href="https://www.center-of-excellence.xyz/training" target="_blank" class="resource-link">Start Course →</a>
         </div>
-
         <h2 class="section-heading">Key Concepts</h2>
-        <p class="section-description">Core ideas you'll learn in this module</p>
-
+        <p class="section-description">Advanced topics covered in this module</p>
         <div class="concepts-grid">
             <div class="concept-card">
-                <h4>Large Language Models (LLMs)</h4>
-                <p>AI systems trained on vast text data that can understand and generate human-like language.</p>
+                <h4>Advanced Context Management</h4>
+                <p>Techniques for managing large codebases and complex project contexts efficiently.</p>
             </div>
             <div class="concept-card">
-                <h4>Tokens & Context Windows</h4>
-                <p>How AI breaks down text into pieces and the limit on how much it can "remember" in a conversation.</p>
+                <h4>Custom Commands & Hooks</h4>
+                <p>Create custom commands and hooks to automate repetitive workflows.</p>
             </div>
             <div class="concept-card">
-                <h4>Temperature</h4>
-                <p>The setting that controls how creative vs. predictable AI responses are.</p>
+                <h4>Memory Patterns (CLAUDE.md)</h4>
+                <p>Structure CLAUDE.md files to give Claude persistent project knowledge.</p>
             </div>
             <div class="concept-card">
-                <h4>Responsible AI Usage</h4>
-                <p>Understanding AI limitations, bias considerations, and ethical usage guidelines.</p>
+                <h4>Error Handling & Recovery</h4>
+                <p>Handle errors gracefully and recover from failed operations.</p>
             </div>
         </div>
-
-        <div class="callout callout-limitation">
-            <div class="callout-title">Key Limitation to Understand</div>
-            <p>LLMs don't truly "understand" in the human sense—they predict likely next words based on patterns. This is why they can sometimes produce confident-sounding but incorrect information (hallucinations).</p>
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Foundation for Agent Development</div>
+            <p>Mastering these advanced Claude Code patterns is essential before building production agents. The same principles apply at scale.</p>
         </div>
-
         <div class="knowledge-check">
             <h3>Knowledge Check</h3>
-            <p>After completing the course, you should be able to:</p>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Explain what a Large Language Model is and how it differs from traditional software</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Describe what tokens and context windows mean for AI conversations</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Identify scenarios where AI might struggle or produce unreliable results</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Pass the AI Fundamentals quiz with 80% or higher</span>
-            </div>
+            <p>Demonstrate your advanced Claude Code skills:</p>
+            <div class="check-item"><div class="check-box"></div><span>Complete the Claude Code 101 course</span></div>
+            <div class="check-item"><div class="check-box"></div><span>Create a comprehensive CLAUDE.md for a project</span></div>
+            <div class="check-item"><div class="check-box"></div><span>Set up a custom command or hook</span></div>
+            <div class="check-item"><div class="check-box"></div><span>Handle a complex multi-file operation with error recovery</span></div>
         </div>
-
         <div class="nav-buttons">
-            <a href="../beginner-path-v2.html" class="btn btn-secondary">
-                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                </svg>
-                Back to Overview
-            </a>
-            <a href="module-1-2.html" class="btn btn-primary">
-                Next: Claude Desktop
-                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                </svg>
-            </a>
+            <a href="index.html" class="btn btn-secondary"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Back to Overview</a>
+            <a href="agent-sdk.html" class="btn btn-primary">Next: Agent SDK <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
         </div>
     </main>
 </body>

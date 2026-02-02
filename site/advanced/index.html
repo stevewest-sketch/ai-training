@@ -70,6 +70,15 @@
         .btn-primary:hover { background: #d97706; }
         .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
         .btn-secondary:hover { background: #eee; }
+        .completion-form-section { margin-top: 3rem; background: white; border: 2px solid #f59e0b; border-radius: 12px; overflow: hidden; }
+        .completion-form-header { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); padding: 1.5rem; color: white; }
+        .completion-form-header h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .completion-form-header p { font-size: 0.9375rem; opacity: 0.9; }
+        .form-embed { padding: 1.5rem; background: #f9fafb; }
+        .form-placeholder { background: white; border: 2px dashed #d1d5db; border-radius: 8px; padding: 3rem 2rem; text-align: center; }
+        .form-placeholder-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .form-placeholder h4 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .form-placeholder p { font-size: 0.875rem; color: #666; }
         @media (max-width: 640px) {
             .main { padding: 2rem 1rem; }
             .page-title { font-size: 2rem; }
@@ -79,7 +88,7 @@
 </head>
 <body>
     <header class="header">
-        <a href="../" class="logo">
+        <a href="../training.html" class="logo">
             <div class="logo-icon">CoE</div>
             <span class="logo-text">Center of Excellence</span>
         </a>
@@ -87,12 +96,12 @@
 
     <nav class="section-tabs">
         <a href="index.html" class="tab active">Overview</a>
-        <a href="module-3-1.html" class="tab">Deep Dive</a>
-        <a href="module-3-2.html" class="tab">Agent SDK</a>
-        <a href="module-3-3.html" class="tab">MCP</a>
-        <a href="module-3-4.html" class="tab">Multi-Agent</a>
-        <a href="module-3-5.html" class="tab">Gladly</a>
-        <a href="module-3-6.html" class="tab">Production</a>
+        <a href="deep-dive.html" class="tab">Deep Dive</a>
+        <a href="agent-sdk.html" class="tab">Agent SDK</a>
+        <a href="mcp-integration.html" class="tab">MCP</a>
+        <a href="multi-agent.html" class="tab">Multi-Agent</a>
+        <a href="gladly.html" class="tab">Gladly</a>
+        <a href="production.html" class="tab">Production</a>
     </nav>
 
     <main class="main">
@@ -122,7 +131,7 @@
             </div>
             <div class="terminal-content">
                 <ul class="module-list">
-                    <a href="module-3-1.html" class="module-item">
+                    <a href="deep-dive.html" class="module-item">
                         <div class="module-number">1</div>
                         <div class="module-info">
                             <div class="module-title">Claude Code 101 Deep Dive</div>
@@ -132,7 +141,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="module-3-2.html" class="module-item">
+                    <a href="agent-sdk.html" class="module-item">
                         <div class="module-number">2</div>
                         <div class="module-info">
                             <div class="module-title">Claude Agent SDK</div>
@@ -142,7 +151,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="module-3-3.html" class="module-item">
+                    <a href="mcp-integration.html" class="module-item">
                         <div class="module-number">3</div>
                         <div class="module-info">
                             <div class="module-title">MCP Server Integration</div>
@@ -152,7 +161,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="module-3-4.html" class="module-item">
+                    <a href="multi-agent.html" class="module-item">
                         <div class="module-number">4</div>
                         <div class="module-info">
                             <div class="module-title">Multi-Agent Orchestration</div>
@@ -162,7 +171,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="module-3-5.html" class="module-item">
+                    <a href="gladly.html" class="module-item">
                         <div class="module-number">5</div>
                         <div class="module-info">
                             <div class="module-title">Gladly Deep Dive</div>
@@ -172,7 +181,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="module-3-6.html" class="module-item">
+                    <a href="production.html" class="module-item">
                         <div class="module-number">6</div>
                         <div class="module-info">
                             <div class="module-title">Production Agent Development</div>
@@ -233,6 +242,22 @@
             <p>This path requires 15-20 hours spread over 4-6 weeks. The final module (Production Agent Development) involves building a real agent for Gladly's 9-agent initiative.</p>
         </div>
 
+        <section class="completion-form-section">
+            <div class="completion-form-header">
+                <h3>Complete This Path</h3>
+                <p>Confirm you've completed all modules and criteria to receive your Agent Developer certificate</p>
+            </div>
+            <div class="form-embed">
+                <!-- Replace FORM_ID with your Google Form embed URL -->
+                <!-- Example: <iframe src="https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true" width="100%" height="800" frameborder="0">Loading...</iframe> -->
+                <div class="form-placeholder">
+                    <div class="form-placeholder-icon">📋</div>
+                    <h4>Completion Form Coming Soon</h4>
+                    <p>Google Form will be embedded here after Vercel deployment</p>
+                </div>
+            </div>
+        </section>
+
         <div class="nav-buttons">
             <a href="../learning-paths/" class="btn btn-secondary">
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -240,7 +265,7 @@
                 </svg>
                 Back to Learning Paths
             </a>
-            <a href="module-3-1.html" class="btn btn-primary">
+            <a href="deep-dive.html" class="btn btn-primary">
                 Start Module 1
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>

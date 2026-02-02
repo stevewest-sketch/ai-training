@@ -2,8 +2,10 @@
   "outputDirectory": "site",
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/beginner", "destination": "/beginner-path-v2.html" },
-    { "source": "/training", "destination": "/training-page-v2.html" },
-    { "source": "/modules", "destination": "/module-skills-v2.html" }
+    { "source": "/beginner", "destination": "/beginner/index.html" },
+    { "source": "/training", "destination": "/training.html" },
+    { "source": "/modules", "destination": "/intermediate/skills.html" },
+    { "source": "/intermediate", "destination": "/intermediate/index.html" },
+    { "source": "/advanced", "destination": "/advanced/index.html" }
   ]
 }
