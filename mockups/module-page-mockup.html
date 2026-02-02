@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2.3: Claude Skills Creation - Intermediate Path</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FFFFFF;
+            color: #1F2937;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #7C3AED;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #6B7280;
+            font-weight: 500;
+        }
+
+        .nav a:hover, .nav a.active {
+            color: #7C3AED;
+        }
+
+        /* Progress Bar */
+        .progress-header {
+            background: #F9FAFB;
+            padding: 0.75rem 2rem;
+            border-bottom: 1px solid #E5E7EB;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .progress-text {
+            font-size: 0.8125rem;
+            color: #6B7280;
+        }
+
+        .progress-bar-container {
+            flex: 1;
+            height: 6px;
+            background: #E5E7EB;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #7C3AED, #A78BFA);
+            border-radius: 3px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1rem 2rem;
+            font-size: 0.875rem;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .breadcrumb a {
+            color: #6B7280;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: #7C3AED;
+        }
+
+        .breadcrumb span {
+            color: #9CA3AF;
+            margin: 0 0.5rem;
+        }
+
+        .breadcrumb .current {
+            color: #1F2937;
+            font-weight: 500;
+        }
+
+        /* Main Layout */
+        .main-layout {
+            display: flex;
+            min-height: calc(100vh - 140px);
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-nav {
+            width: 280px;
+            background: linear-gradient(180deg, #5B21B6 0%, #7C3AED 100%);
+            padding: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .path-info {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .path-title {
+            color: white;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .module-nav-list {
+            list-style: none;
+        }
+
+        .module-nav-item {
+            margin-bottom: 0.25rem;
+        }
+
+        .module-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .module-nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .module-nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: 500;
+        }
+
+        .module-nav-link.completed {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .module-nav-num {
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .module-nav-link.completed .module-nav-num {
+            background: #10B981;
+        }
+
+        .module-nav-link.active .module-nav-num {
+            background: white;
+            color: #7C3AED;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            padding: 2rem 3rem;
+            max-width: 900px;
+        }
+
+        /* Module Header */
+        .module-header {
+            margin-bottom: 2rem;
+        }
+
+        .module-badges {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            padding: 0.375rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .badge-intermediate {
+            background: #F5F3FF;
+            color: #7C3AED;
+        }
+
+        .badge-duration {
+            background: #F3F4F6;
+            color: #6B7280;
+        }
+
+        .badge-required {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .module-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .module-objective {
+            color: #6B7280;
+            font-size: 1.125rem;
+        }
+
+        /* Section Tabs */
+        .section-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 2px solid #E5E7EB;
+            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: #6B7280;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.2s;
+        }
+
+        .tab-btn:hover {
+            color: #7C3AED;
+        }
+
+        .tab-btn.active {
+            color: #7C3AED;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #7C3AED;
+        }
+
+        /* Content Sections */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Video Section */
+        .video-container {
+            background: #1F2937;
+            border-radius: 12px;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder {
+            text-align: center;
+            color: white;
+        }
+
+        .video-placeholder svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .video-placeholder p {
+            opacity: 0.6;
+        }
+
+        .video-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .video-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+
+        .video-meta-item svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Callout Cards */
+        .callout {
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .callout-breakthrough {
+            background: #ECFDF5;
+            border-left: 4px solid #10B981;
+        }
+
+        .callout-concept {
+            background: #F5F3FF;
+            border-left: 4px solid #7C3AED;
+        }
+
+        .callout-warning {
+            background: #FFFBEB;
+            border-left: 4px solid #F59E0B;
+        }
+
+        .callout-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .callout-breakthrough .callout-icon {
+            color: #10B981;
+        }
+
+        .callout-concept .callout-icon {
+            color: #7C3AED;
+        }
+
+        .callout-warning .callout-icon {
+            color: #F59E0B;
+        }
+
+        .callout-content h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .callout-breakthrough .callout-content h4 {
+            color: #065F46;
+        }
+
+        .callout-concept .callout-content h4 {
+            color: #5B21B6;
+        }
+
+        .callout-warning .callout-content h4 {
+            color: #92400E;
+        }
+
+        .callout-content p {
+            font-size: 0.875rem;
+            color: #4B5563;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin: 2rem 0;
+        }
+
+        .timeline-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #1F2937;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            padding-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 36px;
+            bottom: 0;
+            width: 2px;
+            background: #E5E7EB;
+        }
+
+        .timeline-number {
+            width: 32px;
+            height: 32px;
+            background: #7C3AED;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-content h5 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: #1F2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-content p {
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.875rem;
+        }
+
+        .data-table th {
+            background: #F9FAFB;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #4B5563;
+            border-bottom: 2px solid #E5E7EB;
+        }
+
+        .data-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #E5E7EB;
+            color: #1F2937;
+        }
+
+        .data-table tr:hover {
+            background: #F9FAFB;
+        }
+
+        /* Resources List */
+        .resources-list {
+            list-style: none;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .resource-item:hover {
+            border-color: #7C3AED;
+            background: #FAFAFA;
+        }
+
+        .resource-icon {
+            width: 40px;
+            height: 40px;
+            background: #F3F4F6;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .resource-icon svg {
+            width: 20px;
+            height: 20px;
+            color: #6B7280;
+        }
+
+        .resource-item:hover .resource-icon {
+            background: #F5F3FF;
+        }
+
+        .resource-item:hover .resource-icon svg {
+            color: #7C3AED;
+        }
+
+        .resource-info {
+            flex: 1;
+        }
+
+        .resource-info h5 {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: #1F2937;
+            margin-bottom: 0.125rem;
+        }
+
+        .resource-info p {
+            font-size: 0.8125rem;
+            color: #6B7280;
+        }
+
+        .resource-duration {
+            color: #9CA3AF;
+            font-size: 0.8125rem;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #1F2937;
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            color: #E5E7EB;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        /* Knowledge Check */
+        .knowledge-check {
+            background: #F9FAFB;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .knowledge-check h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .knowledge-check h3 svg {
+            width: 20px;
+            height: 20px;
+            color: #7C3AED;
+        }
+
+        .knowledge-check p {
+            color: #4B5563;
+            font-size: 0.9375rem;
+        }
+
+        /* Navigation Footer */
+        .nav-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #E5E7EB;
+        }
+
+        .btn-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-prev {
+            background: #F3F4F6;
+            color: #4B5563;
+        }
+
+        .btn-prev:hover {
+            background: #E5E7EB;
+        }
+
+        .btn-next {
+            background: #7C3AED;
+            color: white;
+        }
+
+        .btn-next:hover {
+            background: #6D28D9;
+        }
+
+        .btn-complete {
+            background: #10B981;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-complete:hover {
+            background: #059669;
+        }
+
+        /* Section Content */
+        .section-content h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1F2937;
+            margin: 2rem 0 1rem;
+        }
+
+        .section-content h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1F2937;
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .section-content p {
+            margin-bottom: 1rem;
+            color: #4B5563;
+        }
+
+        .section-content ul {
+            margin: 1rem 0 1rem 1.5rem;
+            color: #4B5563;
+        }
+
+        .section-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            .sidebar-nav {
+                width: 100%;
+            }
+            .content-area {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">Center of Excellence</div>
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="/training" class="active">Training</a>
+            <a href="/resources">Resources</a>
+            <a href="/about">About</a>
+        </nav>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="progress-header">
+        <span class="progress-text">Intermediate Path Progress: 60%</span>
+        <div class="progress-bar-container">
+            <div class="progress-fill" style="width: 60%"></div>
+        </div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="main-layout">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar-nav">
+            <div class="path-info">Intermediate Path</div>
+            <div class="path-title">Building with Claude</div>
+            <ul class="module-nav-list">
+                <li class="module-nav-item">
+                    <a href="#" class="module-nav-link completed">
+                        <span class="module-nav-num">✓</span>
+                        Claude Code In Action
+                    </a>
+                </li>
+                <li class="module-nav-item">
+                    <a href="#" class="module-nav-link completed">
+                        <span class="module-nav-num">✓</span>
+                        Planning Mode Mastery
+                    </a>
+                </li>
+                <li class="module-nav-item">
+                    <a href="#" class="module-nav-link active">
+                        <span class="module-nav-num">3</span>
+                        Skills Creation
+                    </a>
+                </li>
+                <li class="module-nav-item">
+                    <a href="#" class="module-nav-link">
+                        <span class="module-nav-num">4</span>
+                        Projects Setup
+                    </a>
+                </li>
+                <li class="module-nav-item">
+                    <a href="#" class="module-nav-link">
+                        <span class="module-nav-num">5</span>
+                        Simple Automations
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Content Area -->
+        <main class="content-area">
+            <!-- Module Header -->
+            <div class="module-header">
+                <div class="module-badges">
+                    <span class="badge badge-intermediate">Intermediate</span>
+                    <span class="badge badge-duration">90 minutes</span>
+                </div>
+                <h1>Claude Skills Creation</h1>
+                <p class="module-objective">Build reusable workflows that automate recurring tasks</p>
+            </div>
+
+            <!-- Section Tabs -->
+            <div class="section-tabs">
+                <button class="tab-btn active" data-tab="overview">Overview</button>
+                <button class="tab-btn" data-tab="resources">Resources</button>
+                <button class="tab-btn" data-tab="concepts">Key Concepts</button>
+                <button class="tab-btn" data-tab="check">Knowledge Check</button>
+            </div>
+
+            <!-- Overview Tab -->
+            <div class="tab-content active" id="overview">
+                <!-- Video Section -->
+                <div class="video-container">
+                    <div class="video-placeholder">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <p>Skills Creation Walkthrough</p>
+                    </div>
+                </div>
+
+                <div class="video-meta">
+                    <div class="video-meta-item">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        11 minutes
+                    </div>
+                    <div class="video-meta-item">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        Instructor: Austin
+                    </div>
+                    <div class="video-meta-item">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        AI Office Hours 2/2/26
+                    </div>
+                </div>
+
+                <!-- The Matrix Analogy Callout -->
+                <div class="callout callout-breakthrough">
+                    <svg class="callout-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <div class="callout-content">
+                        <h4>The Matrix Analogy</h4>
+                        <p>Skills are like uploading kung fu to Neo in The Matrix—you're giving Claude the knowledge to do a specific repeatable task instantly, without having to explain it every time.</p>
+                    </div>
+                </div>
+
+                <!-- Why Skills Exist -->
+                <div class="callout callout-concept">
+                    <svg class="callout-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                    <div class="callout-content">
+                        <h4>Why Skills Exist</h4>
+                        <p>Claude Code doesn't retain contextual memory between sessions. Skills provide that persistent memory for repeatable processes, so you don't have to re-explain your workflows every time.</p>
+                    </div>
+                </div>
+
+                <!-- Skill Creation Framework -->
+                <h2 class="timeline-title">Skill Creation Framework</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-number">1</div>
+                        <div class="timeline-content">
+                            <h5>Start a New Chat</h5>
+                            <p>Open Claude Desktop in Chat or Cowork mode for initial skill development</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">2</div>
+                        <div class="timeline-content">
+                            <h5>Describe Your Automation</h5>
+                            <p>"I want to create a skill file that allows me to [TASK] every [FREQUENCY] and then surface [OUTPUTS]"</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">3</div>
+                        <div class="timeline-content">
+                            <h5>Claude Reads Guidelines</h5>
+                            <p>The skill-creator guidelines load automatically to help structure your skill</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">4</div>
+                        <div class="timeline-content">
+                            <h5>Answer Clarifying Questions</h5>
+                            <p>Data sources, triggers/flags, output format preferences, time ranges</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">5</div>
+                        <div class="timeline-content">
+                            <h5>Review & Activate</h5>
+                            <p>Review the generated skill.md file, then "Copy to my skills" to activate</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">6</div>
+                        <div class="timeline-content">
+                            <h5>Test Your Skill</h5>
+                            <p>Start a new chat and mention trigger words to see if your skill activates</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Automation Progression Table -->
+                <h2>Automation Progression</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Where to Run</th>
+                            <th>Use Case</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Phase 1</strong></td>
+                            <td>Chat/Cowork</td>
+                            <td>Manual trigger, learning the skill</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 2</strong></td>
+                            <td>Claude Code</td>
+                            <td>Scheduled via cron job</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 3</strong></td>
+                            <td>GitHub Actions + Slackbot</td>
+                            <td>Fully automated recurring runs</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Pro Tips -->
+                <div class="callout callout-warning">
+                    <svg class="callout-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                    <div class="callout-content">
+                        <h4>Pro Tips from Austin</h4>
+                        <p>Focus most attention on tuning the <strong>description section</strong>—this determines when your skill fires. Build the skill yourself from scratch to learn better (don't just copy someone else's).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources Tab -->
+            <div class="tab-content" id="resources">
+                <h2>Learning Resources</h2>
+                <ul class="resources-list">
+                    <li class="resource-item">
+                        <div class="resource-icon">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                            </svg>
+                        </div>
+                        <div class="resource-info">
+                            <h5>Claude Skills Explained</h5>
+                            <p>YouTube overview of Claude Skills concept and usage</p>
+                        </div>
+                        <span class="resource-duration">25 min</span>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-icon">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <div class="resource-info">
+                            <h5>Skills Creation Walkthrough</h5>
+                            <p>Internal recording from AI Office Hours 2/2/26</p>
+                        </div>
+                        <span class="resource-duration">11 min</span>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-icon">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                            </svg>
+                        </div>
+                        <div class="resource-info">
+                            <h5>Skills Directory</h5>
+                            <p>Browse trending skills at skills.sh</p>
+                        </div>
+                        <span class="resource-duration">Browse</span>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-icon">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <div class="resource-info">
+                            <h5>Build Your First Skill</h5>
+                            <p>Hands-on lab exercise</p>
+                        </div>
+                        <span class="resource-duration">45 min</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Key Concepts Tab -->
+            <div class="tab-content" id="concepts">
+                <div class="section-content">
+                    <h2>Skill Structure</h2>
+                    <p>Skills are markdown files with two critical sections:</p>
+                    <ul>
+                        <li><strong>Description section:</strong> Read at the start of every conversation to determine if the skill should trigger</li>
+                        <li><strong>Instructions section:</strong> Detailed steps and context for executing the skill</li>
+                    </ul>
+
+                    <h3>Example Skills to Build</h3>
+                    <ul>
+                        <li>Weekly Slack channel pulse analysis across customer accounts</li>
+                        <li>Turn demo notes into structured follow-up emails</li>
+                        <li>Generate changelog summaries from commit history</li>
+                        <li>Create meeting prep briefs from calendar and Slack context</li>
+                    </ul>
+
+                    <h2>Skill Triggering</h2>
+                    <p>Claude scans skill descriptions at the start of each conversation. When trigger words or patterns match, the relevant skill activates automatically.</p>
+
+                    <div class="code-block">
+                        <code># Example Skill Description<br><br>"Help me create a skill file that allows me to analyze<br>customer Slack channels weekly and surface important<br>discussions, questions, and sentiment patterns"</code>
+                    </div>
+
+                    <h3>Output Actions</h3>
+                    <p>Skills can include output actions like:</p>
+                    <ul>
+                        <li>Send a message to a Slack channel</li>
+                        <li>Create a Google Doc</li>
+                        <li>Generate a report file</li>
+                        <li>Update a dashboard</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Knowledge Check Tab -->
+            <div class="tab-content" id="check">
+                <div class="knowledge-check">
+                    <h3>
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Knowledge Check
+                    </h3>
+                    <p><strong>Create and share one working Claude Skill</strong> that automates a task you do at least weekly.</p>
+                    <p style="margin-top: 1rem;">Your skill should:</p>
+                    <ul style="margin: 1rem 0 1rem 1.5rem; color: #4B5563;">
+                        <li>Have a clear, specific description that triggers appropriately</li>
+                        <li>Include detailed instructions for the workflow</li>
+                        <li>Produce a useful output (document, message, report, etc.)</li>
+                        <li>Be tested in at least 3 different conversations</li>
+                    </ul>
+                    <p style="margin-top: 1rem; color: #6B7280;">Submit your skill.md file and a brief description of what it automates to complete this module.</p>
+                </div>
+            </div>
+
+            <!-- Navigation Footer -->
+            <div class="nav-footer">
+                <a href="/learning-paths/intermediate/module-2-2.html" class="btn-nav btn-prev">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                    Previous: Planning Mode
+                </a>
+                <button class="btn-nav btn-complete">
+                    Mark Complete
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                </button>
+                <a href="/learning-paths/intermediate/module-2-4.html" class="btn-nav btn-next">
+                    Next: Projects Setup
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active from all tabs
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+                // Add active to clicked tab
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

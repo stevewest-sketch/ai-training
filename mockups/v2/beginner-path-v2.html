@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner Path - AI Foundations & Claude Essentials</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        .logo-text {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1a1a1a;
+        }
+
+        /* Section Tabs */
+        .section-tabs {
+            background: white;
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            padding: 0 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tab {
+            padding: 1rem 1.5rem;
+            font-size: 0.9375rem;
+            color: #666;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s;
+        }
+
+        .tab:hover {
+            color: #1a1a1a;
+        }
+
+        .tab.active {
+            background: #1a1a1a;
+            color: white;
+            border-radius: 6px 6px 0 0;
+        }
+
+        /* Main Content */
+        .main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section Indicator */
+        .section-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #8b5cf6;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .section-indicator::before {
+            content: '◆';
+        }
+
+        /* Page Title */
+        .page-title {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .page-subtitle {
+            color: #666;
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #f5f5f7;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-box h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box p {
+            color: #666;
+            font-size: 0.9375rem;
+        }
+
+        /* Section Heading */
+        .section-heading {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .section-description {
+            color: #666;
+            font-size: 0.9375rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Terminal Window */
+        .terminal-window {
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .terminal-header {
+            background: #2d2d2d;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #febc2e; }
+        .terminal-dot.green { background: #28c840; }
+
+        .terminal-title {
+            color: #999;
+            font-size: 0.8125rem;
+            margin-left: 0.5rem;
+            font-family: monospace;
+        }
+
+        .terminal-content {
+            padding: 1.5rem;
+        }
+
+        /* Module List in Terminal */
+        .module-list {
+            list-style: none;
+        }
+
+        .module-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .module-item:last-child {
+            border-bottom: none;
+        }
+
+        .module-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            margin: 0 -1.5rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .module-number {
+            width: 28px;
+            height: 28px;
+            background: #8b5cf6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .module-number.completed {
+            background: #22c55e;
+        }
+
+        .module-info {
+            flex: 1;
+        }
+
+        .module-title {
+            color: white;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .module-meta {
+            color: #888;
+            font-size: 0.8125rem;
+        }
+
+        .module-arrow {
+            color: #666;
+        }
+
+        /* Callout Cards */
+        .callout {
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .callout-breakthrough {
+            background: #f0fdf4;
+            border-left: 3px solid #22c55e;
+        }
+
+        .callout-limitation {
+            background: #fff7ed;
+            border-left: 3px solid #f97316;
+        }
+
+        .callout-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .callout-breakthrough .callout-title {
+            color: #16a34a;
+        }
+
+        .callout-limitation .callout-title {
+            color: #ea580c;
+        }
+
+        .callout-title::before {
+            font-size: 0.875rem;
+        }
+
+        .callout-breakthrough .callout-title::before {
+            content: '✦';
+        }
+
+        .callout-limitation .callout-title::before {
+            content: '⚠';
+        }
+
+        .callout p {
+            color: #4b5563;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .progress-title {
+            font-weight: 600;
+            font-size: 0.9375rem;
+        }
+
+        .progress-percent {
+            font-weight: 700;
+            color: #8b5cf6;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #8b5cf6;
+            border-radius: 4px;
+        }
+
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8125rem;
+            color: #666;
+        }
+
+        /* Completion Criteria */
+        .criteria-section {
+            margin-top: 2.5rem;
+        }
+
+        .criteria-list {
+            list-style: none;
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+        }
+
+        .criteria-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9375rem;
+        }
+
+        .criteria-item:last-child {
+            border-bottom: none;
+        }
+
+        .criteria-check {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .criteria-check.done {
+            background: #22c55e;
+            border-color: #22c55e;
+            color: white;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #7c3aed;
+        }
+
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #1a1a1a;
+        }
+
+        .btn-secondary:hover {
+            background: #eee;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .main {
+                padding: 2rem 1rem;
+            }
+            .page-title {
+                font-size: 2rem;
+            }
+            .section-tabs {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </div>
+    </header>
+
+    <!-- Section Tabs -->
+    <nav class="section-tabs">
+        <a href="#" class="tab active">Overview</a>
+        <a href="#" class="tab">Module 1</a>
+        <a href="#" class="tab">Module 2</a>
+        <a href="#" class="tab">Module 3</a>
+        <a href="#" class="tab">Module 4</a>
+        <a href="#" class="tab">Module 5</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Section Indicator -->
+        <div class="section-indicator">BEGINNER PATH</div>
+
+        <!-- Page Title -->
+        <h1 class="page-title">AI Foundations & Claude Essentials</h1>
+        <p class="page-subtitle">Build foundational AI literacy and become a confident daily Claude user</p>
+
+        <!-- Info Box -->
+        <div class="info-box">
+            <h3>Who should take this?</h3>
+            <p>This path is required for all Gladly employees. It provides the foundational knowledge you need to work effectively with AI tools in your daily work. No prior technical experience is needed.</p>
+        </div>
+
+        <!-- The Breakthrough Callout -->
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">What You'll Gain</div>
+            <p>After completing this path, you'll be able to navigate Claude's three modes, write effective prompts that get results on the first try, and use Git for version control. These skills will make you 2-3x more productive with AI assistance.</p>
+        </div>
+
+        <!-- Modules Section -->
+        <h2 class="section-heading">Your Learning Journey</h2>
+        <p class="section-description">Complete these 5 modules to earn your Claude Essentials certificate</p>
+
+        <!-- Terminal Window with Modules -->
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">Learning Modules</span>
+            </div>
+            <div class="terminal-content">
+                <ul class="module-list">
+                    <li class="module-item">
+                        <div class="module-number completed">✓</div>
+                        <div class="module-info">
+                            <div class="module-title">AI Fundamentals</div>
+                            <div class="module-meta">60 min • Core AI/ML concepts and how LLMs work</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </li>
+                    <li class="module-item">
+                        <div class="module-number">2</div>
+                        <div class="module-info">
+                            <div class="module-title">Claude Desktop Navigation</div>
+                            <div class="module-meta">30 min • Chat, Cowork, and Code modes</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </li>
+                    <li class="module-item">
+                        <div class="module-number">3</div>
+                        <div class="module-info">
+                            <div class="module-title">Effective Prompting</div>
+                            <div class="module-meta">45 min • Write prompts that get results</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </li>
+                    <li class="module-item">
+                        <div class="module-number">4</div>
+                        <div class="module-info">
+                            <div class="module-title">Git Fundamentals</div>
+                            <div class="module-meta">45 min • Version control basics</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </li>
+                    <li class="module-item">
+                        <div class="module-number">5</div>
+                        <div class="module-info">
+                            <div class="module-title">Agentic AI Concepts</div>
+                            <div class="module-meta">45 min • What AI agents are and how they work</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <div class="progress-header">
+                <span class="progress-title">Your Progress</span>
+                <span class="progress-percent">20%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 20%"></div>
+            </div>
+            <div class="progress-stats">
+                <span>1 of 5 modules complete</span>
+                <span>~4 hours remaining</span>
+            </div>
+        </div>
+
+        <!-- Completion Criteria -->
+        <section class="criteria-section">
+            <h2 class="section-heading">Completion Criteria</h2>
+            <p class="section-description">Complete all criteria to earn your certificate</p>
+
+            <ul class="criteria-list">
+                <li class="criteria-item">
+                    <div class="criteria-check done">
+                        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+                    Pass AI Fundamentals quiz (80%+)
+                </li>
+                <li class="criteria-item">
+                    <div class="criteria-check"></div>
+                    Complete a task in each Claude mode
+                </li>
+                <li class="criteria-item">
+                    <div class="criteria-check"></div>
+                    Create and commit to a GitHub repo
+                </li>
+                <li class="criteria-item">
+                    <div class="criteria-check"></div>
+                    Submit improved prompt examples
+                </li>
+                <li class="criteria-item">
+                    <div class="criteria-check"></div>
+                    Identify relevant agent for your role
+                </li>
+            </ul>
+        </section>
+
+        <!-- The Limitation Callout -->
+        <div class="callout callout-limitation">
+            <div class="callout-title">Time Commitment</div>
+            <p>This path requires 4-6 hours spread over 1-2 weeks. We recommend completing 1-2 modules per day to allow time for hands-on practice between sessions.</p>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <a href="#" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back to Training
+            </a>
+            <a href="#" class="btn btn-primary">
+                Continue to Module 2
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

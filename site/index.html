@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Training Mockups - Center of Excellence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .logo-text {
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: #1a1a1a;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.75rem;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.125rem;
+            margin-bottom: 3rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #8b5cf6;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            margin-bottom: 1rem;
+        }
+
+        .mockups-list {
+            list-style: none;
+        }
+
+        .mockup-item {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            transition: all 0.2s;
+        }
+
+        .mockup-item:hover {
+            border-color: #8b5cf6;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);
+        }
+
+        .mockup-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .mockup-info h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .mockup-info p {
+            color: #666;
+            font-size: 0.9375rem;
+        }
+
+        .mockup-arrow {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #e5e5e5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            transition: all 0.2s;
+        }
+
+        .mockup-item:hover .mockup-arrow {
+            background: #8b5cf6;
+            border-color: #8b5cf6;
+            color: white;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 0.875rem;
+        }
+
+        .footer a {
+            color: #8b5cf6;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </div>
+
+        <span class="badge">Design Preview</span>
+        <h1>AI Training Mockups</h1>
+        <p class="subtitle">Page mockups for the Claude Code Learning Paths implementation</p>
+
+        <ul class="mockups-list">
+            <li class="mockup-item">
+                <a href="training-page-v2.html" class="mockup-link">
+                    <div class="mockup-info">
+                        <h3>Training Page</h3>
+                        <p>Main training hub with Learning Paths section and course listings</p>
+                    </div>
+                    <div class="mockup-arrow">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+            </li>
+            <li class="mockup-item">
+                <a href="beginner-path-v2.html" class="mockup-link">
+                    <div class="mockup-info">
+                        <h3>Beginner Path Landing</h3>
+                        <p>Learning path overview with modules, progress tracking, and completion criteria</p>
+                    </div>
+                    <div class="mockup-arrow">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+            </li>
+            <li class="mockup-item">
+                <a href="module-skills-v2.html" class="mockup-link">
+                    <div class="mockup-info">
+                        <h3>Module Page: Skills Creation</h3>
+                        <p>Course module with embedded video, interactive timeline, and callout cards</p>
+                    </div>
+                    <div class="mockup-arrow">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+            </li>
+        </ul>
+
+        <div class="footer">
+            <p>Gladly AI Training Initiative • February 2026</p>
+            <p style="margin-top: 0.5rem;">Implementation plan and mockups for <a href="https://www.center-of-excellence.xyz/training" target="_blank">center-of-excellence.xyz/training</a></p>
+        </div>
+    </div>
+</body>
+</html>

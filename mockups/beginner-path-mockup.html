@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner Path - AI Foundations & Claude Essentials</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #F9FAFB;
+            color: #1F2937;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #7C3AED;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #6B7280;
+            font-weight: 500;
+        }
+
+        .nav a:hover, .nav a.active {
+            color: #7C3AED;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #E5E7EB;
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb a {
+            color: #6B7280;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: #7C3AED;
+        }
+
+        .breadcrumb span {
+            color: #9CA3AF;
+            margin: 0 0.5rem;
+        }
+
+        .breadcrumb .current {
+            color: #1F2937;
+            font-weight: 500;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+            padding: 3rem 2rem;
+            border-bottom: 4px solid #10B981;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            padding: 0.375rem 0.875rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-beginner {
+            background: #10B981;
+            color: white;
+        }
+
+        .badge-duration {
+            background: white;
+            color: #059669;
+            border: 1px solid #A7F3D0;
+        }
+
+        .badge-required {
+            background: #7C3AED;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #064E3B;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero > .hero-content > p {
+            color: #047857;
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #065F46;
+            font-size: 0.875rem;
+        }
+
+        .stat svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Main Layout */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 2rem;
+        }
+
+        /* Module List */
+        .modules-section h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #1F2937;
+        }
+
+        .module-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .module-card:hover {
+            border-color: #10B981;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+
+        .module-number {
+            width: 36px;
+            height: 36px;
+            background: #ECFDF5;
+            color: #059669;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        .module-card.completed .module-number {
+            background: #10B981;
+            color: white;
+        }
+
+        .module-content {
+            flex: 1;
+        }
+
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.25rem;
+        }
+
+        .module-content h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1F2937;
+        }
+
+        .module-duration {
+            color: #9CA3AF;
+            font-size: 0.8125rem;
+            flex-shrink: 0;
+        }
+
+        .module-content p {
+            color: #6B7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .module-tags {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.25rem 0.625rem;
+            background: #F3F4F6;
+            color: #6B7280;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .tag.external {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .tag.video {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .tag.hands-on {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .module-arrow {
+            color: #D1D5DB;
+            flex-shrink: 0;
+        }
+
+        .module-card:hover .module-arrow {
+            color: #10B981;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sidebar-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .sidebar-card h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        /* Progress Card */
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .progress-percent {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10B981;
+        }
+
+        .progress-label {
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+
+        .progress-bar-bg {
+            height: 8px;
+            background: #ECFDF5;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10B981, #34D399);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-modules {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8125rem;
+            color: #6B7280;
+        }
+
+        /* Learning Objectives */
+        .objectives-list {
+            list-style: none;
+        }
+
+        .objectives-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #F3F4F6;
+            font-size: 0.875rem;
+            color: #4B5563;
+        }
+
+        .objectives-list li:last-child {
+            border-bottom: none;
+        }
+
+        .objectives-list svg {
+            width: 18px;
+            height: 18px;
+            color: #10B981;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Completion Criteria */
+        .criteria-list {
+            list-style: none;
+        }
+
+        .criteria-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.625rem 0;
+            font-size: 0.875rem;
+            color: #4B5563;
+        }
+
+        .criteria-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #D1D5DB;
+            border-radius: 4px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .criteria-checkbox.checked {
+            background: #10B981;
+            border-color: #10B981;
+        }
+
+        .criteria-checkbox svg {
+            width: 12px;
+            height: 12px;
+            color: white;
+        }
+
+        /* Certificate Preview */
+        .certificate-preview {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .certificate-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #10B981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .certificate-icon svg {
+            width: 32px;
+            height: 32px;
+            color: white;
+        }
+
+        .certificate-title {
+            font-weight: 600;
+            color: #065F46;
+            margin-bottom: 0.25rem;
+        }
+
+        .certificate-label {
+            font-size: 0.8125rem;
+            color: #047857;
+        }
+
+        /* Start Button */
+        .btn-start {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #9CA3AF;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .main {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">Center of Excellence</div>
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="/training" class="active">Training</a>
+            <a href="/resources">Resources</a>
+            <a href="/about">About</a>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="/training">Training</a>
+        <span>›</span>
+        <a href="/learning-paths/">Learning Paths</a>
+        <span>›</span>
+        <span class="current">Beginner Path</span>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badges">
+                <span class="badge badge-beginner">Beginner</span>
+                <span class="badge badge-duration">4-6 hours</span>
+                <span class="badge badge-required">Required for All</span>
+            </div>
+            <h1>AI Foundations & Claude Essentials</h1>
+            <p>Build foundational AI literacy and become a confident daily Claude user. This path is required for all Gladly employees.</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                    5 Modules
+                </div>
+                <div class="stat">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    4-6 hours to complete
+                </div>
+                <div class="stat">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                    </svg>
+                    Certificate on completion
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Modules List -->
+        <section class="modules-section">
+            <h2>Course Modules</h2>
+
+            <!-- Module 1.1 -->
+            <div class="module-card completed">
+                <div class="module-number">✓</div>
+                <div class="module-content">
+                    <div class="module-header">
+                        <h3>AI Fundamentals</h3>
+                        <span class="module-duration">60 min</span>
+                    </div>
+                    <p>Understand core AI/ML concepts and how Large Language Models work</p>
+                    <div class="module-tags">
+                        <span class="tag">CoE Course</span>
+                        <span class="tag video">Video</span>
+                        <span class="tag">Quiz</span>
+                    </div>
+                </div>
+                <svg class="module-arrow" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </div>
+
+            <!-- Module 1.2 -->
+            <div class="module-card">
+                <div class="module-number">2</div>
+                <div class="module-content">
+                    <div class="module-header">
+                        <h3>Claude Desktop Navigation</h3>
+                        <span class="module-duration">30 min</span>
+                    </div>
+                    <p>Navigate Claude's three modes (Chat, Cowork, Code) and understand when to use each</p>
+                    <div class="module-tags">
+                        <span class="tag video">Video</span>
+                        <span class="tag hands-on">Hands-on</span>
+                    </div>
+                </div>
+                <svg class="module-arrow" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </div>
+
+            <!-- Module 1.3 -->
+            <div class="module-card">
+                <div class="module-number">3</div>
+                <div class="module-content">
+                    <div class="module-header">
+                        <h3>Effective Prompting</h3>
+                        <span class="module-duration">45 min</span>
+                    </div>
+                    <p>Write prompts that get high-quality results on the first try</p>
+                    <div class="module-tags">
+                        <span class="tag external">External Tool</span>
+                        <span class="tag hands-on">Hands-on</span>
+                    </div>
+                </div>
+                <svg class="module-arrow" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </div>
+
+            <!-- Module 1.4 -->
+            <div class="module-card">
+                <div class="module-number">4</div>
+                <div class="module-content">
+                    <div class="module-header">
+                        <h3>Git Fundamentals</h3>
+                        <span class="module-duration">45 min</span>
+                    </div>
+                    <p>Understand version control basics for collaborative development</p>
+                    <div class="module-tags">
+                        <span class="tag external">YouTube</span>
+                        <span class="tag hands-on">Hands-on</span>
+                    </div>
+                </div>
+                <svg class="module-arrow" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </div>
+
+            <!-- Module 1.5 -->
+            <div class="module-card">
+                <div class="module-number">5</div>
+                <div class="module-content">
+                    <div class="module-header">
+                        <h3>Agentic AI Concepts</h3>
+                        <span class="module-duration">45 min</span>
+                    </div>
+                    <p>Understand what AI agents are and how they work</p>
+                    <div class="module-tags">
+                        <span class="tag">CoE Course</span>
+                        <span class="tag video">Video</span>
+                    </div>
+                </div>
+                <svg class="module-arrow" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Progress Card -->
+            <div class="sidebar-card">
+                <h3>Your Progress</h3>
+                <div class="progress-header">
+                    <span class="progress-percent">20%</span>
+                    <span class="progress-label">complete</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 20%"></div>
+                </div>
+                <div class="progress-modules">
+                    <span>1 of 5 modules</span>
+                    <span>~4 hours left</span>
+                </div>
+            </div>
+
+            <!-- Learning Objectives -->
+            <div class="sidebar-card">
+                <h3>Learning Objectives</h3>
+                <ul class="objectives-list">
+                    <li>
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Understand how Large Language Models work
+                    </li>
+                    <li>
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Navigate Chat, Cowork, and Code modes
+                    </li>
+                    <li>
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Write effective prompts
+                    </li>
+                    <li>
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Use Git for version control
+                    </li>
+                    <li>
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Understand AI agent concepts
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Completion Criteria -->
+            <div class="sidebar-card">
+                <h3>Completion Criteria</h3>
+                <ul class="criteria-list">
+                    <li>
+                        <div class="criteria-checkbox checked">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        Pass AI Fundamentals quiz (80%+)
+                    </li>
+                    <li>
+                        <div class="criteria-checkbox"></div>
+                        Complete task in each Claude mode
+                    </li>
+                    <li>
+                        <div class="criteria-checkbox"></div>
+                        Create and commit to a GitHub repo
+                    </li>
+                    <li>
+                        <div class="criteria-checkbox"></div>
+                        Submit improved prompt examples
+                    </li>
+                    <li>
+                        <div class="criteria-checkbox"></div>
+                        Identify relevant agent for your role
+                    </li>
+                </ul>
+
+                <!-- Certificate Preview -->
+                <div class="certificate-preview">
+                    <div class="certificate-icon">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                        </svg>
+                    </div>
+                    <div class="certificate-title">Claude Essentials</div>
+                    <div class="certificate-label">Certificate Badge</div>
+                </div>
+            </div>
+
+            <!-- Continue Button -->
+            <a href="/learning-paths/beginner/module-1-2.html" class="btn-start">
+                Continue Learning →
+            </a>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 Gladly Center of Excellence • AI Transformation Initiative</p>
+    </footer>
+</body>
+</html>

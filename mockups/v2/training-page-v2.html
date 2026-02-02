@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Training - Center of Excellence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        .logo-text {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1a1a1a;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9375rem;
+        }
+
+        .nav a:hover {
+            color: #1a1a1a;
+        }
+
+        /* Main Content */
+        .main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-link:hover {
+            color: #1a1a1a;
+        }
+
+        /* Page Header */
+        .page-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Learning Paths Section */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .badge-new {
+            background: #1a1a1a;
+            color: white;
+            padding: 0.25rem 0.625rem;
+            border-radius: 4px;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .section-subtitle {
+            color: #666;
+            font-size: 0.9375rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Path Cards */
+        .paths-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .path-card {
+            background: #FFFFFF;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            transition: box-shadow 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+
+        .path-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: #ccc;
+        }
+
+        .path-content {
+            flex: 1;
+        }
+
+        .path-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.375rem;
+        }
+
+        .path-card p {
+            color: #666;
+            font-size: 0.9375rem;
+            margin-bottom: 0.875rem;
+            max-width: 580px;
+        }
+
+        .path-badges {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 0.25rem 0.625rem;
+            border-radius: 4px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+        }
+
+        .badge-gray {
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        .badge-dark {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 1px solid #ddd;
+            color: #666;
+        }
+
+        .path-arrow {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #e5e5e5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            flex-shrink: 0;
+            margin-left: 1rem;
+            transition: all 0.2s;
+        }
+
+        .path-card:hover .path-arrow {
+            background: #1a1a1a;
+            border-color: #1a1a1a;
+            color: white;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: #eee;
+            margin: 2rem 0;
+        }
+
+        /* Course Cards */
+        .courses-section {
+            margin-top: 1rem;
+        }
+
+        .course-card {
+            background: #FFFFFF;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            transition: box-shadow 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: #ccc;
+        }
+
+        .course-content h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .course-content p {
+            color: #666;
+            font-size: 0.875rem;
+            margin-bottom: 0.625rem;
+        }
+
+        .course-badges {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .course-arrow {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #e5e5e5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .course-card:hover .course-arrow {
+            background: #1a1a1a;
+            border-color: #1a1a1a;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .main {
+                padding: 1.5rem 1rem;
+            }
+            .path-card {
+                flex-direction: column;
+            }
+            .path-arrow {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </div>
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="/interviewer">Interviewer</a>
+            <a href="/training">Training</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Back Link -->
+        <a href="/" class="back-link">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            Back to CoE Portal
+        </a>
+
+        <!-- Page Header -->
+        <h1 class="page-title">AI Training</h1>
+        <p class="page-subtitle">Self-paced courses to build your AI knowledge and skills</p>
+
+        <!-- Learning Paths Section -->
+        <div class="section-header">
+            <h2 class="section-title">Learning Paths</h2>
+            <span class="badge-new">New</span>
+        </div>
+        <p class="section-subtitle">Progressive journeys from AI foundations to production agent development</p>
+
+        <div class="paths-grid">
+            <!-- Beginner Path -->
+            <div class="path-card">
+                <div class="path-content">
+                    <h3>Beginner: AI Foundations & Claude Essentials</h3>
+                    <p>Build foundational AI literacy and become a confident daily Claude user</p>
+                    <div class="path-badges">
+                        <span class="badge badge-gray">4-6 hours</span>
+                        <span class="badge badge-gray">5 modules</span>
+                        <span class="badge badge-dark">Required</span>
+                    </div>
+                </div>
+                <div class="path-arrow">
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Intermediate Path -->
+            <div class="path-card">
+                <div class="path-content">
+                    <h3>Intermediate: Building with Claude</h3>
+                    <p>Create Claude Skills and Projects to automate your own workflows</p>
+                    <div class="path-badges">
+                        <span class="badge badge-gray">8-12 hours</span>
+                        <span class="badge badge-gray">5 modules</span>
+                        <span class="badge badge-outline">Intermediate</span>
+                    </div>
+                </div>
+                <div class="path-arrow">
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Advanced Path -->
+            <div class="path-card">
+                <div class="path-content">
+                    <h3>Advanced: Agent Development</h3>
+                    <p>Build production-ready AI agents for Gladly's 9-agent initiative</p>
+                    <div class="path-badges">
+                        <span class="badge badge-gray">15-20 hours</span>
+                        <span class="badge badge-gray">6 modules</span>
+                        <span class="badge badge-outline">Advanced</span>
+                    </div>
+                </div>
+                <div class="path-arrow">
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Individual Courses -->
+        <section class="courses-section">
+            <h2 class="section-title" style="margin-bottom: 1.5rem;">Individual Courses</h2>
+
+            <!-- Agentic AI Primer -->
+            <div class="course-card">
+                <div class="course-content">
+                    <h3>Agentic AI Primer</h3>
+                    <p>Introduction to agentic AI concepts, capabilities, and applications in customer service</p>
+                    <div class="course-badges">
+                        <span class="badge badge-gray">45 min</span>
+                        <span class="badge badge-gray">Beginner</span>
+                    </div>
+                </div>
+                <div class="course-arrow">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- AI Foundations -->
+            <div class="course-card">
+                <div class="course-content">
+                    <h3>AI Foundations</h3>
+                    <p>Core concepts and fundamentals of artificial intelligence and machine learning</p>
+                    <div class="course-badges">
+                        <span class="badge badge-gray">60 min</span>
+                        <span class="badge badge-gray">Beginner</span>
+                    </div>
+                </div>
+                <div class="course-arrow">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Claude Code 101 -->
+            <div class="course-card">
+                <div class="course-content">
+                    <h3>Claude Code 101</h3>
+                    <p>Learn how to use Claude Code for development tasks and productivity</p>
+                    <div class="course-badges">
+                        <span class="badge badge-gray">30 min</span>
+                        <span class="badge badge-gray">Intermediate</span>
+                    </div>
+                </div>
+                <div class="course-arrow">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Gladly Deep Dive -->
+            <div class="course-card">
+                <div class="course-content">
+                    <h3>Gladly Deep Dive</h3>
+                    <p>In-depth exploration of Gladly's AI capabilities and integration patterns</p>
+                    <div class="course-badges">
+                        <span class="badge badge-gray">90 min</span>
+                        <span class="badge badge-gray">Advanced</span>
+                    </div>
+                </div>
+                <div class="course-arrow">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
