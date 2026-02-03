@@ -227,71 +227,46 @@
             color: white;
         }
 
-        /* Divider */
-        .divider {
-            height: 1px;
-            background: #eee;
-            margin: 2rem 0;
-        }
-
-        /* Course Cards */
-        .courses-section {
-            margin-top: 1rem;
-        }
-
-        .course-card {
-            background: #FFFFFF;
-            border: 1px solid #e5e5e5;
+        /* Skills vs Automations Callout */
+        .skills-automations-callout {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
             border-radius: 12px;
-            padding: 1.25rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 0.75rem;
-            transition: box-shadow 0.2s, border-color 0.2s;
-            cursor: pointer;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
         }
-
-        .course-card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border-color: #ccc;
+        .skills-automations-callout h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 1rem;
         }
-
-        .course-content h3 {
+        .distinction-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .distinction-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        .distinction-item h4 {
             font-size: 1rem;
             font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.5rem;
         }
-
-        .course-content p {
-            color: #666;
+        .distinction-item.skills h4 { color: #16a34a; }
+        .distinction-item.automations h4 { color: #ea580c; }
+        .distinction-item p {
             font-size: 0.875rem;
-            margin-bottom: 0.625rem;
+            color: #4b5563;
         }
-
-        .course-badges {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .course-arrow {
-            width: 36px;
-            height: 36px;
-            border: 1px solid #e5e5e5;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            flex-shrink: 0;
-            transition: all 0.2s;
-        }
-
-        .course-card:hover .course-arrow {
-            background: #1a1a1a;
-            border-color: #1a1a1a;
-            color: white;
+        .hackathon-note {
+            font-size: 0.9375rem;
+            color: #78350f;
+            font-weight: 500;
         }
 
         /* Responsive */
@@ -306,6 +281,7 @@
                 margin-left: 0;
                 margin-top: 1rem;
             }
+            .distinction-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -336,6 +312,22 @@
         <!-- Page Header -->
         <h1 class="page-title">AI Training</h1>
         <p class="page-subtitle">Self-paced courses to build your AI knowledge and skills</p>
+
+        <!-- Skills vs Automations Callout -->
+        <div class="skills-automations-callout">
+            <h3>Understanding Skills vs. Automations</h3>
+            <div class="distinction-grid">
+                <div class="distinction-item skills">
+                    <h4>Skills</h4>
+                    <p>Single-task workflows you trigger with a button click. Anyone can build them. <strong>Start here.</strong></p>
+                </div>
+                <div class="distinction-item automations">
+                    <h4>Automations</h4>
+                    <p>Complex multi-system workflows that run automatically. Require API access, engineering review, and leader approval.</p>
+                </div>
+            </div>
+            <p class="hackathon-note">👉 For Thursday's Hackathon: Focus on building Skills.</p>
+        </div>
 
         <!-- Learning Paths Section -->
         <div class="section-header">
@@ -399,81 +391,6 @@
                 </div>
             </a>
         </div>
-
-        <div class="divider"></div>
-
-        <!-- Individual Courses -->
-        <section class="courses-section">
-            <h2 class="section-title" style="margin-bottom: 1.5rem;">Individual Courses</h2>
-
-            <!-- Agentic AI Primer -->
-            <div class="course-card">
-                <div class="course-content">
-                    <h3>Agentic AI Primer</h3>
-                    <p>Introduction to agentic AI concepts, capabilities, and applications in customer service</p>
-                    <div class="course-badges">
-                        <span class="badge badge-gray">45 min</span>
-                        <span class="badge badge-gray">Beginner</span>
-                    </div>
-                </div>
-                <div class="course-arrow">
-                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                </div>
-            </div>
-
-            <!-- AI Foundations -->
-            <div class="course-card">
-                <div class="course-content">
-                    <h3>AI Foundations</h3>
-                    <p>Core concepts and fundamentals of artificial intelligence and machine learning</p>
-                    <div class="course-badges">
-                        <span class="badge badge-gray">60 min</span>
-                        <span class="badge badge-gray">Beginner</span>
-                    </div>
-                </div>
-                <div class="course-arrow">
-                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                </div>
-            </div>
-
-            <!-- Claude Code 101 -->
-            <div class="course-card">
-                <div class="course-content">
-                    <h3>Claude Code 101</h3>
-                    <p>Learn how to use Claude Code for development tasks and productivity</p>
-                    <div class="course-badges">
-                        <span class="badge badge-gray">30 min</span>
-                        <span class="badge badge-gray">Intermediate</span>
-                    </div>
-                </div>
-                <div class="course-arrow">
-                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                </div>
-            </div>
-
-            <!-- Gladly Deep Dive -->
-            <div class="course-card">
-                <div class="course-content">
-                    <h3>Gladly Deep Dive</h3>
-                    <p>In-depth exploration of Gladly's AI capabilities and integration patterns</p>
-                    <div class="course-badges">
-                        <span class="badge badge-gray">90 min</span>
-                        <span class="badge badge-gray">Advanced</span>
-                    </div>
-                </div>
-                <div class="course-arrow">
-                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                </div>
-            </div>
-        </section>
     </main>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Automations - Intermediate Path</title>
+    <title>From Skills to Automations - Intermediate Path</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -57,13 +57,19 @@
         .step-number { width: 32px; height: 32px; background: #8b5cf6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.875rem; flex-shrink: 0; }
         .step-content h4 { font-size: 0.9375rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.25rem; }
         .step-content p { font-size: 0.875rem; color: #666; }
-        .knowledge-check { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
-        .knowledge-check h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
-        .knowledge-check h3::before { content: '📝'; }
-        .knowledge-check > p { color: #666; font-size: 0.9375rem; margin-bottom: 1rem; }
-        .check-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; }
-        .check-item:last-child { border-bottom: none; }
-        .check-box { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 4px; flex-shrink: 0; }
+        .self-assessment { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .self-assessment h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .self-assessment h3::before { content: '✓'; background: #22c55e; color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; }
+        .self-assessment > p { color: #666; font-size: 0.9375rem; margin-bottom: 1rem; }
+        .assessment-list { list-style: none; padding-left: 0; }
+        .assessment-list li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: #4b5563; font-size: 0.9375rem; border-bottom: 1px solid #f0f0f0; }
+        .assessment-list li:last-child { border-bottom: none; }
+        .assessment-list li::before { content: '→'; position: absolute; left: 0; color: #8b5cf6; font-weight: 600; }
+        .path-quiz { background: white; border: 2px solid #8b5cf6; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; text-align: center; }
+        .path-quiz h3 { font-size: 1.125rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .path-quiz p { color: #666; font-size: 0.9375rem; margin-bottom: 1rem; }
+        .btn-quiz { background: #8b5cf6; color: white; padding: 0.75rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem; transition: background 0.2s; }
+        .btn-quiz:hover { background: #7c3aed; }
         .completion-banner { background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%); border-radius: 12px; padding: 2rem; margin-top: 2.5rem; color: white; text-align: center; }
         .completion-banner h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
         .completion-banner p { opacity: 0.9; margin-bottom: 1.5rem; }
@@ -99,17 +105,17 @@
         <a href="/intermediate/planning-mode" class="tab">Planning Mode</a>
         <a href="/intermediate/skills" class="tab">Skills</a>
         <a href="/intermediate/projects" class="tab">Projects</a>
-        <a href="/intermediate/automations" class="tab active">Automations</a>
+        <a href="/intermediate/automations" class="tab active">Skills → Automations</a>
     </nav>
 
     <main class="main">
         <div class="section-indicator">MODULE 5 OF 5</div>
-        <h1 class="page-title">Simple Automations</h1>
-        <p class="page-subtitle">Build your first working automation using Claude Code</p>
+        <h1 class="page-title">From Skills to Automations</h1>
+        <p class="page-subtitle">Understand how Skills become Automations—and when to make that leap</p>
 
         <div class="info-box">
             <h3>Learning Objective</h3>
-            <p>By the end of this module, you'll build and demo a working automation that combines what you've learned about Claude Code, planning mode, skills, and projects.</p>
+            <p>By the end of this module, you'll understand the relationship between Skills and Automations. Focus on building Skills first—Automations should only be pursued with leader approval and engineering support.</p>
         </div>
 
         <div class="callout callout-breakthrough">
@@ -214,33 +220,22 @@
             </div>
         </div>
 
-        <div class="knowledge-check">
-            <h3>Knowledge Check</h3>
-            <p>Complete your capstone automation project:</p>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Choose an automation project that solves a real problem</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Create a SPEC using the planning mode workflow</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Build the automation with Claude Code</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Test it with real data/inputs</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Document how it works (README or similar)</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Demo your automation to the team</span>
-            </div>
+        <div class="self-assessment">
+            <h3>Self-Assessment</h3>
+            <p>Before moving on, can you:</p>
+            <ul class="assessment-list">
+                <li>Plan and build a working automation using Claude Code?</li>
+                <li>Test an automation with real data and handle edge cases?</li>
+                <li>Document and explain your automation to others?</li>
+            </ul>
+        </div>
+
+        <div class="path-quiz">
+            <h3>Intermediate Path Quiz</h3>
+            <p>Complete this quiz to earn your Claude Builder certificate:</p>
+            <a href="#" class="btn-quiz" onclick="alert('Quiz form URL coming soon. Contact your admin to set up the Google Form.'); return false;">
+                Take the Quiz →
+            </a>
         </div>
 
         <div class="completion-banner">
