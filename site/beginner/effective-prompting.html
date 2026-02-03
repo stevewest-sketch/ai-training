@@ -63,13 +63,14 @@
         .compare-card.bad .compare-label { color: #ef4444; }
         .compare-card.good .compare-label { color: #22c55e; }
         .compare-card p { font-size: 0.9375rem; color: #4b5563; font-style: italic; }
-        .knowledge-check { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
-        .knowledge-check h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
-        .knowledge-check h3::before { content: '📝'; }
-        .knowledge-check > p { color: #666; font-size: 0.9375rem; margin-bottom: 1rem; }
-        .check-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; }
-        .check-item:last-child { border-bottom: none; }
-        .check-box { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 4px; flex-shrink: 0; }
+        .self-assessment { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .self-assessment h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .self-assessment h3::before { content: '✓'; background: #22c55e; color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; }
+        .self-assessment > p { color: #666; font-size: 0.9375rem; margin-bottom: 1rem; }
+        .assessment-list { list-style: none; padding-left: 0; }
+        .assessment-list li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: #4b5563; font-size: 0.9375rem; border-bottom: 1px solid #f0f0f0; }
+        .assessment-list li:last-child { border-bottom: none; }
+        .assessment-list li::before { content: '→'; position: absolute; left: 0; color: #8b5cf6; font-weight: 600; }
         .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
         .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
         .btn-primary { background: #8b5cf6; color: white; }
@@ -195,25 +196,14 @@
             <p>If the first response isn't quite right, tell Claude specifically what to change. "Make it more concise" or "Focus more on the technical details" helps Claude adjust.</p>
         </div>
 
-        <div class="knowledge-check">
-            <h3>Knowledge Check</h3>
-            <p>Practice your prompting skills with these exercises:</p>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Write a prompt using the CTFC framework for a task in your daily work</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Take a vague prompt you've used before and rewrite it using the framework</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Use Prompt Cowboy to test and compare your before/after prompts</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Submit your before/after prompt examples showing improvement</span>
-            </div>
+        <div class="self-assessment">
+            <h3>Self-Assessment</h3>
+            <p>Before moving on, can you:</p>
+            <ul class="assessment-list">
+                <li>Write a prompt using Context, Task, Format, and Constraints?</li>
+                <li>Identify what's missing from a vague prompt?</li>
+                <li>Iterate on a prompt to improve output quality?</li>
+            </ul>
         </div>
 
         <div class="nav-buttons">

@@ -70,13 +70,14 @@
         .example-item:last-child { border-bottom: none; }
         .example-icon { width: 8px; height: 8px; background: #8b5cf6; border-radius: 50%; margin-top: 0.5rem; flex-shrink: 0; }
         .example-item span { color: #4b5563; font-size: 0.9375rem; }
-        .knowledge-check { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
-        .knowledge-check h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
-        .knowledge-check h3::before { content: '📝'; }
-        .knowledge-check > p { color: #666; font-size: 0.9375rem; margin-bottom: 1rem; }
-        .check-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; }
-        .check-item:last-child { border-bottom: none; }
-        .check-box { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 4px; flex-shrink: 0; }
+        .self-assessment { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .self-assessment h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .self-assessment h3::before { content: '✓'; background: #22c55e; color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; }
+        .self-assessment > p { color: #666; font-size: 0.9375rem; margin-bottom: 1rem; }
+        .assessment-list { list-style: none; padding-left: 0; }
+        .assessment-list li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: #4b5563; font-size: 0.9375rem; border-bottom: 1px solid #f0f0f0; }
+        .assessment-list li:last-child { border-bottom: none; }
+        .assessment-list li::before { content: '→'; position: absolute; left: 0; color: #8b5cf6; font-weight: 600; }
         .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
         .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
         .btn-primary { background: #8b5cf6; color: white; }
@@ -241,33 +242,14 @@ sentiment patterns for account review."</span>
             <p>Build the skill yourself from scratch to learn better—don't just copy someone else's. Add output actions like "send a message to Slack" or "create a Google Doc" to make skills immediately useful.</p>
         </div>
 
-        <div class="knowledge-check">
-            <h3>Knowledge Check</h3>
-            <p>Create and share a working Claude Skill:</p>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Identify a task you do weekly that could be automated</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Start a new chat and say "help me create a skill"</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Answer Claude's clarifying questions about your workflow</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Review the generated skill.md and tune the description</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Test the skill in a new conversation</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>Share your working skill with the team</span>
-            </div>
+        <div class="self-assessment">
+            <h3>Self-Assessment</h3>
+            <p>Before moving on, can you:</p>
+            <ul class="assessment-list">
+                <li>Explain what a Claude Skill is and when to use one?</li>
+                <li>Create a skill.md with description and instructions?</li>
+                <li>Tune a skill description so it triggers appropriately?</li>
+            </ul>
         </div>
 
         <div class="nav-buttons">
