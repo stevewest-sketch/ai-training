@@ -96,101 +96,186 @@
         <a href="/intermediate/projects-as-agents" class="tab">Projects</a>
         <a href="/intermediate/git-concepts" class="tab active">Git</a>
         <a href="/intermediate/building-automations" class="tab">Automations</a>
+        <a href="/intermediate/assessment" class="tab">Assessment</a>
     </nav>
 
     <main class="main">
         <div class="section-indicator">MODULE 5 OF 6</div>
-        <h1 class="page-title">Git Concepts</h1>
-        <p class="page-subtitle">Understand version control basics for collaborative development</p>
+        <h1 class="page-title">Git 101 for Claude Code Users</h1>
+        <p class="page-subtitle">Understand version control concepts—Claude handles the commands for you</p>
 
         <div class="info-box">
-            <h3>Learning Objective</h3>
-            <p>By the end of this module, you'll understand what version control is, why it matters for AI development, and be able to perform basic Git operations like commits and pushes.</p>
+            <h3>You Don't Need to Memorize Commands</h3>
+            <p>This module teaches you the concepts behind Git so you understand what's happening. Claude Code handles the actual commands—you just need to know what to ask for.</p>
         </div>
+
+        <h2 class="section-heading">What Problem Does Git Solve?</h2>
+        <p class="section-description">The "track changes" problem, but for code</p>
 
         <div class="callout callout-breakthrough">
-            <div class="callout-title">Why This Matters for AI</div>
-            <p>All Gladly agents will live in GitHub (sagansystems org). Claude Code integrates directly with Git, and version control enables safe experimentation—you can always go back if something breaks.</p>
+            <div class="callout-title">The Before Times</div>
+            <p>Without version control: <code>project_final.py</code>, <code>project_final_v2.py</code>, <code>project_final_ACTUALLY_final.py</code>. Sound familiar? Git eliminates this chaos by tracking every change in a systematic way.</p>
         </div>
 
-        <h2 class="section-heading">Watch: Introduction to Git</h2>
-        <p class="section-description">A brief introduction to Git from GitHub's official channel</p>
+        <h2 class="section-heading">The Two Places Your Code Lives</h2>
+        <p class="section-description">Understanding local vs remote</p>
 
-        <div class="video-container">
-            <div class="video-header">
-                <div class="video-dot red"></div>
-                <div class="video-dot yellow"></div>
-                <div class="video-dot green"></div>
-                <span class="video-title">A Brief Introduction to Git</span>
+        <div class="concepts-grid">
+            <div class="concept-card">
+                <h4>💻 Your Computer (Local)</h4>
+                <p>Where you do the work. Changes here are private until you share them. Claude Code works with files here.</p>
             </div>
-            <div class="video-embed">
-                <iframe src="https://www.youtube.com/embed/r8jQ9hVA2qs" allowfullscreen></iframe>
+            <div class="concept-card">
+                <h4>☁️ GitHub (Remote)</h4>
+                <p>The shared home for your code. Like Google Drive for code—multiple people can access and collaborate.</p>
             </div>
         </div>
-        <div class="video-meta">
-            <div class="video-meta-item">⏱️ 15 minutes</div>
-            <div class="video-meta-item">📍 YouTube (GitHub)</div>
+
+        <div class="callout callout-limitation">
+            <div class="callout-title">Key Insight</div>
+            <p>Changes on your computer don't automatically appear on GitHub, and vice versa. You explicitly sync between them. This is a feature, not a bug—it prevents half-finished work from breaking things for others.</p>
         </div>
 
-        <h2 class="section-heading">Key Concepts</h2>
-        <p class="section-description">Core Git terminology you need to understand</p>
+        <h2 class="section-heading">Core Concepts</h2>
+        <p class="section-description">The vocabulary you need to communicate with Claude Code</p>
 
         <div class="concepts-grid">
             <div class="concept-card">
                 <h4>Repository (Repo)</h4>
-                <p>A folder that Git tracks. It contains all your project files and the complete history of changes.</p>
+                <p>A project folder tracked by Git. Contains all your files plus the complete history of every change ever made.</p>
             </div>
             <div class="concept-card">
                 <h4>Commit</h4>
-                <p>A snapshot of your changes at a point in time. Like a save point you can return to.</p>
+                <p>A save point with a description. "Fixed the login bug" or "Added new dashboard." You can always go back to any commit.</p>
             </div>
             <div class="concept-card">
                 <h4>Branch</h4>
-                <p>A parallel version of your code. Work on features without affecting the main codebase.</p>
+                <p>A parallel universe for your code. Work on a new feature without affecting the main version. Merge when ready.</p>
             </div>
             <div class="concept-card">
-                <h4>Push / Pull</h4>
-                <p>Push sends your commits to GitHub. Pull downloads others' changes to your machine.</p>
+                <h4>Push</h4>
+                <p>Upload your commits to GitHub. "Here's my work, now it's backed up and others can see it."</p>
+            </div>
+            <div class="concept-card">
+                <h4>Pull</h4>
+                <p>Download the latest changes from GitHub. "What did my teammates change while I was away?"</p>
+            </div>
+            <div class="concept-card">
+                <h4>Pull Request (PR)</h4>
+                <p>A proposal to merge your branch into main. "Here's my work—please review before it goes live."</p>
             </div>
         </div>
 
-        <h2 class="section-heading">Essential Git Commands</h2>
-        <p class="section-description">The basic commands you'll use daily</p>
+        <h2 class="section-heading">How This Works with Claude Code</h2>
+        <p class="section-description">You speak in concepts, Claude handles the commands</p>
 
         <div class="terminal-window">
             <div class="terminal-header">
                 <div class="terminal-dot red"></div>
                 <div class="terminal-dot yellow"></div>
                 <div class="terminal-dot green"></div>
-                <span class="terminal-title">terminal</span>
+                <span class="terminal-title">Claude Code Conversation</span>
             </div>
             <div class="terminal-content">
-                <span class="comment"># Check the status of your changes</span><br>
-                <span class="command">git status</span><br><br>
-                <span class="comment"># Stage files for commit</span><br>
-                <span class="command">git add filename.txt</span><br>
-                <span class="command">git add .</span> <span class="comment"># stages all changes</span><br><br>
-                <span class="comment"># Commit your staged changes</span><br>
-                <span class="command">git commit -m "Add new feature"</span><br><br>
-                <span class="comment"># Push commits to GitHub</span><br>
-                <span class="command">git push</span><br><br>
-                <span class="comment"># Pull latest changes from GitHub</span><br>
-                <span class="command">git pull</span>
+                <span class="comment">You:</span> <span class="string">"Save my progress with a commit"</span><br><br>
+                <span class="comment">Claude:</span> <span class="output">I'll commit your changes. What message should describe this work?</span><br><br>
+                <span class="comment">You:</span> <span class="string">"Fixed the header alignment issue"</span><br><br>
+                <span class="comment">Claude:</span> <span class="output">Done. Committed with message "Fixed the header alignment issue"</span><br><br>
+                <span class="comment">You:</span> <span class="string">"Push this to GitHub"</span><br><br>
+                <span class="comment">Claude:</span> <span class="output">Pushed to origin/main. Your changes are now on GitHub.</span>
             </div>
         </div>
 
-        <div class="callout callout-limitation">
-            <div class="callout-title">Claude Code + Git</div>
-            <p>When you use Claude Code, it can handle Git operations for you. You can ask Claude to "commit these changes" or "push to GitHub" and it will execute the commands. Understanding the basics helps you know what Claude is doing.</p>
+        <h2 class="section-heading">The Complete Flow</h2>
+        <p class="section-description">A typical work session with Git</p>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">Typical Workflow</span>
+            </div>
+            <div class="terminal-content">
+                <span class="comment">1. Start fresh:</span> <span class="string">"Pull the latest changes"</span><br>
+                <span class="output">   → Gets any updates your teammates made</span><br><br>
+                <span class="comment">2. Do your work:</span> <span class="string">"Create a new file called utils.py"</span><br>
+                <span class="output">   → Make your changes locally</span><br><br>
+                <span class="comment">3. Save a checkpoint:</span> <span class="string">"Commit this as 'Added utility functions'"</span><br>
+                <span class="output">   → Creates a save point you can return to</span><br><br>
+                <span class="comment">4. Share your work:</span> <span class="string">"Push to GitHub"</span><br>
+                <span class="output">   → Uploads to the shared repo</span><br><br>
+                <span class="comment">5. Collaborate:</span> <span class="string">"Create a pull request"</span><br>
+                <span class="output">   → Asks teammates to review before merging</span>
+            </div>
+        </div>
+
+        <h2 class="section-heading">Why Branches Matter</h2>
+        <p class="section-description">Safe experimentation without breaking things</p>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">The Branch Mental Model</div>
+            <p><strong>main</strong> = the production-ready code everyone relies on<br>
+            <strong>your-branch</strong> = your private sandbox to experiment in<br><br>
+            Work on your branch, break things, fix things. Only merge to main when it's ready. If your experiment fails, just delete the branch—main is untouched.</p>
+        </div>
+
+        <h2 class="section-heading">Quick Phrases for Claude Code</h2>
+        <p class="section-description">Copy these when you need them</p>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">Common Requests</span>
+            </div>
+            <div class="terminal-content">
+                <span class="comment"># Starting work</span><br>
+                <span class="string">"Pull the latest changes from GitHub"</span><br>
+                <span class="string">"Create a new branch called feature-x"</span><br><br>
+                <span class="comment"># Saving work</span><br>
+                <span class="string">"Commit these changes with message 'Added X'"</span><br>
+                <span class="string">"Push my branch to GitHub"</span><br><br>
+                <span class="comment"># Collaborating</span><br>
+                <span class="string">"Create a pull request for this branch"</span><br>
+                <span class="string">"Switch to the main branch"</span><br>
+                <span class="string">"Merge main into my branch"</span><br><br>
+                <span class="comment"># Fixing mistakes</span><br>
+                <span class="string">"Undo my last commit"</span><br>
+                <span class="string">"Show me what changed since my last commit"</span>
+            </div>
+        </div>
+
+        <h2 class="section-heading">Common Scenarios</h2>
+        <p class="section-description">What to say when...</p>
+
+        <div class="concepts-grid">
+            <div class="concept-card">
+                <h4>Starting a new feature</h4>
+                <p>"Create a new branch called feature-dashboard, based on main"</p>
+            </div>
+            <div class="concept-card">
+                <h4>Saving your work</h4>
+                <p>"Commit my changes with the message 'Added user settings page'"</p>
+            </div>
+            <div class="concept-card">
+                <h4>Sharing with team</h4>
+                <p>"Push this branch and create a pull request"</p>
+            </div>
+            <div class="concept-card">
+                <h4>Getting teammates' changes</h4>
+                <p>"Pull the latest from main and merge it into my branch"</p>
+            </div>
         </div>
 
         <div class="self-assessment">
             <h3>Self-Assessment</h3>
             <p>Before moving on, can you:</p>
             <ul class="assessment-list">
-                <li>Create a repo, make commits, and push to GitHub?</li>
-                <li>Explain what a commit, branch, and pull request are?</li>
-                <li>Use git status to understand the state of your changes?</li>
+                <li>Explain why code lives in two places (local and GitHub)?</li>
+                <li>Describe what a commit, branch, and pull request are?</li>
+                <li>Ask Claude Code to save, push, and share your work?</li>
             </ul>
         </div>
 

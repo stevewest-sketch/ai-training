@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beginner Path Assessment - AI Training Center</title>
+    <title>Intermediate Path Assessment - AI Training Center</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -41,7 +41,8 @@
         .passing-criteria p { font-size: 0.875rem; color: #166534; }
         .task-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
         .task-card { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.25rem; }
-        .task-card h4 { font-size: 0.9375rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; }
+        .task-card h4 { font-size: 0.9375rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .task-card h4 .task-label { background: #f3e8ff; color: #7c3aed; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
         .task-card ul { list-style: none; }
         .task-card li { padding: 0.375rem 0; padding-left: 1.25rem; position: relative; color: #4b5563; font-size: 0.875rem; }
         .task-card li::before { content: '•'; position: absolute; left: 0; color: #8b5cf6; }
@@ -54,6 +55,11 @@
         .next-step-badge.review { background: #fef3c7; color: #92400e; }
         .next-step-badge.practice { background: #f3e8ff; color: #7c3aed; }
         .next-step-content { font-size: 0.9375rem; color: #4b5563; }
+        .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+        .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; color: #16a34a; }
+        .callout-title::before { content: '✦'; }
+        .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
         .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
         .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
         .btn-primary { background: #8b5cf6; color: white; }
@@ -77,171 +83,186 @@
     </header>
 
     <nav class="section-tabs">
-        <a href="/beginner/" class="tab">Overview</a>
-        <a href="/beginner/ai-foundations" class="tab">AI Foundations</a>
-        <a href="/beginner/claude-chat-overview" class="tab">Claude Chat</a>
-        <a href="/beginner/connectors" class="tab">Connectors</a>
-        <a href="/beginner/artifacts" class="tab">Artifacts</a>
-        <a href="/beginner/sharing-and-projects" class="tab">Sharing</a>
-        <a href="/beginner/effective-prompting" class="tab">Prompting</a>
-        <a href="/beginner/skills-intro" class="tab">Skills</a>
-        <a href="/beginner/assessment" class="tab active">Assessment</a>
+        <a href="/intermediate/" class="tab">Overview</a>
+        <a href="/intermediate/intro-to-cowork" class="tab">Intro to Cowork</a>
+        <a href="/intermediate/planning-mode" class="tab">Planning Mode</a>
+        <a href="/intermediate/skills-deep-dive" class="tab">Skills</a>
+        <a href="/intermediate/projects-as-agents" class="tab">Projects</a>
+        <a href="/intermediate/git-concepts" class="tab">Git</a>
+        <a href="/intermediate/building-automations" class="tab">Automations</a>
+        <a href="/intermediate/assessment" class="tab active">Assessment</a>
     </nav>
 
     <main class="main">
-        <div class="section-indicator">BEGINNER PATH ASSESSMENT</div>
+        <div class="section-indicator">INTERMEDIATE PATH ASSESSMENT</div>
         <h1 class="page-title">Path Assessment</h1>
-        <p class="page-subtitle">Knowledge self-assessment plus practical demonstration</p>
+        <p class="page-subtitle">Demonstrate your Claude Cowork skills through self-reflection and practical work</p>
 
         <div class="info-box">
             <h3>When to Take This Assessment</h3>
-            <p>Complete this assessment after finishing all 7 modules in the Beginner path. This combines self-reflection with hands-on demonstration of your skills.</p>
+            <p>Complete this assessment after finishing all 6 modules in the Intermediate path. You'll reflect on your knowledge and complete 2 practical demonstrations.</p>
         </div>
 
+        <!-- Part 1: Knowledge Self-Assessment -->
         <div class="part-divider">
             <h2>Part 1: Knowledge Self-Assessment</h2>
-            <p>Rate your confidence (1-5) on each statement</p>
+            <p>Rate your confidence on each skill (1 = not confident, 5 = very confident)</p>
         </div>
 
         <ul class="assessment-list">
             <li class="assessment-item">
                 <div class="assessment-number">1</div>
                 <div class="assessment-content">
-                    <h4>AI Foundations</h4>
-                    <p>I can explain what LLMs are and their key limitations to a colleague</p>
+                    <h4>I understand the difference between Claude Chat and Claude Cowork</h4>
+                    <p>I can explain when to use file-based collaboration vs. conversational prompting</p>
                 </div>
             </li>
             <li class="assessment-item">
                 <div class="assessment-number">2</div>
                 <div class="assessment-content">
-                    <h4>Interface & Settings</h4>
-                    <p>I can confidently navigate Claude Chat's interface, settings, and features</p>
+                    <h4>I can use Planning Mode effectively</h4>
+                    <p>I know how to voice dump, create a SPEC, go through the interview process, and review plans</p>
                 </div>
             </li>
             <li class="assessment-item">
                 <div class="assessment-number">3</div>
                 <div class="assessment-content">
-                    <h4>Files & Memory</h4>
-                    <p>I understand file uploads, Memory, and Extended Thinking</p>
+                    <h4>I understand Claude Skills structure and creation</h4>
+                    <p>I can explain what a skill.md file contains and how descriptions determine when skills fire</p>
                 </div>
             </li>
             <li class="assessment-item">
                 <div class="assessment-number">4</div>
                 <div class="assessment-content">
-                    <h4>Connectors</h4>
-                    <p>I know when and how to use all 12 connectors including web search</p>
+                    <h4>I can design a Project as an agent</h4>
+                    <p>I understand how Projects provide persistent context and can function like specialized agents</p>
                 </div>
             </li>
             <li class="assessment-item">
                 <div class="assessment-number">5</div>
                 <div class="assessment-content">
-                    <h4>Artifacts</h4>
-                    <p>I can create, edit, iterate, and export all 7 artifact types</p>
+                    <h4>I understand Git concepts for Claude Code</h4>
+                    <p>I can explain commits, branches, push/pull, and ask Claude to perform these operations</p>
                 </div>
             </li>
             <li class="assessment-item">
                 <div class="assessment-number">6</div>
                 <div class="assessment-content">
-                    <h4>Prompting & Styles</h4>
-                    <p>I can write CTFC-structured prompts and use/create Styles</p>
-                </div>
-            </li>
-            <li class="assessment-item">
-                <div class="assessment-number">7</div>
-                <div class="assessment-content">
-                    <h4>Skills</h4>
-                    <p>I understand what skills are and can call them through natural language</p>
+                    <h4>I can identify automation candidates in my workflow</h4>
+                    <p>I know how to spot repetitive tasks and evaluate them for Claude automation</p>
                 </div>
             </li>
         </ul>
 
         <div class="passing-criteria">
-            <h4>Passing Criteria</h4>
-            <p>No ratings below 3; average 4.0+</p>
+            <h4>Self-Assessment Reflection</h4>
+            <p>If you rated any skill below 3, review that module before proceeding. The practical demonstrations will test these skills directly.</p>
         </div>
 
+        <!-- Part 2: Practical Demonstrations -->
         <div class="part-divider">
             <h2>Part 2: Practical Demonstrations</h2>
-            <p>Complete ANY 3 of 6 tasks</p>
+            <p>Complete any 2 of the following 4 tasks to demonstrate your skills</p>
         </div>
 
         <div class="task-grid">
             <div class="task-card">
-                <h4>Task A: Document Analysis</h4>
+                <h4><span class="task-label">Task A</span> Custom Skill Creation</h4>
                 <ul>
-                    <li>Upload a document</li>
-                    <li>Ask Claude to summarize key points</li>
-                    <li>Export the summary to Google Drive</li>
+                    <li>Identify a repetitive task in your workflow</li>
+                    <li>Create a skill.md with description and instructions</li>
+                    <li>Test the skill with at least 2 different inputs</li>
+                    <li>Iterate on the description until it triggers correctly</li>
                 </ul>
             </div>
             <div class="task-card">
-                <h4>Task B: Content Creation with Artifact</h4>
+                <h4><span class="task-label">Task B</span> Project Agent Design</h4>
                 <ul>
-                    <li>Create a document or presentation artifact</li>
-                    <li>Iterate on it (at least 2 versions)</li>
-                    <li>Export to your preferred format</li>
+                    <li>Create a new Project for a specific use case</li>
+                    <li>Add relevant context files (instructions, examples, data)</li>
+                    <li>Test the Project with real tasks</li>
+                    <li>Document what makes this Project effective</li>
                 </ul>
             </div>
             <div class="task-card">
-                <h4>Task C: Connector Usage</h4>
+                <h4><span class="task-label">Task C</span> Documented Automation Candidate</h4>
                 <ul>
-                    <li>Use at least one connector to find information</li>
-                    <li>Could be Drive file, email, calendar event, or Slack search</li>
-                    <li>Demonstrate Claude pulling external data</li>
+                    <li>Identify a process you do weekly or more often</li>
+                    <li>Document the current manual steps</li>
+                    <li>Write a SPEC for automating it with Claude</li>
+                    <li>Identify inputs, outputs, and potential edge cases</li>
                 </ul>
             </div>
             <div class="task-card">
-                <h4>Task D: Using Skills</h4>
+                <h4><span class="task-label">Task D</span> File-Based Cowork Task</h4>
                 <ul>
-                    <li>Find an organization skill in Settings</li>
-                    <li>Trigger it through natural language</li>
-                    <li>Show the skill-enhanced output</li>
-                </ul>
-            </div>
-            <div class="task-card">
-                <h4>Task E: Prompting with CTFC</h4>
-                <ul>
-                    <li>Write a prompt using all four CTFC components</li>
-                    <li>Show the improved result vs. a basic prompt</li>
-                </ul>
-            </div>
-            <div class="task-card">
-                <h4>Task F: Interactive Exploration</h4>
-                <ul>
-                    <li>Request an interactive artifact (calculator, quiz, etc.)</li>
-                    <li>Test that it actually functions</li>
-                    <li>Explain what it does</li>
+                    <li>Upload a real work file to Claude Cowork</li>
+                    <li>Complete a meaningful transformation or analysis</li>
+                    <li>Use @ mentions to reference specific files</li>
+                    <li>Export or save the results for actual use</li>
                 </ul>
             </div>
         </div>
 
-        <h2 class="section-heading">Next Steps</h2>
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">What Counts as Complete</div>
+            <p>For each task, you should have something tangible to show: a skill.md file, a Project you can demo, a documented SPEC, or output from a Cowork session. The goal is to prove you can apply these concepts to real work.</p>
+        </div>
 
+        <!-- Completion Criteria -->
+        <h2 class="section-heading">Completion Criteria</h2>
+        <p class="section-description">You've successfully completed the Intermediate path when:</p>
+
+        <ul class="assessment-list">
+            <li class="assessment-item">
+                <div class="assessment-number">✓</div>
+                <div class="assessment-content">
+                    <h4>All self-assessment ratings are 3 or higher</h4>
+                    <p>You feel confident in the core concepts covered in each module</p>
+                </div>
+            </li>
+            <li class="assessment-item">
+                <div class="assessment-number">✓</div>
+                <div class="assessment-content">
+                    <h4>You've completed 2 practical demonstrations</h4>
+                    <p>You have tangible artifacts showing applied skills</p>
+                </div>
+            </li>
+            <li class="assessment-item">
+                <div class="assessment-number">✓</div>
+                <div class="assessment-content">
+                    <h4>You're using Claude Cowork in your daily work</h4>
+                    <p>File-based collaboration has become part of your workflow</p>
+                </div>
+            </li>
+        </ul>
+
+        <!-- Next Steps -->
         <div class="next-steps">
-            <h3>Based on Your Results</h3>
+            <h3>What's Next?</h3>
             <div class="next-step-item">
-                <span class="next-step-badge ready">Average 4+</span>
-                <span class="next-step-content">You're ready for the Intermediate path!</span>
+                <span class="next-step-badge ready">Ready</span>
+                <span class="next-step-content"><strong>Continue to Advanced Path:</strong> Learn Claude Code, Git workflows, MCP servers, and production agent development</span>
             </div>
             <div class="next-step-item">
-                <span class="next-step-badge review">Any 3 or below</span>
-                <span class="next-step-content">Review the specific module and try the exercises again</span>
+                <span class="next-step-badge practice">Practice</span>
+                <span class="next-step-content"><strong>Build more skills:</strong> Create 3-5 skills for common tasks before moving on</span>
             </div>
             <div class="next-step-item">
-                <span class="next-step-badge practice">Want more practice?</span>
-                <span class="next-step-content">Use Prompt Cowboy or start a Project to apply your learning</span>
+                <span class="next-step-badge review">Review</span>
+                <span class="next-step-content"><strong>Share with team:</strong> Demo your skills and Projects to colleagues</span>
             </div>
         </div>
 
         <div class="nav-buttons">
-            <a href="/beginner/skills-intro" class="btn btn-secondary">
+            <a href="/intermediate/building-automations" class="btn btn-secondary">
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
-                Previous: Skills Introduction
+                Previous: Building Automations
             </a>
-            <a href="/intermediate/" class="btn btn-primary">
-                Continue to Intermediate Path
+            <a href="/advanced/" class="btn btn-primary">
+                Continue to Advanced Path
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
