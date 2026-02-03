@@ -63,6 +63,14 @@
         .compare-card.bad .compare-label { color: #ef4444; }
         .compare-card.good .compare-label { color: #22c55e; }
         .compare-card p { font-size: 0.9375rem; color: #4b5563; font-style: italic; }
+        .concept-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .concept-table th { background: #8b5cf6; color: white; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
+        .concept-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; vertical-align: top; }
+        .concept-table tr:last-child td { border-bottom: none; }
+        .concept-table tr:hover td { background: #fafafa; }
+        .steps-list { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .steps-list ol { padding-left: 1.25rem; }
+        .steps-list li { padding: 0.5rem 0; color: #4b5563; font-size: 0.9375rem; }
         .self-assessment { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
         .self-assessment h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
         .self-assessment h3::before { content: '✓'; background: #22c55e; color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; }
@@ -97,21 +105,24 @@
 
     <nav class="section-tabs">
         <a href="/beginner/" class="tab">Overview</a>
-        <a href="/beginner/ai-fundamentals" class="tab">AI Fundamentals</a>
-        <a href="/beginner/claude-desktop" class="tab">Claude Desktop</a>
+        <a href="/beginner/ai-foundations" class="tab">AI Foundations</a>
+        <a href="/beginner/claude-chat-overview" class="tab">Claude Chat</a>
+        <a href="/beginner/connectors" class="tab">Connectors</a>
+        <a href="/beginner/artifacts" class="tab">Artifacts</a>
+        <a href="/beginner/sharing-and-projects" class="tab">Sharing</a>
         <a href="/beginner/effective-prompting" class="tab active">Prompting</a>
-        <a href="/beginner/git-basics" class="tab">Git</a>
-        <a href="/beginner/agentic-concepts" class="tab">Agentic AI</a>
+        <a href="/beginner/skills-intro" class="tab">Skills</a>
+        <a href="/beginner/assessment" class="tab">Assessment</a>
     </nav>
 
     <main class="main">
-        <div class="section-indicator">MODULE 3 OF 5</div>
+        <div class="section-indicator">MODULE 6 OF 7</div>
         <h1 class="page-title">Effective Prompting</h1>
-        <p class="page-subtitle">Write prompts that get high-quality results on the first try</p>
+        <p class="page-subtitle">Master the CTFC framework, understand Styles, and create custom styles</p>
 
         <div class="info-box">
             <h3>Learning Objective</h3>
-            <p>By the end of this module, you'll understand how to structure prompts using a simple framework that dramatically improves the quality and relevance of AI responses.</p>
+            <p>By the end of this module, you'll master the CTFC framework for structuring prompts, understand the built-in Styles feature, and know how to create custom styles for consistent outputs.</p>
         </div>
 
         <h2 class="section-heading">Practice Tool</h2>
@@ -196,25 +207,93 @@
             <p>If the first response isn't quite right, tell Claude specifically what to change. "Make it more concise" or "Focus more on the technical details" helps Claude adjust.</p>
         </div>
 
+        <h2 class="section-heading">The Styles Feature</h2>
+        <p class="section-description">Claude has built-in styles that control the tone and format of responses</p>
+
+        <table class="concept-table">
+            <thead>
+                <tr>
+                    <th>Style</th>
+                    <th>What It Does</th>
+                    <th>Best For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Normal</strong></td>
+                    <td>Balanced, conversational</td>
+                    <td>General use</td>
+                </tr>
+                <tr>
+                    <td><strong>Concise</strong></td>
+                    <td>Brief, direct</td>
+                    <td>Quick answers</td>
+                </tr>
+                <tr>
+                    <td><strong>Explanatory</strong></td>
+                    <td>Detailed with context</td>
+                    <td>Learning, complex topics</td>
+                </tr>
+                <tr>
+                    <td><strong>Formal</strong></td>
+                    <td>Professional tone</td>
+                    <td>External communications</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">Creating Custom Styles</h2>
+        <p class="section-description">Create your own styles for consistent outputs across conversations</p>
+
+        <div class="steps-list">
+            <ol>
+                <li>Go to <strong>Settings → Styles</strong></li>
+                <li>Click <strong>Create New Style</strong></li>
+                <li>Write instructions for tone, format, approach</li>
+            </ol>
+        </div>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">Example: "Executive Brief" Style</span>
+            </div>
+            <div class="terminal-content">
+                Write for executive audiences:<br><br>
+                - Lead with the insight or recommendation<br>
+                - Max 3 paragraphs<br>
+                - Use numbers and metrics when available<br>
+                - End with clear next steps
+            </div>
+        </div>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">When to Use Custom Styles</div>
+            <p>Create custom styles for recurring communication patterns: team updates, customer emails, executive summaries, technical documentation. Once created, select the style from the dropdown to apply it automatically.</p>
+        </div>
+
         <div class="self-assessment">
             <h3>Self-Assessment</h3>
             <p>Before moving on, can you:</p>
             <ul class="assessment-list">
                 <li>Write a prompt using Context, Task, Format, and Constraints?</li>
                 <li>Identify what's missing from a vague prompt?</li>
-                <li>Iterate on a prompt to improve output quality?</li>
+                <li>Explain the difference between built-in styles?</li>
+                <li>Create a custom style for a recurring communication need?</li>
             </ul>
         </div>
 
         <div class="nav-buttons">
-            <a href="/beginner/claude-desktop" class="btn btn-secondary">
+            <a href="/beginner/sharing-and-projects" class="btn btn-secondary">
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
-                Previous: Claude Desktop
+                Previous: Sharing & Projects
             </a>
-            <a href="/beginner/git-basics" class="btn btn-primary">
-                Next: Git Fundamentals
+            <a href="/beginner/skills-intro" class="btn btn-primary">
+                Next: Skills Introduction
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>

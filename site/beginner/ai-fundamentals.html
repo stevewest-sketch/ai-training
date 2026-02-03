@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Fundamentals - Beginner Path</title>
+    <title>AI Foundations - Beginner Path</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,7 +13,7 @@
         .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
         .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
         .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
-        .tab { padding: 1rem 1.5rem; font-size: 0.9375rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+        .tab { padding: 1rem 1rem; font-size: 0.875rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
         .tab:hover { color: #1a1a1a; }
         .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
         .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
@@ -49,6 +49,11 @@
         .concept-card { background: white; border: 1px solid #e5e5e5; border-radius: 10px; padding: 1.25rem; }
         .concept-card h4 { font-size: 0.9375rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
         .concept-card p { font-size: 0.875rem; color: #666; }
+        .concept-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .concept-table th { background: #8b5cf6; color: white; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
+        .concept-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; vertical-align: top; }
+        .concept-table tr:last-child td { border-bottom: none; }
+        .concept-table tr:hover td { background: #fafafa; }
         .self-assessment { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
         .self-assessment h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
         .self-assessment h3::before { content: '✓'; background: #22c55e; color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; }
@@ -81,21 +86,24 @@
 
     <nav class="section-tabs">
         <a href="/beginner/" class="tab">Overview</a>
-        <a href="/beginner/ai-fundamentals" class="tab active">AI Fundamentals</a>
-        <a href="/beginner/claude-desktop" class="tab">Claude Desktop</a>
+        <a href="/beginner/ai-foundations" class="tab active">AI Foundations</a>
+        <a href="/beginner/claude-chat-overview" class="tab">Claude Chat</a>
+        <a href="/beginner/connectors" class="tab">Connectors</a>
+        <a href="/beginner/artifacts" class="tab">Artifacts</a>
+        <a href="/beginner/sharing-and-projects" class="tab">Sharing</a>
         <a href="/beginner/effective-prompting" class="tab">Prompting</a>
-        <a href="/beginner/git-basics" class="tab">Git</a>
-        <a href="/beginner/agentic-concepts" class="tab">Agentic AI</a>
+        <a href="/beginner/skills-intro" class="tab">Skills</a>
+        <a href="/beginner/assessment" class="tab">Assessment</a>
     </nav>
 
     <main class="main">
-        <div class="section-indicator">MODULE 1 OF 5</div>
-        <h1 class="page-title">AI Fundamentals</h1>
-        <p class="page-subtitle">Understand core AI/ML concepts and how Large Language Models work</p>
+        <div class="section-indicator">MODULE 1 OF 7</div>
+        <h1 class="page-title">AI Foundations</h1>
+        <p class="page-subtitle">Understand what Large Language Models are, how they process information, and the key concepts that determine their capabilities and limitations</p>
 
         <div class="info-box">
             <h3>Learning Objective</h3>
-            <p>By the end of this module, you'll understand what Large Language Models are, how they process information, and the key concepts that determine their capabilities and limitations.</p>
+            <p>By the end of this module, you'll be able to explain what LLMs are and their key limitations to a colleague, and understand the difference between chatbots, automation, and AI agents.</p>
         </div>
 
         <div class="callout callout-breakthrough">
@@ -122,28 +130,75 @@
         <h2 class="section-heading">Key Concepts</h2>
         <p class="section-description">Core ideas you'll learn in this module</p>
 
-        <div class="concepts-grid">
-            <div class="concept-card">
-                <h4>Large Language Models (LLMs)</h4>
-                <p>AI systems trained on vast text data that can understand and generate human-like language.</p>
-            </div>
-            <div class="concept-card">
-                <h4>Tokens & Context Windows</h4>
-                <p>How AI breaks down text into pieces and the limit on how much it can "remember" in a conversation.</p>
-            </div>
-            <div class="concept-card">
-                <h4>Temperature</h4>
-                <p>The setting that controls how creative vs. predictable AI responses are.</p>
-            </div>
-            <div class="concept-card">
-                <h4>Responsible AI Usage</h4>
-                <p>Understanding AI limitations, bias considerations, and ethical usage guidelines.</p>
-            </div>
-        </div>
+        <table class="concept-table">
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Concept</th>
+                    <th>What It Means</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>LLMs</strong></td>
+                    <td>AI trained on vast text that predicts likely next words based on patterns</td>
+                </tr>
+                <tr>
+                    <td><strong>Tokens</strong></td>
+                    <td>How AI breaks down text into pieces for processing</td>
+                </tr>
+                <tr>
+                    <td><strong>Context Window</strong></td>
+                    <td>The limit on how much Claude can "remember" in a conversation</td>
+                </tr>
+                <tr>
+                    <td><strong>Temperature</strong></td>
+                    <td>Setting controlling creative vs. predictable responses</td>
+                </tr>
+                <tr>
+                    <td><strong>Hallucinations</strong></td>
+                    <td>Confident-sounding but incorrect information</td>
+                </tr>
+            </tbody>
+        </table>
 
         <div class="callout callout-limitation">
             <div class="callout-title">Key Limitation to Understand</div>
             <p>LLMs don't truly "understand" in the human sense—they predict likely next words based on patterns. This is why they can sometimes produce confident-sounding but incorrect information (hallucinations).</p>
+        </div>
+
+        <h2 class="section-heading">Agents vs. Chatbots vs. Automation</h2>
+        <p class="section-description">Understanding the difference helps you see where AI is headed</p>
+
+        <table class="concept-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>What It Does</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Chatbot</strong></td>
+                    <td>Answers questions based on training data</td>
+                    <td>Customer support FAQ bot</td>
+                </tr>
+                <tr>
+                    <td><strong>Automation</strong></td>
+                    <td>Follows predefined rules without reasoning</td>
+                    <td>Zapier workflow, email rules</td>
+                </tr>
+                <tr>
+                    <td><strong>AI Agent</strong></td>
+                    <td>Reasons, uses tools, and takes actions autonomously</td>
+                    <td>PMM Sidekick analyzing Slack</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Connection to Gladly</div>
+            <p>Gladly's 9-agent initiative builds on these concepts—understanding the difference between chatbots and agents helps you see where AI is headed.</p>
         </div>
 
         <div class="self-assessment">
@@ -163,8 +218,8 @@
                 </svg>
                 Back to Overview
             </a>
-            <a href="/beginner/claude-desktop" class="btn btn-primary">
-                Next: Claude Desktop
+            <a href="/beginner/claude-chat-overview" class="btn btn-primary">
+                Next: Claude Chat Overview
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
