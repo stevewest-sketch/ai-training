@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gladly's 9 Agents - AI Training Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+        .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .info-box p { color: #666; font-size: 0.9375rem; }
+        .agents-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .agents-table th { background: #1a1a1a; color: white; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
+        .agents-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; vertical-align: top; }
+        .agents-table tr:last-child td { border-bottom: none; }
+        .agents-table tr:hover td { background: #fafafa; }
+        .agent-name { font-weight: 600; color: #1a1a1a; }
+        .path-coverage { font-size: 0.8125rem; color: #666; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        .btn-primary { background: #1a1a1a; color: white; }
+        .btn-primary:hover { background: #333; }
+        @media (max-width: 768px) {
+            .agents-table { display: block; overflow-x: auto; }
+        }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .nav-buttons { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/training" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <main class="main">
+        <div class="section-indicator">APPENDIX D</div>
+        <h1 class="page-title">Gladly's 9 Agents</h1>
+        <p class="page-subtitle">Reference guide to all nine agents in Gladly's AI initiative</p>
+
+        <div class="info-box">
+            <h3>About the 9-Agent Initiative</h3>
+            <p>Gladly is building nine specialized AI agents to automate and enhance various business functions. Each agent focuses on a specific domain and integrates with relevant tools and data sources.</p>
+        </div>
+
+        <table class="agents-table">
+            <thead>
+                <tr>
+                    <th>Agent</th>
+                    <th>Description</th>
+                    <th>Path Coverage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="agent-name">Content Engine</td>
+                    <td>Creates and repurposes marketing content</td>
+                    <td class="path-coverage">Intermediate skills → Advanced</td>
+                </tr>
+                <tr>
+                    <td class="agent-name">Design Automation</td>
+                    <td>Generates design assets via Figma</td>
+                    <td class="path-coverage">Advanced (MCP)</td>
+                </tr>
+                <tr>
+                    <td class="agent-name">Campaign Orchestration</td>
+                    <td>Manages Marketo campaigns</td>
+                    <td class="path-coverage">Advanced (MCP)</td>
+                </tr>
+                <tr>
+                    <td class="agent-name">Analytics & Reporting</td>
+                    <td>Pulls and analyzes data</td>
+                    <td class="path-coverage">Intermediate → Advanced</td>
+                </tr>
+                <tr>
+                    <td class="agent-name">PMM Sidekick</td>
+                    <td>Supports PMMs with research and content</td>
+                    <td class="path-coverage">Intermediate → Advanced</td>
+                </tr>
+                <tr>
+                    <td class="agent-name">Competitive Intel</td>
+                    <td>Monitors competitor activity</td>
+                    <td class="path-coverage">Intermediate projects → Advanced</td>
+                </tr>
+                <tr>
+                    <td class="agent-name">Web & Development</td>
+                    <td>Updates website and CMS</td>
+                    <td class="path-coverage">Advanced</td>
+                </tr>
+                <tr>
+                    <td class="agent-name">Customer Presentations</td>
+                    <td>Creates customized slide decks</td>
+                    <td class="path-coverage">Intermediate skills → Advanced</td>
+                </tr>
+                <tr>
+                    <td class="agent-name">Social Media</td>
+                    <td>Manages social content creation</td>
+                    <td class="path-coverage">Intermediate → Advanced</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="nav-buttons">
+            <a href="/appendices/concepts" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Previous: Concepts
+            </a>
+            <a href="/appendices/assessment-philosophy" class="btn btn-primary">
+                Next: Assessment Philosophy
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Claude Cowork - Intermediate Path</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .tab { padding: 1rem 1rem; font-size: 0.875rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+        .tab:hover { color: #1a1a1a; }
+        .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+        .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .info-box p { color: #666; font-size: 0.9375rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .key-difference { background: linear-gradient(135deg, #f3e8ff 0%, #fdf4ff 100%); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; border-left: 4px solid #8b5cf6; }
+        .key-difference p { font-size: 1rem; color: #6b21a8; margin: 0; }
+        .key-difference strong { color: #7c3aed; }
+        .compare-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .compare-table th { background: #8b5cf6; color: white; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
+        .compare-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; vertical-align: top; }
+        .compare-table tr:last-child td { border-bottom: none; }
+        .compare-table tr:hover td { background: #fafafa; }
+        .check { color: #22c55e; }
+        .cross { color: #ef4444; }
+        .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+        .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .callout-limitation { background: #fff7ed; border-left: 3px solid #f97316; }
+        .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; }
+        .callout-breakthrough .callout-title { color: #16a34a; }
+        .callout-limitation .callout-title { color: #ea580c; }
+        .callout-breakthrough .callout-title::before { content: '✦'; }
+        .callout-limitation .callout-title::before { content: '⚠'; }
+        .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
+        .example-card { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .example-card h4 { font-size: 1.125rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; }
+        .example-subtitle { font-size: 0.875rem; color: #666; margin-bottom: 1rem; font-style: italic; }
+        .example-section { margin-top: 1.25rem; }
+        .example-section h5 { font-size: 0.875rem; font-weight: 600; color: #8b5cf6; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .terminal-window { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin: 1rem 0; }
+        .terminal-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #febc2e; }
+        .terminal-dot.green { background: #28c840; }
+        .terminal-title { color: #999; font-size: 0.8125rem; margin-left: 0.5rem; font-family: monospace; }
+        .terminal-content { padding: 1.25rem; color: #e5e5e5; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.8125rem; line-height: 1.7; white-space: pre-wrap; }
+        .cowork-response { background: #f5f5f7; border-radius: 8px; padding: 1rem; margin-top: 1rem; }
+        .cowork-response h6 { font-size: 0.8125rem; font-weight: 600; color: #666; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .cowork-response ul { list-style: none; margin: 0; padding: 0; }
+        .cowork-response li { padding: 0.375rem 0; padding-left: 1.25rem; position: relative; color: #4b5563; font-size: 0.875rem; }
+        .cowork-response li::before { content: '→'; position: absolute; left: 0; color: #8b5cf6; }
+        .key-point { background: #fef3c7; border-left: 3px solid #f59e0b; padding: 0.75rem 1rem; margin-top: 1rem; border-radius: 0 8px 8px 0; }
+        .key-point p { font-size: 0.875rem; color: #92400e; margin: 0; }
+        .key-point strong { color: #b45309; }
+        .use-case-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .use-case-table th { background: #f5f5f7; color: #1a1a1a; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
+        .use-case-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; vertical-align: top; }
+        .use-case-table tr:last-child td { border-bottom: none; }
+        .limitation-list { list-style: none; background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; }
+        .limitation-list li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: #4b5563; font-size: 0.9375rem; }
+        .limitation-list li::before { content: '✗'; position: absolute; left: 0; color: #ef4444; font-weight: 600; }
+        .exercise-box { background: white; border: 2px solid #8b5cf6; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .exercise-box h3 { font-size: 1rem; font-weight: 600; color: #7c3aed; margin-bottom: 1rem; }
+        .exercise-item { margin-bottom: 1.5rem; }
+        .exercise-item:last-child { margin-bottom: 0; }
+        .exercise-item h4 { font-size: 0.9375rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .takeaways { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .takeaways h3 { font-size: 1rem; font-weight: 600; color: #166534; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .takeaways h3::before { content: '✓'; }
+        .takeaways ol { list-style: none; counter-reset: takeaway; }
+        .takeaways li { padding: 0.5rem 0; padding-left: 2rem; position: relative; color: #166534; font-size: 0.9375rem; }
+        .takeaways li::before { content: counter(takeaway); counter-increment: takeaway; position: absolute; left: 0; width: 20px; height: 20px; background: #22c55e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-primary { background: #8b5cf6; color: white; }
+        .btn-primary:hover { background: #7c3aed; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        @media (max-width: 768px) {
+            .compare-table, .use-case-table { display: block; overflow-x: auto; }
+        }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .nav-buttons { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/training" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <nav class="section-tabs">
+        <a href="/intermediate/" class="tab">Overview</a>
+        <a href="/intermediate/intro-to-cowork" class="tab active">Intro to Cowork</a>
+        <a href="/intermediate/planning-mode" class="tab">Planning Mode</a>
+        <a href="/intermediate/skills-deep-dive" class="tab">Skills</a>
+        <a href="/intermediate/projects-as-agents" class="tab">Projects</a>
+        <a href="/intermediate/git-concepts" class="tab">Git Concepts</a>
+        <a href="/intermediate/building-automations" class="tab">Automations</a>
+    </nav>
+
+    <main class="main">
+        <div class="section-indicator">MODULE 1 OF 6</div>
+        <h1 class="page-title">Introduction to Claude Cowork</h1>
+        <p class="page-subtitle">Understand what Claude Cowork is, how it differs from Claude Chat, and when to use each mode</p>
+
+        <div class="info-box">
+            <h3>Learning Objective</h3>
+            <p>By the end of this module, you'll understand when to use Cowork vs. Chat and be able to execute file-based tasks confidently.</p>
+        </div>
+
+        <h2 class="section-heading">Overview</h2>
+        <p class="section-description">In the Beginner path, you mastered Claude Chat — the conversational interface for thinking through problems, drafting content, and getting answers. Now it's time to level up.</p>
+
+        <p class="section-description"><strong>Claude Cowork</strong> is where Claude stops just talking and starts <em>doing</em>. It's the bridge between conversation and action — an AI collaborator that can work with your actual files, folders, and data on your computer.</p>
+
+        <div class="key-difference">
+            <p><strong>The Key Difference:</strong><br>Claude Chat is for <em>thinking together</em>.<br>Claude Cowork is for <em>working together</em>.</p>
+        </div>
+
+        <h2 class="section-heading">What Makes Cowork Different?</h2>
+
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Capability</th>
+                    <th>Claude Chat</th>
+                    <th>Claude Cowork</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Answer questions</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Draft content</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Access your files</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Move/organize files</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Read spreadsheets & data</td>
+                    <td>Limited (upload only)</td>
+                    <td class="check">✓ Full access</td>
+                </tr>
+                <tr>
+                    <td>Create files on your computer</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Execute multi-step workflows</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Work while you describe the outcome</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">The Mental Model</div>
+            <p><strong>Claude Chat</strong> = A brilliant colleague you can call anytime to talk through ideas<br>
+            <strong>Claude Cowork</strong> = That same colleague sitting at your desk, able to actually do the work with you</p>
+        </div>
+
+        <h2 class="section-heading">When to Use Cowork vs. Chat</h2>
+
+        <h3 style="font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-top: 1.5rem; margin-bottom: 0.75rem;">Use Claude Chat when you want to:</h3>
+        <ul style="list-style: none; margin-bottom: 1.5rem;">
+            <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+                <span style="position: absolute; left: 0; color: #8b5cf6;">•</span>Brainstorm or think through a problem
+            </li>
+            <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+                <span style="position: absolute; left: 0; color: #8b5cf6;">•</span>Draft an email, document, or message
+            </li>
+            <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+                <span style="position: absolute; left: 0; color: #8b5cf6;">•</span>Get explanations or learn something new
+            </li>
+            <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+                <span style="position: absolute; left: 0; color: #8b5cf6;">•</span>Have a back-and-forth conversation to refine ideas
+            </li>
+            <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+                <span style="position: absolute; left: 0; color: #8b5cf6;">•</span>Quick questions and answers
+            </li>
+        </ul>
+
+        <h3 style="font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem;">Use Claude Cowork when you want to:</h3>
+        <ul style="list-style: none; margin-bottom: 1.5rem;">
+            <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+                <span style="position: absolute; left: 0; color: #22c55e;">•</span>Work with files already on your computer
+            </li>
+            <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+                <span style="position: absolute; left: 0; color: #22c55e;">•</span>Organize, rename, or move folders
+            </li>
+            <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+                <span style="position: absolute; left: 0; color: #22c55e;">•</span>Analyze data in spreadsheets or CSVs
+            </li>
+            <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+                <span style="position: absolute; left: 0; color: #22c55e;">•</span>Create multiple files as part of a project
+            </li>
+            <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+                <span style="position: absolute; left: 0; color: #22c55e;">•</span>Execute a multi-step workflow
+            </li>
+            <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+                <span style="position: absolute; left: 0; color: #22c55e;">•</span>Have Claude <em>do</em> something rather than just <em>describe</em> it
+            </li>
+        </ul>
+
+        <div class="callout callout-limitation">
+            <div class="callout-title">Rule of Thumb</div>
+            <p>If you find yourself saying "now take that and..." or "can you actually do this?" — you probably want Cowork.</p>
+        </div>
+
+        <h2 class="section-heading">Cowork in Action: Real Examples</h2>
+        <p class="section-description">Let's look at the types of tasks where Cowork shines. These aren't hypotheticals — they're the everyday workflows that make Cowork invaluable.</p>
+
+        <!-- Example 1: Organizing Files -->
+        <div class="example-card">
+            <h4>Example 1: Organizing Files</h4>
+            <p class="example-subtitle">You have a Downloads folder that's become a graveyard of random files. You need to organize it but keep putting it off.</p>
+
+            <div class="example-section">
+                <h5>What You'd Say:</h5>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">prompt</span>
+                    </div>
+                    <div class="terminal-content">I need help organizing my Downloads folder. Can you:
+1. Look at what's in there
+2. Suggest a folder structure based on file types
+3. Show me the plan before moving anything
+4. Then organize the files once I approve</div>
+                </div>
+            </div>
+
+            <div class="example-section">
+                <h5>What Cowork Does:</h5>
+                <div class="cowork-response">
+                    <ul>
+                        <li>Scans your Downloads folder</li>
+                        <li>Identifies file types (PDFs, images, spreadsheets, documents, etc.)</li>
+                        <li>Proposes a structure like: /Documents, /Images, /Spreadsheets, /Installers, /Archive</li>
+                        <li>Waits for your approval</li>
+                        <li>Moves files into the new structure</li>
+                        <li>Reports what was moved where</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="key-point">
+                <p><strong>Key Point:</strong> Notice the approval step. Cowork plans before acting — you stay in control.</p>
+            </div>
+        </div>
+
+        <!-- Example 2: Analyzing Data -->
+        <div class="example-card">
+            <h4>Example 2: Analyzing Data</h4>
+            <p class="example-subtitle">You have a CSV export from Salesforce with 6 months of opportunity data. You need to understand win rates by segment.</p>
+
+            <div class="example-section">
+                <h5>What You'd Say:</h5>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">prompt</span>
+                    </div>
+                    <div class="terminal-content">I have a Salesforce export at /Users/me/Documents/Q3-Q4-opps.csv
+
+Can you analyze this and tell me:
+- Win rate by customer segment
+- Average deal size by segment
+- How win rates have trended month over month
+- Any segments where we're losing more than winning
+
+Show me the analysis and create a summary I could share with leadership.</div>
+                </div>
+            </div>
+
+            <div class="example-section">
+                <h5>What Cowork Does:</h5>
+                <div class="cowork-response">
+                    <ul>
+                        <li>Reads the CSV file directly</li>
+                        <li>Processes the data (no upload needed — it accesses your file system)</li>
+                        <li>Calculates the metrics you requested</li>
+                        <li>Creates visualizations if helpful</li>
+                        <li>Generates a shareable summary document</li>
+                        <li>Saves the summary to your specified location</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="key-point">
+                <p><strong>Key Point:</strong> Cowork works with files <em>in place</em>. No uploading, no copy-pasting, no "here's the data" back and forth.</p>
+            </div>
+        </div>
+
+        <!-- Example 3: Multi-File Project Setup -->
+        <div class="example-card">
+            <h4>Example 3: Multi-File Project Setup</h4>
+            <p class="example-subtitle">You're starting a new enablement project and need to set up the folder structure with template files.</p>
+
+            <div class="example-section">
+                <h5>What You'd Say:</h5>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">prompt</span>
+                    </div>
+                    <div class="terminal-content">I'm starting a new project called "Q1 SKO Prep"
+
+Can you create a project folder structure at /Users/me/Projects/Q1-SKO-Prep with:
+- A planning folder with a blank project brief template
+- A content folder with subfolders for presentations, handouts, and videos
+- A logistics folder for venue, catering, and travel
+- A README file explaining the folder structure
+
+Use our standard project brief template if you know it, otherwise create a basic one.</div>
+                </div>
+            </div>
+
+            <div class="example-section">
+                <h5>What Cowork Does:</h5>
+                <div class="cowork-response">
+                    <ul>
+                        <li>Creates the folder structure</li>
+                        <li>Generates template files</li>
+                        <li>Writes the README</li>
+                        <li>Reports back what was created</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="key-point">
+                <p><strong>Key Point:</strong> Cowork can create entire project scaffolds in seconds — work that would take you 15+ minutes of clicking and typing.</p>
+            </div>
+        </div>
+
+        <!-- Example 4: Batch File Operations -->
+        <div class="example-card">
+            <h4>Example 4: Batch File Operations</h4>
+            <p class="example-subtitle">You have 47 screenshots from a product demo that need to be renamed from "Screenshot 2024-01-15 at 3.42.17 PM.png" to something useful.</p>
+
+            <div class="example-section">
+                <h5>What You'd Say:</h5>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">prompt</span>
+                    </div>
+                    <div class="terminal-content">I have a folder of demo screenshots at /Users/me/Desktop/Demo-Screenshots
+
+Can you:
+1. Look at each image
+2. Rename them based on what's shown in the screenshot
+3. Add a sequence number prefix so they stay in order
+4. Show me the proposed renames before executing</div>
+                </div>
+            </div>
+
+            <div class="example-section">
+                <h5>What Cowork Does:</h5>
+                <div class="cowork-response">
+                    <ul>
+                        <li>Opens each image</li>
+                        <li>Analyzes the content (sees "login screen", "dashboard", "settings page", etc.)</li>
+                        <li>Proposes renames like: 01-login-screen.png, 02-dashboard-overview.png, 03-customer-profile.png</li>
+                        <li>Shows you the plan</li>
+                        <li>Executes after approval</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="key-point">
+                <p><strong>Key Point:</strong> Cowork can <em>see</em> images and make intelligent decisions based on content — not just metadata.</p>
+            </div>
+        </div>
+
+        <h2 class="section-heading">Common Cowork Use Cases at Gladly</h2>
+        <p class="section-description">Here's how your colleagues are using Cowork today:</p>
+
+        <table class="use-case-table">
+            <thead>
+                <tr>
+                    <th>Use Case</th>
+                    <th>What They're Doing</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Meeting Prep</strong></td>
+                    <td>"Read my last 5 emails from [client] and the attached documents, then create a prep brief for tomorrow's call"</td>
+                </tr>
+                <tr>
+                    <td><strong>Content Audits</strong></td>
+                    <td>"Go through /Content/Battlecards and identify any that reference [old competitor] or haven't been updated in 6 months"</td>
+                </tr>
+                <tr>
+                    <td><strong>Data Cleanup</strong></td>
+                    <td>"This CSV has duplicate rows and inconsistent formatting in the company name column. Clean it up and save a new version"</td>
+                </tr>
+                <tr>
+                    <td><strong>Project Setup</strong></td>
+                    <td>"Create a new project folder structure for [initiative] using our standard template"</td>
+                </tr>
+                <tr>
+                    <td><strong>File Consolidation</strong></td>
+                    <td>"Find all files related to [customer] across my Documents folder and copy them to a single folder"</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">What Cowork Can't Do (Yet)</h2>
+        <p class="section-description">To set proper expectations:</p>
+
+        <ul class="limitation-list">
+            <li><strong>Can't access cloud storage directly</strong> — Files need to be on your local machine or synced locally</li>
+            <li><strong>Can't interact with web applications</strong> — That's Claude Code territory</li>
+            <li><strong>Can't run indefinitely</strong> — Very long operations may need to be broken into chunks</li>
+            <li><strong>Can't access files you don't have permissions for</strong> — System files, other user folders, etc.</li>
+        </ul>
+
+        <div class="exercise-box">
+            <h3>Try It Yourself: Starter Exercises</h3>
+            <p style="color: #666; font-size: 0.9375rem; margin-bottom: 1rem;">Before moving to the next module, try these low-risk exercises to get comfortable with Cowork:</p>
+
+            <div class="exercise-item">
+                <h4>Exercise 1: Folder Inventory</h4>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">prompt</span>
+                    </div>
+                    <div class="terminal-content">Look at my Desktop folder and tell me:
+- How many files are there?
+- What types of files are most common?
+- Are there any files older than 6 months?
+- What would you recommend for better organization?</div>
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <h4>Exercise 2: Document Analysis</h4>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">prompt</span>
+                    </div>
+                    <div class="terminal-content">Read [path to a document you have] and give me:
+- A 3-sentence summary
+- The key points or decisions
+- Any action items mentioned</div>
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <h4>Exercise 3: Simple Rename (with approval)</h4>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">prompt</span>
+                    </div>
+                    <div class="terminal-content">I have some files in [folder path]. Can you:
+1. Look at what's there
+2. Suggest better, more descriptive names
+3. Show me the plan WITHOUT executing yet
+
+I'll tell you if I want to proceed.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="takeaways">
+            <h3>Key Takeaways</h3>
+            <ol>
+                <li><strong>Cowork = Claude that can act</strong>, not just talk</li>
+                <li><strong>Use it for file operations</strong>, data analysis, and multi-step workflows</li>
+                <li><strong>Describe outcomes</strong>, not step-by-step instructions</li>
+                <li><strong>Always ask for a plan</strong> before file modifications</li>
+                <li><strong>Start with read-only tasks</strong> to build confidence</li>
+            </ol>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="/intermediate/" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back to Overview
+            </a>
+            <a href="/intermediate/planning-mode" class="btn btn-primary">
+                Next: Planning Mode
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

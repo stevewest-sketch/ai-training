@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Technical - Advanced Path</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .tab { padding: 1rem 1rem; font-size: 0.875rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+        .tab:hover { color: #1a1a1a; }
+        .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
+        .tab.locked { color: #999; }
+        .tab.locked::after { content: ' 🔒'; font-size: 0.75rem; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .info-box { background: #fef3c7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; border-left: 4px solid #f59e0b; }
+        .info-box h3 { font-size: 1rem; font-weight: 600; color: #92400e; margin-bottom: 0.5rem; }
+        .info-box p { color: #78350f; font-size: 0.9375rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .command-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .command-table th { background: #f59e0b; color: white; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
+        .command-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; vertical-align: top; }
+        .command-table tr:last-child td { border-bottom: none; }
+        .command-table tr:hover td { background: #fafafa; }
+        .command-table code { background: #f5f5f7; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.8125rem; }
+        .scenario-card { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; }
+        .scenario-card h4 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .scenario-card p { font-size: 0.9375rem; color: #666; margin-bottom: 0.75rem; }
+        .scenario-card .command { background: #1a1a1a; color: #e5e5e5; padding: 0.75rem 1rem; border-radius: 8px; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.8125rem; }
+        .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+        .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; color: #16a34a; }
+        .callout-title::before { content: '✦'; }
+        .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-primary { background: #f59e0b; color: white; }
+        .btn-primary:hover { background: #d97706; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        @media (max-width: 768px) {
+            .command-table { display: block; overflow-x: auto; }
+        }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .nav-buttons { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/training" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <nav class="section-tabs">
+        <a href="/advanced/" class="tab">Overview</a>
+        <a href="/advanced/claude-code-in-action" class="tab">Claude Code</a>
+        <a href="/advanced/planning-mode-code" class="tab">Planning</a>
+        <a href="/advanced/git-technical" class="tab active">Git</a>
+        <a href="/advanced/mcp-integration" class="tab locked">MCP</a>
+        <a href="/advanced/agent-sdk" class="tab locked">SDK</a>
+        <a href="/advanced/multi-agent" class="tab locked">Multi-Agent</a>
+        <a href="/advanced/production-agents" class="tab locked">Production</a>
+    </nav>
+
+    <main class="main">
+        <div class="section-indicator">MODULE 3 OF 7</div>
+        <h1 class="page-title">Git Technical</h1>
+        <p class="page-subtitle">Master Git workflows for professional development, letting Claude Code handle commands while you drive strategy</p>
+
+        <div class="info-box">
+            <h3>Learning Objective</h3>
+            <p>By the end of this module, you'll be able to manage branches, commits, and PRs through Claude Code using natural language commands.</p>
+        </div>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Building on Intermediate Concepts</div>
+            <p>In the Intermediate path, you learned Git concepts. Now let's see how they work in practice with Claude Code — you don't need to memorize commands.</p>
+        </div>
+
+        <h2 class="section-heading">Common Scenarios</h2>
+        <p class="section-description">Here's how to handle everyday Git situations with Claude Code:</p>
+
+        <table class="command-table">
+            <thead>
+                <tr>
+                    <th>Scenario</th>
+                    <th>What to Say</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Need to switch tasks</td>
+                    <td>"Save what I'm working on, I need to fix a bug"</td>
+                </tr>
+                <tr>
+                    <td>Made a mistake</td>
+                    <td>"Undo that last commit, I want to redo it"</td>
+                </tr>
+                <tr>
+                    <td>Need current status</td>
+                    <td>"What's the current status? What have I changed?"</td>
+                </tr>
+                <tr>
+                    <td>Someone else made changes</td>
+                    <td>"Pull the latest changes from main"</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">Quick Reference</h2>
+        <p class="section-description">Natural language commands and what Git does behind the scenes:</p>
+
+        <table class="command-table">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Command for Claude</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Start new work</td>
+                    <td>"Create a branch for [feature name]"</td>
+                </tr>
+                <tr>
+                    <td>Save progress</td>
+                    <td>"Commit these changes"</td>
+                </tr>
+                <tr>
+                    <td>Upload to GitHub</td>
+                    <td>"Push to GitHub"</td>
+                </tr>
+                <tr>
+                    <td>Propose changes</td>
+                    <td>"Create a PR"</td>
+                </tr>
+                <tr>
+                    <td>See status</td>
+                    <td>"Show me the git status"</td>
+                </tr>
+                <tr>
+                    <td>Return to main</td>
+                    <td>"Switch to main branch"</td>
+                </tr>
+                <tr>
+                    <td>Get latest</td>
+                    <td>"Pull the latest from main"</td>
+                </tr>
+                <tr>
+                    <td>Undo last save</td>
+                    <td>"Undo the last commit"</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">Workflow Examples</h2>
+        <p class="section-description">Real scenarios and how to handle them:</p>
+
+        <div class="scenario-card">
+            <h4>Starting a New Feature</h4>
+            <p>You're about to start working on a new feature and want to keep your work separate from main.</p>
+            <div class="command">"Create a new branch called feature/user-authentication and switch to it"</div>
+        </div>
+
+        <div class="scenario-card">
+            <h4>Saving Your Progress</h4>
+            <p>You've made some changes and want to save them with a descriptive message.</p>
+            <div class="command">"Commit my changes with the message 'Add login form validation'"</div>
+        </div>
+
+        <div class="scenario-card">
+            <h4>Sharing Your Work</h4>
+            <p>Your feature is ready for review and you want to create a pull request.</p>
+            <div class="command">"Push this branch and create a PR to main"</div>
+        </div>
+
+        <div class="scenario-card">
+            <h4>Handling Conflicts</h4>
+            <p>Someone else made changes to the same files you're working on.</p>
+            <div class="command">"Pull the latest from main and help me resolve any conflicts"</div>
+        </div>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Claude Translates for You</div>
+            <p>You don't need to know the exact Git commands. Claude Code understands your intent and executes the right commands. Focus on what you want to accomplish, not how Git works.</p>
+        </div>
+
+        <h2 class="section-heading">What You Say vs. What Git Does</h2>
+
+        <table class="command-table">
+            <thead>
+                <tr>
+                    <th>You Say</th>
+                    <th>Git Command (for reference)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>"Start a new branch for this feature"</td>
+                    <td><code>git checkout -b feature-name</code></td>
+                </tr>
+                <tr>
+                    <td>"Save my changes"</td>
+                    <td><code>git add . && git commit -m "..."</code></td>
+                </tr>
+                <tr>
+                    <td>"Upload this to GitHub"</td>
+                    <td><code>git push origin branch-name</code></td>
+                </tr>
+                <tr>
+                    <td>"Get the latest changes from the team"</td>
+                    <td><code>git pull origin main</code></td>
+                </tr>
+                <tr>
+                    <td>"I'm done, create a review request"</td>
+                    <td><code>gh pr create</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="nav-buttons">
+            <a href="/advanced/planning-mode-code" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Previous: Planning Mode
+            </a>
+            <a href="/advanced/mcp-integration" class="btn btn-primary">
+                Next: MCP Integration
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

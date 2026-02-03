@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planning Mode in Claude Code - Advanced Path</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .tab { padding: 1rem 1rem; font-size: 0.875rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+        .tab:hover { color: #1a1a1a; }
+        .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
+        .tab.locked { color: #999; }
+        .tab.locked::after { content: ' 🔒'; font-size: 0.75rem; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .info-box { background: #fef3c7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; border-left: 4px solid #f59e0b; }
+        .info-box h3 { font-size: 1rem; font-weight: 600; color: #92400e; margin-bottom: 0.5rem; }
+        .info-box p { color: #78350f; font-size: 0.9375rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+        .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; color: #16a34a; }
+        .callout-title::before { content: '✦'; }
+        .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
+        .steps-list { background: white; border: 1px solid #e5e5e5; border-radius: 12px; overflow: hidden; }
+        .step-item { padding: 1.25rem 1.5rem; border-bottom: 1px solid #f0f0f0; display: flex; align-items: flex-start; gap: 1rem; }
+        .step-item:last-child { border-bottom: none; }
+        .step-number { width: 32px; height: 32px; background: #f59e0b; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600; flex-shrink: 0; }
+        .step-content h4 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.25rem; }
+        .step-content p { font-size: 0.9375rem; color: #666; }
+        .terminal-window { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin: 1.5rem 0; }
+        .terminal-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #febc2e; }
+        .terminal-dot.green { background: #28c840; }
+        .terminal-title { color: #999; font-size: 0.8125rem; margin-left: 0.5rem; font-family: monospace; }
+        .terminal-content { padding: 1.5rem; color: #e5e5e5; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.8125rem; line-height: 1.7; white-space: pre-wrap; }
+        .terminal-content .comment { color: #6a9955; }
+        .terminal-content .heading { color: #f59e0b; font-weight: 600; }
+        .terminal-content .section { color: #569cd6; }
+        .interview-prompt { background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%); border: 1px solid #fcd34d; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .interview-prompt h4 { font-size: 1rem; font-weight: 600; color: #92400e; margin-bottom: 1rem; }
+        .takeaways { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .takeaways h3 { font-size: 1rem; font-weight: 600; color: #166534; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .takeaways h3::before { content: '✓'; }
+        .takeaways ol { list-style: none; counter-reset: takeaway; }
+        .takeaways li { padding: 0.5rem 0; padding-left: 2rem; position: relative; color: #166534; font-size: 0.9375rem; }
+        .takeaways li::before { content: counter(takeaway); counter-increment: takeaway; position: absolute; left: 0; width: 20px; height: 20px; background: #22c55e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-primary { background: #f59e0b; color: white; }
+        .btn-primary:hover { background: #d97706; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .nav-buttons { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/training" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <nav class="section-tabs">
+        <a href="/advanced/" class="tab">Overview</a>
+        <a href="/advanced/claude-code-in-action" class="tab">Claude Code</a>
+        <a href="/advanced/planning-mode-code" class="tab active">Planning</a>
+        <a href="/advanced/git-technical" class="tab">Git</a>
+        <a href="/advanced/mcp-integration" class="tab locked">MCP</a>
+        <a href="/advanced/agent-sdk" class="tab locked">SDK</a>
+        <a href="/advanced/multi-agent" class="tab locked">Multi-Agent</a>
+        <a href="/advanced/production-agents" class="tab locked">Production</a>
+    </nav>
+
+    <main class="main">
+        <div class="section-indicator">MODULE 2 OF 7</div>
+        <h1 class="page-title">Planning Mode in Claude Code</h1>
+        <p class="page-subtitle">Master the full 6-step planning process using SPEC files and the interview prompt technique</p>
+
+        <div class="info-box">
+            <h3>Learning Objective</h3>
+            <p>By the end of this module, you'll be able to apply the 6-step planning process for complex development projects using SPEC.md files and the interview prompt technique.</p>
+        </div>
+
+        <h2 class="section-heading">Beyond Cowork Planning</h2>
+        <p class="section-description">In the Intermediate path, you learned planning as a motion—sharing context and letting Claude propose approaches. In Claude Code, we formalize this with:</p>
+
+        <ul style="list-style: none; margin-bottom: 1.5rem;">
+            <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+                <span style="position: absolute; left: 0; color: #f59e0b; font-weight: 600;">•</span><strong>SPEC.md files</strong> — Persistent planning documents
+            </li>
+            <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+                <span style="position: absolute; left: 0; color: #f59e0b; font-weight: 600;">•</span><strong>The interview prompt</strong> — A specific technique for complex projects
+            </li>
+            <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+                <span style="position: absolute; left: 0; color: #f59e0b; font-weight: 600;">•</span><strong>Plan-then-execute</strong> — Approval gates before code changes
+            </li>
+        </ul>
+
+        <h2 class="section-heading">The 6-Step Planning Process</h2>
+
+        <div class="steps-list">
+            <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Create SPEC.md</h4>
+                    <p>Start every project with a specification file that captures what you're building, why it matters, success criteria, and known constraints.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Run the Interview Prompt</h4>
+                    <p>Use a structured prompt to have Claude interview you about the project until it has everything needed to create a solid plan.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Answer Claude's Questions</h4>
+                    <p>Claude will ask about edge cases, technical constraints, integration requirements, and testing expectations you may not have considered.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Review the Proposed Plan</h4>
+                    <p>Claude generates a detailed implementation plan. Review it for completeness, correct understanding, and reasonable approach.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h4>Approve and Execute</h4>
+                    <p>Once satisfied, approve the plan. Claude begins implementation, checking in at key milestones.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <h4>Update SPEC as You Go</h4>
+                    <p>The SPEC file becomes living documentation. Update it as requirements evolve or you learn new information.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-heading">The Interview Prompt</h2>
+        <p class="section-description">Use this prompt to kick off the planning process:</p>
+
+        <div class="interview-prompt">
+            <h4>The Interview Prompt Pattern</h4>
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
+                    <span class="terminal-title">interview-prompt.md</span>
+                </div>
+                <div class="terminal-content">Read the SPEC.md file. Then interview me about this project.
+
+Ask questions one at a time until you have everything you need to:
+1. Understand the full scope
+2. Identify potential challenges
+3. Propose an implementation approach
+
+Don't start building until I approve your plan.</div>
+            </div>
+        </div>
+
+        <h2 class="section-heading">The SPEC.md Template</h2>
+        <p class="section-description">Use this template to start every project:</p>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">SPEC.md</span>
+            </div>
+            <div class="terminal-content"><span class="heading"># Project: [Name]</span>
+
+<span class="section">## Overview</span>
+[What this project does and why it matters]
+
+<span class="section">## Goals</span>
+- [ ] Goal 1
+- [ ] Goal 2
+- [ ] Goal 3
+
+<span class="section">## Success Criteria</span>
+- [How we know it's working]
+- [Metrics or outcomes to measure]
+
+<span class="section">## Constraints</span>
+- [Technical limitations]
+- [Timeline requirements]
+- [Dependencies]
+
+<span class="section">## Open Questions</span>
+- [Things we still need to figure out]
+
+<span class="section">## Implementation Plan</span>
+<span class="comment">[Filled in after interview process]</span>
+
+<span class="section">## Progress Log</span>
+<span class="comment">[Updated as work progresses]</span></div>
+        </div>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Why This Works</div>
+            <p>SPEC files make planning persistent—context survives across sessions. The interview prompt surfaces unknowns you didn't know to ask about. Approval gates prevent runaway execution and keep you in control.</p>
+        </div>
+
+        <div class="takeaways">
+            <h3>Key Takeaways</h3>
+            <ol>
+                <li><strong>SPEC files make planning persistent</strong> — context survives across sessions</li>
+                <li><strong>The interview prompt surfaces unknowns</strong> — better plans through questions</li>
+                <li><strong>Approval gates prevent runaway execution</strong> — you stay in control</li>
+                <li><strong>Update specs as you learn</strong> — living documentation</li>
+            </ol>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="/advanced/claude-code-in-action" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Previous: Claude Code in Action
+            </a>
+            <a href="/advanced/git-technical" class="btn btn-primary">
+                Next: Git Technical
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Skills - Beginner Path</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .tab { padding: 1rem 1rem; font-size: 0.875rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+        .tab:hover { color: #1a1a1a; }
+        .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+        .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .info-box p { color: #666; font-size: 0.9375rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .compare-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .compare-table th { background: #8b5cf6; color: white; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
+        .compare-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; vertical-align: top; }
+        .compare-table tr:last-child td { border-bottom: none; }
+        .compare-table tr:hover td { background: #fafafa; }
+        .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+        .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .callout-limitation { background: #fff7ed; border-left: 3px solid #f97316; }
+        .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; }
+        .callout-breakthrough .callout-title { color: #16a34a; }
+        .callout-limitation .callout-title { color: #ea580c; }
+        .callout-breakthrough .callout-title::before { content: '✦'; }
+        .callout-limitation .callout-title::before { content: '⚠'; }
+        .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
+        .blockquote { background: #f5f5f7; border-left: 4px solid #8b5cf6; padding: 1.25rem 1.5rem; border-radius: 0 12px 12px 0; margin: 1.5rem 0; }
+        .blockquote p { font-style: italic; color: #4b5563; font-size: 0.9375rem; margin-bottom: 0; }
+        .terminal-window { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin: 1.5rem 0; }
+        .terminal-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #febc2e; }
+        .terminal-dot.green { background: #28c840; }
+        .terminal-title { color: #999; font-size: 0.8125rem; margin-left: 0.5rem; font-family: monospace; }
+        .terminal-content { padding: 1.5rem; color: #e5e5e5; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.875rem; line-height: 1.8; }
+        .terminal-content .label { color: #8b5cf6; font-weight: 600; }
+        .terminal-content .example { color: #a5d6ff; }
+        .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        .compare-card { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.25rem; }
+        .compare-card.bad { border-left: 3px solid #ef4444; }
+        .compare-card.good { border-left: 3px solid #22c55e; }
+        .compare-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+        .compare-card.bad .compare-label { color: #ef4444; }
+        .compare-card.good .compare-label { color: #22c55e; }
+        .compare-card p { font-size: 0.9375rem; color: #4b5563; font-style: italic; }
+        .skills-list { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; }
+        .skills-category { margin-bottom: 1.5rem; }
+        .skills-category:last-child { margin-bottom: 0; }
+        .skills-category h4 { font-size: 0.9375rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .skills-category ul { list-style: none; }
+        .skills-category li { padding: 0.375rem 0; padding-left: 1.25rem; position: relative; color: #666; font-size: 0.9375rem; }
+        .skills-category li::before { content: '•'; position: absolute; left: 0; color: #8b5cf6; }
+        .example-box { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .example-box h4 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 1rem; }
+        .example-step { display: flex; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0; }
+        .example-step:last-child { border-bottom: none; }
+        .example-step-label { font-weight: 600; color: #8b5cf6; font-size: 0.875rem; min-width: 80px; }
+        .example-step-content { color: #4b5563; font-size: 0.9375rem; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-primary { background: #8b5cf6; color: white; }
+        .btn-primary:hover { background: #7c3aed; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        @media (max-width: 768px) {
+            .compare-table { display: block; overflow-x: auto; }
+            .compare-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .nav-buttons { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/training" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <nav class="section-tabs">
+        <a href="/beginner/" class="tab">Overview</a>
+        <a href="/beginner/ai-foundations" class="tab">AI Foundations</a>
+        <a href="/beginner/claude-chat-overview" class="tab">Claude Chat</a>
+        <a href="/beginner/connectors" class="tab">Connectors</a>
+        <a href="/beginner/artifacts" class="tab">Artifacts</a>
+        <a href="/beginner/sharing-and-projects" class="tab">Sharing</a>
+        <a href="/beginner/effective-prompting" class="tab">Prompting</a>
+        <a href="/beginner/skills-intro" class="tab active">Skills</a>
+        <a href="/beginner/assessment" class="tab">Assessment</a>
+    </nav>
+
+    <main class="main">
+        <div class="section-indicator">MODULE 7 OF 7</div>
+        <h1 class="page-title">Introduction to Skills</h1>
+        <p class="page-subtitle">Understand what skills are and how to leverage preloaded capabilities through natural language</p>
+
+        <div class="info-box">
+            <h3>Learning Objective</h3>
+            <p>By the end of this module, you'll understand what skills are and how to call them through natural language—no special commands needed.</p>
+        </div>
+
+        <h2 class="section-heading">What Are Skills?</h2>
+
+        <div class="blockquote">
+            <p>"Skills are capabilities you can call upon that are preloaded into Claude... To call on those skills, you just do it in natural language."</p>
+        </div>
+
+        <p class="section-description">Think of skills as specialized abilities Claude has been trained to perform well. Some come from Anthropic, some are Gladly-specific.</p>
+
+        <h2 class="section-heading">Skills vs. Connectors</h2>
+
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Connectors</th>
+                    <th>Skills</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>What they do</td>
+                    <td>Access external data</td>
+                    <td>Perform specific workflows</td>
+                </tr>
+                <tr>
+                    <td>Who creates them</td>
+                    <td>Built into Claude</td>
+                    <td>Your organization</td>
+                </tr>
+                <tr>
+                    <td>How activated</td>
+                    <td>Always available</td>
+                    <td>Triggered by context</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">How Skills Work</h2>
+        <p class="section-description">You don't need to know how skills are built—just how to use them. Simply describe what you need:</p>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">natural-language-examples.md</span>
+            </div>
+            <div class="terminal-content">
+                <span class="example">"Create a PowerPoint presentation about..."</span><br>
+                <span class="example">"Analyze this data and show me a chart..."</span><br>
+                <span class="example">"Help me structure this document using our standard template..."</span>
+            </div>
+        </div>
+
+        <p class="section-description">Claude recognizes when a skill applies and uses it automatically.</p>
+
+        <h2 class="section-heading">Types of Skills Available</h2>
+
+        <div class="skills-list">
+            <div class="skills-category">
+                <h4>From Anthropic (Built-in):</h4>
+                <ul>
+                    <li>Document creation (Word, PowerPoint, etc.)</li>
+                    <li>Data analysis and visualization</li>
+                    <li>Code generation and explanation</li>
+                    <li>Image understanding</li>
+                </ul>
+            </div>
+            <div class="skills-category">
+                <h4>From Gladly (Custom):</h4>
+                <ul>
+                    <li>Competitive positioning frameworks</li>
+                    <li>Strategic messaging alignment</li>
+                    <li>Presentation templates</li>
+                    <li>Content formatting standards</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-heading">Using Skills Naturally</h2>
+        <p class="section-description">You don't need special commands:</p>
+
+        <div class="compare-grid">
+            <div class="compare-card bad">
+                <div class="compare-label">❌ Don't do this</div>
+                <p>"Activate competitive analysis skill"</p>
+            </div>
+            <div class="compare-card good">
+                <div class="compare-label">✓ Do this instead</div>
+                <p>"Analyze Sierra AI's recent product announcements"</p>
+            </div>
+        </div>
+
+        <h2 class="section-heading">Example: Using a Skill</h2>
+
+        <div class="example-box">
+            <h4>Competitive Positioning Skill in Action</h4>
+            <div class="example-step">
+                <span class="example-step-label">You say:</span>
+                <span class="example-step-content">"Create a competitive comparison slide for Sierra AI vs Gladly"</span>
+            </div>
+            <div class="example-step">
+                <span class="example-step-label">What happens:</span>
+                <span class="example-step-content">
+                    1. Claude recognizes this needs the competitive positioning skill<br>
+                    2. Applies Gladly's framework and messaging<br>
+                    3. Creates properly formatted output
+                </span>
+            </div>
+            <div class="example-step">
+                <span class="example-step-label">Key point:</span>
+                <span class="example-step-content">You didn't have to specify "use the competitive skill"—Claude figured it out from context.</span>
+            </div>
+        </div>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Looking Ahead</div>
+            <p>In the Intermediate path, you'll learn what skills actually are (they're markdown files!) and how to create your own. For now, just focus on calling them naturally.</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="/beginner/effective-prompting" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Previous: Effective Prompting
+            </a>
+            <a href="/beginner/assessment" class="btn btn-primary">
+                Next: Assessment
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

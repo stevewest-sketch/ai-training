@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troubleshooting Guide - AI Training Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .troubleshoot-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .troubleshoot-table th { background: #1a1a1a; color: white; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
+        .troubleshoot-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; vertical-align: top; }
+        .troubleshoot-table tr:last-child td { border-bottom: none; }
+        .troubleshoot-table tr:hover td { background: #fafafa; }
+        .problem-cell { color: #1a1a1a; font-weight: 500; }
+        .fix-cell { color: #4b5563; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        .btn-primary { background: #1a1a1a; color: white; }
+        .btn-primary:hover { background: #333; }
+        @media (max-width: 768px) {
+            .troubleshoot-table { display: block; overflow-x: auto; }
+        }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .nav-buttons { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/training" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <main class="main">
+        <div class="section-indicator">APPENDIX A</div>
+        <h1 class="page-title">Troubleshooting Guide</h1>
+        <p class="page-subtitle">Common problems and quick fixes for working with Claude</p>
+
+        <h2 class="section-heading">Claude Understanding Issues</h2>
+        <p class="section-description">When Claude isn't giving you the responses you expect</p>
+
+        <table class="troubleshoot-table">
+            <thead>
+                <tr>
+                    <th style="width: 35%;">Problem</th>
+                    <th>Fix</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="problem-cell">Goes off-topic</td>
+                    <td class="fix-cell">Break into focused, single-task prompts</td>
+                </tr>
+                <tr>
+                    <td class="problem-cell">Too generic</td>
+                    <td class="fix-cell">Add specific context, examples, constraints</td>
+                </tr>
+                <tr>
+                    <td class="problem-cell">Too verbose</td>
+                    <td class="fix-cell">Add "Be concise" or specify length</td>
+                </tr>
+                <tr>
+                    <td class="problem-cell">Misunderstands request</td>
+                    <td class="fix-cell">Rephrase with more context; use CTFC</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">Connector Problems</h2>
+        <p class="section-description">Issues with Google Drive, Gmail, Slack, and other connectors</p>
+
+        <table class="troubleshoot-table">
+            <thead>
+                <tr>
+                    <th style="width: 35%;">Problem</th>
+                    <th>Fix</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="problem-cell">"I can't access Drive"</td>
+                    <td class="fix-cell">Re-authenticate in Settings → Connectors</td>
+                </tr>
+                <tr>
+                    <td class="problem-cell">File not found</td>
+                    <td class="fix-cell">Check file permissions; be more specific about filename</td>
+                </tr>
+                <tr>
+                    <td class="problem-cell">Web search returns nothing</td>
+                    <td class="fix-cell">Broaden search terms; try different phrasing</td>
+                </tr>
+                <tr>
+                    <td class="problem-cell">"I don't have access to..."</td>
+                    <td class="fix-cell">Enable the connector in Settings → Connectors</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">Artifact Problems</h2>
+        <p class="section-description">Issues creating, editing, or exporting artifacts</p>
+
+        <table class="troubleshoot-table">
+            <thead>
+                <tr>
+                    <th style="width: 35%;">Problem</th>
+                    <th>Fix</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="problem-cell">Won't create artifact</td>
+                    <td class="fix-cell">Ask explicitly: "Create this as an artifact"</td>
+                </tr>
+                <tr>
+                    <td class="problem-cell">Export fails</td>
+                    <td class="fix-cell">Re-auth Google; check permissions</td>
+                </tr>
+                <tr>
+                    <td class="problem-cell">Interactive broken</td>
+                    <td class="fix-cell">Ask Claude to debug; refresh and try again</td>
+                </tr>
+                <tr>
+                    <td class="problem-cell">Wrong artifact type</td>
+                    <td class="fix-cell">Specify type: "Create this as a table/diagram/code"</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">Memory Issues</h2>
+        <p class="section-description">When Claude's memory isn't working as expected</p>
+
+        <table class="troubleshoot-table">
+            <thead>
+                <tr>
+                    <th style="width: 35%;">Problem</th>
+                    <th>Fix</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="problem-cell">Doesn't remember something</td>
+                    <td class="fix-cell">Check Settings → Memory; re-tell Claude</td>
+                </tr>
+                <tr>
+                    <td class="problem-cell">Remembers incorrectly</td>
+                    <td class="fix-cell">"Forget what you remember about [topic]"</td>
+                </tr>
+                <tr>
+                    <td class="problem-cell">Too much remembered</td>
+                    <td class="fix-cell">Review and clear specific memories</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">Quick Reference: Error Messages</h2>
+        <p class="section-description">Common error messages and what to do</p>
+
+        <table class="troubleshoot-table">
+            <thead>
+                <tr>
+                    <th style="width: 35%;">Error</th>
+                    <th>Fix</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="problem-cell">"I don't have access to..."</td>
+                    <td class="fix-cell">Enable in Settings → Connectors</td>
+                </tr>
+                <tr>
+                    <td class="problem-cell">"I couldn't find..."</td>
+                    <td class="fix-cell">Try different search terms</td>
+                </tr>
+                <tr>
+                    <td class="problem-cell">"I'm not able to..."</td>
+                    <td class="fix-cell">Rephrase; add business context</td>
+                </tr>
+                <tr>
+                    <td class="problem-cell">"That file doesn't exist"</td>
+                    <td class="fix-cell">Check file path; ensure synced locally</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="nav-buttons">
+            <a href="/appendices/" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back to Appendices
+            </a>
+            <a href="/appendices/resources" class="btn btn-primary">
+                Next: External Resources
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

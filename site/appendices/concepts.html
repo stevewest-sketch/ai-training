@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills vs Automations vs Projects - AI Training Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .concept-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .concept-table th { background: #1a1a1a; color: white; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
+        .concept-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; vertical-align: top; }
+        .concept-table tr:last-child td { border-bottom: none; }
+        .concept-table tr:hover td { background: #fafafa; }
+        .concept-name { font-weight: 600; color: #1a1a1a; }
+        .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+        .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; color: #16a34a; }
+        .callout-title::before { content: '✦'; }
+        .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
+        .progression-list { list-style: none; background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; }
+        .progression-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #f0f0f0; }
+        .progression-item:last-child { border-bottom: none; }
+        .progression-number { width: 32px; height: 32px; background: #8b5cf6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600; flex-shrink: 0; }
+        .progression-content h4 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.25rem; }
+        .progression-content p { font-size: 0.9375rem; color: #666; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        .btn-primary { background: #1a1a1a; color: white; }
+        .btn-primary:hover { background: #333; }
+        @media (max-width: 768px) {
+            .concept-table { display: block; overflow-x: auto; }
+        }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .nav-buttons { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/training" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <main class="main">
+        <div class="section-indicator">APPENDIX C</div>
+        <h1 class="page-title">Skills vs Automations vs Projects</h1>
+        <p class="page-subtitle">Understanding when to use each concept and how they work together</p>
+
+        <h2 class="section-heading">Concept Comparison</h2>
+        <p class="section-description">Each serves a different purpose in your AI workflow</p>
+
+        <table class="concept-table">
+            <thead>
+                <tr>
+                    <th>Concept</th>
+                    <th>What It Is</th>
+                    <th>When to Use</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="concept-name">Skill</td>
+                    <td>Markdown file defining a capability</td>
+                    <td>When you want Claude to know how to do something</td>
+                    <td>"Analyze Slack channels for sentiment"</td>
+                </tr>
+                <tr>
+                    <td class="concept-name">Project</td>
+                    <td>Persistent context container</td>
+                    <td>Ongoing work with consistent context</td>
+                    <td>Competitive Intel knowledge base</td>
+                </tr>
+                <tr>
+                    <td class="concept-name">Automation</td>
+                    <td>Skill that runs on schedule/trigger</td>
+                    <td>Hands-free recurring tasks</td>
+                    <td>Weekly Slack pulse every Monday</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">The Recommended Progression</h2>
+        <p class="section-description">Build your capabilities step by step</p>
+
+        <ul class="progression-list">
+            <li class="progression-item">
+                <div class="progression-number">1</div>
+                <div class="progression-content">
+                    <h4>Start with Projects</h4>
+                    <p>Projects give you flexibility to experiment with persistent context and custom instructions. Use them to prototype agent behavior through conversation before investing in code.</p>
+                </div>
+            </li>
+            <li class="progression-item">
+                <div class="progression-number">2</div>
+                <div class="progression-content">
+                    <h4>Create Skills</h4>
+                    <p>Once you identify a repeatable workflow that works in a Project, codify it as a skill. Skills are markdown files that define what Claude should do when certain conditions are met.</p>
+                </div>
+            </li>
+            <li class="progression-item">
+                <div class="progression-number">3</div>
+                <div class="progression-content">
+                    <h4>Add Scheduling for Automations</h4>
+                    <p>When a skill proves valuable and needs to run without you, add a trigger (time-based or event-based) to turn it into an automation.</p>
+                </div>
+            </li>
+        </ul>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Key Insight</div>
+            <p>Don't skip to automations too quickly. Prove value with manual execution first, then automate what works. This approach reduces wasted effort and ensures your automations actually solve real problems.</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="/appendices/resources" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Previous: Resources
+            </a>
+            <a href="/appendices/agents-reference" class="btn btn-primary">
+                Next: Gladly's 9 Agents
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

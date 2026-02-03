@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appendices - AI Training Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+        .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .info-box p { color: #666; font-size: 0.9375rem; }
+        .appendix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .appendix-card { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; transition: all 0.2s; text-decoration: none; display: block; }
+        .appendix-card:hover { border-color: #1a1a1a; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); transform: translateY(-2px); }
+        .appendix-icon { width: 48px; height: 48px; background: #f5f5f7; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem; }
+        .appendix-card h3 { font-size: 1.125rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .appendix-card p { font-size: 0.9375rem; color: #666; line-height: 1.5; }
+        .appendix-label { font-size: 0.75rem; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+        .nav-buttons { display: flex; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .appendix-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/training" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <main class="main">
+        <div class="section-indicator">REFERENCE MATERIALS</div>
+        <h1 class="page-title">Appendices</h1>
+        <p class="page-subtitle">Quick reference guides, resources, and supplementary materials</p>
+
+        <div class="info-box">
+            <h3>How to Use These Resources</h3>
+            <p>These appendices provide quick reference materials to support your learning journey. Bookmark the ones most relevant to your work and return to them as needed.</p>
+        </div>
+
+        <div class="appendix-grid">
+            <a href="/appendices/troubleshooting" class="appendix-card">
+                <div class="appendix-label">Appendix A</div>
+                <div class="appendix-icon">🔧</div>
+                <h3>Troubleshooting Guide</h3>
+                <p>Common problems and solutions for Claude understanding, connectors, artifacts, and memory issues.</p>
+            </a>
+
+            <a href="/appendices/resources" class="appendix-card">
+                <div class="appendix-label">Appendix B</div>
+                <div class="appendix-icon">📚</div>
+                <h3>External Resources</h3>
+                <p>Anthropic courses, tools, utilities, and internal resources to support your learning.</p>
+            </a>
+
+            <a href="/appendices/concepts" class="appendix-card">
+                <div class="appendix-label">Appendix C</div>
+                <div class="appendix-icon">🔄</div>
+                <h3>Skills vs Automations vs Projects</h3>
+                <p>Understand when to use each concept and how they work together.</p>
+            </a>
+
+            <a href="/appendices/agents-reference" class="appendix-card">
+                <div class="appendix-label">Appendix D</div>
+                <div class="appendix-icon">🤖</div>
+                <h3>Gladly's 9 Agents</h3>
+                <p>Reference guide to all nine agents in Gladly's AI initiative and their capabilities.</p>
+            </a>
+
+            <a href="/appendices/assessment-philosophy" class="appendix-card">
+                <div class="appendix-label">Appendix E</div>
+                <div class="appendix-icon">📋</div>
+                <h3>Assessment Philosophy</h3>
+                <p>Why we use confidence-based self-assessment and how it supports adult learning.</p>
+            </a>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="/training" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back to Training Center
+            </a>
+        </div>
+    </main>
+</body>
+</html>

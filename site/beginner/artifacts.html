@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Artifacts - Beginner Path</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .tab { padding: 1rem 1rem; font-size: 0.875rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+        .tab:hover { color: #1a1a1a; }
+        .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+        .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .info-box p { color: #666; font-size: 0.9375rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .artifact-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .artifact-table th { background: #8b5cf6; color: white; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
+        .artifact-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; vertical-align: top; }
+        .artifact-table tr:last-child td { border-bottom: none; }
+        .artifact-table tr:hover td { background: #fafafa; }
+        .artifact-name { font-weight: 600; color: #1a1a1a; }
+        .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+        .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .callout-limitation { background: #fff7ed; border-left: 3px solid #f97316; }
+        .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; }
+        .callout-breakthrough .callout-title { color: #16a34a; }
+        .callout-limitation .callout-title { color: #ea580c; }
+        .callout-breakthrough .callout-title::before { content: '✦'; }
+        .callout-limitation .callout-title::before { content: '⚠'; }
+        .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
+        .terminal-window { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin: 1.5rem 0; }
+        .terminal-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #febc2e; }
+        .terminal-dot.green { background: #28c840; }
+        .terminal-title { color: #999; font-size: 0.8125rem; margin-left: 0.5rem; font-family: monospace; }
+        .terminal-content { padding: 1.5rem; color: #e5e5e5; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.875rem; line-height: 1.8; }
+        .terminal-content .label { color: #8b5cf6; font-weight: 600; }
+        .terminal-content .example { color: #a5d6ff; }
+        .steps-list { list-style: none; background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; counter-reset: step; }
+        .steps-list li { padding: 0.75rem 0; padding-left: 2rem; position: relative; color: #4b5563; font-size: 0.9375rem; border-bottom: 1px solid #f0f0f0; }
+        .steps-list li:last-child { border-bottom: none; }
+        .steps-list li::before { content: counter(step); counter-increment: step; position: absolute; left: 0; width: 24px; height: 24px; background: #8b5cf6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; }
+        .feature-card { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; }
+        .feature-card h4 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .feature-card p { font-size: 0.9375rem; color: #666; }
+        .export-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .export-option { background: #f5f5f7; border-radius: 8px; padding: 1rem; text-align: center; }
+        .export-option h5 { font-size: 0.875rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.25rem; }
+        .export-option p { font-size: 0.8125rem; color: #666; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-primary { background: #8b5cf6; color: white; }
+        .btn-primary:hover { background: #7c3aed; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        @media (max-width: 768px) {
+            .artifact-table { display: block; overflow-x: auto; }
+        }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .nav-buttons { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/training" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <nav class="section-tabs">
+        <a href="/beginner/" class="tab">Overview</a>
+        <a href="/beginner/ai-foundations" class="tab">AI Foundations</a>
+        <a href="/beginner/claude-chat-overview" class="tab">Claude Chat</a>
+        <a href="/beginner/connectors" class="tab">Connectors</a>
+        <a href="/beginner/artifacts" class="tab active">Artifacts</a>
+        <a href="/beginner/sharing-and-projects" class="tab">Sharing</a>
+        <a href="/beginner/effective-prompting" class="tab">Prompting</a>
+        <a href="/beginner/skills-intro" class="tab">Skills</a>
+        <a href="/beginner/assessment" class="tab">Assessment</a>
+    </nav>
+
+    <main class="main">
+        <div class="section-indicator">MODULE 4 OF 7</div>
+        <h1 class="page-title">Understanding Artifacts</h1>
+        <p class="page-subtitle">Master all 7 artifact types, understand versioning, work with interactive and executable artifacts</p>
+
+        <div class="info-box">
+            <h3>Learning Objective</h3>
+            <p>By the end of this module, you'll be able to create, edit, iterate, and export all 7 artifact types, including interactive components and executable code.</p>
+        </div>
+
+        <h2 class="section-heading">What Are Artifacts?</h2>
+        <p class="section-description">Artifacts are the tangible outputs Claude creates during your conversation—documents, code, spreadsheets, diagrams, and more. They appear in a separate panel for easy viewing and export.</p>
+
+        <h2 class="section-heading">All 7 Artifact Types</h2>
+        <p class="section-description">Claude can create many different types of artifacts</p>
+
+        <table class="artifact-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>What It Does</th>
+                    <th>Example Prompt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="artifact-name">Documents</td>
+                    <td>Rich text with formatting</td>
+                    <td>"Create a project brief for our Q2 launch"</td>
+                </tr>
+                <tr>
+                    <td class="artifact-name">Code</td>
+                    <td>Syntax-highlighted code</td>
+                    <td>"Write a Python script to analyze this CSV"</td>
+                </tr>
+                <tr>
+                    <td class="artifact-name">Data/Tables</td>
+                    <td>Structured data, spreadsheets</td>
+                    <td>"Create a comparison table of these vendors"</td>
+                </tr>
+                <tr>
+                    <td class="artifact-name">Diagrams</td>
+                    <td>Flowcharts, org charts (Mermaid)</td>
+                    <td>"Create a flowchart of our approval process"</td>
+                </tr>
+                <tr>
+                    <td class="artifact-name">Interactive</td>
+                    <td>Functional React components</td>
+                    <td>"Build a ROI calculator"</td>
+                </tr>
+                <tr>
+                    <td class="artifact-name">HTML/Web</td>
+                    <td>Complete webpage previews</td>
+                    <td>"Create a landing page mockup"</td>
+                </tr>
+                <tr>
+                    <td class="artifact-name">SVG/Image</td>
+                    <td>Vector graphics</td>
+                    <td>"Create an icon for our new feature"</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">Working with Artifacts</h2>
+        <p class="section-description">How to view, edit, and iterate on artifacts</p>
+
+        <div class="feature-card">
+            <h4>Viewing</h4>
+            <p>Click any artifact to open it in the preview panel</p>
+        </div>
+
+        <div class="feature-card">
+            <h4>Editing</h4>
+            <p>Ask Claude to modify the artifact:</p>
+        </div>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">editing-examples.md</span>
+            </div>
+            <div class="terminal-content">
+                <span class="example">"Make the introduction shorter"</span><br>
+                <span class="example">"Add a section on implementation timeline"</span><br>
+                <span class="example">"Change the chart to show percentages instead of raw numbers"</span>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <h4>Versioning</h4>
+            <p>Claude keeps track of iterations—you can ask to revert: "Go back to the previous version of this doc"</p>
+        </div>
+
+        <h2 class="section-heading">Interactive Artifacts</h2>
+        <p class="section-description">Functional web components that actually work—calculators, quizzes, data visualizations, forms</p>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Example</div>
+            <p>"Build a tip calculator with split options" → Creates a working calculator you can actually use</p>
+        </div>
+
+        <div class="callout callout-limitation">
+            <div class="callout-title">Limitations</div>
+            <p>Interactive artifacts cannot connect to databases, make network requests, or persist data</p>
+        </div>
+
+        <h2 class="section-heading">Code Execution</h2>
+        <p class="section-description">Claude can run Python and JavaScript code, not just display it</p>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">When to Use</div>
+            <p>Data analysis, calculations, data transformation, quick scripts</p>
+        </div>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">example.md</span>
+            </div>
+            <div class="terminal-content">
+                <span class="label">You:</span> <span class="example">"Analyze this CSV and show me trends"</span><br><br>
+                <span class="label">Claude:</span> <span class="example">Runs code, displays results with visualizations</span>
+            </div>
+        </div>
+
+        <h2 class="section-heading">Artifact Versioning</h2>
+        <p class="section-description">When you iterate, Claude creates versions (v1, v2, v3) you can navigate</p>
+
+        <div class="feature-card">
+            <h4>Navigation</h4>
+            <p>Arrow buttons to move between versions; click version indicator for history</p>
+        </div>
+
+        <div class="feature-card">
+            <h4>Iteration Prompts</h4>
+            <p>"Make it more concise" → Creates v2</p>
+        </div>
+
+        <h2 class="section-heading">Exporting to Google Drive</h2>
+        <p class="section-description">Step-by-step process for exporting artifacts</p>
+
+        <ol class="steps-list">
+            <li>Click the artifact to select it</li>
+            <li>Click the <strong>Export</strong> button (arrow icon)</li>
+            <li>Select <strong>Google Drive</strong> as destination</li>
+            <li>Choose folder location</li>
+            <li>Confirm export</li>
+        </ol>
+
+        <p class="section-description" style="margin-top: 1rem;">The file will be created as a native Google Doc, Sheet, or Slide—fully editable in Google Workspace.</p>
+
+        <h2 class="section-heading">Other Export Options</h2>
+
+        <div class="export-options">
+            <div class="export-option">
+                <h5>Copy to Clipboard</h5>
+                <p>For pasting elsewhere</p>
+            </div>
+            <div class="export-option">
+                <h5>Download</h5>
+                <p>Save as local file</p>
+            </div>
+            <div class="export-option">
+                <h5>Share Link</h5>
+                <p>Generate shareable artifact URL</p>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="/beginner/connectors" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Previous: Connectors
+            </a>
+            <a href="/beginner/sharing-and-projects" class="btn btn-primary">
+                Next: Sharing & Projects
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

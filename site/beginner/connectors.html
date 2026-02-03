@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working with Connectors - Beginner Path</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .tab { padding: 1rem 1rem; font-size: 0.875rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+        .tab:hover { color: #1a1a1a; }
+        .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+        .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .info-box p { color: #666; font-size: 0.9375rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .connector-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .connector-table th { background: #8b5cf6; color: white; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
+        .connector-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; vertical-align: top; }
+        .connector-table tr:last-child td { border-bottom: none; }
+        .connector-table tr:hover td { background: #fafafa; }
+        .connector-name { font-weight: 600; color: #1a1a1a; }
+        .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+        .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .callout-limitation { background: #fff7ed; border-left: 3px solid #f97316; }
+        .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; }
+        .callout-breakthrough .callout-title { color: #16a34a; }
+        .callout-limitation .callout-title { color: #ea580c; }
+        .callout-breakthrough .callout-title::before { content: '✦'; }
+        .callout-limitation .callout-title::before { content: '⚠'; }
+        .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
+        .terminal-window { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin: 1.5rem 0; }
+        .terminal-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #febc2e; }
+        .terminal-dot.green { background: #28c840; }
+        .terminal-title { color: #999; font-size: 0.8125rem; margin-left: 0.5rem; font-family: monospace; }
+        .terminal-content { padding: 1.5rem; color: #e5e5e5; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.875rem; line-height: 1.8; }
+        .terminal-content .label { color: #8b5cf6; font-weight: 600; }
+        .terminal-content .example { color: #a5d6ff; }
+        .compare-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .compare-table th { background: #f5f5f7; color: #1a1a1a; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
+        .compare-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; }
+        .compare-table tr:last-child td { border-bottom: none; }
+        .steps-list { list-style: none; background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; }
+        .steps-list li { padding: 0.75rem 0; padding-left: 2rem; position: relative; color: #4b5563; font-size: 0.9375rem; border-bottom: 1px solid #f0f0f0; }
+        .steps-list li:last-child { border-bottom: none; }
+        .steps-list li::before { content: counter(step); counter-increment: step; position: absolute; left: 0; width: 24px; height: 24px; background: #8b5cf6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; }
+        .steps-list { counter-reset: step; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-primary { background: #8b5cf6; color: white; }
+        .btn-primary:hover { background: #7c3aed; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        @media (max-width: 768px) {
+            .connector-table, .compare-table { display: block; overflow-x: auto; }
+        }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .nav-buttons { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/training" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <nav class="section-tabs">
+        <a href="/beginner/" class="tab">Overview</a>
+        <a href="/beginner/ai-foundations" class="tab">AI Foundations</a>
+        <a href="/beginner/claude-chat-overview" class="tab">Claude Chat</a>
+        <a href="/beginner/connectors" class="tab active">Connectors</a>
+        <a href="/beginner/artifacts" class="tab">Artifacts</a>
+        <a href="/beginner/sharing-and-projects" class="tab">Sharing</a>
+        <a href="/beginner/effective-prompting" class="tab">Prompting</a>
+        <a href="/beginner/skills-intro" class="tab">Skills</a>
+        <a href="/beginner/assessment" class="tab">Assessment</a>
+    </nav>
+
+    <main class="main">
+        <div class="section-indicator">MODULE 3 OF 7</div>
+        <h1 class="page-title">Working with Connectors</h1>
+        <p class="page-subtitle">Understand all 12 connectors, master web search, and know when to use each</p>
+
+        <div class="info-box">
+            <h3>Learning Objective</h3>
+            <p>By the end of this module, you'll understand how to use all 12 connectors available in Claude Chat, including when to use web search vs. other connectors.</p>
+        </div>
+
+        <h2 class="section-heading">What Are Connectors?</h2>
+        <p class="section-description">Connectors allow Claude Chat to access external data sources and services during your conversation. Instead of copying and pasting information, Claude can pull it directly.</p>
+
+        <h2 class="section-heading">All 12 Available Connectors</h2>
+        <p class="section-description">Each connector gives Claude access to different data sources</p>
+
+        <table class="connector-table">
+            <thead>
+                <tr>
+                    <th>Connector</th>
+                    <th>What Claude Can Access</th>
+                    <th>Example Use</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="connector-name">Google Drive</td>
+                    <td>Documents, spreadsheets, slides, files</td>
+                    <td>"Summarize my Q4 planning doc"</td>
+                </tr>
+                <tr>
+                    <td class="connector-name">Gmail</td>
+                    <td>Read emails, search inbox, find attachments</td>
+                    <td>"Find the last email from [client]"</td>
+                </tr>
+                <tr>
+                    <td class="connector-name">Google Calendar</td>
+                    <td>View events, check availability, meeting details</td>
+                    <td>"What meetings do I have tomorrow?"</td>
+                </tr>
+                <tr>
+                    <td class="connector-name">Slack</td>
+                    <td>Search messages, channels, read conversations</td>
+                    <td>"Find recent discussions about Sidekick"</td>
+                </tr>
+                <tr>
+                    <td class="connector-name">Notion</td>
+                    <td>Pages, databases, workspace content</td>
+                    <td>"Search my Notion for project specs"</td>
+                </tr>
+                <tr>
+                    <td class="connector-name">Gong</td>
+                    <td>Call recordings, transcripts, deal info</td>
+                    <td>"Summarize last week's calls"</td>
+                </tr>
+                <tr>
+                    <td class="connector-name">GitHub</td>
+                    <td>Repositories, code, issues, PRs</td>
+                    <td>"Check the status of open issues"</td>
+                </tr>
+                <tr>
+                    <td class="connector-name">Figma</td>
+                    <td>Design files, components, comments</td>
+                    <td>"Review the latest mockups"</td>
+                </tr>
+                <tr>
+                    <td class="connector-name">Asana</td>
+                    <td>Tasks, projects, workspaces</td>
+                    <td>"What tasks are due this week?"</td>
+                </tr>
+                <tr>
+                    <td class="connector-name">Jira</td>
+                    <td>Issues, projects, sprint info</td>
+                    <td>"Show me open bugs in current sprint"</td>
+                </tr>
+                <tr>
+                    <td class="connector-name">Sanity</td>
+                    <td>CMS content, documents, assets</td>
+                    <td>"Find recent blog drafts"</td>
+                </tr>
+                <tr>
+                    <td class="connector-name">Web Search</td>
+                    <td>Real-time internet search results</td>
+                    <td>"What's Sierra AI announcing this week?"</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">How to Enable Connectors</h2>
+        <p class="section-description">Set up connectors in your Claude settings</p>
+
+        <ol class="steps-list">
+            <li>Open Claude Settings (gear icon)</li>
+            <li>Navigate to "Connectors" section</li>
+            <li>Toggle on desired connectors</li>
+            <li>Authorize access when prompted</li>
+        </ol>
+
+        <h2 class="section-heading">Using Connectors in Conversation</h2>
+        <p class="section-description">Once enabled, you simply mention the data you need</p>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">example-prompts.md</span>
+            </div>
+            <div class="terminal-content">
+                <span class="label">Google Drive:</span><br>
+                <span class="example">"Look at my doc called 'Q4 OKRs' and summarize the key objectives"</span><br><br>
+                <span class="label">Calendar:</span><br>
+                <span class="example">"What does my week look like? Any conflicts I should know about?"</span><br><br>
+                <span class="label">Slack:</span><br>
+                <span class="example">"Search our Slack for recent conversations about the pricing page redesign"</span><br><br>
+                <span class="label">Web Search:</span><br>
+                <span class="example">"What's Sierra AI announcing this week?"</span>
+            </div>
+        </div>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Best Practices</div>
+            <p>Be specific about which document or channel you're referencing. Claude will ask for clarification if multiple matches exist. Connectors work in Chat mode only (Cowork has direct file access instead).</p>
+        </div>
+
+        <h2 class="section-heading">Web Search Deep Dive</h2>
+        <p class="section-description">Understanding when and how Claude searches the web</p>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">When Claude Searches Automatically</div>
+            <p>Questions about recent events, current data, topics requiring up-to-date information</p>
+        </div>
+
+        <div class="callout callout-limitation">
+            <div class="callout-title">Understanding Citations</div>
+            <p>Numbered references [1], [2] link to sources. You can request explicit searches: "Search the web for recent reviews of [product]"</p>
+        </div>
+
+        <h2 class="section-heading">Web Search vs. Connectors</h2>
+        <p class="section-description">Know when to use each</p>
+
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Use Web Search When...</th>
+                    <th>Use Connectors When...</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Information is publicly available</td>
+                    <td>Information is in your workspace</td>
+                </tr>
+                <tr>
+                    <td>You need current/recent data</td>
+                    <td>You need historical company data</td>
+                </tr>
+                <tr>
+                    <td>Researching external topics</td>
+                    <td>Accessing emails, files, messages</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-limitation">
+            <div class="callout-title">Web Search Limitations</div>
+            <p>Cannot access paywalled content, login-required pages, or real-time dynamic data</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="/beginner/claude-chat-overview" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Previous: Claude Chat Overview
+            </a>
+            <a href="/beginner/artifacts" class="btn btn-primary">
+                Next: Artifacts
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

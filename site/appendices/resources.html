@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External Resources - AI Training Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .resource-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .resource-table th { background: #1a1a1a; color: white; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
+        .resource-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; vertical-align: top; }
+        .resource-table tr:last-child td { border-bottom: none; }
+        .resource-table tr:hover td { background: #fafafa; }
+        .resource-table a { color: #8b5cf6; text-decoration: none; }
+        .resource-table a:hover { text-decoration: underline; }
+        .path-badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+        .path-badge.beginner { background: #f3e8ff; color: #7c3aed; }
+        .path-badge.advanced { background: #fef3c7; color: #b45309; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        .btn-primary { background: #1a1a1a; color: white; }
+        .btn-primary:hover { background: #333; }
+        @media (max-width: 768px) {
+            .resource-table { display: block; overflow-x: auto; }
+        }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .nav-buttons { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/training" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <main class="main">
+        <div class="section-indicator">APPENDIX B</div>
+        <h1 class="page-title">External Resources</h1>
+        <p class="page-subtitle">Curated courses, tools, and references to support your learning</p>
+
+        <h2 class="section-heading">Anthropic Courses (Skilljar)</h2>
+        <p class="section-description">Official training courses from Anthropic</p>
+
+        <table class="resource-table">
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Relevant Path</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="https://anthropic.skilljar.com/ai-fluency-framework-foundations" target="_blank">AI Fluency: Framework & Foundations</a></td>
+                    <td><span class="path-badge beginner">Beginner</span></td>
+                </tr>
+                <tr>
+                    <td><a href="https://anthropic.skilljar.com/claude-101" target="_blank">Claude 101</a></td>
+                    <td><span class="path-badge beginner">Beginner</span></td>
+                </tr>
+                <tr>
+                    <td><a href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank">Claude Code in Action</a></td>
+                    <td><span class="path-badge advanced">Advanced</span></td>
+                </tr>
+                <tr>
+                    <td><a href="https://anthropic.skilljar.com/claude-with-the-anthropic-api" target="_blank">Building with the Claude API</a></td>
+                    <td><span class="path-badge advanced">Advanced</span></td>
+                </tr>
+                <tr>
+                    <td><a href="https://anthropic.skilljar.com/introduction-to-model-context-protocol" target="_blank">Intro to MCP</a></td>
+                    <td><span class="path-badge advanced">Advanced</span></td>
+                </tr>
+                <tr>
+                    <td><a href="https://anthropic.skilljar.com/model-context-protocol-advanced-topics" target="_blank">MCP Advanced Topics</a></td>
+                    <td><span class="path-badge advanced">Advanced</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">Tools & Utilities</h2>
+        <p class="section-description">Helpful tools for practicing and building</p>
+
+        <table class="resource-table">
+            <thead>
+                <tr>
+                    <th>Tool</th>
+                    <th>Use</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="https://promptcowboy.ai" target="_blank">Prompt Cowboy</a></td>
+                    <td>Prompting practice</td>
+                </tr>
+                <tr>
+                    <td><a href="https://skills.sh/trending" target="_blank">Skills Directory</a></td>
+                    <td>Browse skills</td>
+                </tr>
+                <tr>
+                    <td><a href="https://agentation.dev/features" target="_blank">Agentation</a></td>
+                    <td>MCP reference</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">Internal Resources</h2>
+        <p class="section-description">Gladly-specific training and documentation</p>
+
+        <table class="resource-table">
+            <thead>
+                <tr>
+                    <th>Resource</th>
+                    <th>Use</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="https://www.center-of-excellence.xyz/training" target="_blank">CoE Portal</a></td>
+                    <td>AI courses</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.loom.com/share/97cb836202304912a45df619caa22f08" target="_blank">Claude Desktop Loom</a></td>
+                    <td>Interface overview</td>
+                </tr>
+                <tr>
+                    <td>Skills Creation Recording</td>
+                    <td>Skills tutorial (Google Drive)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">Video Resources</h2>
+        <p class="section-description">In-depth video content</p>
+
+        <table class="resource-table">
+            <thead>
+                <tr>
+                    <th>Video</th>
+                    <th>Use</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="https://www.youtube.com/embed/TqC1qOfiVcQ" target="_blank">Agent SDK Full Workshop (60 min)</a></td>
+                    <td>Agent SDK deep dive</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="nav-buttons">
+            <a href="/appendices/troubleshooting" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Previous: Troubleshooting
+            </a>
+            <a href="/appendices/concepts" class="btn btn-primary">
+                Next: Concepts
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>
