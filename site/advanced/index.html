@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Path - Agent Development</title>
+    <title>Advanced Path - Claude Code Mastery</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -16,6 +16,8 @@
         .tab { padding: 1rem 1rem; font-size: 0.875rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
         .tab:hover { color: #1a1a1a; }
         .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
+        .tab.locked { color: #999; }
+        .tab.locked::after { content: ' 🔒'; font-size: 0.75rem; }
         .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
         .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
         .section-indicator::before { content: '◆'; }
@@ -96,31 +98,32 @@
 
     <nav class="section-tabs">
         <a href="/advanced/" class="tab active">Overview</a>
-        <a href="/advanced/deep-dive" class="tab">Deep Dive</a>
-        <a href="/advanced/agent-sdk" class="tab">Agent SDK</a>
-        <a href="/advanced/mcp-integration" class="tab">MCP</a>
-        <a href="/advanced/multi-agent" class="tab">Multi-Agent</a>
-        <a href="/advanced/gladly" class="tab">Gladly</a>
-        <a href="/advanced/production" class="tab">Production</a>
+        <a href="/advanced/claude-code-in-action" class="tab">Claude Code</a>
+        <a href="/advanced/planning-mode-code" class="tab">Planning</a>
+        <a href="/advanced/git-technical" class="tab">Git</a>
+        <a href="/advanced/mcp-integration" class="tab locked">MCP</a>
+        <a href="/advanced/agent-sdk" class="tab locked">SDK</a>
+        <a href="/advanced/multi-agent" class="tab locked">Multi-Agent</a>
+        <a href="/advanced/production-agents" class="tab locked">Production</a>
     </nav>
 
     <main class="main">
-        <div class="section-indicator">ADVANCED PATH</div>
-        <h1 class="page-title">Agent Development</h1>
-        <p class="page-subtitle">Build production-ready AI agents for Gladly's 9-agent initiative</p>
+        <div class="section-indicator">ADVANCED PATH • CLAUDE CODE</div>
+        <h1 class="page-title">Claude Code Mastery</h1>
+        <p class="page-subtitle">Build production-ready AI agents and integrations</p>
 
         <div class="info-box">
-            <h3>Who should take this?</h3>
-            <p>This path is for core AI Acceleration team members and agent owners. You should have completed the Intermediate Path, including building a working automation. This path prepares you to build and deploy production agents.</p>
+            <h3>What You'll Learn</h3>
+            <p>Navigate and use Claude Code's development environment. Apply the full 6-step planning process with SPEC files. Master Git workflows for professional development. Build agents with the Claude SDK. Integrate with external services via MCP. Deploy production agents.</p>
         </div>
 
         <div class="callout callout-breakthrough">
-            <div class="callout-title">What You'll Gain</div>
-            <p>After completing this path, you'll be able to build functional agents using the Agent SDK, integrate agents with external services via MCP, coordinate multi-agent workflows, and deploy production agents to the sagansystems GitHub org.</p>
+            <div class="callout-title">Product Focus</div>
+            <p>This path focuses on Claude Code—the terminal-based development environment for building real applications, agents, and integrations. Prerequisites: Completed Intermediate Path + developer comfort (or willingness to learn).</p>
         </div>
 
         <h2 class="section-heading">Your Learning Journey</h2>
-        <p class="section-description">Complete these 6 modules to earn your Agent Developer certificate</p>
+        <p class="section-description">Complete these 7 modules (15-20 hours total) — 4 modules currently locked</p>
 
         <div class="terminal-window">
             <div class="terminal-header">
@@ -131,61 +134,71 @@
             </div>
             <div class="terminal-content">
                 <ul class="module-list">
-                    <a href="/advanced/deep-dive" class="module-item">
+                    <a href="/advanced/claude-code-in-action" class="module-item">
                         <div class="module-number">1</div>
                         <div class="module-info">
-                            <div class="module-title">Claude Code 101 Deep Dive</div>
-                            <div class="module-meta">30 min • Advanced features and patterns</div>
+                            <div class="module-title">Claude Code in Action</div>
+                            <div class="module-meta">90 min • Anthropic Skilljar course</div>
                         </div>
                         <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="/advanced/agent-sdk" class="module-item">
+                    <a href="/advanced/planning-mode-code" class="module-item">
                         <div class="module-number">2</div>
                         <div class="module-info">
-                            <div class="module-title">Claude Agent SDK</div>
-                            <div class="module-meta">120 min • Build agents with official SDK</div>
+                            <div class="module-title">Planning Mode in Claude Code</div>
+                            <div class="module-meta">45 min • SPEC files + interview process</div>
                         </div>
                         <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="/advanced/mcp-integration" class="module-item">
+                    <a href="/advanced/git-technical" class="module-item">
                         <div class="module-number">3</div>
                         <div class="module-info">
-                            <div class="module-title">MCP Server Integration</div>
-                            <div class="module-meta">90 min • Connect agents to external services</div>
+                            <div class="module-title">Git Technical</div>
+                            <div class="module-meta">30 min • Professional Git workflows</div>
                         </div>
                         <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="/advanced/multi-agent" class="module-item">
-                        <div class="module-number">4</div>
+                    <a href="/advanced/mcp-integration" class="module-item" style="opacity: 0.6;">
+                        <div class="module-number" style="background: #666;">4</div>
                         <div class="module-info">
-                            <div class="module-title">Multi-Agent Orchestration</div>
-                            <div class="module-meta">90 min • Coordinate multiple agents</div>
+                            <div class="module-title">MCP Integration 🔒</div>
+                            <div class="module-meta">Coming Soon • Connect to external services</div>
                         </div>
                         <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="/advanced/gladly" class="module-item">
-                        <div class="module-number">5</div>
+                    <a href="/advanced/agent-sdk" class="module-item" style="opacity: 0.6;">
+                        <div class="module-number" style="background: #666;">5</div>
                         <div class="module-info">
-                            <div class="module-title">Gladly Deep Dive</div>
-                            <div class="module-meta">90 min • Gladly AI architecture and integration</div>
+                            <div class="module-title">Claude Agent SDK 🔒</div>
+                            <div class="module-meta">Coming Soon • Build agents with SDK</div>
                         </div>
                         <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="/advanced/production" class="module-item">
-                        <div class="module-number">6</div>
+                    <a href="/advanced/multi-agent" class="module-item" style="opacity: 0.6;">
+                        <div class="module-number" style="background: #666;">6</div>
                         <div class="module-info">
-                            <div class="module-title">Production Agent Development</div>
-                            <div class="module-meta">180 min • Build, test, and deploy</div>
+                            <div class="module-title">Multi-Agent Orchestration 🔒</div>
+                            <div class="module-meta">Coming Soon • Coordinate multiple agents</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="/advanced/production-agents" class="module-item" style="opacity: 0.6;">
+                        <div class="module-number" style="background: #666;">7</div>
+                        <div class="module-info">
+                            <div class="module-title">Production Agent Development 🔒</div>
+                            <div class="module-meta">Coming Soon • Build, test, and deploy</div>
                         </div>
                         <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -223,8 +236,8 @@
                 </svg>
                 Back to Training
             </a>
-            <a href="/advanced/deep-dive" class="btn btn-primary">
-                Start Module 1
+            <a href="/advanced/claude-code-in-action" class="btn btn-primary">
+                Start: Claude Code in Action
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
