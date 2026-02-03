@@ -1,9 +1,11 @@
 {
   "outputDirectory": "site",
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/training", "destination": "/", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/beginner", "destination": "/beginner/index.html" },
-    { "source": "/training", "destination": "/training.html" },
     { "source": "/modules", "destination": "/intermediate/skills.html" },
     { "source": "/intermediate", "destination": "/intermediate/index.html" },
     { "source": "/advanced", "destination": "/advanced/index.html" }
