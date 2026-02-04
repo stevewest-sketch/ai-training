@@ -8,11 +8,11 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
-        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
         .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
         .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
         .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
-        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; position: sticky; top: 60px; z-index: 99; }
         .tab { padding: 1rem 1.5rem; font-size: 0.9375rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
         .tab:hover { color: #1a1a1a; }
         .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
@@ -87,17 +87,18 @@
     <nav class="section-tabs">
         <a href="/beginner/" class="tab">Overview</a>
         <a href="/beginner/ai-foundations" class="tab">AI Foundations</a>
-        <a href="/beginner/claude-chat-overview" class="tab">Claude Chat</a>
+        <a href="/beginner/claude-desktop-overview" class="tab">Claude Desktop</a>
         <a href="/beginner/connectors" class="tab active">Connectors</a>
         <a href="/beginner/artifacts" class="tab">Artifacts</a>
-        <a href="/beginner/sharing-and-projects" class="tab">Sharing</a>
+        <a href="/beginner/sharing-conversations" class="tab">Sharing</a>
+        <a href="/beginner/projects-intro" class="tab">Projects</a>
         <a href="/beginner/effective-prompting" class="tab">Prompting</a>
         <a href="/beginner/skills-intro" class="tab">Skills</a>
         <a href="/beginner/assessment" class="tab">Assessment</a>
     </nav>
 
     <main class="main">
-        <div class="section-indicator">MODULE 3 OF 7</div>
+        <div class="section-indicator">MODULE 3 OF 8</div>
         <h1 class="page-title">Working with Connectors</h1>
         <p class="page-subtitle">Understand all 12 connectors, master web search, and know when to use each</p>
 
@@ -139,7 +140,7 @@
                 <tr>
                     <td class="connector-name">Slack</td>
                     <td>Search messages, channels, read conversations</td>
-                    <td>"Find recent discussions about Sidekick"</td>
+                    <td>"Find recent discussions about PMM Agent"</td>
                 </tr>
                 <tr>
                     <td class="connector-name">Notion</td>
@@ -265,12 +266,23 @@
             <p>Cannot access paywalled content, login-required pages, or real-time dynamic data</p>
         </div>
 
+        <div class="callout callout-breakthrough" style="background: #f3e8ff; border-left: 3px solid #8b5cf6;">
+            <div class="callout-title" style="color: #7c3aed;">Try It Yourself</div>
+            <p style="margin-bottom: 0.75rem;">Practice enabling and using a connector:</p>
+            <ol style="padding-left: 1.25rem; color: #4b5563; font-size: 0.875rem;">
+                <li style="padding: 0.25rem 0;">Go to Settings → Connectors</li>
+                <li style="padding: 0.25rem 0;">Enable the Google Drive connector and authorize access</li>
+                <li style="padding: 0.25rem 0;">Start a new conversation and ask: "Look at my Google Drive and tell me what documents I have"</li>
+                <li style="padding: 0.25rem 0;">Try a web search: "Search the web for recent news about AI assistants"</li>
+            </ol>
+        </div>
+
         <div class="nav-buttons">
-            <a href="/beginner/claude-chat-overview" class="btn btn-secondary">
+            <a href="/beginner/claude-desktop-overview" class="btn btn-secondary">
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
-                Previous: Claude Chat Overview
+                Previous: Claude Desktop Overview
             </a>
             <a href="/beginner/artifacts" class="btn btn-primary">
                 Next: Artifacts

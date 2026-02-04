@@ -2,7 +2,10 @@
   "outputDirectory": "site",
   "cleanUrls": true,
   "redirects": [
-    { "source": "/training", "destination": "/", "permanent": true }
+    { "source": "/training", "destination": "/", "permanent": true },
+    { "source": "/beginner/claude-chat-overview", "destination": "/beginner/claude-desktop-overview", "permanent": true },
+    { "source": "/beginner/sharing-and-projects", "destination": "/beginner/sharing-conversations", "permanent": true },
+    { "source": "/intermediate/git-concepts", "destination": "/advanced/git-concepts", "permanent": true }
   ],
   "rewrites": [
     { "source": "/beginner", "destination": "/beginner/index.html" },

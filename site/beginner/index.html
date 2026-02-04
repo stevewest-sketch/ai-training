@@ -27,6 +27,9 @@
             align-items: center;
             padding: 1rem 2rem;
             border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
@@ -62,6 +65,9 @@
             gap: 0;
             padding: 0 2rem;
             border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 60px;
+            z-index: 99;
         }
 
         .tab {
@@ -525,10 +531,11 @@
     <nav class="section-tabs">
         <a href="/beginner/" class="tab active">Overview</a>
         <a href="/beginner/ai-foundations" class="tab">AI Foundations</a>
-        <a href="/beginner/claude-chat-overview" class="tab">Claude Chat</a>
+        <a href="/beginner/claude-desktop-overview" class="tab">Claude Desktop</a>
         <a href="/beginner/connectors" class="tab">Connectors</a>
         <a href="/beginner/artifacts" class="tab">Artifacts</a>
-        <a href="/beginner/sharing-and-projects" class="tab">Sharing</a>
+        <a href="/beginner/sharing-conversations" class="tab">Sharing</a>
+        <a href="/beginner/projects-intro" class="tab">Projects</a>
         <a href="/beginner/effective-prompting" class="tab">Prompting</a>
         <a href="/beginner/skills-intro" class="tab">Skills</a>
         <a href="/beginner/assessment" class="tab">Assessment</a>
@@ -579,10 +586,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="/beginner/claude-chat-overview" class="module-item">
+                    <a href="/beginner/claude-desktop-overview" class="module-item">
                         <div class="module-number">2</div>
                         <div class="module-info">
-                            <div class="module-title">Claude Chat Overview</div>
+                            <div class="module-title">Claude Desktop Overview</div>
                             <div class="module-meta">35 min • Interface, Settings, Memory, Extended Thinking</div>
                         </div>
                         <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -609,18 +616,28 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="/beginner/sharing-and-projects" class="module-item">
+                    <a href="/beginner/sharing-conversations" class="module-item">
                         <div class="module-number">5</div>
                         <div class="module-info">
-                            <div class="module-title">Sharing & Projects</div>
-                            <div class="module-meta">25 min • Share conversations, intro to Projects</div>
+                            <div class="module-title">Sharing Conversations</div>
+                            <div class="module-meta">15 min • Share conversations with teammates</div>
+                        </div>
+                        <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="/beginner/projects-intro" class="module-item">
+                        <div class="module-number">6</div>
+                        <div class="module-info">
+                            <div class="module-title">Introduction to Projects</div>
+                            <div class="module-meta">15 min • Persistent workspaces with memory</div>
                         </div>
                         <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </a>
                     <a href="/beginner/effective-prompting" class="module-item">
-                        <div class="module-number">6</div>
+                        <div class="module-number">7</div>
                         <div class="module-info">
                             <div class="module-title">Effective Prompting</div>
                             <div class="module-meta">35 min • CTFC framework + Styles feature</div>
@@ -630,7 +647,7 @@
                         </svg>
                     </a>
                     <a href="/beginner/skills-intro" class="module-item">
-                        <div class="module-number">7</div>
+                        <div class="module-number">8</div>
                         <div class="module-info">
                             <div class="module-title">Introduction to Skills</div>
                             <div class="module-meta">20 min • Skills as capabilities, natural language triggers</div>

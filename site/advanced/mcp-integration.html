@@ -8,11 +8,11 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
-        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
         .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
         .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
         .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
-        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; position: sticky; top: 60px; z-index: 99; }
         .tab { padding: 1rem 1.5rem; font-size: 0.9375rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
         .tab:hover { color: #1a1a1a; }
         .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
@@ -75,8 +75,9 @@
     <nav class="section-tabs">
         <a href="/advanced/" class="tab">Overview</a>
         <a href="/advanced/claude-code-in-action" class="tab">Code in Action</a>
-        <a href="/advanced/planning-mode-code" class="tab">Planning Mode</a>
+        <a href="/advanced/git-concepts" class="tab">Git Concepts</a>
         <a href="/advanced/git-technical" class="tab">Git Technical</a>
+        <a href="/advanced/planning-mode-code" class="tab">Planning Mode</a>
         <a href="/advanced/mcp-integration" class="tab active">MCP</a>
         <a href="/advanced/agent-sdk" class="tab">Agent SDK</a>
         <a href="/advanced/multi-agent" class="tab">Multi-Agent</a>
@@ -88,7 +89,7 @@
             <h3 style="color: #92400e; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Coming Soon</h3>
             <p style="color: #78350f; font-size: 0.9375rem;">This module is under development. Check back soon for full content on Model Context Protocol integration.</p>
         </div>
-        <div class="section-indicator">MODULE 4 OF 7</div>
+        <div class="section-indicator">MODULE 5 OF 8</div>
         <h1 class="page-title">MCP Server Integration</h1>
         <p class="page-subtitle">Extend Claude with external service connections</p>
         <div class="info-box">
@@ -109,11 +110,11 @@
         <h2 class="section-heading">Relevant Integrations for 9 Agents</h2>
         <p class="section-description">Key MCP integrations needed for Gladly's agent initiative</p>
         <div class="integrations-grid">
-            <div class="integration-card"><div class="integration-icon">☁️</div><h4>Salesforce</h4><p>PMM Sidekick, Analytics, Presentations</p></div>
+            <div class="integration-card"><div class="integration-icon">☁️</div><h4>Salesforce</h4><p>PMM Agent, Analytics, Presentations</p></div>
             <div class="integration-card"><div class="integration-icon">📧</div><h4>Marketo</h4><p>Campaign Orchestration</p></div>
             <div class="integration-card"><div class="integration-icon">📊</div><h4>Google Workspace</h4><p>Presentations, Web</p></div>
             <div class="integration-card"><div class="integration-icon">🎨</div><h4>Figma</h4><p>Design Automation</p></div>
-            <div class="integration-card"><div class="integration-icon">💬</div><h4>Slack</h4><p>PMM Sidekick</p></div>
+            <div class="integration-card"><div class="integration-icon">💬</div><h4>Slack</h4><p>PMM Agent</p></div>
             <div class="integration-card"><div class="integration-icon">🔗</div><h4>Custom APIs</h4><p>Any REST/GraphQL service</p></div>
         </div>
         <h2 class="section-heading">Key Concepts</h2>

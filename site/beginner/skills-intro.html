@@ -8,11 +8,11 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
-        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
         .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
         .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
         .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
-        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; position: sticky; top: 60px; z-index: 99; }
         .tab { padding: 1rem 1.5rem; font-size: 0.9375rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
         .tab:hover { color: #1a1a1a; }
         .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
@@ -101,17 +101,18 @@
     <nav class="section-tabs">
         <a href="/beginner/" class="tab">Overview</a>
         <a href="/beginner/ai-foundations" class="tab">AI Foundations</a>
-        <a href="/beginner/claude-chat-overview" class="tab">Claude Chat</a>
+        <a href="/beginner/claude-desktop-overview" class="tab">Claude Desktop</a>
         <a href="/beginner/connectors" class="tab">Connectors</a>
         <a href="/beginner/artifacts" class="tab">Artifacts</a>
-        <a href="/beginner/sharing-and-projects" class="tab">Sharing</a>
+        <a href="/beginner/sharing-conversations" class="tab">Sharing</a>
+        <a href="/beginner/projects-intro" class="tab">Projects</a>
         <a href="/beginner/effective-prompting" class="tab">Prompting</a>
         <a href="/beginner/skills-intro" class="tab active">Skills</a>
         <a href="/beginner/assessment" class="tab">Assessment</a>
     </nav>
 
     <main class="main">
-        <div class="section-indicator">MODULE 7 OF 7</div>
+        <div class="section-indicator">MODULE 8 OF 8</div>
         <h1 class="page-title">Introduction to Skills</h1>
         <p class="page-subtitle">Understand what skills are and how to leverage preloaded capabilities through natural language</p>
 

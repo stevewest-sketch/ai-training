@@ -8,11 +8,11 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
-        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
         .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
         .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
         .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
-        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; position: sticky; top: 60px; z-index: 99; }
         .tab { padding: 1rem 1.5rem; font-size: 0.9375rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
         .tab:hover { color: #1a1a1a; }
         .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
@@ -106,17 +106,18 @@
     <nav class="section-tabs">
         <a href="/beginner/" class="tab">Overview</a>
         <a href="/beginner/ai-foundations" class="tab">AI Foundations</a>
-        <a href="/beginner/claude-chat-overview" class="tab">Claude Chat</a>
+        <a href="/beginner/claude-desktop-overview" class="tab">Claude Desktop</a>
         <a href="/beginner/connectors" class="tab">Connectors</a>
         <a href="/beginner/artifacts" class="tab">Artifacts</a>
-        <a href="/beginner/sharing-and-projects" class="tab">Sharing</a>
+        <a href="/beginner/sharing-conversations" class="tab">Sharing</a>
+        <a href="/beginner/projects-intro" class="tab">Projects</a>
         <a href="/beginner/effective-prompting" class="tab active">Prompting</a>
         <a href="/beginner/skills-intro" class="tab">Skills</a>
         <a href="/beginner/assessment" class="tab">Assessment</a>
     </nav>
 
     <main class="main">
-        <div class="section-indicator">MODULE 6 OF 7</div>
+        <div class="section-indicator">MODULE 7 OF 8</div>
         <h1 class="page-title">Effective Prompting</h1>
         <p class="page-subtitle">Master the CTFC framework, understand Styles, and create custom styles</p>
 
@@ -274,6 +275,17 @@
             <p>Create custom styles for recurring communication patterns: team updates, customer emails, executive summaries, technical documentation. Once created, select the style from the dropdown to apply it automatically.</p>
         </div>
 
+        <div class="callout callout-breakthrough" style="background: #f3e8ff; border-left: 3px solid #8b5cf6;">
+            <div class="callout-title" style="color: #7c3aed;">Try It Yourself: CTFC Practice</div>
+            <p style="margin-bottom: 0.75rem;">Compare results using the CTFC framework:</p>
+            <ol style="padding-left: 1.25rem; color: #4b5563; font-size: 0.875rem;">
+                <li style="padding: 0.25rem 0;"><strong>Vague prompt:</strong> Ask Claude "Write an email about a meeting"</li>
+                <li style="padding: 0.25rem 0;"><strong>CTFC prompt:</strong> Now try: "I'm a team lead scheduling a planning meeting with my 5-person team. Write a casual email inviting them to a 30-minute sync next Tuesday at 2pm. Include the agenda: Q2 goals review and task assignments. Keep it under 100 words."</li>
+                <li style="padding: 0.25rem 0;">Compare the two responses—notice how much more useful the second one is</li>
+                <li style="padding: 0.25rem 0;"><strong>Bonus:</strong> Create a custom Style in Settings for your most common communication type</li>
+            </ol>
+        </div>
+
         <div class="self-assessment">
             <h3>Self-Assessment</h3>
             <p>Before moving on, can you:</p>
@@ -286,11 +298,11 @@
         </div>
 
         <div class="nav-buttons">
-            <a href="/beginner/sharing-and-projects" class="btn btn-secondary">
+            <a href="/beginner/projects-intro" class="btn btn-secondary">
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
-                Previous: Sharing & Projects
+                Previous: Projects Introduction
             </a>
             <a href="/beginner/skills-intro" class="btn btn-primary">
                 Next: Skills Introduction
