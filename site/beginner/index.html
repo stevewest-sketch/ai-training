@@ -150,6 +150,59 @@
             font-size: 0.9375rem;
         }
 
+        /* Learning Points Grid */
+        .learning-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .learning-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .learning-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .learning-item {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .learning-icon {
+            width: 24px;
+            height: 24px;
+            background: #f0fdf4;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #22c55e;
+            font-size: 0.875rem;
+        }
+
+        .learning-text {
+            color: #4b5563;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 640px) {
+            .learning-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Section Heading */
         .section-heading {
             font-family: 'Libre Baskerville', Georgia, serif;
@@ -551,10 +604,35 @@
         <h1 class="page-title">Claude Chat Fundamentals</h1>
         <p class="page-subtitle">Build foundational AI literacy and become a confident daily Claude Chat user</p>
 
-        <!-- Info Box -->
-        <div class="info-box">
+        <!-- What You'll Learn -->
+        <div class="learning-section">
             <h3>What You'll Learn</h3>
-            <p>Core AI concepts and how large language models work. Navigate Claude Chat's full feature set: Settings, Memory, Styles, Extended Thinking. Master file uploads and all 12 connectors including web search. Create and iterate on all 7 artifact types. Write effective prompts using CTFC framework and Styles. Use preloaded skills through natural language.</p>
+            <div class="learning-grid">
+                <div class="learning-item">
+                    <div class="learning-icon">✓</div>
+                    <div class="learning-text">Core AI concepts and how large language models work</div>
+                </div>
+                <div class="learning-item">
+                    <div class="learning-icon">✓</div>
+                    <div class="learning-text">Navigate Claude Chat's full feature set: Settings, Memory, Styles, Extended Thinking</div>
+                </div>
+                <div class="learning-item">
+                    <div class="learning-icon">✓</div>
+                    <div class="learning-text">Master file uploads and all 12 connectors including web search</div>
+                </div>
+                <div class="learning-item">
+                    <div class="learning-icon">✓</div>
+                    <div class="learning-text">Create and iterate on all 7 artifact types</div>
+                </div>
+                <div class="learning-item">
+                    <div class="learning-icon">✓</div>
+                    <div class="learning-text">Write effective prompts using CTFC framework and Styles</div>
+                </div>
+                <div class="learning-item">
+                    <div class="learning-icon">✓</div>
+                    <div class="learning-text">Use preloaded skills through natural language</div>
+                </div>
+            </div>
         </div>
 
         <!-- The Breakthrough Callout -->
