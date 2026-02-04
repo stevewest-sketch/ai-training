@@ -45,10 +45,6 @@
         .resource-meta span { font-size: 0.75rem; color: #999; display: flex; align-items: center; gap: 0.25rem; }
         .resource-link { color: #8b5cf6; text-decoration: none; font-weight: 500; font-size: 0.875rem; white-space: nowrap; }
         .resource-link:hover { text-decoration: underline; }
-        .concepts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
-        .concept-card { background: white; border: 1px solid #e5e5e5; border-radius: 10px; padding: 1.25rem; }
-        .concept-card h4 { font-size: 0.9375rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
-        .concept-card p { font-size: 0.875rem; color: #666; }
         .concept-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
         .concept-table th { background: #8b5cf6; color: white; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
         .concept-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; vertical-align: top; }
@@ -68,10 +64,10 @@
         .btn-primary:hover { background: #7c3aed; }
         .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
         .btn-secondary:hover { background: #eee; }
+        .subsection-heading { font-size: 1.125rem; font-weight: 600; color: #1a1a1a; margin-top: 2rem; margin-bottom: 0.75rem; }
         @media (max-width: 640px) {
             .main { padding: 2rem 1rem; }
             .page-title { font-size: 2rem; }
-            .concepts-grid { grid-template-columns: 1fr; }
             .nav-buttons { flex-direction: column; gap: 1rem; }
         }
     </style>
@@ -87,7 +83,8 @@
     <nav class="section-tabs">
         <a href="/beginner/" class="tab">Overview</a>
         <a href="/beginner/ai-foundations" class="tab active">AI Foundations</a>
-        <a href="/beginner/claude-desktop-overview" class="tab">Claude Desktop</a>
+        <a href="/beginner/claude-desktop-app" class="tab">Desktop App</a>
+        <a href="/beginner/claude-chat" class="tab">Claude Chat</a>
         <a href="/beginner/connectors" class="tab">Connectors</a>
         <a href="/beginner/artifacts" class="tab">Artifacts</a>
         <a href="/beginner/sharing-conversations" class="tab">Sharing</a>
@@ -98,13 +95,13 @@
     </nav>
 
     <main class="main">
-        <div class="section-indicator">MODULE 1 OF 8</div>
+        <div class="section-indicator">MODULE 1 OF 10</div>
         <h1 class="page-title">AI Foundations</h1>
-        <p class="page-subtitle">Understand what Large Language Models are, how they process information, and the key concepts that determine their capabilities and limitations</p>
+        <p class="page-subtitle">Core AI concepts, LLMs, and what powers modern AI assistants</p>
 
         <div class="info-box">
             <h3>Learning Objective</h3>
-            <p>By the end of this module, you'll be able to explain what LLMs are and their key limitations to a colleague, and understand the difference between chatbots, automation, and AI agents.</p>
+            <p>By the end of this module, you'll understand what Large Language Models are, how they process information, and the key concepts that determine their capabilities and limitations.</p>
         </div>
 
         <div class="callout callout-breakthrough">
@@ -112,59 +109,131 @@
             <p>Understanding how AI "thinks" helps you work with it more effectively. You'll know why certain prompts work better than others and what Claude can and can't do.</p>
         </div>
 
-        <h2 class="section-heading">Course Resources</h2>
+        <h2 class="section-heading">Course Resource</h2>
         <p class="section-description">Complete the AI Foundations course on the Center of Excellence portal</p>
 
         <div class="resource-card">
             <div class="resource-icon">🎓</div>
             <div class="resource-info">
                 <h4>AI Foundations Course</h4>
-                <p>Comprehensive introduction to AI concepts, LLMs, and responsible AI usage</p>
+                <p>Interactive course covering tokenization, context windows, attention, and more</p>
                 <div class="resource-meta">
-                    
                     <span>📍 CoE Portal</span>
                 </div>
             </div>
-            <a href="https://www.center-of-excellence.xyz/training" target="_blank" class="resource-link">Start Course →</a>
+            <a href="https://www.center-of-excellence.xyz/agentic-ai-training/ai-foundations.html" target="_blank" class="resource-link">Start Course →</a>
         </div>
 
-        <h2 class="section-heading">Key Concepts</h2>
-        <p class="section-description">Core ideas you'll learn in this module</p>
+        <h2 class="section-heading">Key Concepts Summary</h2>
+        <p class="section-description">After completing the CoE course, you should understand these concepts</p>
+
+        <h3 class="subsection-heading">1. Tokenization: How AI Reads Text</h3>
+        <p class="section-description">AI can't read words like you do. It converts text into numbers called "tokens" — puzzle pieces the AI uses to understand language.</p>
 
         <table class="concept-table">
             <thead>
                 <tr>
-                    <th style="width: 30%;">Concept</th>
+                    <th>Key Insight</th>
                     <th>What It Means</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>LLMs</strong></td>
-                    <td>AI trained on vast text that predicts likely next words based on patterns</td>
+                    <td><strong>Spaces are tokens too</strong></td>
+                    <td>" my" is different from "my"</td>
                 </tr>
                 <tr>
-                    <td><strong>Tokens</strong></td>
-                    <td>How AI breaks down text into pieces for processing</td>
+                    <td><strong>Case matters</strong></td>
+                    <td>"Hello" and "hello" are different tokens</td>
                 </tr>
                 <tr>
-                    <td><strong>Context Window</strong></td>
-                    <td>The limit on how much Claude can "remember" in a conversation</td>
-                </tr>
-                <tr>
-                    <td><strong>Temperature</strong></td>
-                    <td>Setting controlling creative vs. predictable responses</td>
-                </tr>
-                <tr>
-                    <td><strong>Hallucinations</strong></td>
-                    <td>Confident-sounding but incorrect information</td>
+                    <td><strong>Rare words get split</strong></td>
+                    <td>"austin" → "aust" + "in"</td>
                 </tr>
             </tbody>
         </table>
 
         <div class="callout callout-limitation">
+            <div class="callout-title">Why This Matters</div>
+            <p>AI doesn't "understand" words — it processes token IDs. This is why it can struggle with spelling and rare names.</p>
+        </div>
+
+        <h3 class="subsection-heading">2. Context Window: AI's Memory</h3>
+        <p class="section-description">The context window is AI's short-term memory — how much text it can "see" at once. Everything outside the window is forgotten.</p>
+
+        <table class="concept-table">
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Context Window</th>
+                    <th>Approximate Words</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GPT-3.5</td>
+                    <td>~4,000 tokens</td>
+                    <td>~3,000 words</td>
+                </tr>
+                <tr>
+                    <td>GPT-4</td>
+                    <td>~128,000 tokens</td>
+                    <td>~100,000 words</td>
+                </tr>
+                <tr>
+                    <td><strong>Claude 3</strong></td>
+                    <td><strong>~200,000 tokens</strong></td>
+                    <td><strong>~150,000 words</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Practical Implication</div>
+            <p>If a conversation is too long, the AI might "forget" important details from the beginning. Claude's large context window helps, but very long conversations may still lose early context.</p>
+        </div>
+
+        <h3 class="subsection-heading">3. How AI Generates Responses (Prediction)</h3>
+        <p class="section-description">AI generates text <strong>one token at a time</strong> by predicting "what word is most likely to come next?" It's like autocomplete on your phone, but much more sophisticated.</p>
+
+        <table class="concept-table">
+            <thead>
+                <tr>
+                    <th>Temperature Setting</th>
+                    <th>Effect</th>
+                    <th>Best For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Low (0.0-0.3)</strong></td>
+                    <td>Predictable, consistent responses</td>
+                    <td>Factual answers, code, structured data</td>
+                </tr>
+                <tr>
+                    <td><strong>High (0.7-1.0)</strong></td>
+                    <td>Creative, varied responses</td>
+                    <td>Brainstorming, creative writing</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="subsection-heading">4. Attention: How AI Understands Context</h3>
+        <p class="section-description">The breakthrough that made modern AI possible. When processing a word, the AI "looks at" all other words to understand meaning.</p>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Example</div>
+            <p>In "I need help tracking my order" — the word "order" pays attention to "tracking" to understand the context.<br><br>
+            This is how AI knows "bank" means different things in "river bank" vs "bank account" — by looking at surrounding words.</p>
+        </div>
+
+        <h3 class="subsection-heading">5. Hallucinations: Why AI Gets Things Wrong</h3>
+        <p class="section-description">AI doesn't "know" facts — it predicts statistically likely text. When it confidently states something false, it's because that pattern was statistically common in its training data.</p>
+
+        <div class="callout callout-limitation">
             <div class="callout-title">Key Limitation to Understand</div>
-            <p>LLMs don't truly "understand" in the human sense—they predict likely next words based on patterns. This is why they can sometimes produce confident-sounding but incorrect information (hallucinations).</p>
+            <p>LLMs don't truly "understand" in the human sense — they predict likely next words based on patterns. This is why they can sometimes produce confident-sounding but incorrect information (hallucinations).<br><br>
+            <strong>Implication:</strong> This is why grounding AI in real-time data (like customer databases or web search) is so important.</p>
         </div>
 
         <h2 class="section-heading">Agents vs. Chatbots vs. Automation</h2>
@@ -198,17 +267,38 @@
         </table>
 
         <div class="callout callout-breakthrough">
+            <div class="callout-title">The Agent Loop</div>
+            <p><strong>Think → Act → Observe → (Repeat until done)</strong><br><br>
+            Agents don't just respond — they reason about what to do next, take action, observe the result, and iterate. This is fundamentally different from chatbots.</p>
+        </div>
+
+        <div class="callout callout-breakthrough">
             <div class="callout-title">Connection to Gladly</div>
-            <p>Gladly's 9-agent initiative builds on these concepts—understanding the difference between chatbots and agents helps you see where AI is headed.</p>
+            <p>Gladly's 9-agent initiative builds on these concepts — understanding the difference between chatbots and agents helps you see where AI is headed. The agents being built use all these principles: context windows, attention, and the Think → Act → Observe loop.</p>
+        </div>
+
+        <h2 class="section-heading">Supplementary Resource (Optional)</h2>
+
+        <div class="resource-card">
+            <div class="resource-icon">📚</div>
+            <div class="resource-info">
+                <h4>AI Fluency: Framework & Foundations</h4>
+                <p>Learn to collaborate with AI systems effectively, efficiently, ethically, and safely</p>
+                <div class="resource-meta">
+                    <span>📍 Anthropic Skilljar</span>
+                </div>
+            </div>
+            <a href="https://anthropic.skilljar.com/ai-fluency-framework-foundations" target="_blank" class="resource-link">Take Course →</a>
         </div>
 
         <div class="self-assessment">
             <h3>Self-Assessment</h3>
-            <p>Before moving on, can you:</p>
+            <p>After completing the CoE course, can you:</p>
             <ul class="assessment-list">
-                <li>Explain what a Large Language Model is to a colleague?</li>
-                <li>Describe how tokens and context windows affect AI conversations?</li>
-                <li>Identify scenarios where AI might produce unreliable results?</li>
+                <li>Explain what tokens are and why they matter?</li>
+                <li>Describe why a long conversation might "lose" context?</li>
+                <li>Explain why AI might generate incorrect but confident-sounding information?</li>
+                <li>Describe the difference between a chatbot, automation, and agent?</li>
             </ul>
         </div>
 
@@ -219,8 +309,8 @@
                 </svg>
                 Back to Overview
             </a>
-            <a href="/beginner/claude-desktop-overview" class="btn btn-primary">
-                Next: Claude Desktop Overview
+            <a href="/beginner/claude-desktop-app" class="btn btn-primary">
+                Next: Claude Desktop App
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>

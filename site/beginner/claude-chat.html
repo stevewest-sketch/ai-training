@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Claude Chat - Beginner Path</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+        .header { background: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
+        .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; position: sticky; top: 60px; z-index: 99; }
+        .tab { padding: 1rem 1.5rem; font-size: 0.9375rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+        .tab:hover { color: #1a1a1a; }
+        .tab.active { background: #1a1a1a; color: white; border-radius: 6px 6px 0 0; }
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .section-indicator::before { content: '◆'; }
+        .page-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.2; }
+        .page-subtitle { color: #666; font-size: 1.125rem; margin-bottom: 2rem; }
+        .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+        .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .info-box p { color: #666; font-size: 0.9375rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+        .key-difference { background: linear-gradient(135deg, #f3e8ff 0%, #fdf4ff 100%); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; border-left: 4px solid #8b5cf6; }
+        .key-difference p { font-size: 1rem; color: #6b21a8; margin: 0; }
+        .key-difference strong { color: #7c3aed; }
+        .compare-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .compare-table th { background: #8b5cf6; color: white; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
+        .compare-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; vertical-align: top; }
+        .compare-table tr:last-child td { border-bottom: none; }
+        .compare-table tr:hover td { background: #fafafa; }
+        .check { color: #22c55e; }
+        .cross { color: #ef4444; }
+        .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+        .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .callout-limitation { background: #fff7ed; border-left: 3px solid #f97316; }
+        .callout-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.375rem; }
+        .callout-breakthrough .callout-title { color: #16a34a; }
+        .callout-limitation .callout-title { color: #ea580c; }
+        .callout-breakthrough .callout-title::before { content: '✦'; }
+        .callout-limitation .callout-title::before { content: '⚠'; }
+        .callout p { color: #4b5563; font-size: 0.875rem; line-height: 1.5; }
+        .example-card { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .example-card h4 { font-size: 1.125rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; }
+        .example-subtitle { font-size: 0.875rem; color: #666; margin-bottom: 1rem; font-style: italic; }
+        .example-section { margin-top: 1.25rem; }
+        .example-section h5 { font-size: 0.875rem; font-weight: 600; color: #8b5cf6; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .terminal-window { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin: 1rem 0; }
+        .terminal-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #febc2e; }
+        .terminal-dot.green { background: #28c840; }
+        .terminal-title { color: #999; font-size: 0.8125rem; margin-left: 0.5rem; font-family: monospace; }
+        .terminal-content { padding: 1.25rem; color: #e5e5e5; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.8125rem; line-height: 1.7; white-space: pre-wrap; }
+        .chat-response { background: #f5f5f7; border-radius: 8px; padding: 1rem; margin-top: 1rem; }
+        .chat-response h6 { font-size: 0.8125rem; font-weight: 600; color: #666; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .chat-response ul { list-style: none; margin: 0; padding: 0; }
+        .chat-response li { padding: 0.375rem 0; padding-left: 1.25rem; position: relative; color: #4b5563; font-size: 0.875rem; }
+        .chat-response li::before { content: '→'; position: absolute; left: 0; color: #8b5cf6; }
+        .key-point { background: #fef3c7; border-left: 3px solid #f59e0b; padding: 0.75rem 1rem; margin-top: 1rem; border-radius: 0 8px 8px 0; }
+        .key-point p { font-size: 0.875rem; color: #92400e; margin: 0; }
+        .key-point strong { color: #b45309; }
+        .use-case-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .use-case-table th { background: #f5f5f7; color: #1a1a1a; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
+        .use-case-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #f0f0f0; font-size: 0.9375rem; vertical-align: top; }
+        .use-case-table tr:last-child td { border-bottom: none; }
+        .hotkey-box { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .hotkey-item { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid #f0f0f0; }
+        .hotkey-item:last-child { border-bottom: none; }
+        .hotkey-key { background: #1a1a1a; color: white; padding: 0.25rem 0.75rem; border-radius: 6px; font-family: monospace; font-size: 0.875rem; white-space: nowrap; }
+        .hotkey-desc { font-size: 0.9375rem; color: #4b5563; }
+        .exercise-box { background: white; border: 2px solid #8b5cf6; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .exercise-box h3 { font-size: 1rem; font-weight: 600; color: #7c3aed; margin-bottom: 1rem; }
+        .exercise-item { margin-bottom: 1.5rem; }
+        .exercise-item:last-child { margin-bottom: 0; }
+        .exercise-item h4 { font-size: 0.9375rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+        .takeaways { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .takeaways h3 { font-size: 1rem; font-weight: 600; color: #166534; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .takeaways h3::before { content: '✓'; }
+        .takeaways ol { list-style: none; counter-reset: takeaway; }
+        .takeaways li { padding: 0.5rem 0; padding-left: 2rem; position: relative; color: #166534; font-size: 0.9375rem; }
+        .takeaways li::before { content: counter(takeaway); counter-increment: takeaway; position: absolute; left: 0; width: 20px; height: 20px; background: #22c55e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; }
+        .self-assessment { background: white; border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .self-assessment h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .self-assessment h3::before { content: '✓'; background: #22c55e; color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; }
+        .self-assessment > p { color: #666; font-size: 0.9375rem; margin-bottom: 1rem; }
+        .assessment-list { list-style: none; padding-left: 0; }
+        .assessment-list li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: #4b5563; font-size: 0.9375rem; border-bottom: 1px solid #f0f0f0; }
+        .assessment-list li:last-child { border-bottom: none; }
+        .assessment-list li::before { content: '→'; position: absolute; left: 0; color: #8b5cf6; font-weight: 600; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-primary { background: #8b5cf6; color: white; }
+        .btn-primary:hover { background: #7c3aed; }
+        .btn-secondary { background: #f5f5f5; color: #1a1a1a; }
+        .btn-secondary:hover { background: #eee; }
+        @media (max-width: 768px) {
+            .compare-table, .use-case-table { display: block; overflow-x: auto; }
+        }
+        @media (max-width: 640px) {
+            .main { padding: 2rem 1rem; }
+            .page-title { font-size: 2rem; }
+            .nav-buttons { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/training" class="logo">
+            <div class="logo-icon">CoE</div>
+            <span class="logo-text">Center of Excellence</span>
+        </a>
+    </header>
+
+    <nav class="section-tabs">
+        <a href="/beginner/" class="tab">Overview</a>
+        <a href="/beginner/ai-foundations" class="tab">AI Foundations</a>
+        <a href="/beginner/claude-desktop-app" class="tab">Desktop App</a>
+        <a href="/beginner/claude-chat" class="tab active">Claude Chat</a>
+        <a href="/beginner/connectors" class="tab">Connectors</a>
+        <a href="/beginner/artifacts" class="tab">Artifacts</a>
+        <a href="/beginner/sharing-conversations" class="tab">Sharing</a>
+        <a href="/beginner/projects-intro" class="tab">Projects</a>
+        <a href="/beginner/effective-prompting" class="tab">Prompting</a>
+        <a href="/beginner/skills-intro" class="tab">Skills</a>
+        <a href="/beginner/assessment" class="tab">Assessment</a>
+    </nav>
+
+    <main class="main">
+        <div class="section-indicator">MODULE 3 OF 10</div>
+        <h1 class="page-title">Introduction to Claude Chat</h1>
+        <p class="page-subtitle">Master the conversational AI interface you'll use every day</p>
+
+        <div class="info-box">
+            <h3>Learning Objective</h3>
+            <p>By the end of this module, you'll use Claude Chat confidently for brainstorming, drafting, learning, and quick productivity wins.</p>
+        </div>
+
+        <h2 class="section-heading">Overview</h2>
+        <p class="section-description">In Module 1.2, you learned about Claude's three modes: Chat, Cowork, and Code. Now let's dive deep into <strong>Claude Chat</strong> — the mode you'll use most frequently.</p>
+
+        <p class="section-description"><strong>Claude Chat</strong> is where you think together with Claude. It's your always-available thinking partner — ready to brainstorm ideas, draft content, explain concepts, and help you work through problems in conversation.</p>
+
+        <div class="key-difference">
+            <p><strong>The Key Difference:</strong><br>Claude Chat is for <em>thinking together</em>.<br>Claude Cowork is for <em>working together</em>.</p>
+        </div>
+
+        <h2 class="section-heading">What Makes Chat Different?</h2>
+
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Capability</th>
+                    <th>Claude Chat</th>
+                    <th>Claude Cowork</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Answer questions</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Draft content</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Brainstorm ideas</td>
+                    <td class="check">✓ Best for this</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Learn and explore topics</td>
+                    <td class="check">✓ Best for this</td>
+                    <td>Limited</td>
+                </tr>
+                <tr>
+                    <td>Back-and-forth iteration</td>
+                    <td class="check">✓ Best for this</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Access your files</td>
+                    <td class="cross">✗ (upload instead)</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Move/organize files</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Create files on your computer</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Work while you do other tasks</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✓</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">The Mental Model</div>
+            <p><strong>Claude Chat</strong> = A brilliant colleague you can call anytime to talk through ideas<br>
+            <strong>Claude Cowork</strong> = That same colleague sitting at your desk, able to actually do the work with you</p>
+        </div>
+
+        <h2 class="section-heading">What Chat Mode Does Best</h2>
+        <p class="section-description">Chat is optimized for conversational, iterative work where you're actively engaged</p>
+
+        <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #22c55e;">✓ Quick Questions & Explanations</h3>
+        <p class="section-description">Get instant answers, clarifications, and explanations on any topic.</p>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">example prompt</span>
+            </div>
+            <div class="terminal-content">What's the difference between ARR and MRR? Explain it simply.</div>
+        </div>
+
+        <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #22c55e;">✓ Brainstorming & Ideation</h3>
+        <p class="section-description">Generate ideas, explore possibilities, and think through problems together.</p>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">example prompt</span>
+            </div>
+            <div class="terminal-content">I need 10 creative angles for our Q2 email campaign targeting mid-market retail.</div>
+        </div>
+
+        <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #22c55e;">✓ Content Drafting</h3>
+        <p class="section-description">Write and refine emails, documents, presentations, and more through conversation.</p>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">example prompt</span>
+            </div>
+            <div class="terminal-content">Draft a follow-up email to a prospect who went dark after our demo. Make it warm but direct.</div>
+        </div>
+
+        <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #22c55e;">✓ Learning & Exploration</h3>
+        <p class="section-description">Understand new concepts, get context on topics, and build knowledge.</p>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">example prompt</span>
+            </div>
+            <div class="terminal-content">Explain how vector embeddings work. I'm technical but new to AI.</div>
+        </div>
+
+        <h2 class="section-heading">Chat Mode Limitations</h2>
+        <p class="section-description">Understanding these helps you know when to switch to Cowork</p>
+
+        <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #ef4444;">✗ Cannot Access Local Files</h3>
+        <p class="section-description">Chat can't browse your computer. You need to <strong>upload</strong> files directly, or use <strong>Cowork</strong> for file system access.</p>
+        <p class="section-description" style="color: #666;"><strong>Workaround:</strong> Drag-and-drop files into the chat, or use Connectors (next module).</p>
+
+        <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #ef4444;">✗ Cannot Modify Files on Your Computer</h3>
+        <p class="section-description">Chat can create content but can't save it to specific locations on your computer.</p>
+        <p class="section-description" style="color: #666;"><strong>Workaround:</strong> Copy/export from artifacts, or use Cowork for file operations.</p>
+
+        <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #ef4444;">✗ Cannot Run Long Processes Independently</h3>
+        <p class="section-description">Chat is conversational — it works <em>with</em> you, not <em>for</em> you in the background.</p>
+        <p class="section-description" style="color: #666;"><strong>When to switch:</strong> If you find yourself saying "do this while I go do something else" → Cowork.</p>
+
+        <div class="callout callout-limitation">
+            <div class="callout-title">Rule of Thumb</div>
+            <p>If you find yourself saying "now take that and..." or "can you actually do this?" — you probably want <strong>Cowork</strong> (covered in the Intermediate path).</p>
+        </div>
+
+        <h2 class="section-heading">Chat in Action: Real Examples</h2>
+        <p class="section-description">Let's look at how Chat shines in everyday work scenarios</p>
+
+        <!-- Example 1 -->
+        <div class="example-card">
+            <h4>Example 1: Quick Research & Synthesis</h4>
+            <p class="example-subtitle">You're preparing for a call with a prospect and need quick context on their industry.</p>
+
+            <div class="example-section">
+                <h5>What You'd Say:</h5>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">prompt</span>
+                    </div>
+                    <div class="terminal-content">I'm calling Sephora's CX team tomorrow. Give me:
+1. A quick overview of beauty retail CX trends
+2. The 3 biggest challenges their industry faces
+3. How competitors are using AI in this space</div>
+                </div>
+            </div>
+
+            <div class="example-section">
+                <h5>What Chat Does:</h5>
+                <div class="chat-response">
+                    <ul>
+                        <li>Synthesizes relevant information</li>
+                        <li>Organizes it in a clear format</li>
+                        <li>Gives you conversation-ready talking points</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="key-point">
+                <p><strong>Key Point:</strong> This is research and synthesis — Chat's sweet spot.</p>
+            </div>
+        </div>
+
+        <!-- Example 2 -->
+        <div class="example-card">
+            <h4>Example 2: Content Drafting with Iteration</h4>
+            <p class="example-subtitle">You need to write a customer case study email but want to get the tone right.</p>
+
+            <div class="example-section">
+                <h5>What You'd Say:</h5>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">prompt</span>
+                    </div>
+                    <div class="terminal-content">Help me write an email to our VP asking if we can publish
+their logo as a customer reference.
+
+Context:
+- They've been a customer for 8 months
+- Just renewed with expanded usage
+- We have a great relationship with the CSM
+- Never asked for reference permission before
+
+Make it warm and appreciative, not pushy.</div>
+                </div>
+            </div>
+
+            <div class="example-section">
+                <h5>You Iterate:</h5>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">follow-up prompt</span>
+                    </div>
+                    <div class="terminal-content">Good start. Can you:
+- Make it shorter (2 paragraphs max)
+- Add a specific mention of their NPS improvement
+- End with a softer call-to-action</div>
+                </div>
+            </div>
+
+            <div class="key-point">
+                <p><strong>Key Point:</strong> The back-and-forth iteration is what makes Chat powerful for drafting.</p>
+            </div>
+        </div>
+
+        <!-- Example 3 -->
+        <div class="example-card">
+            <h4>Example 3: Brainstorming Ideas</h4>
+            <p class="example-subtitle">You need creative angles for a webinar topic but feel stuck.</p>
+
+            <div class="example-section">
+                <h5>What You'd Say:</h5>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">prompt</span>
+                    </div>
+                    <div class="terminal-content">I'm planning a webinar on "AI in Customer Experience" for retail brands.
+
+Help me brainstorm:
+- 5 compelling title options
+- 3 different angles we could take
+- Discussion questions that would spark engagement
+
+Our audience is CX leaders at mid-market and enterprise retail companies.</div>
+                </div>
+            </div>
+
+            <div class="example-section">
+                <h5>What Chat Does:</h5>
+                <div class="chat-response">
+                    <ul>
+                        <li>Generates diverse options</li>
+                        <li>Provides rationale for each</li>
+                        <li>Asks follow-up questions to refine</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="key-point">
+                <p><strong>Key Point:</strong> Brainstorming is conversational by nature — Chat excels here.</p>
+            </div>
+        </div>
+
+        <!-- Example 4 -->
+        <div class="example-card">
+            <h4>Example 4: Learning a New Topic</h4>
+            <p class="example-subtitle">You need to understand a technical concept for an upcoming customer conversation.</p>
+
+            <div class="example-section">
+                <h5>What You'd Say:</h5>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">prompt</span>
+                    </div>
+                    <div class="terminal-content">I need to understand "customer data platforms" (CDPs) for a
+prospect conversation. I'm not technical.
+
+Explain:
+1. What a CDP is in simple terms
+2. How it's different from a CRM
+3. Why a CX team would care about CDP integration
+4. Questions I should ask about their CDP stack</div>
+                </div>
+            </div>
+
+            <div class="example-section">
+                <h5>What Chat Does:</h5>
+                <div class="chat-response">
+                    <ul>
+                        <li>Explains at your level</li>
+                        <li>Connects concepts to your context (CX)</li>
+                        <li>Prepares you for the real conversation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="key-point">
+                <p><strong>Key Point:</strong> Learning through dialogue helps you understand, not just memorize.</p>
+            </div>
+        </div>
+
+        <h2 class="section-heading">Common Chat Use Cases at Gladly</h2>
+        <p class="section-description">Here's how your colleagues are using Chat today</p>
+
+        <table class="use-case-table">
+            <thead>
+                <tr>
+                    <th>Use Case</th>
+                    <th>What They're Doing</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Meeting Prep</strong></td>
+                    <td>"Give me 5 questions to ask a VP of CX at a grocery chain about their AI strategy"</td>
+                </tr>
+                <tr>
+                    <td><strong>Email Drafting</strong></td>
+                    <td>"Help me write a follow-up to this prospect — firm but friendly"</td>
+                </tr>
+                <tr>
+                    <td><strong>Competitive Intel</strong></td>
+                    <td>"Compare our approach to Sierra's positioning on voice AI"</td>
+                </tr>
+                <tr>
+                    <td><strong>Document Review</strong></td>
+                    <td>"I'm uploading our Q4 plan. Summarize the key initiatives and flag any risks"</td>
+                </tr>
+                <tr>
+                    <td><strong>Presentation Help</strong></td>
+                    <td>"Help me structure a 10-slide deck on our 2025 roadmap for customers"</td>
+                </tr>
+                <tr>
+                    <td><strong>Quick Learning</strong></td>
+                    <td>"Explain what 'semantic search' means in the context of CX"</td>
+                </tr>
+                <tr>
+                    <td><strong>Feedback Requests</strong></td>
+                    <td>"Review this battlecard draft and suggest improvements"</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-heading">Three Types of Persistent Information</h2>
+        <p class="section-description">Understanding what Claude remembers and where</p>
+
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>What It Stores</th>
+                    <th>How to Edit</th>
+                    <th>Scope</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Memory</strong></td>
+                    <td>Facts Claude learns from conversations</td>
+                    <td>Settings → Memory</td>
+                    <td>All conversations</td>
+                </tr>
+                <tr>
+                    <td><strong>Preferences</strong></td>
+                    <td>Default model, language, theme</td>
+                    <td>Settings → Preferences</td>
+                    <td>All conversations</td>
+                </tr>
+                <tr>
+                    <td><strong>Project Instructions</strong></td>
+                    <td>Custom behavior rules</td>
+                    <td>Project Settings</td>
+                    <td>That project only</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 1rem;">Managing Memory</h3>
+
+        <div class="hotkey-box">
+            <div class="hotkey-item">
+                <span class="hotkey-key">Add to memory</span>
+                <span class="hotkey-desc">"Remember that I prefer concise responses"</span>
+            </div>
+            <div class="hotkey-item">
+                <span class="hotkey-key">Check memory</span>
+                <span class="hotkey-desc">"What do you remember about me?"</span>
+            </div>
+            <div class="hotkey-item">
+                <span class="hotkey-key">Remove from memory</span>
+                <span class="hotkey-desc">"Forget what you remember about my job title"</span>
+            </div>
+            <div class="hotkey-item">
+                <span class="hotkey-key">View/delete directly</span>
+                <span class="hotkey-desc">Settings → Memory → Click ✕ on any item</span>
+            </div>
+        </div>
+
+        <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 1rem;">Memory vs. Project Instructions</h3>
+
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Use Memory</th>
+                    <th>Use Project Instructions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>"Always use formal tone with me"</td>
+                    <td class="check">✓</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>"Use formal tone in this project only"</td>
+                    <td></td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>"I work on the Marketing team"</td>
+                    <td class="check">✓</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>"This project is for Q1 SKO"</td>
+                    <td></td>
+                    <td class="check">✓</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Rule of Thumb</div>
+            <p><strong>Memory</strong> = about YOU (everywhere). <strong>Project Instructions</strong> = about the WORK (that project only).</p>
+        </div>
+
+        <h2 class="section-heading">File Uploads in Chat</h2>
+        <p class="section-description">Three ways to share files: click attachment icon, drag-and-drop, or paste (⌘ + V)</p>
+
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Formats</th>
+                    <th>Max Size</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Documents</strong></td>
+                    <td>PDF, DOCX, TXT, MD, RTF</td>
+                    <td>30MB</td>
+                </tr>
+                <tr>
+                    <td><strong>Spreadsheets</strong></td>
+                    <td>XLSX, CSV</td>
+                    <td>30MB</td>
+                </tr>
+                <tr>
+                    <td><strong>Images</strong></td>
+                    <td>PNG, JPG, JPEG, GIF, WEBP</td>
+                    <td>30MB</td>
+                </tr>
+                <tr>
+                    <td><strong>Code</strong></td>
+                    <td>JS, PY, HTML, CSS, JSON, and 20+ more</td>
+                    <td>30MB</td>
+                </tr>
+                <tr>
+                    <td><strong>Presentations</strong></td>
+                    <td>PPTX (converted to images)</td>
+                    <td>30MB</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-breakthrough">
+            <div class="callout-title">Upload vs. Connectors</div>
+            <p>Use <strong>Upload</strong> for local files on your computer. Use <strong>Connectors</strong> when files live in Google Drive, email, Notion, or other cloud services (next module).</p>
+        </div>
+
+        <h2 class="section-heading">Extended Thinking (Preview)</h2>
+        <p class="section-description">Extended Thinking allows Claude to "think out loud" before responding for complex problems</p>
+
+        <div class="callout callout-limitation">
+            <div class="callout-title">When to Use Extended Thinking</div>
+            <p><strong>Use for:</strong> Complex multi-step problems, strategic analysis, code debugging, or when you want to see Claude's reasoning.<br><br>
+            <strong>How to request:</strong> "Think through this step by step before answering."</p>
+        </div>
+
+        <div class="exercise-box">
+            <h3>Try It Yourself: Starter Exercises</h3>
+            <p style="color: #666; font-size: 0.9375rem; margin-bottom: 1rem;">Practice using Chat for real tasks:</p>
+
+            <div class="exercise-item">
+                <h4>Exercise 1: Quick Research</h4>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">prompt</span>
+                    </div>
+                    <div class="terminal-content">I need context on [topic relevant to your role] for a meeting tomorrow.
+Give me a 2-minute verbal summary I could give to my manager.</div>
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <h4>Exercise 2: Email Drafting with Iteration</h4>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">prompt</span>
+                    </div>
+                    <div class="terminal-content">Draft an email for [real scenario you're facing].
+Then ask Claude to adjust the tone, length, or focus.</div>
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <h4>Exercise 3: Brainstorming</h4>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">prompt</span>
+                    </div>
+                    <div class="terminal-content">I'm stuck on [real challenge you're facing].
+Give me 5 different approaches I haven't considered.</div>
+                </div>
+            </div>
+
+            <div class="exercise-item">
+                <h4>Exercise 4: Memory Practice</h4>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">prompt</span>
+                    </div>
+                    <div class="terminal-content">Remember that I work at Gladly and my role is [your role].</div>
+                </div>
+                <p style="margin-top: 0.75rem; font-size: 0.875rem; color: #666;">Then start a new conversation and see if Claude remembers.</p>
+            </div>
+        </div>
+
+        <div class="takeaways">
+            <h3>Key Takeaways</h3>
+            <ol>
+                <li><strong>Chat = conversational collaboration</strong> — thinking together, not task execution</li>
+                <li><strong>Best for:</strong> Q&A, brainstorming, drafting, learning, iteration</li>
+                <li><strong>Limitations:</strong> Can't access local files (upload instead) or work independently</li>
+                <li><strong>Memory persists across conversations</strong> — use it for your preferences</li>
+                <li><strong>When you need file access or background work</strong> → Switch to Cowork (Intermediate path)</li>
+            </ol>
+        </div>
+
+        <div class="self-assessment">
+            <h3>Self-Assessment</h3>
+            <p>Before moving on, can you:</p>
+            <ul class="assessment-list">
+                <li>Explain when to use Chat vs. Cowork?</li>
+                <li>Upload a file and ask Claude to analyze it?</li>
+                <li>Add something to Claude's Memory?</li>
+                <li>Use Chat for brainstorming effectively?</li>
+            </ul>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="/beginner/claude-desktop-app" class="btn btn-secondary">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Previous: Claude Desktop App
+            </a>
+            <a href="/beginner/connectors" class="btn btn-primary">
+                Next: Connectors
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+</body>
+</html>
