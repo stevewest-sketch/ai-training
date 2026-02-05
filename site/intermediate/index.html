@@ -12,6 +12,13 @@
         .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
         .logo-icon { width: 36px; height: 36px; background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; }
         .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
+        .nav a { color: #666; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; }
+        .nav a:hover { color: #1a1a1a; }
+        .breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.875rem; color: #666; padding: 0.75rem 2rem; background: #fafafa; border-bottom: 1px solid #eee; position: sticky; top: 110px; z-index: 98; }
+        .breadcrumb a { color: #8b5cf6; text-decoration: none; transition: color 0.2s; }
+        .breadcrumb a:hover { color: #7c3aed; text-decoration: underline; }
+        .breadcrumb-separator { color: #ccc; }
+        .breadcrumb-current { color: #1a1a1a; font-weight: 500; }
         .section-tabs { background: white; display: flex; justify-content: center; gap: 0; padding: 0 2rem; border-bottom: 1px solid #eee; overflow-x: auto; position: sticky; top: 60px; z-index: 99; }
         .tab { padding: 1rem 1.5rem; font-size: 0.9375rem; color: #666; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
         .tab:hover { color: #1a1a1a; }
@@ -97,10 +104,13 @@
 </head>
 <body>
     <header class="header">
-        <a href="/training" class="logo">
+        <a href="/" class="logo">
             <div class="logo-icon">CoE</div>
             <span class="logo-text">Center of Excellence</span>
         </a>
+        <nav class="nav">
+            <a href="/">Claude Training</a>
+        </nav>
     </header>
 
     <nav class="section-tabs">
@@ -112,6 +122,12 @@
         <a href="/intermediate/building-automations" class="tab">Automations</a>
         <a href="/intermediate/personal-os" class="tab">Build Your Personal OS</a>
         <a href="/intermediate/assessment" class="tab">Assessment</a>
+    </nav>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Training Hub</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">Intermediate Path: Claude Cowork</span>
     </nav>
 
     <main class="main">
@@ -231,7 +247,7 @@
         </div>
 
         <div class="nav-buttons">
-            <a href="/training" class="btn btn-secondary">
+            <a href="/" class="btn btn-secondary">
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
