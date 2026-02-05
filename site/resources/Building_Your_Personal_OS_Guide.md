@@ -6,20 +6,18 @@ A comprehensive guide to creating a daily operating system that synthesizes your
 
 ## Table of Contents
 
-**Core Setup (Everyone)**
 1. [Overview](#overview)
 2. [Prerequisites](#prerequisites)
 3. [Folder Structure Setup](#folder-structure-setup)
 4. [Creating Your CLAUDE.md Brain File](#creating-your-claudemd-brain-file)
 5. [Building Your Context Files](#building-your-context-files)
 6. [Connecting Your Systems](#connecting-your-systems)
-7. [Using Gemini Meeting Notes](#using-gemini-meeting-notes)
+7. [Setting Up Meeting Notes](#setting-up-meeting-notes)
 8. [Customizing Your Briefing Output](#customizing-your-briefing-output)
 9. [Over to You Options](#over-to-you-options)
 10. [Maintenance & Iteration](#maintenance--iteration)
-
-**Advanced Setup (Optional)**
-11. [Adding Granola for Enhanced Meeting Notes](#advanced-adding-granola-for-enhanced-meeting-notes)
+11. [Quick Start Checklist](#quick-start-checklist)
+12. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -43,29 +41,29 @@ When you say "let's start our day" (or similar trigger phrase), Claude will:
 4. Cross-reference everything to surface patterns and priorities
 5. Present a structured briefing with clear next actions
 
-### Two Setup Paths
+### Meeting Notes Options
 
-| Path | Best For | Meeting Notes Source |
-|------|----------|---------------------|
-| **Core Setup** | Everyone | Gemini notes from Gmail (automatic from Google Meet) |
-| **Advanced Setup** | Power users comfortable with scripting | Granola app + export script (richer notes) |
+| Option | Best For | What You Get |
+|--------|----------|--------------|
+| **Gemini Notes** | Google Meet users | Automatic summaries emailed after meetings |
+| **Granola** | All meetings (Zoom, Teams, Meet) | Rich structured notes with full context |
 
-**Start with Core Setup.** You can add Granola later if you want enhanced meeting capture.
+**Both are easy to set up.** Gemini works automatically via Gmail. Granola works via MCP connector — just as simple as connecting Slack. Many users enable both for complete coverage.
 
 ---
 
 ## Prerequisites
 
-### Required (Core Setup)
+### Required
 - Claude Cowork access (with folder mounted)
 - Slack MCP connector enabled
 - Gmail MCP connector enabled
 - Google Calendar MCP connector enabled
 - Google Drive MCP connector enabled
 
-### For Meeting Notes
-- **Core path**: Google Meet with Gemini notes enabled (automatic for Gladly accounts)
-- **Advanced path**: [Granola app](https://granola.ai) + Python 3.x (see Advanced section)
+### For Meeting Notes (choose one or both)
+- **Gemini Notes**: Automatic for Google Meet users (notes emailed via Gmail)
+- **Granola MCP**: Enable in Settings → Connectors (works with any meeting platform)
 
 ---
 
@@ -82,9 +80,8 @@ Claude/
 │   ├── projects.md        ← Active projects and initiatives
 │   ├── drive_links.md     ← Key document links and IDs
 │   └── competitors.md     ← Competitive landscape (if relevant)
-├── Outbox/
-│   └── Daily/             ← (Optional) Saved briefings
-└── Logs/                  ← (Optional) Session logs
+└── Outbox/
+    └── Daily/             ← (Optional) Saved briefings
 ```
 
 ### Creating the Folders
@@ -97,7 +94,6 @@ In Cowork, simply say:
 ```bash
 mkdir -p ~/Claude/Context
 mkdir -p ~/Claude/Outbox/Daily
-mkdir -p ~/Claude/Logs
 ```
 
 ---
@@ -123,10 +119,11 @@ When I say "let's start our day" (or "morning", "daily briefing", etc.), execute
 
 ### What to gather (in parallel):
 1. Read context files: `Claude/Context/*.md`
-2. Slack: Messages to me, from my manager, from direct reports
-3. Gmail: Gemini meeting notes + Doc comments/mentions
-4. Calendar: Today's meetings
-5. Drive: Recent updates to key documents
+2. Granola: Query recent meetings for action items and decisions (if enabled)
+3. Slack: Messages to me, from my manager, from direct reports
+4. Gmail: Doc comments/mentions (+ Gemini notes if not using Granola)
+5. Calendar: Today's meetings
+6. Drive: Recent updates to key documents
 
 ### Output format:
 
@@ -140,7 +137,7 @@ When I say "let's start our day" (or "morning", "daily briefing", etc.), execute
 
 ## ✅ Action Items From Recent Meetings
 **You committed to:**
-- [Items from Gemini notes and recent meetings]
+- [Items from Granola/Gemini notes and recent meetings]
 
 **Waiting on others:**
 - [Person]: [What they owe]
@@ -516,37 +513,77 @@ google_drive_search: "[Your Team Name]"
 
 ---
 
-## Using Gemini Meeting Notes
+## Setting Up Meeting Notes
 
-Google Meet automatically generates meeting summaries via Gemini. These are emailed to you after each meeting.
+You have two options for meeting intelligence — use one or both depending on your workflow.
 
-### How It Works
+---
 
+### Option A: Granola MCP (Recommended)
+
+Granola provides the richest meeting context and works with any meeting platform.
+
+**Setup:**
+1. Install [Granola app](https://granola.ai) (free tier works)
+2. Enable the Granola MCP connector in Claude Cowork (Settings → Connectors)
+3. That's it — Claude can now query your meetings directly
+
+**What Claude Can Access:**
+- Full meeting notes with structured summaries
+- Action items and decisions
+- Participant lists and context
+- Meeting transcripts (via Granola links)
+
+**How Claude Queries Granola:**
+
+For your daily briefing, Claude will use:
+```
+query_granola_meetings: "What action items and decisions from my meetings in the last 3 days?"
+list_meetings: time_range="this_week"
+```
+
+For specific meeting context:
+```
+query_granola_meetings: "What was discussed in my 1:1 with [name]?"
+```
+
+**Why Granola is Recommended:**
+- Works with Zoom, Teams, Meet, and any other platform
+- Richer notes than Gemini
+- Direct MCP queries (no email searching)
+- Local storage means faster access
+
+---
+
+### Option B: Gemini Notes via Gmail
+
+If you primarily use Google Meet and don't want another app, Gemini notes work automatically.
+
+**How It Works:**
 1. You attend a Google Meet meeting
 2. Gemini generates notes with summary, action items, and key points
 3. Notes are emailed to you with subject line "Notes by Gemini"
 4. Claude searches Gmail for these notes during your briefing
 
-### What Claude Extracts
-
-From Gemini notes, Claude will surface:
-- **Action items assigned to you**
-- **Decisions made in the meeting**
-- **Key discussion points**
-- **Follow-ups needed**
-
-### Gmail Search for Gemini Notes
-
-This search is already included in the template:
+**Gmail Search for Gemini Notes:**
 ```
 search_gmail_messages: q="subject:(Notes by Gemini) newer_than:3d"
 ```
 
-### Tips for Better Gemini Notes
-
+**Tips for Better Gemini Notes:**
 - Enable transcription in Google Meet settings
-- Use clear action language in meetings ("Steve will...", "Action item:...")
-- Gemini captures decisions better when stated explicitly
+- Use clear action language ("Steve will...", "Action item:...")
+- State decisions explicitly
+
+---
+
+### Using Both Together
+
+Many users enable both:
+- **Granola** for detailed notes and cross-platform meetings
+- **Gemini** as a backup for quick Google Meet summaries
+
+Claude will pull from both sources and dedupe when presenting your briefing.
 
 ---
 
@@ -651,6 +688,7 @@ These are on-demand prompts for when you want to go deeper. Customize based on w
 
 ## Quick Start Checklist
 
+- [ ] Enable MCP connectors (Slack, Gmail, Calendar, Drive, and optionally Granola)
 - [ ] Create folder structure (`~/Claude/Context/`, etc.)
 - [ ] Copy and customize `CLAUDE.md` template
 - [ ] Create `profile.md` with your role and preferences
@@ -685,390 +723,34 @@ These are on-demand prompts for when you want to go deeper. Customize based on w
 
 ---
 
-# ADVANCED: Adding Granola for Enhanced Meeting Notes
-
-> **This section is optional.** It requires comfort with Terminal and Python scripting. The Core Setup with Gemini notes works well for most users.
-
-## Why Add Granola?
-
-| Feature | Gemini Notes | Granola |
-|---------|--------------|---------|
-| Setup difficulty | Automatic | Requires script |
-| Note detail | Summary + action items | Full structured notes |
-| Works with | Google Meet only | Any meeting (Zoom, etc.) |
-| Local storage | No | Yes |
-| Customizable | No | Yes |
-
-## Prerequisites
-
-- [Granola app](https://granola.ai) installed (free tier works)
-- Python 3.x installed on your Mac
-- Comfort with Terminal commands
-
-## Step 1: Create the Granola Folder
-
-Add to your folder structure:
-```
-Claude/
-├── Inbox/
-│   └── granola/           ← Exported meeting notes
-└── scripts/
-    └── granola_export.py  ← Export script
-```
-
-In Terminal:
-```bash
-mkdir -p ~/Claude/Inbox/granola
-mkdir -p ~/Claude/scripts
-```
-
-## Step 2: Create the Export Script
-
-Create `~/Claude/scripts/granola_export.py` with this content:
-
-```python
-#!/usr/bin/env python3
-"""
-Granola Meeting Notes Exporter
-Exports meeting notes from Granola's local cache to markdown files.
-"""
-
-import os
-import json
-import re
-from datetime import datetime, timedelta
-from pathlib import Path
-
-# Configuration
-GRANOLA_CACHE = Path.home() / "Library/Application Support/Granola/cache.json"
-OUTPUT_DIR = Path.home() / "Claude/Inbox/granola"
-DAYS_TO_EXPORT = 14  # Export meetings from last N days
-
-def prosemirror_to_text(node, depth=0):
-    """Convert ProseMirror document structure to plain text/markdown."""
-    if not node:
-        return ""
-    if isinstance(node, str):
-        return node
-    if not isinstance(node, dict):
-        return ""
-
-    node_type = node.get('type', '')
-    content = node.get('content', [])
-    text = node.get('text', '')
-    marks = node.get('marks', [])
-
-    # Handle text nodes
-    if node_type == 'text':
-        result = text
-        for mark in marks:
-            mark_type = mark.get('type', '')
-            if mark_type == 'bold':
-                result = f"**{result}**"
-            elif mark_type == 'italic':
-                result = f"*{result}*"
-            elif mark_type == 'code':
-                result = f"`{result}`"
-            elif mark_type == 'link':
-                href = mark.get('attrs', {}).get('href', '')
-                result = f"[{result}]({href})"
-        return result
-
-    # Process children
-    children_text = []
-    for child in content:
-        child_text = prosemirror_to_text(child, depth + 1)
-        if child_text:
-            children_text.append(child_text)
-
-    combined = ''.join(children_text)
-
-    # Handle block types
-    if node_type == 'paragraph':
-        return combined + '\n\n'
-    elif node_type == 'heading':
-        level = node.get('attrs', {}).get('level', 1)
-        return '#' * level + ' ' + combined + '\n\n'
-    elif node_type == 'bulletList':
-        return combined
-    elif node_type == 'orderedList':
-        return combined
-    elif node_type == 'listItem':
-        return '- ' + combined.strip() + '\n'
-    elif node_type == 'blockquote':
-        lines = combined.strip().split('\n')
-        return '\n'.join('> ' + line for line in lines) + '\n\n'
-    elif node_type == 'codeBlock':
-        return f"```\n{combined}```\n\n"
-    elif node_type == 'horizontalRule':
-        return '\n---\n\n'
-    elif node_type == 'hardBreak':
-        return '\n'
-    elif node_type == 'doc':
-        return combined
-
-    return combined
-
-def sanitize_filename(title):
-    """Convert meeting title to safe filename."""
-    safe = re.sub(r'[^\w\s-]', '', title)
-    safe = re.sub(r'\s+', '_', safe)
-    return safe[:50]
-
-def format_meeting_markdown(meeting):
-    """Format a meeting as markdown."""
-    lines = [f"# {meeting['title']}\n"]
-    lines.append(f"**Date:** {meeting['date']}")
-
-    if meeting['participants']:
-        participant_names = [str(p) for p in meeting['participants'] if p]
-        lines.append(f"**Participants:** {', '.join(participant_names)}")
-
-    # Flag priority 1:1s
-    title_lower = meeting['title'].lower()
-    priority_patterns = ['1:1', '1-1', 'weekly']
-    if any(p in title_lower for p in priority_patterns):
-        lines.append("**Priority:** ⭐ 1:1 with key stakeholder")
-
-    lines.append("\n---\n")
-
-    if meeting['summary']:
-        lines.append("## Summary\n")
-        lines.append(meeting['summary'])
-        lines.append("")
-
-    if meeting.get('transcript_link'):
-        lines.append("---")
-        lines.append(f"Chat with meeting transcript: [{meeting['transcript_link']}]({meeting['transcript_link']})")
-        lines.append("")
-
-    return '\n'.join(lines)
-
-def export_meetings():
-    """Main export function."""
-    if not GRANOLA_CACHE.exists():
-        print(f"Granola cache not found at {GRANOLA_CACHE}")
-        print("Make sure Granola is installed and has recorded some meetings.")
-        return
-
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
-    # Load cache
-    with open(GRANOLA_CACHE, 'r') as f:
-        cache_wrapper = json.load(f)
-
-    # Parse the nested JSON structure
-    if 'root' in cache_wrapper and 'cache' in cache_wrapper['root']:
-        cache_str = cache_wrapper['root']['cache']
-        if isinstance(cache_str, str):
-            cache = json.loads(cache_str)
-        else:
-            cache = cache_str
-    else:
-        cache = cache_wrapper
-
-    # Find meetings
-    meetings = []
-    cutoff = datetime.now() - timedelta(days=DAYS_TO_EXPORT)
-
-    for key, value in cache.items():
-        if not isinstance(value, dict):
-            continue
-
-        if 'title' in value or 'meeting' in value or 'notes' in value:
-            try:
-                meeting = {'title': '', 'date': '', 'participants': [],
-                          'summary': '', 'transcript_link': ''}
-
-                # Extract title
-                if 'title' in value:
-                    meeting['title'] = value['title']
-                elif 'meeting' in value and isinstance(value['meeting'], dict):
-                    meeting['title'] = value['meeting'].get('title', 'Untitled')
-
-                if not meeting['title']:
-                    continue
-
-                # Extract date
-                date_str = None
-                for date_field in ['startedAt', 'createdAt', 'date', 'start']:
-                    if date_field in value:
-                        date_str = value[date_field]
-                        break
-                    if 'meeting' in value and isinstance(value['meeting'], dict):
-                        if date_field in value['meeting']:
-                            date_str = value['meeting'][date_field]
-                            break
-
-                if date_str:
-                    try:
-                        if isinstance(date_str, (int, float)):
-                            dt = datetime.fromtimestamp(date_str / 1000 if date_str > 1e11 else date_str)
-                        else:
-                            dt = datetime.fromisoformat(date_str.replace('Z', '+00:00'))
-
-                        if dt < cutoff:
-                            continue
-
-                        meeting['date'] = dt.strftime('%A, %B %d, %Y at %I:%M %p')
-                        meeting['_datetime'] = dt
-                    except:
-                        continue
-                else:
-                    continue
-
-                # Extract participants
-                participants = value.get('participants', [])
-                if not participants and 'meeting' in value:
-                    participants = value['meeting'].get('participants', [])
-
-                for p in participants:
-                    if isinstance(p, dict):
-                        name = p.get('email') or p.get('name') or p.get('displayName')
-                        if isinstance(name, str) and name:
-                            meeting['participants'].append(name)
-                    elif isinstance(p, str) and p:
-                        meeting['participants'].append(p)
-
-                # Extract notes (ProseMirror format)
-                notes = value.get('notes', {})
-                if isinstance(notes, dict) and 'content' in notes:
-                    meeting['summary'] = prosemirror_to_text(notes['content'])
-                elif isinstance(notes, str):
-                    meeting['summary'] = notes
-
-                # Check documentPanels for additional content
-                panels = value.get('documentPanels', [])
-                for panel in panels:
-                    if isinstance(panel, dict):
-                        panel_content = panel.get('content', {})
-                        if isinstance(panel_content, dict):
-                            panel_text = prosemirror_to_text(panel_content)
-                            if panel_text and panel_text not in meeting['summary']:
-                                meeting['summary'] += '\n\n' + panel_text
-
-                # Extract transcript link
-                meeting['transcript_link'] = value.get('transcriptUrl', '') or \
-                                            value.get('shareUrl', '') or \
-                                            value.get('publicUrl', '')
-
-                if meeting['summary'] or meeting['transcript_link']:
-                    meetings.append(meeting)
-
-            except Exception as e:
-                continue
-
-    # Export meetings
-    exported = 0
-    for meeting in meetings:
-        try:
-            dt = meeting['_datetime']
-            date_prefix = dt.strftime('%Y-%m-%d')
-            filename = f"{date_prefix}_{sanitize_filename(meeting['title'])}.md"
-            filepath = OUTPUT_DIR / filename
-
-            markdown = format_meeting_markdown(meeting)
-
-            with open(filepath, 'w') as f:
-                f.write(markdown)
-
-            exported += 1
-        except Exception as e:
-            print(f"Error exporting {meeting.get('title', 'unknown')}: {e}")
-
-    print(f"Exported {exported} meetings to {OUTPUT_DIR}")
-
-if __name__ == '__main__':
-    export_meetings()
-```
-
-## Step 3: Make it Executable and Test
-
-```bash
-chmod +x ~/Claude/scripts/granola_export.py
-cd ~/Claude && python3 scripts/granola_export.py
-```
-
-You should see:
-```
-Exported 25 meetings to /Users/you/Claude/Inbox/granola
-```
-
-## Step 4: Update Your CLAUDE.md
-
-Add this to your briefing instructions:
-
-```markdown
-### Check Granola inbox:
-- Read meeting notes from `Claude/Inbox/granola/` (last 2-3 days)
-- Prioritize 1:1 meetings (look for "⭐ Priority" flag)
-- If no recent exports, prompt: "Run `cd ~/Claude && python3 scripts/granola_export.py` in Terminal"
-```
-
-Add 1:1 naming patterns:
-
-```markdown
-## Granola 1:1 Naming Conventions
-
-| Pattern | Who | Relationship |
-|---------|-----|--------------|
-| `YourName/ManagerName` | [Manager] | My manager |
-| `YourName/ReportName` | [Report] | Direct report |
-| `YourName/ColleagueName` | [Colleague] | Key collaborator |
-
-**Priority order:** Manager → Direct reports → Collaborators
-```
-
-## Step 5: Set Up Automatic Sync (Optional)
-
-Create `~/Library/LaunchAgents/com.user.granola-export.plist`:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>Label</key>
-    <string>com.user.granola-export</string>
-    <key>ProgramArguments</key>
-    <array>
-        <string>/usr/bin/python3</string>
-        <string>/Users/YOUR_USERNAME/Claude/scripts/granola_export.py</string>
-    </array>
-    <key>StartCalendarInterval</key>
-    <dict>
-        <key>Hour</key>
-        <integer>9</integer>
-        <key>Minute</key>
-        <integer>30</integer>
-    </dict>
-</dict>
-</plist>
-```
-
-Replace `YOUR_USERNAME` and load:
-```bash
-launchctl load ~/Library/LaunchAgents/com.user.granola-export.plist
-```
-
----
-
-## Troubleshooting Granola
-
-### "Granola export shows 0 meetings"
-- Ensure Granola has recorded meetings (check the app)
-- Verify cache exists: `ls ~/Library/Application\ Support/Granola/`
-- Increase `DAYS_TO_EXPORT` in the script
-
-### "Meetings export but have no content"
-- Granola uses ProseMirror format - the script handles this
-- Check if notes were actually taken in the meeting
-- Verify the meeting wasn't too short for note generation
-
-### "Script errors"
-- Ensure Python 3 is installed: `python3 --version`
-- Check file permissions on the script
-- Verify the Granola cache path is correct for your system
+## Troubleshooting
+
+### "Briefing is missing meeting context"
+
+**If using Granola MCP:**
+- Verify the Granola MCP connector is enabled in Settings → Connectors
+- Check that Granola app is running and has recorded meetings
+- Try: `list_meetings time_range="this_week"` to verify connection
+
+**If using Gemini Notes:**
+- Check that Gemini notes are being sent to your email
+- Verify the Gmail search is finding results: `subject:(Notes by Gemini)`
+- Ensure you have Gmail MCP connector enabled
+
+### "Briefing is too long"
+- Move sections to "over to you" options
+- Reduce the Slack search scope
+- Focus on action items only
+
+### "Claude isn't reading my files"
+- Verify files exist in the mounted folder
+- Check file permissions
+- Ensure paths in CLAUDE.md match actual locations
+
+### "Missing Slack messages"
+- Check channel names are exact matches
+- Verify Slack MCP connector is enabled
+- Try searching with `in:#channel-name` format
 
 ---
 

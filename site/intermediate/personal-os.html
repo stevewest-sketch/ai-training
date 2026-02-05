@@ -289,6 +289,7 @@
                 <li>Gmail MCP connector</li>
                 <li>Google Calendar MCP connector</li>
                 <li>Google Drive MCP connector</li>
+                <li>Granola MCP connector <em>(recommended for meeting notes)</em></li>
             </ul>
             <p style="margin-top: 0.5rem;">If any are missing, go to <strong>Settings → Connectors</strong> and enable them first.</p>
         </div>
@@ -384,10 +385,11 @@ When I say "let's start our day" (or "morning", "daily briefing", etc.), execute
 
 ### What to gather (in parallel):
 1. Read context files: `Claude/Context/*.md`
-2. Slack: Messages to me, from my manager, from direct reports
-3. Gmail: Gemini meeting notes + Doc comments/mentions
-4. Calendar: Today's meetings
-5. Drive: Recent updates to key documents
+2. Granola: Query recent meetings for action items and decisions (if enabled)
+3. Slack: Messages to me, from my manager, from direct reports
+4. Gmail: Doc comments/mentions (+ Gemini notes if not using Granola)
+5. Calendar: Today's meetings
+6. Drive: Recent updates to key documents
 
 ### Output format:
 
@@ -624,13 +626,18 @@ The Doc ID is: 1ABC123xyz</div>
             </thead>
             <tbody>
                 <tr>
+                    <td><strong>Granola</strong></td>
+                    <td>Meeting notes, action items, decisions</td>
+                    <td>Rich meeting context from any platform</td>
+                </tr>
+                <tr>
                     <td><strong>Slack</strong></td>
                     <td>Messages to you, from manager, from direct reports, priority channels</td>
                     <td>Surfaces urgent items and team activity</td>
                 </tr>
                 <tr>
                     <td><strong>Gmail</strong></td>
-                    <td>Gemini meeting notes, Doc comments/mentions</td>
+                    <td>Doc comments/mentions (+ Gemini notes if not using Granola)</td>
                     <td>Captures action items and requests</td>
                 </tr>
                 <tr>
@@ -647,8 +654,22 @@ The Doc ID is: 1ABC123xyz</div>
         </table>
 
         <div class="callout callout-breakthrough">
-            <div class="callout-title">Gemini Meeting Notes</div>
-            <p>Google Meet automatically generates meeting summaries via Gemini. These are emailed to you with subject "Notes by Gemini" and include action items, decisions, key points, and follow-ups. Claude searches for these automatically during your briefing.</p>
+            <div class="callout-title">Meeting Notes Options</div>
+            <p>You have two options for meeting intelligence — use one or both:</p>
+            <p style="margin-top: 0.75rem;"><strong>Granola MCP (Recommended)</strong></p>
+            <ul style="margin-left: 1rem; margin-bottom: 0.5rem;">
+                <li>Works with Zoom, Teams, Google Meet, and any platform</li>
+                <li>Richer, structured notes with full context</li>
+                <li>Direct MCP queries — no email searching needed</li>
+                <li>Enable in Settings → Connectors</li>
+            </ul>
+            <p><strong>Gemini Notes (via Gmail)</strong></p>
+            <ul style="margin-left: 1rem;">
+                <li>Automatic for Google Meet users</li>
+                <li>Summaries emailed with subject "Notes by Gemini"</li>
+                <li>Claude searches Gmail during your briefing</li>
+            </ul>
+            <p style="margin-top: 0.5rem;"><em>Most users enable Granola MCP for richer notes. You can use both together.</em></p>
         </div>
 
         <!-- Step 5: Test -->
@@ -671,8 +692,9 @@ The Doc ID is: 1ABC123xyz</div>
                 <h6>Claude will:</h6>
                 <ul>
                     <li>Read your CLAUDE.md and context files</li>
+                    <li>Query Granola for meeting notes and action items (if enabled)</li>
                     <li>Search Slack, Gmail, Calendar, Drive</li>
-                    <li>Find Gemini meeting notes from recent meetings</li>
+                    <li>Cross-reference everything to surface patterns</li>
                     <li>Compile and present your daily briefing</li>
                     <li>End with "Over to you—what do you want to dive into?"</li>
                 </ul>
@@ -805,7 +827,7 @@ The Doc ID is: 1ABC123xyz</div>
                 </tr>
                 <tr>
                     <td>Missing meeting context</td>
-                    <td>Check that Gemini notes are in your Gmail</td>
+                    <td>Verify Granola MCP is enabled, or check Gemini notes in Gmail</td>
                 </tr>
                 <tr>
                     <td>Wrong Slack channels</td>
@@ -922,57 +944,11 @@ The Doc ID is: 1ABC123xyz</div>
             <ol>
                 <li><strong>CLAUDE.md is the brain</strong> — it controls everything about how your Personal OS works</li>
                 <li><strong>Context files provide depth</strong> — profile, team, projects, and drive links give Claude the background it needs</li>
-                <li><strong>Four systems feed the briefing</strong> — Slack, Gmail, Calendar, and Drive working together</li>
-                <li><strong>Gemini notes capture meetings</strong> — automatically surfacing action items and decisions</li>
+                <li><strong>Five systems feed the briefing</strong> — Granola, Slack, Gmail, Calendar, and Drive working together</li>
+                <li><strong>Granola MCP captures meetings</strong> — rich notes from any meeting platform via direct queries</li>
                 <li><strong>Iteration is expected</strong> — your first setup won't be perfect, and that's okay</li>
             </ol>
         </div>
-
-        <!-- Advanced Section (Collapsed) -->
-        <details class="advanced-section">
-            <summary>
-                Advanced: Granola Integration
-                <span class="advanced-warning">Requires Terminal & Python knowledge</span>
-            </summary>
-            <div class="advanced-content">
-                <p style="color: #666; margin-bottom: 1rem;"><strong>Note:</strong> This section is optional. Your Personal OS works great with just Gemini notes — Granola is for power users who want enhanced meeting capture that works with any meeting platform (Zoom, Teams, etc.), not just Google Meet.</p>
-
-                <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Gemini vs Granola</h4>
-                <table class="use-case-table">
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Gemini Notes</th>
-                            <th>Granola</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Setup difficulty</td>
-                            <td>Automatic</td>
-                            <td>Requires script</td>
-                        </tr>
-                        <tr>
-                            <td>Note detail</td>
-                            <td>Summary + action items</td>
-                            <td>Full structured notes</td>
-                        </tr>
-                        <tr>
-                            <td>Works with</td>
-                            <td>Google Meet only</td>
-                            <td>Any meeting (Zoom, Teams, etc.)</td>
-                        </tr>
-                        <tr>
-                            <td>Local storage</td>
-                            <td>No</td>
-                            <td>Yes</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <p style="color: #666; margin-top: 1rem;">If you're interested in setting up Granola integration, refer to the full <strong>Building_Your_Personal_OS_Guide.md</strong> document which includes the complete Python export script and setup instructions.</p>
-            </div>
-        </details>
 
         <!-- Nav Buttons -->
         <div class="nav-buttons">
