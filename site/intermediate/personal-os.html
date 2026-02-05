@@ -32,7 +32,7 @@
         .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
         .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
         .info-box p { color: #666; font-size: 0.9375rem; }
-        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; scroll-margin-top: 220px; }
         .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
         .key-difference { background: linear-gradient(135deg, #f3e8ff 0%, #fdf4ff 100%); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; border-left: 4px solid #8b5cf6; }
         .key-difference p { font-size: 1rem; color: #6b21a8; margin: 0; }
@@ -130,9 +130,79 @@
             .page-title { font-size: 2rem; }
             .nav-buttons { flex-direction: column; gap: 1rem; }
         }
+        /* ═══════════════════════════════════════════
+           JUMP NAV — Fixed right sidebar
+           ═══════════════════════════════════════════ */
+        .jump-nav-sidebar {
+          position: fixed;
+          top: 180px;
+          right: max(1rem, calc((100vw - 900px) / 2 - 200px));
+          width: 180px;
+          max-height: calc(100vh - 220px);
+          overflow-y: auto;
+          z-index: 50;
+        }
+        .jump-nav-sidebar[hidden] { display: none; }
+        .jump-nav-label {
+          font-size: 0.6875rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          color: #999;
+          margin-bottom: 0.75rem;
+          display: flex;
+          align-items: center;
+          gap: 0.375rem;
+        }
+        .jump-nav-label svg { stroke: #bbb; }
+        .jump-nav-links {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          border-left: 1px solid #e5e5e5;
+          padding-left: 0;
+        }
+        .jump-nav-links a {
+          display: block;
+          padding: 0.375rem 0 0.375rem 0.75rem;
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: #888;
+          text-decoration: none;
+          transition: all 0.2s;
+          border-left: 2px solid transparent;
+          margin-left: -1px;
+          line-height: 1.4;
+        }
+        .jump-nav-links a:hover { color: #1a1a1a; }
+        .jump-nav-links a.active {
+          color: #8b5cf6;
+          border-left-color: #8b5cf6;
+        }
+        @media (max-width: 1200px) {
+          .jump-nav-sidebar { display: none; }
+        }
     </style>
 </head>
 <body>
+    <!-- Jump Nav Sidebar (auto-populated by JS) -->
+    <aside class="jump-nav-sidebar" id="jumpNavSidebar" aria-label="Page sections">
+      <div class="jump-nav-label">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <line x1="8" y1="6" x2="21" y2="6"/>
+          <line x1="8" y1="12" x2="21" y2="12"/>
+          <line x1="8" y1="18" x2="21" y2="18"/>
+          <line x1="3" y1="6" x2="3.01" y2="6"/>
+          <line x1="3" y1="12" x2="3.01" y2="12"/>
+          <line x1="3" y1="18" x2="3.01" y2="18"/>
+        </svg>
+        On this page
+      </div>
+      <nav class="jump-nav-links" id="jumpNavLinks"></nav>
+    </aside>
+
     <header class="header">
         <a href="/" class="logo">
             <div class="logo-icon">CoE</div>
@@ -173,7 +243,7 @@
         </div>
 
         <!-- Two Ways to Build -->
-        <h2 class="section-heading">Two Ways to Build</h2>
+        <h2 class="section-heading" id="two-ways" data-jump-label="Choose Your Learning Approach">Two Ways to Build</h2>
         <p class="section-description">Choose your preferred learning approach:</p>
 
         <div class="two-options">
@@ -224,7 +294,7 @@ Start by reading the attached guide, then introduce me to what we're building an
         </div>
 
         <!-- Overview -->
-        <h2 class="section-heading">Overview</h2>
+        <h2 class="section-heading" id="overview" data-jump-label="What You Will Build">Overview</h2>
         <p class="section-description">In the last module, you learned what Claude Cowork can do. Now you're going to build something powerful: <strong>a personal AI chief of staff</strong> that pulls together everything happening in your work life and presents it in one place.</p>
 
         <!-- Video Tutorial -->
@@ -251,7 +321,7 @@ Start by reading the attached guide, then introduce me to what we're building an
         </div>
 
         <!-- How It Works Diagram -->
-        <h2 class="section-heading">How It Works</h2>
+        <h2 class="section-heading" id="how-it-works" data-jump-label="Daily Briefing Flow Diagram">How It Works</h2>
         <p class="section-description">Here's the flow from trigger phrase to daily briefing:</p>
 
         <div class="diagram-box">┌─────────────────────────────────────────────────────────────┐
@@ -282,7 +352,7 @@ Start by reading the attached guide, then introduce me to what we're building an
         └─────────────────────────────────────────┘</div>
 
         <!-- What You're Building -->
-        <h2 class="section-heading">What You're Building</h2>
+        <h2 class="section-heading" id="what-youre-building" data-jump-label="System Components Overview">What You're Building</h2>
         <p class="section-description">Think of this as building Claude's "brain" for understanding your work. You'll create a folder structure with context files that teach Claude who you are, what you care about, and how to help you.</p>
 
         <table class="compare-table">
@@ -327,7 +397,7 @@ Start by reading the attached guide, then introduce me to what we're building an
         </div>
 
         <!-- Step 1: Folder Structure -->
-        <h2 class="section-heading">Step 1: Create Your Folder Structure</h2>
+        <h2 class="section-heading" id="step-1" data-jump-label="Create Your Folder Structure">Step 1: Create Your Folder Structure</h2>
         <p class="section-description">First, you need to create the folder structure that Claude will use:</p>
 
         <div class="diagram-box">Claude/
@@ -387,7 +457,7 @@ touch ~/Claude/Context/drive_links.md</div>
         </div>
 
         <!-- Step 2: CLAUDE.md -->
-        <h2 class="section-heading">Step 2: Create Your CLAUDE.md Brain File</h2>
+        <h2 class="section-heading" id="step-2" data-jump-label="Create the CLAUDE.md Brain File">Step 2: Create Your CLAUDE.md Brain File</h2>
         <p class="section-description">This is the most important file. It tells Claude who you are, what to do when you ask for a briefing, and how to format outputs.</p>
 
         <div class="callout callout-breakthrough">
@@ -527,7 +597,7 @@ When I ask for more, these are my options:
         </div>
 
         <!-- Step 3: Context Files -->
-        <h2 class="section-heading">Step 3: Build Your Context Files</h2>
+        <h2 class="section-heading" id="step-3" data-jump-label="Build Your Context Files">Step 3: Build Your Context Files</h2>
         <p class="section-description">Now you'll create the supporting files that give Claude deeper context about your work.</p>
 
         <div class="example-card">
@@ -645,7 +715,7 @@ The Doc ID is: 1ABC123xyz</div>
         </div>
 
         <!-- Step 4: System Connections -->
-        <h2 class="section-heading">Step 4: Understanding System Connections</h2>
+        <h2 class="section-heading" id="step-4" data-jump-label="System Connection Setup">Step 4: Understanding System Connections</h2>
         <p class="section-description">Your Personal OS pulls from four connected systems. Here's how each one works:</p>
 
         <table class="use-case-table">
@@ -705,7 +775,7 @@ The Doc ID is: 1ABC123xyz</div>
         </div>
 
         <!-- Step 5: Test -->
-        <h2 class="section-heading">Step 5: Test Your Setup</h2>
+        <h2 class="section-heading" id="step-5" data-jump-label="Test Your Setup">Step 5: Test Your Setup</h2>
         <p class="section-description">Time to see it in action. Once you've created your files, start a new Cowork session.</p>
 
         <div class="example-card">
@@ -737,7 +807,7 @@ The Doc ID is: 1ABC123xyz</div>
         </div>
 
         <!-- Sample Briefing -->
-        <h2 class="section-heading">Sample Daily Briefing</h2>
+        <h2 class="section-heading" id="sample-briefing" data-jump-label="Example Daily Briefing Output">Sample Daily Briefing</h2>
         <p class="section-description">Here's what a real briefing looks like. This is the output you'll get each morning:</p>
 
         <div class="claude-response">
@@ -842,7 +912,7 @@ The Doc ID is: 1ABC123xyz</div>
         </div>
 
         <!-- Step 6: Customize -->
-        <h2 class="section-heading">Step 6: Customize and Iterate</h2>
+        <h2 class="section-heading" id="step-6" data-jump-label="Customize and Iterate">Step 6: Customize and Iterate</h2>
         <p class="section-description">No setup is perfect on the first try. Here's how to refine your Personal OS based on what you see:</p>
 
         <table class="use-case-table">
@@ -900,7 +970,7 @@ The Doc ID is: 1ABC123xyz</div>
         </div>
 
         <!-- Maintenance Schedule -->
-        <h2 class="section-heading">Maintenance Schedule</h2>
+        <h2 class="section-heading" id="maintenance" data-jump-label="Ongoing Maintenance Schedule">Maintenance Schedule</h2>
         <p class="section-description">Your Personal OS needs regular care to stay useful:</p>
 
         <table class="compare-table">
@@ -998,5 +1068,59 @@ The Doc ID is: 1ABC123xyz</div>
             </a>
         </div>
     </main>
+
+<script>
+(function () {
+  'use strict';
+  const HEADING_SELECTOR = 'main h2.section-heading[id]';
+  const MIN_SECTIONS = 2;
+  const SCROLL_OFFSET = 220;
+
+  const sidebar = document.getElementById('jumpNavSidebar');
+  const linksContainer = document.getElementById('jumpNavLinks');
+  if (!sidebar || !linksContainer) return;
+
+  const headings = document.querySelectorAll(HEADING_SELECTOR);
+  if (headings.length < MIN_SECTIONS) {
+    sidebar.hidden = true;
+    return;
+  }
+
+  headings.forEach((heading, i) => {
+    const label = heading.dataset.jumpLabel || heading.textContent.trim();
+    const link = document.createElement('a');
+    link.href = '#' + heading.id;
+    link.textContent = label;
+    if (i === 0) link.classList.add('active');
+    linksContainer.appendChild(link);
+  });
+
+  const jumpLinks = linksContainer.querySelectorAll('a');
+
+  function updateActiveLink() {
+    let currentId = '';
+    headings.forEach(h => {
+      if (h.getBoundingClientRect().top <= SCROLL_OFFSET) {
+        currentId = h.id;
+      }
+    });
+    jumpLinks.forEach(link => {
+      const isActive = link.getAttribute('href') === '#' + currentId;
+      link.classList.toggle('active', isActive);
+    });
+  }
+
+  linksContainer.addEventListener('click', e => {
+    const link = e.target.closest('a');
+    if (!link) return;
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  updateActiveLink();
+})();
+</script>
 </body>
 </html>

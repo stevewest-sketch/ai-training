@@ -72,10 +72,6 @@
 
         /* Breadcrumb */
         .breadcrumb {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
             font-size: 0.875rem;
             color: #666;
             padding: 0.75rem 2rem;
@@ -84,6 +80,15 @@
             position: sticky;
             top: 60px;
             z-index: 99;
+        }
+
+        .breadcrumb-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .breadcrumb a {
@@ -444,9 +449,11 @@
 
     <!-- Breadcrumb -->
     <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Training Hub</a>
-        <span class="breadcrumb-separator">›</span>
-        <span class="breadcrumb-current">Learning Paths</span>
+        <div class="breadcrumb-content">
+            <a href="/">Training Hub</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Learning Paths</span>
+        </div>
     </nav>
 
     <!-- Main Content -->

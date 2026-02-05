@@ -15,7 +15,8 @@
         .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
         .nav a { color: #666; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; }
         .nav a:hover { color: #1a1a1a; }
-        .breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.875rem; color: #666; padding: 0.75rem 2rem; background: #fafafa; border-bottom: 1px solid #eee; position: sticky; top: 110px; z-index: 98; }
+        .breadcrumb { font-size: 0.875rem; color: #666; padding: 0.75rem 2rem; background: #fafafa; border-bottom: 1px solid #eee; position: sticky; top: 110px; z-index: 98; }
+        .breadcrumb-content { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; max-width: 900px; margin: 0 auto; }
         .breadcrumb a { color: #8b5cf6; text-decoration: none; transition: color 0.2s; }
         .breadcrumb a:hover { color: #7c3aed; text-decoration: underline; }
         .breadcrumb-separator { color: #ccc; }
@@ -32,7 +33,7 @@
         .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
         .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
         .info-box p { color: #666; font-size: 0.9375rem; }
-        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; scroll-margin-top: 220px; }
         .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
         .key-difference { background: linear-gradient(135deg, #f3e8ff 0%, #fdf4ff 100%); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; border-left: 4px solid #8b5cf6; }
         .key-difference p { font-size: 1rem; color: #6b21a8; margin: 0; }
@@ -116,6 +117,66 @@
             .page-title { font-size: 2rem; }
             .nav-buttons { flex-direction: column; gap: 1rem; }
         }
+        /* ═══════════════════════════════════════════
+           JUMP NAV — Fixed right sidebar
+           ═══════════════════════════════════════════ */
+        .jump-nav-sidebar {
+          position: fixed;
+          top: 180px;
+          right: max(1rem, calc((100vw - 900px) / 2 - 200px));
+          width: 180px;
+          max-height: calc(100vh - 220px);
+          overflow-y: auto;
+          z-index: 50;
+        }
+        .jump-nav-sidebar[hidden] {
+          display: none;
+        }
+        .jump-nav-label {
+          font-size: 0.6875rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          color: #999;
+          margin-bottom: 0.75rem;
+          display: flex;
+          align-items: center;
+          gap: 0.375rem;
+        }
+        .jump-nav-label svg {
+          stroke: #bbb;
+        }
+        .jump-nav-links {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          border-left: 1px solid #e5e5e5;
+          padding-left: 0;
+        }
+        .jump-nav-links a {
+          display: block;
+          padding: 0.375rem 0 0.375rem 0.75rem;
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: #888;
+          text-decoration: none;
+          transition: all 0.2s;
+          border-left: 2px solid transparent;
+          margin-left: -1px;
+          line-height: 1.4;
+        }
+        .jump-nav-links a:hover {
+          color: #1a1a1a;
+        }
+        .jump-nav-links a.active {
+          color: #8b5cf6;
+          border-left-color: #8b5cf6;
+        }
+        @media (max-width: 1200px) {
+          .jump-nav-sidebar {
+            display: none;
+          }
+        }
     </style>
 </head>
 <body>
@@ -144,12 +205,34 @@
     </nav>
 
     <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Training Hub</a>
-        <span class="breadcrumb-separator">›</span>
-        <a href="/beginner/">Beginner Path</a>
-        <span class="breadcrumb-separator">›</span>
-        <span class="breadcrumb-current">Claude Chat</span>
+        <div class="breadcrumb-content">
+            <a href="/">Training Hub</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="/beginner/">Beginner Path</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Claude Chat</span>
+        </div>
     </nav>
+
+    <!-- Jump Nav Sidebar (auto-populated by JS) -->
+    <aside class="jump-nav-sidebar" id="jumpNavSidebar" aria-label="Page sections">
+      <div class="jump-nav-label">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <line x1="8" y1="6" x2="21" y2="6"/>
+          <line x1="8" y1="12" x2="21" y2="12"/>
+          <line x1="8" y1="18" x2="21" y2="18"/>
+          <line x1="3" y1="6" x2="3.01" y2="6"/>
+          <line x1="3" y1="12" x2="3.01" y2="12"/>
+          <line x1="3" y1="18" x2="3.01" y2="18"/>
+        </svg>
+        On this page
+      </div>
+      <nav class="jump-nav-links" id="jumpNavLinks">
+        <!-- JS injects <a> elements here -->
+      </nav>
+    </aside>
 
     <main class="main">
         <div class="section-indicator">MODULE 3 OF 10</div>
@@ -161,7 +244,7 @@
             <p>By the end of this module, you'll use Claude Chat confidently for brainstorming, drafting, learning, and quick productivity wins.</p>
         </div>
 
-        <h2 class="section-heading">Overview</h2>
+        <h2 class="section-heading" id="overview" data-jump-label="Claude Chat Overview">Overview</h2>
         <p class="section-description">In Module 1.2, you learned about Claude's three modes: Chat, Cowork, and Code. Now let's dive deep into <strong>Claude Chat</strong> — the mode you'll use most frequently.</p>
 
         <p class="section-description"><strong>Claude Chat</strong> is where you think together with Claude. It's your always-available thinking partner — ready to brainstorm ideas, draft content, explain concepts, and help you work through problems in conversation.</p>
@@ -170,7 +253,7 @@
             <p><strong>The Key Difference:</strong><br>Claude Chat is for <em>thinking together</em>.<br>Claude Cowork is for <em>working together</em>.</p>
         </div>
 
-        <h2 class="section-heading">What Makes Chat Different?</h2>
+        <h2 class="section-heading" id="chat-different" data-jump-label="Chat vs Cowork Comparison">What Makes Chat Different?</h2>
 
         <table class="compare-table">
             <thead>
@@ -240,7 +323,7 @@
             <strong>Claude Cowork</strong> = That same colleague sitting at your desk, able to actually do the work with you</p>
         </div>
 
-        <h2 class="section-heading">What Chat Mode Does Best</h2>
+        <h2 class="section-heading" id="chat-best" data-jump-label="What Chat Mode Does Best">What Chat Mode Does Best</h2>
         <p class="section-description">Chat is optimized for conversational, iterative work where you're actively engaged</p>
 
         <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #22c55e;">✓ Quick Questions & Explanations</h3>
@@ -291,7 +374,7 @@
             <div class="terminal-content">Explain how vector embeddings work. I'm technical but new to AI.</div>
         </div>
 
-        <h2 class="section-heading">Chat Mode Limitations</h2>
+        <h2 class="section-heading" id="chat-limitations" data-jump-label="Chat Mode Limitations">Chat Mode Limitations</h2>
         <p class="section-description">Understanding these helps you know when to switch to Cowork</p>
 
         <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #ef4444;">✗ Cannot Access Local Files</h3>
@@ -311,7 +394,7 @@
             <p>If you find yourself saying "now take that and..." or "can you actually do this?" — you probably want <strong>Cowork</strong> (covered in the Intermediate path).</p>
         </div>
 
-        <h2 class="section-heading">Chat in Action: Real Examples</h2>
+        <h2 class="section-heading" id="chat-examples" data-jump-label="Chat in Action Examples">Chat in Action: Real Examples</h2>
         <p class="section-description">Let's look at how Chat shines in everyday work scenarios</p>
 
         <!-- Example 1 -->
@@ -481,7 +564,7 @@ Explain:
             </div>
         </div>
 
-        <h2 class="section-heading">Common Chat Use Cases at Gladly</h2>
+        <h2 class="section-heading" id="use-cases" data-jump-label="Common Chat Use Cases">Common Chat Use Cases at Gladly</h2>
         <p class="section-description">Here's how your colleagues are using Chat today</p>
 
         <table class="use-case-table">
@@ -523,7 +606,7 @@ Explain:
             </tbody>
         </table>
 
-        <h2 class="section-heading">Three Types of Persistent Information</h2>
+        <h2 class="section-heading" id="persistent-info" data-jump-label="Persistent Information Types">Three Types of Persistent Information</h2>
         <p class="section-description">Understanding what Claude remembers and where</p>
 
         <table class="compare-table">
@@ -617,7 +700,7 @@ Explain:
             <p><strong>Memory</strong> = about YOU (everywhere). <strong>Project Instructions</strong> = about the WORK (that project only).</p>
         </div>
 
-        <h2 class="section-heading">File Uploads in Chat</h2>
+        <h2 class="section-heading" id="file-uploads" data-jump-label="File Uploads in Chat">File Uploads in Chat</h2>
         <p class="section-description">Three ways to share files: click attachment icon, drag-and-drop, or paste (⌘ + V)</p>
 
         <table class="compare-table">
@@ -662,7 +745,7 @@ Explain:
             <p>Use <strong>Upload</strong> for local files on your computer. Use <strong>Connectors</strong> when files live in Google Drive, email, Notion, or other cloud services (next module).</p>
         </div>
 
-        <h2 class="section-heading">Extended Thinking (Preview)</h2>
+        <h2 class="section-heading" id="extended-thinking" data-jump-label="Extended Thinking Preview">Extended Thinking (Preview)</h2>
         <p class="section-description">Extended Thinking allows Claude to "think out loud" before responding for complex problems</p>
 
         <div class="callout callout-limitation">
@@ -769,5 +852,59 @@ Give me 5 different approaches I haven't considered.</div>
             </a>
         </div>
     </main>
+
+    <script>
+    (function () {
+      'use strict';
+      const HEADING_SELECTOR = 'main h2.section-heading[id]';
+      const MIN_SECTIONS = 2;
+      const SCROLL_OFFSET = 220;
+
+      const sidebar = document.getElementById('jumpNavSidebar');
+      const linksContainer = document.getElementById('jumpNavLinks');
+      if (!sidebar || !linksContainer) return;
+
+      const headings = document.querySelectorAll(HEADING_SELECTOR);
+      if (headings.length < MIN_SECTIONS) {
+        sidebar.hidden = true;
+        return;
+      }
+
+      headings.forEach((heading, i) => {
+        const label = heading.dataset.jumpLabel || heading.textContent.trim();
+        const link = document.createElement('a');
+        link.href = '#' + heading.id;
+        link.textContent = label;
+        if (i === 0) link.classList.add('active');
+        linksContainer.appendChild(link);
+      });
+
+      const jumpLinks = linksContainer.querySelectorAll('a');
+
+      function updateActiveLink() {
+        let currentId = '';
+        headings.forEach(h => {
+          if (h.getBoundingClientRect().top <= SCROLL_OFFSET) {
+            currentId = h.id;
+          }
+        });
+        jumpLinks.forEach(link => {
+          const isActive = link.getAttribute('href') === '#' + currentId;
+          link.classList.toggle('active', isActive);
+        });
+      }
+
+      linksContainer.addEventListener('click', e => {
+        const link = e.target.closest('a');
+        if (!link) return;
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+
+      window.addEventListener('scroll', updateActiveLink, { passive: true });
+      updateActiveLink();
+    })();
+    </script>
 </body>
 </html>

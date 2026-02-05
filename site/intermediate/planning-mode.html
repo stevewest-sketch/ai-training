@@ -33,7 +33,7 @@
         .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
         .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
         .info-box p { color: #666; font-size: 0.9375rem; }
-        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; scroll-margin-top: 220px; }
         .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
         .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
         .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
@@ -90,9 +90,79 @@
             .timeline-header { gap: 0.25rem; }
             .timeline-step { padding: 0.25rem 0.5rem; }
         }
+/* ═══════════════════════════════════════════
+   JUMP NAV — Fixed right sidebar
+   ═══════════════════════════════════════════ */
+.jump-nav-sidebar {
+  position: fixed;
+  top: 180px;
+  right: max(1rem, calc((100vw - 900px) / 2 - 200px));
+  width: 180px;
+  max-height: calc(100vh - 220px);
+  overflow-y: auto;
+  z-index: 50;
+}
+.jump-nav-sidebar[hidden] { display: none; }
+.jump-nav-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #999;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.jump-nav-label svg { stroke: #bbb; }
+.jump-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 1px solid #e5e5e5;
+  padding-left: 0;
+}
+.jump-nav-links a {
+  display: block;
+  padding: 0.375rem 0 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #888;
+  text-decoration: none;
+  transition: all 0.2s;
+  border-left: 2px solid transparent;
+  margin-left: -1px;
+  line-height: 1.4;
+}
+.jump-nav-links a:hover { color: #1a1a1a; }
+.jump-nav-links a.active {
+  color: #8b5cf6;
+  border-left-color: #8b5cf6;
+}
+@media (max-width: 1200px) {
+  .jump-nav-sidebar { display: none; }
+}
     </style>
 </head>
 <body>
+<!-- Jump Nav Sidebar (auto-populated by JS) -->
+<aside class="jump-nav-sidebar" id="jumpNavSidebar" aria-label="Page sections">
+  <div class="jump-nav-label">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <line x1="8" y1="6" x2="21" y2="6"/>
+      <line x1="8" y1="12" x2="21" y2="12"/>
+      <line x1="8" y1="18" x2="21" y2="18"/>
+      <line x1="3" y1="6" x2="3.01" y2="6"/>
+      <line x1="3" y1="12" x2="3.01" y2="12"/>
+      <line x1="3" y1="18" x2="3.01" y2="18"/>
+    </svg>
+    On this page
+  </div>
+  <nav class="jump-nav-links" id="jumpNavLinks"></nav>
+</aside>
+
     <header class="header">
         <a href="/" class="logo">
             <div class="logo-icon">CoE</div>
@@ -142,7 +212,7 @@
             <p>Stop thinking of Claude as something you give instructions to. Start thinking of it as a collaborator you share context with. This is the single most important shift in how you work with AI.</p>
         </div>
 
-        <h2 class="section-heading">The Planning Process</h2>
+        <h2 class="section-heading" id="planning-process" data-jump-label="Six-Step Planning Workflow">The Planning Process</h2>
         <p class="section-description">A proven 6-step workflow for complex projects</p>
 
         <div class="timeline-container">
@@ -182,7 +252,7 @@
             </div>
         </div>
 
-        <h2 class="section-heading">The Interview Prompt</h2>
+        <h2 class="section-heading" id="interview-prompt" data-jump-label="The Interview Prompt Template">The Interview Prompt</h2>
         <p class="section-description">Use this exact prompt to have Claude interview you about your project</p>
 
         <div class="terminal-window">
@@ -252,5 +322,58 @@ complete, then write the detailed spec to the file.</div>
             document.querySelectorAll('.timeline-step').forEach((el, i) => el.classList.toggle('active', i === stepNum - 1));
         }
     </script>
+<script>
+(function () {
+  'use strict';
+  const HEADING_SELECTOR = 'main h2.section-heading[id]';
+  const MIN_SECTIONS = 2;
+  const SCROLL_OFFSET = 220;
+
+  const sidebar = document.getElementById('jumpNavSidebar');
+  const linksContainer = document.getElementById('jumpNavLinks');
+  if (!sidebar || !linksContainer) return;
+
+  const headings = document.querySelectorAll(HEADING_SELECTOR);
+  if (headings.length < MIN_SECTIONS) {
+    sidebar.hidden = true;
+    return;
+  }
+
+  headings.forEach((heading, i) => {
+    const label = heading.dataset.jumpLabel || heading.textContent.trim();
+    const link = document.createElement('a');
+    link.href = '#' + heading.id;
+    link.textContent = label;
+    if (i === 0) link.classList.add('active');
+    linksContainer.appendChild(link);
+  });
+
+  const jumpLinks = linksContainer.querySelectorAll('a');
+
+  function updateActiveLink() {
+    let currentId = '';
+    headings.forEach(h => {
+      if (h.getBoundingClientRect().top <= SCROLL_OFFSET) {
+        currentId = h.id;
+      }
+    });
+    jumpLinks.forEach(link => {
+      const isActive = link.getAttribute('href') === '#' + currentId;
+      link.classList.toggle('active', isActive);
+    });
+  }
+
+  linksContainer.addEventListener('click', e => {
+    const link = e.target.closest('a');
+    if (!link) return;
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  updateActiveLink();
+})();
+</script>
 </body>
 </html>

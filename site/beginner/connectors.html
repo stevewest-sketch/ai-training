@@ -15,7 +15,8 @@
         .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
         .nav a { color: #666; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; }
         .nav a:hover { color: #1a1a1a; }
-        .breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.875rem; color: #666; padding: 0.75rem 2rem; background: #fafafa; border-bottom: 1px solid #eee; position: sticky; top: 110px; z-index: 98; }
+        .breadcrumb { font-size: 0.875rem; color: #666; padding: 0.75rem 2rem; background: #fafafa; border-bottom: 1px solid #eee; position: sticky; top: 110px; z-index: 98; }
+        .breadcrumb-content { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; max-width: 900px; margin: 0 auto; }
         .breadcrumb a { color: #8b5cf6; text-decoration: none; transition: color 0.2s; }
         .breadcrumb a:hover { color: #7c3aed; text-decoration: underline; }
         .breadcrumb-separator { color: #ccc; }
@@ -32,7 +33,7 @@
         .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
         .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
         .info-box p { color: #666; font-size: 0.9375rem; }
-        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; scroll-margin-top: 220px; }
         .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
         .connector-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
         .connector-table th { background: #8b5cf6; color: white; text-align: left; padding: 1rem 1.25rem; font-weight: 600; font-size: 0.875rem; }
@@ -82,6 +83,79 @@
             .page-title { font-size: 2rem; }
             .nav-buttons { flex-direction: column; gap: 1rem; }
         }
+        /* Video Section */
+        .video-container { background: #1a1a1a; border-radius: 12px; overflow: hidden; margin: 1.5rem 0; }
+        .video-header { background: #2d2d2d; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .video-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .video-dot.red { background: #ff5f57; }
+        .video-dot.yellow { background: #febc2e; }
+        .video-dot.green { background: #28c840; }
+        .video-title { color: #999; font-size: 0.8125rem; font-family: 'Inter', sans-serif; margin-left: 0.5rem; }
+        .video-embed { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+        .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-meta { display: flex; gap: 1.5rem; margin-top: 1rem; flex-wrap: wrap; padding: 0; }
+        .video-meta-item { display: flex; align-items: center; gap: 0.5rem; color: #666; font-size: 0.85rem; }
+        .video-meta-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+        /* ═══════════════════════════════════════════
+           JUMP NAV — Fixed right sidebar
+           ═══════════════════════════════════════════ */
+        .jump-nav-sidebar {
+          position: fixed;
+          top: 180px;
+          right: max(1rem, calc((100vw - 900px) / 2 - 200px));
+          width: 180px;
+          max-height: calc(100vh - 220px);
+          overflow-y: auto;
+          z-index: 50;
+        }
+        .jump-nav-sidebar[hidden] {
+          display: none;
+        }
+        .jump-nav-label {
+          font-size: 0.6875rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          color: #999;
+          margin-bottom: 0.75rem;
+          display: flex;
+          align-items: center;
+          gap: 0.375rem;
+        }
+        .jump-nav-label svg {
+          stroke: #bbb;
+        }
+        .jump-nav-links {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          border-left: 1px solid #e5e5e5;
+          padding-left: 0;
+        }
+        .jump-nav-links a {
+          display: block;
+          padding: 0.375rem 0 0.375rem 0.75rem;
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: #888;
+          text-decoration: none;
+          transition: all 0.2s;
+          border-left: 2px solid transparent;
+          margin-left: -1px;
+          line-height: 1.4;
+        }
+        .jump-nav-links a:hover {
+          color: #1a1a1a;
+        }
+        .jump-nav-links a.active {
+          color: #8b5cf6;
+          border-left-color: #8b5cf6;
+        }
+        @media (max-width: 1200px) {
+          .jump-nav-sidebar {
+            display: none;
+          }
+        }
     </style>
 </head>
 <body>
@@ -110,12 +184,34 @@
     </nav>
 
     <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Training Hub</a>
-        <span class="breadcrumb-separator">›</span>
-        <a href="/beginner/">Beginner Path</a>
-        <span class="breadcrumb-separator">›</span>
-        <span class="breadcrumb-current">Connectors</span>
+        <div class="breadcrumb-content">
+            <a href="/">Training Hub</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="/beginner/">Beginner Path</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Connectors</span>
+        </div>
     </nav>
+
+    <!-- Jump Nav Sidebar (auto-populated by JS) -->
+    <aside class="jump-nav-sidebar" id="jumpNavSidebar" aria-label="Page sections">
+      <div class="jump-nav-label">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <line x1="8" y1="6" x2="21" y2="6"/>
+          <line x1="8" y1="12" x2="21" y2="12"/>
+          <line x1="8" y1="18" x2="21" y2="18"/>
+          <line x1="3" y1="6" x2="3.01" y2="6"/>
+          <line x1="3" y1="12" x2="3.01" y2="12"/>
+          <line x1="3" y1="18" x2="3.01" y2="18"/>
+        </svg>
+        On this page
+      </div>
+      <nav class="jump-nav-links" id="jumpNavLinks">
+        <!-- JS injects <a> elements here -->
+      </nav>
+    </aside>
 
     <main class="main">
         <div class="section-indicator">MODULE 4 OF 10</div>
@@ -127,10 +223,55 @@
             <p>By the end of this module, you'll understand how to use all 12 connectors available in Claude Chat, including when to use web search vs. other connectors.</p>
         </div>
 
-        <h2 class="section-heading">What Are Connectors?</h2>
+        <h2 class="section-heading" id="connectors-video" data-jump-label="Connectors Overview">Watch: Connectors Overview</h2>
+        <p class="section-description">Austin introduces connectors and walks through every one available in the Gladly license.</p>
+
+        <div class="video-container">
+            <div class="video-header">
+                <div class="video-dot red"></div>
+                <div class="video-dot yellow"></div>
+                <div class="video-dot green"></div>
+                <span class="video-title">Connectors: Linking Claude to Your Tools</span>
+            </div>
+            <div class="video-embed">
+                <iframe
+                    src="https://drive.google.com/file/d/1krrw5c0AS-LwGIUPFVHExNhcVd93XEYY/preview"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+        <div class="video-meta">
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                ~2 min
+            </div>
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                </svg>
+                Presenter: Austin Reece
+            </div>
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                Claude 101 Training • Feb 5, 2026
+            </div>
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+                Google Drive
+            </div>
+        </div>
+
+        <h2 class="section-heading" id="what-connectors" data-jump-label="What Are Connectors">What Are Connectors?</h2>
         <p class="section-description">Connectors allow Claude Chat to access external data sources and services during your conversation. Instead of copying and pasting information, Claude can pull it directly.</p>
 
-        <h2 class="section-heading">All 12 Available Connectors</h2>
+        <h2 class="section-heading" id="all-connectors" data-jump-label="All 12 Available Connectors">All 12 Available Connectors</h2>
         <p class="section-description">Each connector gives Claude access to different data sources</p>
 
         <table class="connector-table">
@@ -205,7 +346,7 @@
             </tbody>
         </table>
 
-        <h2 class="section-heading">How to Enable Connectors</h2>
+        <h2 class="section-heading" id="enable-connectors" data-jump-label="How to Enable Connectors">How to Enable Connectors</h2>
         <p class="section-description">Set up connectors in your Claude settings</p>
 
         <ol class="steps-list">
@@ -215,7 +356,52 @@
             <li>Authorize access when prompted</li>
         </ol>
 
-        <h2 class="section-heading">Using Connectors in Conversation</h2>
+        <h2 class="section-heading" id="live-demo" data-jump-label="Granola to Slack Workflow Demo">Watch: Live Demo — Granola to Slack Workflow</h2>
+        <p class="section-description">Connectors in action: querying Granola for meeting notes, then posting a summary to Slack.</p>
+
+        <div class="video-container">
+            <div class="video-header">
+                <div class="video-dot red"></div>
+                <div class="video-dot yellow"></div>
+                <div class="video-dot green"></div>
+                <span class="video-title">Live Demo: Using Connectors (Granola → Slack)</span>
+            </div>
+            <div class="video-embed">
+                <iframe
+                    src="https://drive.google.com/file/d/1pkVFveJ2pXr6IRICWggGCWcT_7zExI1y/preview"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+        <div class="video-meta">
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                ~4.5 min
+            </div>
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                </svg>
+                Presenter: Austin Reece
+            </div>
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                Claude 101 Training • Feb 5, 2026
+            </div>
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+                Google Drive
+            </div>
+        </div>
+
+        <h2 class="section-heading" id="using-connectors" data-jump-label="Using Connectors in Conversation">Using Connectors in Conversation</h2>
         <p class="section-description">Once enabled, you simply mention the data you need</p>
 
         <div class="terminal-window">
@@ -242,7 +428,7 @@
             <p>Be specific about which document or channel you're referencing. Claude will ask for clarification if multiple matches exist. Connectors work in Chat mode only (Cowork has direct file access instead).</p>
         </div>
 
-        <h2 class="section-heading">Web Search Deep Dive</h2>
+        <h2 class="section-heading" id="web-search" data-jump-label="Web Search Deep Dive">Web Search Deep Dive</h2>
         <p class="section-description">Understanding when and how Claude searches the web</p>
 
         <div class="callout callout-breakthrough">
@@ -255,7 +441,7 @@
             <p>Numbered references [1], [2] link to sources. You can request explicit searches: "Search the web for recent reviews of [product]"</p>
         </div>
 
-        <h2 class="section-heading">Web Search vs. Connectors</h2>
+        <h2 class="section-heading" id="search-vs-connectors" data-jump-label="Web Search vs Connectors">Web Search vs. Connectors</h2>
         <p class="section-description">Know when to use each</p>
 
         <table class="compare-table">
@@ -312,5 +498,59 @@
             </a>
         </div>
     </main>
+
+    <script>
+    (function () {
+      'use strict';
+      const HEADING_SELECTOR = 'main h2.section-heading[id]';
+      const MIN_SECTIONS = 2;
+      const SCROLL_OFFSET = 220;
+
+      const sidebar = document.getElementById('jumpNavSidebar');
+      const linksContainer = document.getElementById('jumpNavLinks');
+      if (!sidebar || !linksContainer) return;
+
+      const headings = document.querySelectorAll(HEADING_SELECTOR);
+      if (headings.length < MIN_SECTIONS) {
+        sidebar.hidden = true;
+        return;
+      }
+
+      headings.forEach((heading, i) => {
+        const label = heading.dataset.jumpLabel || heading.textContent.trim();
+        const link = document.createElement('a');
+        link.href = '#' + heading.id;
+        link.textContent = label;
+        if (i === 0) link.classList.add('active');
+        linksContainer.appendChild(link);
+      });
+
+      const jumpLinks = linksContainer.querySelectorAll('a');
+
+      function updateActiveLink() {
+        let currentId = '';
+        headings.forEach(h => {
+          if (h.getBoundingClientRect().top <= SCROLL_OFFSET) {
+            currentId = h.id;
+          }
+        });
+        jumpLinks.forEach(link => {
+          const isActive = link.getAttribute('href') === '#' + currentId;
+          link.classList.toggle('active', isActive);
+        });
+      }
+
+      linksContainer.addEventListener('click', e => {
+        const link = e.target.closest('a');
+        if (!link) return;
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+
+      window.addEventListener('scroll', updateActiveLink, { passive: true });
+      updateActiveLink();
+    })();
+    </script>
 </body>
 </html>

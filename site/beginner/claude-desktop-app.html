@@ -15,7 +15,8 @@
         .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
         .nav a { color: #666; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; }
         .nav a:hover { color: #1a1a1a; }
-        .breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.875rem; color: #666; padding: 0.75rem 2rem; background: #fafafa; border-bottom: 1px solid #eee; position: sticky; top: 110px; z-index: 98; }
+        .breadcrumb { font-size: 0.875rem; color: #666; padding: 0.75rem 2rem; background: #fafafa; border-bottom: 1px solid #eee; position: sticky; top: 110px; z-index: 98; }
+        .breadcrumb-content { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; max-width: 900px; margin: 0 auto; }
         .breadcrumb a { color: #8b5cf6; text-decoration: none; transition: color 0.2s; }
         .breadcrumb a:hover { color: #7c3aed; text-decoration: underline; }
         .breadcrumb-separator { color: #ccc; }
@@ -32,7 +33,7 @@
         .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
         .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
         .info-box p { color: #666; font-size: 0.9375rem; }
-        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; scroll-margin-top: 220px; }
         .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
         .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
         .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
@@ -86,6 +87,66 @@
             .page-title { font-size: 2rem; }
             .nav-buttons { flex-direction: column; gap: 1rem; }
         }
+        /* ═══════════════════════════════════════════
+           JUMP NAV — Fixed right sidebar
+           ═══════════════════════════════════════════ */
+        .jump-nav-sidebar {
+          position: fixed;
+          top: 180px;
+          right: max(1rem, calc((100vw - 900px) / 2 - 200px));
+          width: 180px;
+          max-height: calc(100vh - 220px);
+          overflow-y: auto;
+          z-index: 50;
+        }
+        .jump-nav-sidebar[hidden] {
+          display: none;
+        }
+        .jump-nav-label {
+          font-size: 0.6875rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          color: #999;
+          margin-bottom: 0.75rem;
+          display: flex;
+          align-items: center;
+          gap: 0.375rem;
+        }
+        .jump-nav-label svg {
+          stroke: #bbb;
+        }
+        .jump-nav-links {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          border-left: 1px solid #e5e5e5;
+          padding-left: 0;
+        }
+        .jump-nav-links a {
+          display: block;
+          padding: 0.375rem 0 0.375rem 0.75rem;
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: #888;
+          text-decoration: none;
+          transition: all 0.2s;
+          border-left: 2px solid transparent;
+          margin-left: -1px;
+          line-height: 1.4;
+        }
+        .jump-nav-links a:hover {
+          color: #1a1a1a;
+        }
+        .jump-nav-links a.active {
+          color: #8b5cf6;
+          border-left-color: #8b5cf6;
+        }
+        @media (max-width: 1200px) {
+          .jump-nav-sidebar {
+            display: none;
+          }
+        }
     </style>
 </head>
 <body>
@@ -114,12 +175,34 @@
     </nav>
 
     <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Training Hub</a>
-        <span class="breadcrumb-separator">›</span>
-        <a href="/beginner/">Beginner Path</a>
-        <span class="breadcrumb-separator">›</span>
-        <span class="breadcrumb-current">Desktop App</span>
+        <div class="breadcrumb-content">
+            <a href="/">Training Hub</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="/beginner/">Beginner Path</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Desktop App</span>
+        </div>
     </nav>
+
+    <!-- Jump Nav Sidebar (auto-populated by JS) -->
+    <aside class="jump-nav-sidebar" id="jumpNavSidebar" aria-label="Page sections">
+      <div class="jump-nav-label">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <line x1="8" y1="6" x2="21" y2="6"/>
+          <line x1="8" y1="12" x2="21" y2="12"/>
+          <line x1="8" y1="18" x2="21" y2="18"/>
+          <line x1="3" y1="6" x2="3.01" y2="6"/>
+          <line x1="3" y1="12" x2="3.01" y2="12"/>
+          <line x1="3" y1="18" x2="3.01" y2="18"/>
+        </svg>
+        On this page
+      </div>
+      <nav class="jump-nav-links" id="jumpNavLinks">
+        <!-- JS injects <a> elements here -->
+      </nav>
+    </aside>
 
     <main class="main">
         <div class="section-indicator">MODULE 2 OF 10</div>
@@ -131,7 +214,7 @@
             <p>By the end of this module, you'll understand Claude's three product modes and navigate the Claude Desktop application confidently.</p>
         </div>
 
-        <h2 class="section-heading">Watch: Claude Desktop Overview</h2>
+        <h2 class="section-heading" id="desktop-overview" data-jump-label="Claude Desktop Overview">Watch: Claude Desktop Overview</h2>
         <p class="section-description">A quick tour of the Claude Desktop application and its three modes</p>
 
         <div class="video-container">
@@ -149,7 +232,52 @@
             <div class="video-meta-item">📍 Loom</div>
         </div>
 
-        <h2 class="section-heading">The Claude Product Family</h2>
+        <h2 class="section-heading" id="interface-deep-dive" data-jump-label="Interface Deep Dive">Watch: Interface Deep Dive from Claude 101</h2>
+        <p class="section-description">Austin walks through the model selector, extended thinking, and configuration options.</p>
+
+        <div class="video-container">
+            <div class="video-header">
+                <div class="video-dot red"></div>
+                <div class="video-dot yellow"></div>
+                <div class="video-dot green"></div>
+                <span class="video-title">Claude Desktop App: Key Interface Components</span>
+            </div>
+            <div class="video-embed">
+                <iframe
+                    src="https://drive.google.com/file/d/1Ditf_dmHN5w3EAuEX4CsbaGYxq0WRRwS/preview"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+        <div class="video-meta">
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                ~2 min
+            </div>
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                </svg>
+                Presenter: Austin Reece
+            </div>
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                Claude 101 Training • Feb 5, 2026
+            </div>
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+                Google Drive
+            </div>
+        </div>
+
+        <h2 class="section-heading" id="product-family" data-jump-label="Claude Product Family">The Claude Product Family</h2>
         <p class="section-description">Claude has three distinct products. This path focuses on Claude Chat.</p>
 
         <table class="concept-table">
@@ -184,7 +312,7 @@
             <p>This Beginner path focuses on <strong>Claude Chat</strong>. The other modes are covered in later paths. In the next module, you'll dive deep into everything Chat can do.</p>
         </div>
 
-        <h2 class="section-heading">Choosing the Right Mode</h2>
+        <h2 class="section-heading" id="choosing-mode" data-jump-label="Choosing the Right Mode">Choosing the Right Mode</h2>
         <p class="section-description">Quick reference for when to use each Claude mode</p>
 
         <table class="concept-table">
@@ -246,7 +374,52 @@
             3. Building something with code? → <strong>Code</strong></p>
         </div>
 
-        <h2 class="section-heading">Essential Keyboard Shortcuts</h2>
+        <h2 class="section-heading" id="gemini-alongside" data-jump-label="Using Gemini Alongside Claude">Watch: Using Gemini Alongside Claude</h2>
+        <p class="section-description">Both tools available via enterprise license — use trial-and-error per task.</p>
+
+        <div class="video-container">
+            <div class="video-header">
+                <div class="video-dot red"></div>
+                <div class="video-dot yellow"></div>
+                <div class="video-dot green"></div>
+                <span class="video-title">Using Gemini Alongside Claude</span>
+            </div>
+            <div class="video-embed">
+                <iframe
+                    src="https://drive.google.com/file/d/1vh91NMxdKwlNECv4ua_dZ3AziBw4tGfj/preview"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+        <div class="video-meta">
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                ~1 min
+            </div>
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                </svg>
+                Presenter: Lauren Giosa + Austin Reece
+            </div>
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                Claude 101 Training • Feb 5, 2026
+            </div>
+            <div class="video-meta-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+                Google Drive
+            </div>
+        </div>
+
+        <h2 class="section-heading" id="keyboard-shortcuts" data-jump-label="Essential Keyboard Shortcuts">Essential Keyboard Shortcuts</h2>
         <p class="section-description">Master these shortcuts to work faster with Claude</p>
 
         <div class="hotkey-box">
@@ -272,7 +445,7 @@
             </div>
         </div>
 
-        <h2 class="section-heading">Settings Navigation</h2>
+        <h2 class="section-heading" id="settings-nav" data-jump-label="Settings Navigation">Settings Navigation</h2>
         <p class="section-description">Know where to find each feature in Claude's Settings</p>
 
         <table class="concept-table">
@@ -359,5 +532,59 @@
             </a>
         </div>
     </main>
+
+    <script>
+    (function () {
+      'use strict';
+      const HEADING_SELECTOR = 'main h2.section-heading[id]';
+      const MIN_SECTIONS = 2;
+      const SCROLL_OFFSET = 220;
+
+      const sidebar = document.getElementById('jumpNavSidebar');
+      const linksContainer = document.getElementById('jumpNavLinks');
+      if (!sidebar || !linksContainer) return;
+
+      const headings = document.querySelectorAll(HEADING_SELECTOR);
+      if (headings.length < MIN_SECTIONS) {
+        sidebar.hidden = true;
+        return;
+      }
+
+      headings.forEach((heading, i) => {
+        const label = heading.dataset.jumpLabel || heading.textContent.trim();
+        const link = document.createElement('a');
+        link.href = '#' + heading.id;
+        link.textContent = label;
+        if (i === 0) link.classList.add('active');
+        linksContainer.appendChild(link);
+      });
+
+      const jumpLinks = linksContainer.querySelectorAll('a');
+
+      function updateActiveLink() {
+        let currentId = '';
+        headings.forEach(h => {
+          if (h.getBoundingClientRect().top <= SCROLL_OFFSET) {
+            currentId = h.id;
+          }
+        });
+        jumpLinks.forEach(link => {
+          const isActive = link.getAttribute('href') === '#' + currentId;
+          link.classList.toggle('active', isActive);
+        });
+      }
+
+      linksContainer.addEventListener('click', e => {
+        const link = e.target.closest('a');
+        if (!link) return;
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+
+      window.addEventListener('scroll', updateActiveLink, { passive: true });
+      updateActiveLink();
+    })();
+    </script>
 </body>
 </html>

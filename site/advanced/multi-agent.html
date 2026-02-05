@@ -15,7 +15,8 @@
         .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
         .nav a { color: #666; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; }
         .nav a:hover { color: #1a1a1a; }
-        .breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.875rem; color: #666; padding: 0.75rem 2rem; background: #fafafa; border-bottom: 1px solid #eee; position: sticky; top: 110px; z-index: 98; }
+        .breadcrumb { font-size: 0.875rem; color: #666; padding: 0.75rem 2rem; background: #fafafa; border-bottom: 1px solid #eee; position: sticky; top: 110px; z-index: 98; }
+        .breadcrumb-content { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; max-width: 900px; margin: 0 auto; }
         .breadcrumb a { color: #8b5cf6; text-decoration: none; transition: color 0.2s; }
         .breadcrumb a:hover { color: #7c3aed; text-decoration: underline; }
         .breadcrumb-separator { color: #ccc; }
@@ -32,7 +33,7 @@
         .info-box { background: #f5f5f7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
         .info-box h3 { font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
         .info-box p { color: #666; font-size: 0.9375rem; }
-        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; }
+        .section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 400; color: #1a1a1a; margin-bottom: 0.5rem; margin-top: 2.5rem; scroll-margin-top: 220px; }
         .section-description { color: #666; font-size: 0.9375rem; margin-bottom: 1.5rem; }
         .callout { border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
         .callout-breakthrough { background: #f0fdf4; border-left: 3px solid #22c55e; }
@@ -77,9 +78,79 @@
         .btn-secondary:hover { background: #eee; }
         @media (max-width: 768px) { .concepts-grid { grid-template-columns: 1fr; } .flow-items { flex-direction: column; } .flow-arrow { transform: rotate(90deg); } }
         @media (max-width: 640px) { .main { padding: 2rem 1rem; } .page-title { font-size: 2rem; } .nav-buttons { flex-direction: column; gap: 1rem; } }
+/* ═══════════════════════════════════════════
+   JUMP NAV — Fixed right sidebar
+   ═══════════════════════════════════════════ */
+.jump-nav-sidebar {
+  position: fixed;
+  top: 180px;
+  right: max(1rem, calc((100vw - 900px) / 2 - 200px));
+  width: 180px;
+  max-height: calc(100vh - 220px);
+  overflow-y: auto;
+  z-index: 50;
+}
+.jump-nav-sidebar[hidden] { display: none; }
+.jump-nav-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #999;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.jump-nav-label svg { stroke: #bbb; }
+.jump-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 1px solid #e5e5e5;
+  padding-left: 0;
+}
+.jump-nav-links a {
+  display: block;
+  padding: 0.375rem 0 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #888;
+  text-decoration: none;
+  transition: all 0.2s;
+  border-left: 2px solid transparent;
+  margin-left: -1px;
+  line-height: 1.4;
+}
+.jump-nav-links a:hover { color: #1a1a1a; }
+.jump-nav-links a.active {
+  color: #8b5cf6;
+  border-left-color: #8b5cf6;
+}
+@media (max-width: 1200px) {
+  .jump-nav-sidebar { display: none; }
+}
     </style>
 </head>
 <body>
+<!-- Jump Nav Sidebar (auto-populated by JS) -->
+<aside class="jump-nav-sidebar" id="jumpNavSidebar" aria-label="Page sections">
+  <div class="jump-nav-label">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <line x1="8" y1="6" x2="21" y2="6"/>
+      <line x1="8" y1="12" x2="21" y2="12"/>
+      <line x1="8" y1="18" x2="21" y2="18"/>
+      <line x1="3" y1="6" x2="3.01" y2="6"/>
+      <line x1="3" y1="12" x2="3.01" y2="12"/>
+      <line x1="3" y1="18" x2="3.01" y2="18"/>
+    </svg>
+    On this page
+  </div>
+  <nav class="jump-nav-links" id="jumpNavLinks"></nav>
+</aside>
+
     <header class="header">
         <a href="/" class="logo">
             <div class="logo-icon">CoE</div>
@@ -103,11 +174,13 @@
     </nav>
 
     <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Training Hub</a>
-        <span class="breadcrumb-separator">›</span>
-        <a href="/advanced/">Advanced Path</a>
-        <span class="breadcrumb-separator">›</span>
-        <span class="breadcrumb-current">Multi-Agent</span>
+        <div class="breadcrumb-content">
+            <a href="/">Training Hub</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="/advanced/">Advanced Path</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Multi-Agent</span>
+        </div>
     </nav>
 
     <main class="main">
@@ -123,7 +196,7 @@
             <h3>Learning Objective</h3>
             <p>By the end of this module, you'll understand agent swarm architecture, implement inter-agent communication, design workflow orchestration patterns, and handle conflicts between agents.</p>
         </div>
-        <h2 class="section-heading">Resources</h2>
+        <h2 class="section-heading" id="resources" data-jump-label="Swarm Patterns and Examples">Resources</h2>
         <div class="resource-card">
             <div class="resource-icon">🐙</div>
             <div class="resource-info"><h4>Compound Engineering Plugin</h4><p>Agent swarm architecture and patterns</p></div>
@@ -134,7 +207,7 @@
             <div class="resource-info"><h4>Orchestration Patterns</h4><p>Multi-agent coordination patterns and examples</p></div>
             <a href="https://gist.github.com/kieranklaassen/4f2aba89594a4aea4ad64d753984b2ea" target="_blank" class="resource-link">View Gist →</a>
         </div>
-        <h2 class="section-heading">Agent Interconnections (9-Agent Spec)</h2>
+        <h2 class="section-heading" id="agent-interconnections" data-jump-label="How Agents Communicate">Agent Interconnections (9-Agent Spec)</h2>
         <p class="section-description">How Gladly's agents will communicate with each other</p>
         <div class="flow-diagram">
             <div class="flow-title">Example: Content Distribution Flow</div>
@@ -150,7 +223,7 @@
             <div class="callout-title">Other Agent Connections</div>
             <p><strong>Competitive Intel → PMM Agent:</strong> Real-time competitive updates. <strong>Customer Content Hub → Multiple agents:</strong> Central source of truth for all content-generating agents.</p>
         </div>
-        <h2 class="section-heading">Key Concepts</h2>
+        <h2 class="section-heading" id="key-concepts" data-jump-label="Orchestration and Conflict Resolution">Key Concepts</h2>
         <div class="concepts-grid">
             <div class="concept-card"><h4>Agent Swarm Architecture</h4><p>Patterns for organizing multiple specialized agents into coordinated teams.</p></div>
             <div class="concept-card"><h4>Inter-Agent Communication</h4><p>How agents pass information, trigger each other, and share context.</p></div>
@@ -175,5 +248,58 @@
             <a href="/advanced/production-agents" class="btn btn-primary">Next: Production Agents <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
         </div>
     </main>
+<script>
+(function () {
+  'use strict';
+  const HEADING_SELECTOR = 'main h2.section-heading[id]';
+  const MIN_SECTIONS = 2;
+  const SCROLL_OFFSET = 220;
+
+  const sidebar = document.getElementById('jumpNavSidebar');
+  const linksContainer = document.getElementById('jumpNavLinks');
+  if (!sidebar || !linksContainer) return;
+
+  const headings = document.querySelectorAll(HEADING_SELECTOR);
+  if (headings.length < MIN_SECTIONS) {
+    sidebar.hidden = true;
+    return;
+  }
+
+  headings.forEach((heading, i) => {
+    const label = heading.dataset.jumpLabel || heading.textContent.trim();
+    const link = document.createElement('a');
+    link.href = '#' + heading.id;
+    link.textContent = label;
+    if (i === 0) link.classList.add('active');
+    linksContainer.appendChild(link);
+  });
+
+  const jumpLinks = linksContainer.querySelectorAll('a');
+
+  function updateActiveLink() {
+    let currentId = '';
+    headings.forEach(h => {
+      if (h.getBoundingClientRect().top <= SCROLL_OFFSET) {
+        currentId = h.id;
+      }
+    });
+    jumpLinks.forEach(link => {
+      const isActive = link.getAttribute('href') === '#' + currentId;
+      link.classList.toggle('active', isActive);
+    });
+  }
+
+  linksContainer.addEventListener('click', e => {
+    const link = e.target.closest('a');
+    if (!link) return;
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  updateActiveLink();
+})();
+</script>
 </body>
 </html>
