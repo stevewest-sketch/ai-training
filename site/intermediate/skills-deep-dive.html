@@ -15,7 +15,8 @@
         .logo-text { font-weight: 600; font-size: 1rem; color: #1a1a1a; }
         .nav a { color: #666; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; }
         .nav a:hover { color: #1a1a1a; }
-        .breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.875rem; color: #666; padding: 0.75rem 2rem; background: #fafafa; border-bottom: 1px solid #eee; position: sticky; top: 110px; z-index: 98; }
+        .breadcrumb { font-size: 0.875rem; color: #666; padding: 0.75rem 2rem; background: #fafafa; border-bottom: 1px solid #eee; position: sticky; top: 110px; z-index: 98; }
+        .breadcrumb-content { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; max-width: 900px; margin: 0 auto; }
         .breadcrumb a { color: #8b5cf6; text-decoration: none; transition: color 0.2s; }
         .breadcrumb a:hover { color: #7c3aed; text-decoration: underline; }
         .breadcrumb-separator { color: #ccc; }
@@ -191,13 +192,15 @@
         <a href="/intermediate/assessment" class="tab">Assessment</a>
     </nav>
 
-    <div class="breadcrumb">
-        <a href="/">Training Hub</a>
-        <span class="breadcrumb-separator">›</span>
-        <a href="/intermediate/">Intermediate Path</a>
-        <span class="breadcrumb-separator">›</span>
-        <span class="breadcrumb-current">Skills</span>
-    </div>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="breadcrumb-content">
+            <a href="/">Training Hub</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="/intermediate/">Intermediate Path</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Skills</span>
+        </div>
+    </nav>
 
     <main class="main">
         <div class="section-indicator">MODULE 3 OF 6</div>
