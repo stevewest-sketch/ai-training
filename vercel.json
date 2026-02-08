@@ -6,7 +6,8 @@
     { "source": "/beginner/claude-chat-overview", "destination": "/beginner/claude-desktop-app", "permanent": true },
     { "source": "/beginner/claude-desktop-overview", "destination": "/beginner/claude-desktop-app", "permanent": true },
     { "source": "/beginner/sharing-and-projects", "destination": "/beginner/sharing-conversations", "permanent": true },
-    { "source": "/intermediate/git-concepts", "destination": "/advanced/git-concepts", "permanent": true }
+    { "source": "/intermediate/git-concepts", "destination": "/advanced/git-concepts", "permanent": true },
+    { "source": "/intermediate/personal-os", "destination": "/intermediate/daily-briefing-skill", "permanent": true }
   ],
   "rewrites": [
     { "source": "/beginner", "destination": "/beginner/index.html" },
