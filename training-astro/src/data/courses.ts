@@ -81,7 +81,7 @@ export const courses: Course[] = [
             title: 'Working with Connectors',
             shortTitle: 'Connectors',
             time: '25 min',
-            description: 'All 12 connectors + web search deep dive',
+            description: 'Connectors overview + web search deep dive',
             status: 'live',
           },
           {

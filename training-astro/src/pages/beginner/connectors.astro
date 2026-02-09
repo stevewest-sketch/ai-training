@@ -11,8 +11,8 @@ const module = 'connectors';
 
 <ModuleLayout
   {course} {path} {module}
-  subtitle="Understand all 12 connectors, master web search, and know when to use each"
-  learningObjective="By the end of this module, you'll understand how to use all 12 connectors available in Claude Chat, including when to use web search vs. other connectors."
+  subtitle="Understand Claude's connectors, master web search, and know when to use each"
+  learningObjective="By the end of this module, you'll understand how to use the connectors available in Claude Chat, including when to use web search vs. other connectors."
 >
 
   <h2 class="section-heading" id="connectors-video" data-jump-label="Connectors Overview">Watch: Connectors Overview</h2>
@@ -29,7 +29,7 @@ const module = 'connectors';
   <h2 class="section-heading" id="what-connectors" data-jump-label="What Are Connectors">What Are Connectors?</h2>
   <p class="section-description">Connectors allow Claude Chat to access external data sources and services during your conversation. Instead of copying and pasting information, Claude can pull it directly.</p>
 
-  <h2 class="section-heading" id="all-connectors" data-jump-label="All 12 Available Connectors">All 12 Available Connectors</h2>
+  <h2 class="section-heading" id="all-connectors" data-jump-label="Available Connectors">Available Connectors</h2>
   <p class="section-description">Each connector gives Claude access to different data sources</p>
 
   <table class="connector-table">
@@ -62,19 +62,9 @@ const module = 'connectors';
         <td>"Find recent discussions about PMM Agent"</td>
       </tr>
       <tr>
-        <td class="connector-name">Notion</td>
-        <td>Pages, databases, workspace content</td>
-        <td>"Search my Notion for project specs"</td>
-      </tr>
-      <tr>
         <td class="connector-name">Gong</td>
         <td>Call recordings, transcripts, deal info</td>
         <td>"Summarize last week's calls"</td>
-      </tr>
-      <tr>
-        <td class="connector-name">GitHub</td>
-        <td>Repositories, code, issues, PRs</td>
-        <td>"Check the status of open issues"</td>
       </tr>
       <tr>
         <td class="connector-name">Figma</td>
@@ -87,8 +77,8 @@ const module = 'connectors';
         <td>"What tasks are due this week?"</td>
       </tr>
       <tr>
-        <td class="connector-name">Jira</td>
-        <td>Issues, projects, sprint info</td>
+        <td class="connector-name">Atlassian (Jira/Confluence)</td>
+        <td>Issues, projects, sprint info, wiki pages</td>
         <td>"Show me open bugs in current sprint"</td>
       </tr>
       <tr>
@@ -97,9 +87,19 @@ const module = 'connectors';
         <td>"Find recent blog drafts"</td>
       </tr>
       <tr>
+        <td class="connector-name">Granola</td>
+        <td>Meeting notes, transcripts, action items</td>
+        <td>"What were the action items from yesterday's standup?"</td>
+      </tr>
+      <tr>
+        <td class="connector-name">Crossbeam</td>
+        <td>Partner overlap data, account mapping</td>
+        <td>"Show partner overlap for [account]"</td>
+      </tr>
+      <tr>
         <td class="connector-name">Web Search</td>
-        <td>Real-time internet search results</td>
-        <td>"What's Sierra AI announcing this week?"</td>
+        <td>Real-time web results, current information, fact-checking</td>
+        <td>"What are the latest trends in CX AI?"</td>
       </tr>
     </tbody>
   </table>
