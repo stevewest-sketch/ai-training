@@ -63,8 +63,8 @@ export const courses: Course[] = [
             slug: 'claude-chat',
             title: 'Introduction to Claude Chat',
             shortTitle: 'Claude Chat',
-            time: '35 min',
-            description: 'Chat mode deep dive, Memory, Extended Thinking',
+            time: '40 min',
+            description: 'Chat mode deep dive, Memory, Extended Thinking, conversation sharing',
             status: 'live',
           },
           // ↓ MOVED FROM POSITION 8 → 4
@@ -106,15 +106,6 @@ export const courses: Course[] = [
             shortTitle: 'Skills',
             time: '20 min',
             description: 'Skills as capabilities, natural language triggers',
-            status: 'live',
-          },
-          // ↓ MOVED FROM POSITION 6 → 9
-          {
-            slug: 'sharing-conversations',
-            title: 'Sharing Conversations',
-            shortTitle: 'Sharing',
-            time: '15 min',
-            description: 'Share conversations with teammates',
             status: 'live',
           },
           {
