@@ -25,12 +25,12 @@ export const courses: Course[] = [
       // ─────────────────────────────────────────────
       {
         slug: 'beginner',
-        title: 'Beginner: Claude Chat',
-        subtitle: 'Claude Chat Fundamentals',
+        title: 'Foundations: Using Claude',
+        subtitle: 'Core Concepts & Daily Use',
         emoji: '🟢',
         color: 'green',
         productFocus: 'Claude Chat',
-        description: 'Build foundational AI literacy and become a confident daily Claude Chat user. Learn prompting, artifacts, connectors, Styles, Memory, and how to leverage preloaded skills.',
+        description: 'Build foundational AI literacy and become a confident, effective Claude user every day.',
         prerequisites: 'None — start here if you\'re new to AI tools.',
         whatYoullLearn: [
           'Core AI concepts: LLMs, tokens, context windows, hallucinations',
@@ -133,12 +133,12 @@ export const courses: Course[] = [
       // ─────────────────────────────────────────────
       {
         slug: 'intermediate',
-        title: 'Intermediate: Claude Cowork',
-        subtitle: 'Mastering Claude Cowork',
+        title: 'Builder: Creating with Claude',
+        subtitle: 'Skills, Projects & Automations',
         emoji: '🟡',
         color: 'yellow',
         productFocus: 'Claude Cowork',
-        description: 'Transform from task-giver to outcome-creator. Master file-based collaboration, planning-as-a-motion, create your own skills, and build automations with Projects.',
+        description: 'Transform from task-giver to outcome-creator. Master planning methodology, create custom skills, build automations, and design AI-powered workflows.',
         prerequisites: 'Completed Beginner Path.',
         whatYoullLearn: [
           'What Cowork is and when to use it vs. Chat',
@@ -214,12 +214,12 @@ export const courses: Course[] = [
       // ─────────────────────────────────────────────
       {
         slug: 'advanced',
-        title: 'Advanced: Claude Code',
-        subtitle: 'Claude Code Mastery',
+        title: 'Developer: Building Agents',
+        subtitle: 'Claude Code & Agent Development',
         emoji: '🔴',
         color: 'red',
         productFocus: 'Claude Code',
-        description: 'Production-ready development. Master Git workflows, build agents with the SDK, and integrate with external services via MCP.',
+        description: 'Build production AI agents with Claude Code. Master Git workflows, MCP integrations, the Agent SDK, and multi-agent architectures.',
         prerequisites: 'Completed Intermediate Path + developer comfort (or willingness to learn).',
         whatYoullLearn: [
           'Navigate and use Claude Code\'s development environment',
