@@ -96,7 +96,7 @@ export const courses: Course[] = [
             slug: 'projects-intro',
             title: 'Introduction to Projects',
             shortTitle: 'Projects',
-            time: '15 min',
+            time: '25 min',
             description: 'Persistent workspaces with memory',
             status: 'live',
           },
