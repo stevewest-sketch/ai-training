@@ -1,0 +1,72 @@
+---
+// src/pages/index.astro
+// Training Hub Homepage — path cards auto-generated from courses.ts
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GlobalHeader from '../components/GlobalHeader.astro';
+import { courses, getPathUrl, getPathTotalTime, hasComingSoon } from '../data/courses';
+
+const course = courses[0]; // claude-training
+---
+
+<BaseLayout title={course.title}>
+  <GlobalHeader />
+
+  <main class="main" style="max-width: 800px;">
+    <h1 class="page-title">{course.title}</h1>
+    <p class="page-subtitle">Master Claude at your own pace—from daily productivity to building AI agents</p>
+    <p class="page-description">{course.description}</p>
+
+    <div class="section-header">
+      <h2 class="section-title">Choose Your Learning Path</h2>
+    </div>
+
+    <div class="paths-grid">
+      {course.paths.map((path) => {
+        const url = getPathUrl(course.slug, path.slug);
+        const totalTime = getPathTotalTime(path);
+        const contentModules = path.modules.filter(m => !m.isAssessment);
+        const liveCount = contentModules.filter(m => m.status === 'live').length;
+        const hasAssessment = path.modules.some(m => m.isAssessment);
+        const comingSoon = hasComingSoon(path);
+        const allComingSoon = contentModules.every(m => m.status === 'coming-soon');
+
+        const moduleLabel = `${contentModules.length} modules${hasAssessment ? ' + assessment' : ''}`;
+
+        return allComingSoon ? (
+          <div class="path-card disabled">
+            <div class="path-content">
+              <h3>{path.emoji} {path.title}</h3>
+              <p>{path.description}</p>
+              <div class="path-badges">
+                <span class="badge badge-gray">{moduleLabel}</span>
+                <span class="badge badge-coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="path-arrow">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+        ) : (
+          <a href={url} class="path-card">
+            <div class="path-content">
+              <h3>{path.emoji} {path.title}</h3>
+              <p>{path.description}</p>
+              <div class="path-badges">
+                <span class="badge badge-gray">{moduleLabel}</span>
+                {comingSoon && <span class="badge badge-coming-soon">Partially Available</span>}
+              </div>
+            </div>
+            <div class="path-arrow">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </main>
+</BaseLayout>

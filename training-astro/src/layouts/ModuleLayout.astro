@@ -1,0 +1,76 @@
+---
+// src/layouts/ModuleLayout.astro
+// ═══════════════════════════════════════════════════════════════
+// THE MAIN LAYOUT for every module/lesson page.
+// Handles: header, sidebar tabs, breadcrumbs, module header,
+//          jump nav, and prev/next navigation.
+//
+// The page file only needs to provide the unique lesson content.
+//
+// Usage in a page:
+//   ---
+//   import ModuleLayout from '../../../layouts/ModuleLayout.astro';
+//   const course = 'claude-training';
+//   const path = 'beginner';
+//   const module = 'ai-foundations';
+//   ---
+//   <ModuleLayout {course} {path} {module}
+//     subtitle="The building blocks of modern AI"
+//     learningObjective="By the end of this module, you'll understand..."
+//   >
+//     <!-- Your unique lesson content here -->
+//   </ModuleLayout>
+// ═══════════════════════════════════════════════════════════════
+
+import BaseLayout from './BaseLayout.astro';
+import GlobalHeader from '../components/GlobalHeader.astro';
+import PathSidebar from '../components/PathSidebar.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ModuleHeader from '../components/ModuleHeader.astro';
+import ModuleNav from '../components/ModuleNav.astro';
+import JumpNav from '../components/JumpNav.astro';
+import { getModuleContext } from '../data/courses';
+
+interface Props {
+  course: string;
+  path: string;
+  module: string;
+  subtitle?: string;
+  learningObjective?: string;
+}
+
+const { course, path, module, subtitle, learningObjective } = Astro.props;
+const context = getModuleContext(course, path, module);
+
+if (!context) {
+  throw new Error(`Module not found: ${course}/${path}/${module}. Check courses.ts.`);
+}
+
+const pageTitle = `${context.module.title} - ${context.path.subtitle}`;
+---
+
+<BaseLayout title={pageTitle}>
+  <GlobalHeader />
+  <PathSidebar
+    courseSlug={course}
+    pathSlug={path}
+    activeModuleSlug={module}
+  />
+  <Breadcrumbs context={context} />
+
+  <main class="main">
+    <ModuleHeader
+      context={context}
+      subtitle={subtitle}
+      learningObjective={learningObjective}
+    />
+
+    <!-- Unique lesson content goes here -->
+    <slot />
+
+    <!-- Previous / Next navigation -->
+    <ModuleNav context={context} />
+  </main>
+
+  <JumpNav />
+</BaseLayout>

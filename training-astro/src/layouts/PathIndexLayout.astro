@@ -1,0 +1,145 @@
+---
+// src/layouts/PathIndexLayout.astro
+// ═══════════════════════════════════════════════════════════════
+// Layout for learning path overview/index pages.
+// Auto-generates the module list from courses.ts.
+// ═══════════════════════════════════════════════════════════════
+
+import BaseLayout from './BaseLayout.astro';
+import GlobalHeader from '../components/GlobalHeader.astro';
+import PathSidebar from '../components/PathSidebar.astro';
+import { getPath, getCourse, getModuleUrl, getPathTotalTime } from '../data/courses';
+
+interface Props {
+  courseSlug: string;
+  pathSlug: string;
+}
+
+const { courseSlug, pathSlug } = Astro.props;
+const course = getCourse(courseSlug);
+const path = getPath(courseSlug, pathSlug);
+
+if (!course || !path) {
+  throw new Error(`Path not found: ${courseSlug}/${pathSlug}. Check courses.ts.`);
+}
+
+const contentModules = path.modules.filter(m => !m.isAssessment);
+const assessment = path.modules.find(m => m.isAssessment);
+const totalTime = getPathTotalTime(path);
+const pageTitle = `${path.subtitle} - ${course.title}`;
+
+const firstModule = path.modules[0];
+const firstModuleUrl = getModuleUrl(courseSlug, pathSlug, firstModule.slug);
+---
+
+<BaseLayout title={pageTitle}>
+  <GlobalHeader />
+  <PathSidebar courseSlug={courseSlug} pathSlug={pathSlug} />
+
+  <div class="breadcrumb">
+    <div class="breadcrumb-content">
+      <a href="/">Training Hub</a>
+      <span class="breadcrumb-separator">›</span>
+      <span class="breadcrumb-current">{path.subtitle}</span>
+    </div>
+  </div>
+
+  <main class="main">
+    <div class="section-indicator">
+      {path.slug.toUpperCase()} PATH • {path.productFocus.toUpperCase()}
+    </div>
+    <h1 class="page-title">{path.subtitle}</h1>
+    <p class="page-subtitle">{path.description}</p>
+
+    <!-- What You'll Learn -->
+    {path.whatYoullLearn && path.whatYoullLearn.length > 0 && (
+      <div class="info-box" style="margin-bottom: 2rem;">
+        <h3>What You'll Learn</h3>
+        <div class="learning-grid" style="margin-top: 0.75rem;">
+          {path.whatYoullLearn.map(item => (
+            <div class="learning-item">
+              <div class="learning-icon">✓</div>
+              <div class="learning-text">{item}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Product Focus callout -->
+    <div class="callout callout-breakthrough">
+      <div class="callout-title">Product Focus</div>
+      <p>This path focuses on {path.productFocus}. {path.prerequisites ? `Prerequisites: ${path.prerequisites}` : ''}</p>
+    </div>
+
+    <!-- Module List -->
+    <h2 class="section-heading" id="learning-journey" data-jump-label="Learning Journey">Your Learning Journey</h2>
+    <p class="section-description">
+      Complete these {contentModules.length} modules{assessment ? ' plus assessment' : ''} • Estimated total: {totalTime}
+    </p>
+
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="terminal-dot red"></div>
+        <div class="terminal-dot yellow"></div>
+        <div class="terminal-dot green"></div>
+        <span class="terminal-title">Learning Modules</span>
+      </div>
+      <div class="terminal-content">
+        <ul class="module-list">
+          {contentModules.map((mod, i) => {
+            const url = getModuleUrl(courseSlug, pathSlug, mod.slug);
+            const isLocked = mod.status === 'coming-soon';
+            return (
+              <a href={isLocked ? '#' : url} class="module-item" style={isLocked ? 'opacity: 0.5; cursor: default;' : ''}>
+                <div class="module-number">{i + 1}</div>
+                <div class="module-info">
+                  <div class="module-title">
+                    {mod.title}
+                    {isLocked && <span class="coming-soon-badge">🔒 Coming Soon</span>}
+                  </div>
+                  <div class="module-meta">
+                    {mod.time && `${mod.time} • `}{mod.description}
+                  </div>
+                </div>
+                {!isLocked && (
+                  <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                )}
+              </a>
+            );
+          })}
+          {assessment && (
+            <a href={getModuleUrl(courseSlug, pathSlug, assessment.slug)} class="module-item">
+              <div class="module-number" style="background: #22c55e;">✓</div>
+              <div class="module-info">
+                <div class="module-title">{assessment.title}</div>
+                <div class="module-meta">{assessment.description}</div>
+              </div>
+              <svg class="module-arrow" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          )}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-buttons">
+      <a href="/" class="btn btn-secondary">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to Training
+      </a>
+      <a href={firstModuleUrl} class="btn btn-primary">
+        Start: {firstModule.shortTitle}
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </main>
+</BaseLayout>

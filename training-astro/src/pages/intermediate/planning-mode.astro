@@ -1,0 +1,130 @@
+---
+// src/pages/intermediate/planning-mode.astro
+// ═══════════════════════════════════════
+// INTERMEDIATE MODULE 2: Planning Mode
+// This is ALL the code needed for a module page.
+// Compare to the 383-line HTML original.
+// ═══════════════════════════════════════
+
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'intermediate';
+const module = 'planning-mode';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Adopt the outcome-creator mindset and collaborate through planning"
+  learningObjective="By the end of this module, you'll adopt the outcome-creator mindset and learn how to collaborate with Claude through planning rather than task-by-task instruction."
+>
+
+  <!-- ── Quote Box ────────────────────────── -->
+  <div class="quote-box">
+    <blockquote>"There's a mental reframe when we're working with more powerful AI agents. They turn from task-doers to outcome creators."</blockquote>
+    <cite>— Gladly AI Team</cite>
+  </div>
+
+  <CalloutBox type="breakthrough" title="The Mental Reframe">
+    Stop thinking of Claude as something you give instructions to. Start thinking of it as a collaborator you share context with. This is the single most important shift in how you work with AI.
+  </CalloutBox>
+
+  <!-- ── Planning Process ────────────────────────── -->
+  <h2 class="section-heading" id="planning-process" data-jump-label="Six-Step Planning Workflow">The Planning Process</h2>
+  <p class="section-description">A proven 6-step workflow for complex projects</p>
+
+  <div class="timeline-container">
+    <div class="timeline-header">
+      <div class="timeline-step active" onclick="showStep(1)">
+        <div class="step-number">1</div>
+        <div class="step-label">Voice Dump</div>
+      </div>
+      <div class="timeline-step" onclick="showStep(2)">
+        <div class="step-number">2</div>
+        <div class="step-label">Create SPEC</div>
+      </div>
+      <div class="timeline-step" onclick="showStep(3)">
+        <div class="step-number">3</div>
+        <div class="step-label">Enter Plan</div>
+      </div>
+      <div class="timeline-step" onclick="showStep(4)">
+        <div class="step-number">4</div>
+        <div class="step-label">Interview</div>
+      </div>
+      <div class="timeline-step" onclick="showStep(5)">
+        <div class="step-number">5</div>
+        <div class="step-label">Review</div>
+      </div>
+      <div class="timeline-step" onclick="showStep(6)">
+        <div class="step-number">6</div>
+        <div class="step-label">Execute</div>
+      </div>
+    </div>
+    <div class="timeline-content" id="timeline-content">
+      <h4>Voice Dump</h4>
+      <div class="step-time">Step 1 of 6 • 15-20 minutes</div>
+      <p>Record your thoughts about your idea using Apple Voice Memo or any recording app. Don't worry about structure—just talk through what you want to build, why, and any considerations.</p>
+      <div class="detail-box">
+        <strong>Pro tip:</strong> Walk around while recording. Movement helps ideas flow. Don't edit yourself—capture everything, even half-formed thoughts.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Interview Prompt ────────────────────────── -->
+  <h2 class="section-heading" id="interview-prompt" data-jump-label="The Interview Prompt Template">The Interview Prompt</h2>
+  <p class="section-description">Use this exact prompt to have Claude interview you about your project</p>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">planning-prompt.md</span>
+    </div>
+    <div class="terminal-content">Read this @SPEC.md file and interview me in detail
+using the AskUserQuestionTool about literally
+anything: technical implementation, UI & UX,
+concerns, tradeoffs, etc. but make sure the
+questions are not obvious. Be very in-depth and
+continue interviewing me continually until it's
+complete, then write the detailed spec to the file.</div>
+  </div>
+
+  <CalloutBox type="limitation" title="Key Insight">
+    The interview process is where the magic happens. Claude will ask you questions you hadn't considered, surface edge cases, and help you think through tradeoffs. This is why planning mode reduces iteration—you're solving problems before they exist.
+  </CalloutBox>
+
+  <CalloutBox type="breakthrough" title="Review Before Approving">
+    Read the plan thoroughly before approving. If technical details are unclear, ask Claude to explain them in non-technical terms. It's much easier to change a plan than to rewrite implemented code.
+  </CalloutBox>
+
+  <!-- ── Self Assessment ────────────────────────── -->
+  <div class="self-assessment">
+    <h3>Self-Assessment</h3>
+    <p>Before moving on, can you:</p>
+    <ul class="assessment-list">
+      <li>Create a SPEC.md from a voice dump or written description?</li>
+      <li>Run the interview prompt to refine requirements?</li>
+      <li>Review a plan and identify areas needing clarification?</li>
+    </ul>
+  </div>
+
+</ModuleLayout>
+
+<script>
+  const steps = [
+    { title: "Voice Dump", time: "Step 1 of 6 • 15-20 minutes", content: "Record your thoughts about your idea using Apple Voice Memo or any recording app. Don't worry about structure—just talk through what you want to build, why, and any considerations.", detail: "<strong>Pro tip:</strong> Walk around while recording. Movement helps ideas flow. Don't edit yourself—capture everything, even half-formed thoughts." },
+    { title: "Create SPEC.md", time: "Step 2 of 6 • 5 minutes", content: "Paste your voice transcript into Claude and ask it to create a specification document. This becomes the foundation for planning.", detail: "<strong>Prompt:</strong> \"Here's a transcript of my thoughts about a project. Create a SPEC.md that captures the key requirements, goals, and considerations.\"" },
+    { title: "Enter Plan Mode", time: "Step 3 of 6 • 1 minute", content: "Share your SPEC.md with Claude Code and press Shift+Tab to enter plan mode. This tells Claude you want to plan before executing.", detail: "<strong>Keyboard shortcut:</strong> Shift+Tab cycles between modes. Plan mode is indicated in the UI." },
+    { title: "Interview Process", time: "Step 4 of 6 • 10-20 minutes", content: "Use the interview prompt to have Claude ask you detailed questions about your project. Answer thoroughly—this is where you refine your requirements.", detail: "<strong>Key point:</strong> The questions should NOT be obvious. Claude should dig into technical implementation, UI/UX, edge cases, and tradeoffs you might not have considered." },
+    { title: "Review Plan", time: "Step 5 of 6 • 5-10 minutes", content: "Read the generated plan thoroughly before approving. If anything is unclear, ask Claude to explain it in different terms.", detail: "<strong>Ask for clarity:</strong> If the plan has technical details you don't understand, ask \"Can you explain this section in non-technical terms?\"" },
+    { title: "Execute", time: "Step 6 of 6 • Varies", content: "Once you approve the plan, Claude executes it. Because you've done thorough planning, there should be fewer surprises and revisions.", detail: "<strong>Iteration tip:</strong> If you do need changes, reference the original plan. Claude has context and can make targeted adjustments." }
+  ];
+  function showStep(stepNum) {
+    const step = steps[stepNum - 1];
+    document.getElementById('timeline-content').innerHTML = `<h4>${step.title}</h4><div class="step-time">${step.time}</div><p>${step.content}</p><div class="detail-box">${step.detail}</div>`;
+    document.querySelectorAll('.timeline-step').forEach((el, i) => el.classList.toggle('active', i === stepNum - 1));
+  }
+</script>

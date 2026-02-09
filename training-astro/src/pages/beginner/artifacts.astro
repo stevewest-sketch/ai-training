@@ -1,0 +1,199 @@
+---
+// src/pages/beginner/artifacts.astro
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'beginner';
+const module = 'artifacts';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Master all 7 artifact types, understand versioning, work with interactive and executable artifacts"
+  learningObjective="By the end of this module, you'll be able to create, edit, iterate, and export all 7 artifact types, including interactive components and executable code."
+>
+
+  <h2 class="section-heading" id="artifacts-video" data-jump-label="Artifacts in Action">Watch: Artifacts in Action</h2>
+  <p class="section-description">Demo: chat transcript → branded HTML mockup → animated interface with product cards.</p>
+
+  <VideoEmbed
+    title="Artifacts: Creating Visual Content in Claude"
+    src="https://drive.google.com/file/d/1wcgt7SbgyRW1ZZThNkVDrUUecMBmWs9c/preview"
+    duration="6.5 min"
+    presenter="Austin Reece"
+    date="Claude 101 Training • Feb 5, 2026"
+  />
+
+  <h2 class="section-heading" id="what-are-artifacts" data-jump-label="What Are Artifacts">What Are Artifacts?</h2>
+  <p class="section-description">Artifacts are the tangible outputs Claude creates during your conversation—documents, code, spreadsheets, diagrams, and more. They appear in a separate panel for easy viewing and export.</p>
+
+  <h2 class="section-heading" id="artifact-types" data-jump-label="All 7 Artifact Types">All 7 Artifact Types</h2>
+  <p class="section-description">Claude can create many different types of artifacts</p>
+
+  <table class="artifact-table">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>What It Does</th>
+        <th>Example Prompt</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="artifact-name">Documents</td>
+        <td>Rich text with formatting</td>
+        <td>"Create a project brief for our Q2 launch"</td>
+      </tr>
+      <tr>
+        <td class="artifact-name">Code</td>
+        <td>Syntax-highlighted code</td>
+        <td>"Write a Python script to analyze this CSV"</td>
+      </tr>
+      <tr>
+        <td class="artifact-name">Data/Tables</td>
+        <td>Structured data, spreadsheets</td>
+        <td>"Create a comparison table of these vendors"</td>
+      </tr>
+      <tr>
+        <td class="artifact-name">Diagrams</td>
+        <td>Flowcharts, org charts (Mermaid)</td>
+        <td>"Create a flowchart of our approval process"</td>
+      </tr>
+      <tr>
+        <td class="artifact-name">Interactive</td>
+        <td>Functional React components</td>
+        <td>"Build a ROI calculator"</td>
+      </tr>
+      <tr>
+        <td class="artifact-name">HTML/Web</td>
+        <td>Complete webpage previews</td>
+        <td>"Create a landing page mockup"</td>
+      </tr>
+      <tr>
+        <td class="artifact-name">SVG/Image</td>
+        <td>Vector graphics</td>
+        <td>"Create an icon for our new feature"</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-heading" id="working-with" data-jump-label="Working with Artifacts">Working with Artifacts</h2>
+  <p class="section-description">How to view, edit, and iterate on artifacts</p>
+
+  <div class="feature-card">
+    <h4>Viewing</h4>
+    <p>Click any artifact to open it in the preview panel</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>Editing</h4>
+    <p>Ask Claude to modify the artifact:</p>
+  </div>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">editing-examples.md</span>
+    </div>
+    <div class="terminal-content">
+      <span class="example">"Make the introduction shorter"</span><br>
+      <span class="example">"Add a section on implementation timeline"</span><br>
+      <span class="example">"Change the chart to show percentages instead of raw numbers"</span>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <h4>Versioning</h4>
+    <p>Claude keeps track of iterations—you can ask to revert: "Go back to the previous version of this doc"</p>
+  </div>
+
+  <h2 class="section-heading" id="interactive" data-jump-label="Interactive Artifacts">Interactive Artifacts</h2>
+  <p class="section-description">Functional web components that actually work—calculators, quizzes, data visualizations, forms</p>
+
+  <CalloutBox type="breakthrough" title="Example">
+    "Build a tip calculator with split options" → Creates a working calculator you can actually use
+  </CalloutBox>
+
+  <CalloutBox type="limitation" title="Limitations">
+    Interactive artifacts cannot connect to databases, make network requests, or persist data
+  </CalloutBox>
+
+  <h2 class="section-heading" id="code-execution" data-jump-label="Code Execution in Artifacts">Code Execution</h2>
+  <p class="section-description">Claude can run Python and JavaScript code, not just display it</p>
+
+  <CalloutBox type="breakthrough" title="When to Use">
+    Data analysis, calculations, data transformation, quick scripts
+  </CalloutBox>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">example.md</span>
+    </div>
+    <div class="terminal-content">
+      <span class="label">You:</span> <span class="example">"Analyze this CSV and show me trends"</span><br><br>
+      <span class="label">Claude:</span> <span class="example">Runs code, displays results with visualizations</span>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="versioning" data-jump-label="Artifact Versioning">Artifact Versioning</h2>
+  <p class="section-description">When you iterate, Claude creates versions (v1, v2, v3) you can navigate</p>
+
+  <div class="feature-card">
+    <h4>Navigation</h4>
+    <p>Arrow buttons to move between versions; click version indicator for history</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>Iteration Prompts</h4>
+    <p>"Make it more concise" → Creates v2</p>
+  </div>
+
+  <h2 class="section-heading" id="export-gdrive" data-jump-label="Exporting to Google Drive">Exporting to Google Drive</h2>
+  <p class="section-description">Step-by-step process for exporting artifacts</p>
+
+  <ol class="steps-list">
+    <li>Click the artifact to select it</li>
+    <li>Click the <strong>Export</strong> button (arrow icon)</li>
+    <li>Select <strong>Google Drive</strong> as destination</li>
+    <li>Choose folder location</li>
+    <li>Confirm export</li>
+  </ol>
+
+  <p class="section-description" style="margin-top: 1rem;">The file will be created as a native Google Doc, Sheet, or Slide—fully editable in Google Workspace.</p>
+
+  <h2 class="section-heading" id="export-other" data-jump-label="Other Export Options">Other Export Options</h2>
+
+  <div class="export-options">
+    <div class="export-option">
+      <h5>Copy to Clipboard</h5>
+      <p>For pasting elsewhere</p>
+    </div>
+    <div class="export-option">
+      <h5>Download</h5>
+      <p>Save as local file</p>
+    </div>
+    <div class="export-option">
+      <h5>Share Link</h5>
+      <p>Generate shareable artifact URL</p>
+    </div>
+  </div>
+
+  <div class="callout callout-breakthrough" style="background: #f3e8ff; border-left: 3px solid #8b5cf6;">
+    <div class="callout-title" style="color: #7c3aed;">Try It Yourself</div>
+    <p style="margin-bottom: 0.75rem;">Create and iterate on different artifact types:</p>
+    <ol style="padding-left: 1.25rem; color: #4b5563; font-size: 0.875rem;">
+      <li style="padding: 0.25rem 0;"><strong>Document:</strong> Ask Claude to "Create a one-page project brief for a team offsite"</li>
+      <li style="padding: 0.25rem 0;"><strong>Iterate:</strong> Tell Claude "Make it shorter and add bullet points for the agenda"</li>
+      <li style="padding: 0.25rem 0;"><strong>Interactive:</strong> Ask Claude to "Build a simple tip calculator"</li>
+      <li style="padding: 0.25rem 0;"><strong>Export:</strong> Click the Export button on your artifact and save it to Google Drive</li>
+    </ol>
+  </div>
+
+</ModuleLayout>

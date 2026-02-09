@@ -1,0 +1,730 @@
+---
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'intermediate';
+const module = 'daily-briefing-skill';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Build a skill that synthesizes your meetings, communications, and documents into actionable intelligence — using nothing but Claude chat"
+  learningObjective="By the end of this module, you'll have a working .skill file that delivers a personalized daily briefing, pulling live data from Slack, Gmail, Calendar, Drive, and Granola meeting notes. You'll build it entirely in Claude chat and install it in your Claude account."
+>
+
+  <h2 class="section-heading" id="what-youre-building" data-jump-label="What You're Building">What You're Building</h2>
+  <p class="section-description">When you say "let's start our day" in any Claude conversation, your daily briefing skill will automatically read your context, search your connected systems, cross-reference everything, and present a structured briefing with clear next actions.</p>
+  <p class="section-description">This isn't theoretical — you'll build, install, and run a real briefing during this module.</p>
+
+  <CalloutBox type="breakthrough" title="You Don't Need to Code Anything">
+    You describe what you want in a Claude chat conversation. Claude builds the skill files for you. You download a <code>.skill</code> file and upload it to your Claude account. That's the entire process.
+  </CalloutBox>
+
+  <div style="margin: 1.5rem 0;">
+    <a href="/resources/Building_Your_Daily_Briefing_Guide.md" download class="btn btn-primary" style="display: inline-flex;">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+      </svg>
+      Download Full Guide (.md)
+    </a>
+    <p style="color: #666; font-size: 0.875rem; margin-top: 0.5rem;">Prefer a hands-on approach? Download this guide, upload it to a Claude chat, and let Claude walk you through it interactively.</p>
+  </div>
+
+  <h2 class="section-heading" id="how-it-works" data-jump-label="How It Works">How It Works</h2>
+  <p class="section-description">Here's the flow from trigger phrase to daily briefing:</p>
+
+  <div class="diagram-box">┌──────────────────────────────────────────────────────────────────┐
+│                  "Let's start our day"                           │
+└──────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+               ┌──────────────────────────┐
+               │  Claude reads your skill  │
+               │  SKILL.md + context.md    │
+               └──────────────────────────┘
+                              │
+         ┌────────────────────┼────────────────────┐
+         ▼                    ▼                    ▼
+   ┌──────────┐        ┌──────────┐        ┌──────────┐
+   │  Slack    │        │  Gmail   │        │ Calendar │
+   │ messages  │        │ comments │        │  events  │
+   └──────────┘        └──────────┘        └──────────┘
+         │                    │                    │
+         │         ┌──────────┴──────────┐         │
+         │         ▼                     ▼         │
+         │   ┌──────────┐        ┌──────────┐     │
+         │   │ Granola  │        │  Drive   │     │
+         │   │ meetings │        │   docs   │     │
+         │   └──────────┘        └──────────┘     │
+         │         │                    │          │
+         └─────────┼────────────────────┼──────────┘
+                   ▼                    ▼
+         ┌─────────────────────────────────────────┐
+         │  Cross-reference signals across systems  │
+         └─────────────────────────────────────────┘
+                              │
+                              ▼
+         ┌─────────────────────────────────────────┐
+         │        Your Daily Briefing               │
+         │  • Today's schedule + meeting prep       │
+         │  • Urgent items needing attention         │
+         │  • Action items from meetings             │
+         │  • OKR progress                           │
+         │  • "Over to you—what's next?"             │
+         └─────────────────────────────────────────┘</div>
+
+  <h2 class="section-heading" id="whats-inside" data-jump-label="What's Inside a Skill">What's Inside a Skill</h2>
+  <p class="section-description">Your daily briefing skill has exactly two files:</p>
+
+  <table class="compare-table">
+    <tr>
+      <th>Component</th>
+      <th>What It Does</th>
+      <th>You Provide</th>
+      <th>Claude Handles</th>
+    </tr>
+    <tr>
+      <td><strong>SKILL.md</strong></td>
+      <td>Instructions Claude follows when triggered</td>
+      <td>Your data sources, briefing sections, alert logic</td>
+      <td>Format, error handling, trigger phrases</td>
+    </tr>
+    <tr>
+      <td><strong>references/context.md</strong></td>
+      <td>Your consolidated knowledge base</td>
+      <td>Your role, team, OKRs, Slack channels, key docs</td>
+      <td>Structure, organization, fallback data</td>
+    </tr>
+  </table>
+
+  <div class="diagram-box">daily-briefing/
+├── SKILL.md                    ← Instructions (what Claude does)
+└── references/
+    └── context.md              ← Your knowledge base (who you are)</div>
+
+  <div class="key-difference">
+    <p><strong>Why Skills, Not Folders</strong><br>An earlier version of this training recommended building a folder structure in Cowork with a CLAUDE.md and multiple context files. The Skills approach is better:</p>
+  </div>
+
+  <table class="compare-table">
+    <tr>
+      <th>Cowork Folder Approach</th>
+      <th>Claude Skill Approach</th>
+    </tr>
+    <tr>
+      <td>File system resets between sessions</td>
+      <td>Skill persists in your Claude account</td>
+    </tr>
+    <tr>
+      <td>Multiple files to maintain (profile.md, team.md, projects.md, etc.)</td>
+      <td>Single consolidated context.md</td>
+    </tr>
+    <tr>
+      <td>Only works in Cowork desktop app</td>
+      <td>Works in any Claude interface — web, mobile, desktop</td>
+    </tr>
+    <tr>
+      <td>Can't easily share or move your setup</td>
+      <td>Portable .skill file</td>
+    </tr>
+    <tr>
+      <td>No built-in error handling</td>
+      <td>Error handling in the skill instructions</td>
+    </tr>
+    <tr>
+      <td>Manual setup: create folders, edit files</td>
+      <td>Claude builds it in a chat conversation</td>
+    </tr>
+  </table>
+
+  <h2 class="section-heading" id="before-you-start" data-jump-label="Before You Start">Before You Start</h2>
+
+  <CalloutBox type="limitation" title="Prerequisites: MCP Connectors">
+    <p>Make sure you have these connectors enabled in Claude:</p>
+    <ul style="margin-top: 0.5rem; margin-left: 1rem; list-style: none;">
+      <li style="padding: 0.25rem 0; color: #4b5563; font-size: 0.875rem;">&#10003; Slack</li>
+      <li style="padding: 0.25rem 0; color: #4b5563; font-size: 0.875rem;">&#10003; Gmail</li>
+      <li style="padding: 0.25rem 0; color: #4b5563; font-size: 0.875rem;">&#10003; Google Calendar</li>
+      <li style="padding: 0.25rem 0; color: #4b5563; font-size: 0.875rem;">&#10003; Google Drive</li>
+      <li style="padding: 0.25rem 0; color: #4b5563; font-size: 0.875rem;">&#10003; Granola <em>(recommended — works with Zoom, Teams, Google Meet)</em></li>
+    </ul>
+    <p style="margin-top: 0.5rem;"><strong>Where to check:</strong> Settings &rarr; Connected Apps (claude.ai) or Settings &rarr; Connectors (Cowork/Desktop)</p>
+  </CalloutBox>
+
+  <h2 class="section-heading" id="step-1" data-jump-label="Step 1: Gather Information">Step 1: Gather Your Information</h2>
+  <p class="section-description">Spend 10 minutes filling this out before talking to Claude. You'll paste it directly into the build conversation.</p>
+
+  <div class="exercise-box">
+    <h3>Your Daily Briefing Worksheet</h3>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="terminal-dot red"></div>
+        <div class="terminal-dot yellow"></div>
+        <div class="terminal-dot green"></div>
+        <span class="terminal-title">worksheet — copy and fill in</span>
+      </div>
+      <div class="terminal-content">ABOUT YOU
+---------
+Name:
+Title:
+Company: Gladly
+Manager: [Name] ([Their Title])
+Email:
+
+YOUR TEAM (skip if you're an IC without direct reports)
+-------------------------------------------------------
+Direct Report 1: [Name] - [Role] - [Focus Areas]
+Direct Report 2: [Name] - [Role] - [Focus Areas]
+Direct Report 3: [Name] - [Role] - [Focus Areas]
+
+KEY COLLABORATORS
+-----------------
+[Name] - [Role] - [How you work together]
+[Name] - [Role] - [How you work together]
+
+PRIORITY SLACK CHANNELS (what you check first each morning)
+-----------------------------------------------------------
+1. DMs with [Manager Name]
+2. DMs from direct reports (if applicable)
+3. #[your-team-channel]
+4. #[cross-functional-channel]
+5. #[project-channel]
+6. #[other relevant channel]
+
+KEY GOOGLE DOCUMENTS
+--------------------
+[Doc Name]: [Full URL]  → Type: Doc / Sheet
+[Doc Name]: [Full URL]  → Type: Doc / Sheet
+[Doc Name]: [Full URL]  → Type: Doc / Sheet
+
+(Important: Note whether each is a Google Doc or a Google Sheet —
+they're fetched differently. Docs use google_drive_fetch;
+Sheets require browser tools.)
+
+YOUR OKRs OR CURRENT GOALS
+---------------------------
+Goal 1: [Description] — Due: [Date]
+Goal 2: [Description] — Due: [Date]
+Goal 3: [Description] — Due: [Date]
+
+WHAT MATTERS MOST IN YOUR BRIEFING
+-----------------------------------
+(Rank or cross out what you don't need)
+□ Today's schedule with meeting prep
+□ Urgent items (48-hour action window)
+□ Action items from recent meetings
+□ Google Doc comments needing response
+□ OKR progress
+□ Manager activity / what they're tracking
+□ Team pulse / direct report status
+□ Competitive intelligence
+□ Other: ___
+
+ALERT TRIGGERS (things that should always be flagged)
+-----------------------------------------------------
+e.g., "Manager mentions same thing twice = they're tracking it"
+e.g., "Same blocker from team member 2+ times = needs escalation"
+e.g., "Deadline within 48 hours I haven't mentioned"</div>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="step-2" data-jump-label="Step 2: Build in Claude Chat">Step 2: Build Your Skill in Claude Chat</h2>
+  <p class="section-description">Open a <strong>new conversation</strong> in claude.ai or the Claude app. Paste the following prompt, filling in your information from Step 1.</p>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">build prompt</span>
+    </div>
+    <div class="terminal-content">I want to build a personal daily briefing skill for Claude.
+Here's my information:
+
+[Paste your completed worksheet from Step 1]
+
+Please build this as a .skill file with:
+1. SKILL.md — the briefing instructions Claude follows when I say
+   "let's start our day"
+2. references/context.md — my consolidated knowledge base
+
+Important requirements:
+- Work with MCP connectors: Slack, Gmail, Calendar, Drive, Granola
+- If any data source fails, continue with the remaining sources
+- Include error handling (especially Granola, which can be flaky)
+- Google Docs use google_drive_fetch; Sheets need Chrome browser tools
+- Cross-reference signals across systems, don't just list them
+- End with "Over to you" and contextual follow-up prompts
+- Include day-specific logic (Monday OKR reminders, heavy meeting
+  day prep, Friday wrap-up)
+
+Package it as a downloadable .skill file when done.</div>
+  </div>
+
+  <div class="cowork-response">
+    <h6>What Happens Next</h6>
+    <ul>
+      <li>Claude asks clarifying questions (e.g., "Which Slack channels are highest priority?")</li>
+      <li>Creates the SKILL.md with your customized briefing flow</li>
+      <li>Creates references/context.md with your consolidated knowledge base</li>
+      <li>Validates the skill format</li>
+      <li>Packages and presents a downloadable <code>.skill</code> file</li>
+    </ul>
+  </div>
+
+  <div class="key-point">
+    <p><strong>This takes one conversation</strong> — usually 10-20 minutes.</p>
+  </div>
+
+  <h2 class="section-heading" id="step-3" data-jump-label="Step 3: Install Your Skill">Step 3: Install Your Skill</h2>
+  <p class="section-description">Three steps:</p>
+
+  <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem; color: #4b5563; font-size: 0.9375rem;">
+    <li style="padding: 0.375rem 0;"><strong>Download</strong> the <code>.skill</code> file Claude created (appears as a downloadable file in the chat)</li>
+    <li style="padding: 0.375rem 0;"><strong>Go to</strong> claude.ai &rarr; <strong>Settings &rarr; Skills</strong></li>
+    <li style="padding: 0.375rem 0;"><strong>Upload</strong> your <code>.skill</code> file</li>
+  </ol>
+
+  <p class="section-description">The skill is now active across all your conversations. No additional setup needed.</p>
+
+  <CalloutBox type="limitation" title="How to Update Your Skill Later">
+    Start a new Claude chat, upload your current <code>.skill</code> file (or the individual SKILL.md and context.md), describe what you want to change, and ask Claude to rebuild. Then re-upload the new <code>.skill</code> file to replace the old one.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="step-4" data-jump-label="Step 4: Run Your First Briefing">Step 4: Run Your First Briefing</h2>
+  <p class="section-description">Open a <strong>new conversation</strong> (not the one you used to build). Type:</p>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">prompt</span>
+    </div>
+    <div class="terminal-content">Let's start our day</div>
+  </div>
+
+  <p class="section-description" style="margin-top: 1rem;">Claude will read your skill, load your context, gather data from all connected systems, cross-reference signals, and present your structured briefing. First run takes 30-60 seconds.</p>
+
+  <p class="section-description"><strong>What to Evaluate</strong></p>
+  <ul style="list-style: none; margin-bottom: 1.5rem;">
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;"><span style="position: absolute; left: 0; color: #22c55e;">&#10003;</span>Did it pull my calendar correctly?</li>
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;"><span style="position: absolute; left: 0; color: #22c55e;">&#10003;</span>Did it find relevant Slack messages?</li>
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;"><span style="position: absolute; left: 0; color: #22c55e;">&#10003;</span>Are the "Needs Your Attention" items actually urgent?</li>
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;"><span style="position: absolute; left: 0; color: #22c55e;">&#10003;</span>Is the meeting prep useful?</li>
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;"><span style="position: absolute; left: 0; color: #ef4444;">&#10007;</span>What's missing that I wish it had?</li>
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;"><span style="position: absolute; left: 0; color: #ef4444;">&#10007;</span>What's noise I don't need?</li>
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;"><span style="position: absolute; left: 0; color: #ef4444;">&#10007;</span>Any sections consistently empty?</li>
+  </ul>
+
+  <h2 class="section-heading" id="sample-briefing" data-jump-label="Example Briefing Output">Example Daily Briefing Output</h2>
+  <p class="section-description">Here's what a real briefing looks like. Your sections will vary based on your role and configuration.</p>
+
+  <div class="claude-response">
+    <h1>Daily Briefing — Wednesday, February 4, 2026</h1>
+
+    <h2>Today's Schedule</h2>
+    <table>
+      <tr><th>Time</th><th>Meeting</th><th>Context</th></tr>
+      <tr><td>9:00 AM</td><td>Sales Enablement Weekly</td><td>Sarah, Marcus, Priya — SKO planning focus</td></tr>
+      <tr><td>10:30 AM</td><td>1:1 with Sarah Chen</td><td>She wants to discuss career growth</td></tr>
+      <tr><td>2:00 PM</td><td>Q1 Planning Review</td><td>Leadership team</td></tr>
+      <tr><td>3:30 PM</td><td>1:1 with David Kim</td><td>Your manager — tracking enablement metrics</td></tr>
+    </table>
+    <p><em>Tomorrow's first meeting: Product Sync at 9:00 AM</em></p>
+
+    <hr>
+
+    <h2>Needs Your Attention</h2>
+    <ol>
+      <li><strong>David mentioned Q1 enablement metrics twice yesterday</strong> — in Slack and your 1:1 doc. He's tracking this. <em>(Slack + Drive)</em></li>
+      <li><strong>Battle card review due tomorrow</strong> — Sarah flagged Zendesk comparison needs updating. <em>(Doc comment)</em></li>
+      <li><strong>You committed to delivering competitive positioning framework by Thursday EOD.</strong> <em>(Granola meeting notes)</em></li>
+    </ol>
+
+    <hr>
+
+    <h2>Action Items From Recent Meetings</h2>
+    <p><strong>You committed to:</strong></p>
+    <ul>
+      <li>Competitive positioning framework &rarr; Thursday EOD</li>
+      <li>Review Sarah's onboarding deck &rarr; Today</li>
+      <li>Schedule sync with Product Marketing &rarr; Not yet done</li>
+    </ul>
+    <p><strong>Waiting on others:</strong></p>
+    <ul>
+      <li>Priya: Win/loss analysis data (promised Monday)</li>
+      <li>Product team: New feature docs for Q1 release</li>
+    </ul>
+
+    <hr>
+
+    <h2>OKR Progress</h2>
+    <table>
+      <tr><th>Key Result</th><th>Due</th><th>Status</th></tr>
+      <tr><td>Reduce ramp time 90&rarr;60 days</td><td>Mar 31</td><td>On track (72 days)</td></tr>
+      <tr><td>Launch 5 skill modules</td><td>Mar 31</td><td>3/5 complete</td></tr>
+      <tr><td>Win rate 55%&rarr;65%</td><td>Mar 31</td><td>Currently 58%</td></tr>
+    </table>
+
+    <hr>
+
+    <h2>Manager Activity (Last 24h)</h2>
+    <ul>
+      <li>David is preparing for board prep — mentioned "enablement ROI"</li>
+      <li>Asked about competitive win rate trends after a lost deal</li>
+      <li>Shared AI in sales enablement article in your DM</li>
+    </ul>
+
+    <hr>
+
+    <h2>Team Pulse</h2>
+    <ul>
+      <li><strong>Sarah Chen:</strong> High energy, but stretched between onboarding redesign + SKO prep</li>
+      <li><strong>Marcus Williams:</strong> Flagged bandwidth on video production — may need contractor</li>
+      <li><strong>Priya Patel:</strong> Strong week — analytics dashboard getting leadership praise</li>
+    </ul>
+
+    <hr>
+
+    <h2>Meeting Prep</h2>
+    <p><strong>9:00 AM — Sales Enablement Weekly</strong></p>
+    <ul>
+      <li>SKO session assignments status</li>
+      <li>Marcus's bandwidth concern on video production</li>
+      <li>Priya's win/loss data update</li>
+    </ul>
+    <p><strong>10:30 AM — 1:1 with Sarah Chen</strong></p>
+    <ul>
+      <li>Review her onboarding deck (your action item)</li>
+      <li>Career growth conversation follow-up</li>
+      <li>Bandwidth check: onboarding redesign + SKO prep</li>
+    </ul>
+
+    <hr>
+
+    <p><strong>What I Can Help With Right Now:</strong></p>
+    <ul>
+      <li>I can draft the competitive positioning framework (I can do the hard part)</li>
+      <li>I can pull context for your 1:1 with David (I can do this entirely)</li>
+      <li>I can summarize the win/loss data gap for Priya follow-up (I can accelerate this)</li>
+    </ul>
+
+    <div class="claude-footer">
+      Over to you — what do you want to dive into?<br>
+      Quick prompts: "1:1 prep David" &bull; "competitive" &bull; "meeting prep Q1 planning"
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="customize" data-jump-label="Customize for Your Role">Customize for Your Role</h2>
+  <p class="section-description">Not every section applies to every role. Adjust based on how you work:</p>
+
+  <div class="example-card">
+    <h4>Individual Contributors</h4>
+    <ul style="margin-left: 1rem; color: #4b5563; font-size: 0.9375rem;">
+      <li style="padding: 0.25rem 0;">Remove "Team Pulse" and "Team OKR Status" sections</li>
+      <li style="padding: 0.25rem 0;">Add project-specific tracking (e.g., "status of my PRs," "my open tickets")</li>
+      <li style="padding: 0.25rem 0;">Focus "Needs Your Attention" on your own deadlines and deliverables</li>
+    </ul>
+  </div>
+
+  <div class="example-card">
+    <h4>Managers</h4>
+    <ul style="margin-left: 1rem; color: #4b5563; font-size: 0.9375rem;">
+      <li style="padding: 0.25rem 0;">Keep all team sections — "Team Pulse" and "Team OKR Snapshot" are essential for 1:1s</li>
+      <li style="padding: 0.25rem 0;">Add "1:1 prep" as a prominent follow-up prompt</li>
+      <li style="padding: 0.25rem 0;">Monitor direct reports' Slack channels for mood and blockers</li>
+    </ul>
+  </div>
+
+  <div class="example-card">
+    <h4>Customer-Facing Roles (Sales, CS, Support)</h4>
+    <ul style="margin-left: 1rem; color: #4b5563; font-size: 0.9375rem;">
+      <li style="padding: 0.25rem 0;">Add deal/account channel monitoring</li>
+      <li style="padding: 0.25rem 0;">Include customer health signals from Slack</li>
+      <li style="padding: 0.25rem 0;">Track renewal or expansion activity</li>
+      <li style="padding: 0.25rem 0;">Add "deal intel [account]" as a follow-up prompt</li>
+    </ul>
+  </div>
+
+  <div class="example-card">
+    <h4>Executives</h4>
+    <ul style="margin-left: 1rem; color: #4b5563; font-size: 0.9375rem;">
+      <li style="padding: 0.25rem 0;">Add competitive intel to the main briefing (not just as follow-up)</li>
+      <li style="padding: 0.25rem 0;">Include company-wide metrics and announcements</li>
+      <li style="padding: 0.25rem 0;">Monitor board-relevant items</li>
+    </ul>
+  </div>
+
+  <h3 style="font-size: 1rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem;">Briefing Section Matrix</h3>
+
+  <table class="compare-table">
+    <tr>
+      <th>Section</th>
+      <th>Everyone</th>
+      <th>Managers</th>
+      <th>ICs</th>
+      <th>Customer-Facing</th>
+    </tr>
+    <tr><td>Today's Schedule</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr>
+    <tr><td>Needs Your Attention</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr>
+    <tr><td>Action Items</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr>
+    <tr><td>Doc Comments</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr>
+    <tr><td>OKR Progress</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr>
+    <tr><td>Manager Activity</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr>
+    <tr><td>Team Pulse</td><td></td><td>&#10003;</td><td></td><td></td></tr>
+    <tr><td>Meeting Prep</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr>
+    <tr><td>Team OKR Snapshot</td><td></td><td>&#10003;</td><td></td><td></td></tr>
+    <tr><td>Deal/Account Intel</td><td></td><td></td><td></td><td>&#10003;</td></tr>
+  </table>
+
+  <h2 class="section-heading" id="great-briefing" data-jump-label="What Makes a Great Briefing">What Makes a Great Briefing Skill</h2>
+
+  <table class="compare-table">
+    <tr>
+      <th>Aspect</th>
+      <th>Good</th>
+      <th>Great</th>
+    </tr>
+    <tr>
+      <td><strong>Data sources</strong></td>
+      <td>Lists data from each system separately</td>
+      <td>Cross-references signals across systems</td>
+    </tr>
+    <tr>
+      <td><strong>Priorities</strong></td>
+      <td>Shows everything</td>
+      <td>Filters to 48-hour action window</td>
+    </tr>
+    <tr>
+      <td><strong>Error handling</strong></td>
+      <td>Breaks when a source fails</td>
+      <td>Continues gracefully, notes what's missing</td>
+    </tr>
+    <tr>
+      <td><strong>OKR data</strong></td>
+      <td>Hardcoded in the skill</td>
+      <td>Fetched live from Drive with fallback</td>
+    </tr>
+    <tr>
+      <td><strong>Meeting prep</strong></td>
+      <td>Lists meetings</td>
+      <td>Pulls context from past meetings + action items</td>
+    </tr>
+    <tr>
+      <td><strong>Alert logic</strong></td>
+      <td>None</td>
+      <td>Manager repeat detection, deadline warnings, cross-source confirmation</td>
+    </tr>
+  </table>
+
+  <CalloutBox type="breakthrough" title="Cross-System Intelligence">
+    <p>The real power isn't listing data — it's connecting signals:</p>
+    <ul style="margin-top: 0.5rem; margin-left: 1rem; list-style: disc;">
+      <li style="padding: 0.25rem 0; color: #4b5563; font-size: 0.875rem;">Topic in Slack AND on today's agenda &rarr; flag in Meeting Prep</li>
+      <li style="padding: 0.25rem 0; color: #4b5563; font-size: 0.875rem;">Action item from meeting connects to today's calendar &rarr; surface in Needs Your Attention</li>
+      <li style="padding: 0.25rem 0; color: #4b5563; font-size: 0.875rem;">Doc comment AND meeting note reference same deliverable &rarr; high priority</li>
+      <li style="padding: 0.25rem 0; color: #4b5563; font-size: 0.875rem;">Manager mentions something twice &rarr; they're tracking it, address proactively</li>
+      <li style="padding: 0.25rem 0; color: #4b5563; font-size: 0.875rem;">Same blocker from someone 2+ times &rarr; needs escalation</li>
+    </ul>
+    <p style="margin-top: 0.5rem;">Your skill instructions should tell Claude to look for these patterns.</p>
+  </CalloutBox>
+
+  <h2 class="section-heading" id="meeting-notes" data-jump-label="Meeting Notes Options">Meeting Notes Options</h2>
+
+  <table class="compare-table">
+    <tr>
+      <th>Feature</th>
+      <th>Granola MCP (Recommended)</th>
+      <th>Gemini Notes (via Gmail)</th>
+    </tr>
+    <tr>
+      <td><strong>Setup</strong></td>
+      <td>Enable connector in Settings</td>
+      <td>Automatic for Google Meet</td>
+    </tr>
+    <tr>
+      <td><strong>Works with</strong></td>
+      <td>Zoom, Teams, Meet, any platform</td>
+      <td>Google Meet only</td>
+    </tr>
+    <tr>
+      <td><strong>Note quality</strong></td>
+      <td>Rich structured notes</td>
+      <td>Summary + action items</td>
+    </tr>
+    <tr>
+      <td><strong>How Claude accesses</strong></td>
+      <td>Direct MCP query</td>
+      <td>Gmail search for "Notes by Gemini"</td>
+    </tr>
+    <tr>
+      <td><strong>Recommendation</strong></td>
+      <td>&#10003; Primary choice</td>
+      <td>Good backup for Meet-only users</td>
+    </tr>
+  </table>
+
+  <p class="section-description">You can use both — Claude pulls from both and deduplicates.</p>
+
+  <h2 class="section-heading" id="docs-vs-sheets" data-jump-label="Docs vs. Sheets">Google Docs vs. Google Sheets</h2>
+  <p class="section-description">This distinction matters for how your skill fetches data:</p>
+
+  <table class="use-case-table">
+    <tr>
+      <th>Type</th>
+      <th>How Claude Fetches It</th>
+      <th>What Your Skill Needs</th>
+    </tr>
+    <tr>
+      <td><strong>Google Docs</strong></td>
+      <td><code>google_drive_fetch</code> — fast, direct MCP call</td>
+      <td>The Doc ID (string between <code>/d/</code> and <code>/edit</code> in URL)</td>
+    </tr>
+    <tr>
+      <td><strong>Google Sheets</strong></td>
+      <td>Chrome browser tools — navigates to URL</td>
+      <td>The full URL including tab/gid parameter</td>
+    </tr>
+  </table>
+
+  <div class="key-point">
+    <p><strong>Tip:</strong> If possible, move critical data from Sheets to Docs — Docs are faster and more reliable since they don't need browser automation.</p>
+  </div>
+
+  <h2 class="section-heading" id="iterate" data-jump-label="Iterate and Improve">Iterate and Improve</h2>
+
+  <table class="use-case-table">
+    <tr>
+      <th>If You Notice...</th>
+      <th>Fix It By...</th>
+    </tr>
+    <tr>
+      <td>Briefing is too long</td>
+      <td>Remove sections or move them to "over to you" prompts</td>
+    </tr>
+    <tr>
+      <td>Missing a Slack channel</td>
+      <td>Update context.md and rebuild the skill</td>
+    </tr>
+    <tr>
+      <td>OKR data is stale</td>
+      <td>Verify the Google Doc ID; check if it's a Sheet not a Doc</td>
+    </tr>
+    <tr>
+      <td>Manager section is empty</td>
+      <td>Check the right Slack username for your manager</td>
+    </tr>
+    <tr>
+      <td>Granola keeps erroring</td>
+      <td>The skill handles this — shows a warning and continues</td>
+    </tr>
+    <tr>
+      <td>A section is always empty</td>
+      <td>Remove it from the briefing template</td>
+    </tr>
+    <tr>
+      <td>Want a new section</td>
+      <td>Describe it to Claude and rebuild</td>
+    </tr>
+  </table>
+
+  <h3 style="font-size: 1rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem;">Maintenance Cadence</h3>
+
+  <table class="compare-table">
+    <tr>
+      <th>Frequency</th>
+      <th>What to Update</th>
+    </tr>
+    <tr>
+      <td><strong>As needed</strong></td>
+      <td>Tweak sections, add channels, adjust formatting</td>
+    </tr>
+    <tr>
+      <td><strong>Monthly</strong></td>
+      <td>Update OKRs and focus areas in context.md</td>
+    </tr>
+    <tr>
+      <td><strong>Quarterly</strong></td>
+      <td>Full rebuild — new OKR cycle, org changes, project shifts</td>
+    </tr>
+    <tr>
+      <td><strong>When things break</strong></td>
+      <td>Usually a Doc ID moved or a connector was disconnected</td>
+    </tr>
+  </table>
+
+  <h2 class="section-heading" id="troubleshooting" data-jump-label="Troubleshooting">Troubleshooting</h2>
+
+  <table class="use-case-table">
+    <tr>
+      <th>Problem</th>
+      <th>Cause</th>
+      <th>Fix</th>
+    </tr>
+    <tr>
+      <td>Briefing didn't trigger</td>
+      <td>Skill not installed or wrong trigger phrase</td>
+      <td>Check Settings &rarr; Skills. Try "let's start our day" exactly. Start a new conversation.</td>
+    </tr>
+    <tr>
+      <td>"Granola unavailable" warning</td>
+      <td>MCP connector flaky or UUID error</td>
+      <td>Normal — briefing continues without meeting data. Retry next time.</td>
+    </tr>
+    <tr>
+      <td>Missing Slack messages</td>
+      <td>Channel names don't match or connector not enabled</td>
+      <td>Verify exact channel names. Check Settings &rarr; Connected Apps.</td>
+    </tr>
+    <tr>
+      <td>OKR section shows "stale" warning</td>
+      <td>Google Drive fetch failed</td>
+      <td>Check Doc ID in context.md. Open doc directly to verify access.</td>
+    </tr>
+    <tr>
+      <td>Google Sheets data missing</td>
+      <td><code>google_drive_fetch</code> doesn't work with Sheets</td>
+      <td>Sheets need Chrome browser tools — note this in your skill.</td>
+    </tr>
+    <tr>
+      <td>"Response could not be fully generated"</td>
+      <td>Too much data, ran out of context</td>
+      <td>Reduce Slack channels. Simplify less critical sections.</td>
+    </tr>
+  </table>
+
+  <div class="exercise-box">
+    <h3>Try It Yourself</h3>
+    <p style="color: #666; font-size: 0.9375rem; margin-bottom: 1rem;">Complete these exercises during or after the module:</p>
+    <div class="exercise-item">
+      <h4>Exercise 1: Gather Your Information (10 min)</h4>
+      <p style="color: #666; font-size: 0.875rem;">Fill out the worksheet from Step 1 with your actual information.</p>
+    </div>
+    <div class="exercise-item">
+      <h4>Exercise 2: Build Your Skill (15-20 min)</h4>
+      <p style="color: #666; font-size: 0.875rem;">Open a new Claude chat. Paste the build prompt from Step 2 with your information. Let Claude build and package your skill.</p>
+    </div>
+    <div class="exercise-item">
+      <h4>Exercise 3: Install and Test (5 min)</h4>
+      <p style="color: #666; font-size: 0.875rem;">Download the <code>.skill</code> file, install it in Settings &rarr; Skills, open a new conversation, and say "Let's start our day."</p>
+    </div>
+    <div class="exercise-item">
+      <h4>Exercise 4: Iterate (5 min)</h4>
+      <p style="color: #666; font-size: 0.875rem;">Based on your first briefing, identify one thing to change. Rebuild and re-upload.</p>
+    </div>
+  </div>
+
+  <div class="takeaways">
+    <h3>Key Takeaways</h3>
+    <ol>
+      <li><strong>Build in Claude chat</strong> — describe what you want, Claude builds the files. No Cowork, no code, no terminal.</li>
+      <li><strong>Two files is all you need</strong> — SKILL.md (instructions) and context.md (your knowledge base).</li>
+      <li><strong>Install once, use everywhere</strong> — your <code>.skill</code> file works across web, mobile, and desktop.</li>
+      <li><strong>Cross-system intelligence is the differentiator</strong> — connecting signals across Slack, Gmail, Calendar, and Drive is what makes this more than a notification list.</li>
+      <li><strong>Error resilience matters</strong> — good skills handle failed data sources gracefully instead of breaking.</li>
+      <li><strong>Iteration is expected</strong> — your first briefing won't be perfect, and that's by design.</li>
+    </ol>
+  </div>
+</ModuleLayout>

@@ -1,0 +1,17 @@
+---
+// src/components/CalloutBox.astro
+// Styled callout box with variants: breakthrough (green), limitation (orange)
+
+interface Props {
+  type: 'breakthrough' | 'limitation' | 'important';
+  title: string;
+}
+
+const { type, title } = Astro.props;
+const className = `callout callout-${type}`;
+---
+
+<div class={className}>
+  <div class="callout-title">{title}</div>
+  <p><slot /></p>
+</div>

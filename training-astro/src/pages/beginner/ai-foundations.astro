@@ -1,0 +1,170 @@
+---
+// src/pages/beginner/ai-foundations.astro
+// ═══════════════════════════════════════
+// BEGINNER MODULE 1: AI Foundations
+// This is ALL the code needed for a module page.
+// Compare to the 581-line HTML original.
+// ═══════════════════════════════════════
+
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'beginner';
+const module = 'ai-foundations';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="The building blocks of modern AI — from neural networks to agents"
+  learningObjective="By the end of this module, you'll understand core AI concepts including LLMs, tokens, context windows, and the difference between chatbots and AI agents."
+>
+
+  <!-- ── Watch: How AI Works ──────────────────── -->
+  <h2 class="section-heading" id="how-ai-works" data-jump-label="How AI Works">Watch: How AI Works</h2>
+  <p class="section-description">Foundational AI concepts: how AI generates text, the AI trust spectrum, and the role of AI agents.</p>
+
+  <VideoEmbed
+    title="How AI Works: The Foundations"
+    src="https://drive.google.com/file/d/1_PIOY2iVZaZ3_W3mA5t8WhnRcQUlSIuR/preview"
+    duration="11 min"
+    presenter="Austin Reece"
+    date="Claude 101 Training • Feb 5, 2026"
+  />
+
+  <!-- ── Core Concepts ────────────────────────── -->
+  <h2 class="section-heading" id="core-concepts" data-jump-label="Core Concepts">Core Concepts</h2>
+  <p class="section-description">Essential AI vocabulary and concepts</p>
+
+  <table class="concept-table">
+    <thead>
+      <tr>
+        <th>Concept</th>
+        <th>What It Means</th>
+        <th>Why It Matters</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Large Language Model (LLM)</strong></td>
+        <td>A neural network trained on vast text data to generate human-like text</td>
+        <td>This is what powers Claude — understanding this helps you set realistic expectations</td>
+      </tr>
+      <tr>
+        <td><strong>Tokens</strong></td>
+        <td>The units AI processes — roughly ¾ of a word</td>
+        <td>Everything has a token cost: your input, Claude's output, and uploaded files</td>
+      </tr>
+      <tr>
+        <td><strong>Context Window</strong></td>
+        <td>The total amount of text Claude can "see" at once</td>
+        <td>Claude's context window is large but finite — understanding limits helps you work within them</td>
+      </tr>
+      <tr>
+        <td><strong>Temperature</strong></td>
+        <td>Controls randomness — low = predictable, high = creative</td>
+        <td>Explains why Claude gives different answers to the same question</td>
+      </tr>
+      <tr>
+        <td><strong>Attention Mechanism</strong></td>
+        <td>How AI weighs the importance of different parts of input</td>
+        <td>Why putting important context first in your prompt gets better results</td>
+      </tr>
+      <tr>
+        <td><strong>Hallucination</strong></td>
+        <td>When AI generates plausible-sounding but incorrect information</td>
+        <td>Always verify critical facts — Claude can be confidently wrong</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <CalloutBox type="limitation" title="Critical Limitation">
+    LLMs don't "know" things — they predict likely text. This means Claude can generate confident-sounding responses that are factually incorrect. Always verify important claims, especially dates, statistics, and technical specifications.
+  </CalloutBox>
+
+  <!-- ── Agents vs Chatbots ───────────────────── -->
+  <h2 class="section-heading" id="agents-vs-chatbots" data-jump-label="Agents vs Chatbots">Agents vs. Chatbots</h2>
+  <p class="section-description">Understanding the spectrum from simple chatbot to AI agent</p>
+
+  <table class="concept-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Chatbot</th>
+        <th>AI Agent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Responds to questions</td>
+        <td>✓</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>Takes actions</td>
+        <td>Limited</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>Uses tools</td>
+        <td>✗</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>Persists context</td>
+        <td>Per conversation</td>
+        <td>Across sessions</td>
+      </tr>
+      <tr>
+        <td>Works autonomously</td>
+        <td>✗</td>
+        <td>✓</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <CalloutBox type="breakthrough" title="Key Insight">
+    Claude is on a spectrum. In Chat mode, it's closer to a chatbot. In Cowork and Code modes, it's closer to an agent. This training will take you across that spectrum.
+  </CalloutBox>
+
+  <!-- ── Additional Resources ─────────────────── -->
+  <h2 class="section-heading" id="resources" data-jump-label="Resources">Additional Resources</h2>
+
+  <div class="resource-card">
+    <div class="resource-icon">🎓</div>
+    <div class="resource-info">
+      <h4>Gladly CoE: AI Foundations Course</h4>
+      <p>Comprehensive AI foundations course in the Center of Excellence portal</p>
+      <div class="resource-meta">
+        <span>📍 center-of-excellence.xyz</span>
+      </div>
+    </div>
+    <a href="https://www.center-of-excellence.xyz/" target="_blank" class="resource-link">Open Course →</a>
+  </div>
+
+  <!-- ── Watch: PII Guidelines ────────────────── -->
+  <h2 class="section-heading" id="pii" data-jump-label="PII Guidelines">Watch: PII Guidelines</h2>
+  <p class="section-description">Critical guidance on handling personally identifiable information with AI tools.</p>
+
+  <VideoEmbed
+    title="PII Guidelines and Safety"
+    src="https://drive.google.com/file/d/1IxumCm8UWS5wgz0gXLn_y-WZ-vKHDQAi/preview"
+    duration="4 min"
+    presenter="Austin Reece"
+    date="Claude 101 Training • Feb 5, 2026"
+  />
+
+  <!-- ── Self Assessment ──────────────────────── -->
+  <div class="self-assessment">
+    <h3>Self-Assessment</h3>
+    <p>Before moving on, can you:</p>
+    <ul class="assessment-list">
+      <li>Explain what an LLM is and how it generates text?</li>
+      <li>Describe what tokens are and why context windows matter?</li>
+      <li>Explain why hallucinations happen and how to mitigate them?</li>
+      <li>Distinguish between a chatbot and an AI agent?</li>
+    </ul>
+  </div>
+
+</ModuleLayout>

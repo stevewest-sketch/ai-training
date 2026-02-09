@@ -1,0 +1,339 @@
+---
+// src/pages/advanced/git-workflows.astro
+// SPECIAL MERGE: This module combines content from git-concepts.html and git-technical.html
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'advanced';
+const module = 'git-workflows';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Understand version control concepts—Claude handles the commands for you"
+  learningObjective="By the end of this module, you'll understand Git concepts and workflows, and be able to manage branches, commits, and PRs through Claude Code using natural language commands."
+>
+
+  <!-- PART 1: GIT CONCEPTS (from git-concepts.html) -->
+
+  <div class="info-box">
+    <h3>You Don't Need to Memorize Commands</h3>
+    <p>This module teaches you the concepts behind Git so you understand what's happening. Claude Code handles the actual commands—you just need to know what to ask for.</p>
+  </div>
+
+  <h2 class="section-heading" id="concepts-problem" data-jump-label="Why Git Exists">What Problem Does Git Solve?</h2>
+  <p class="section-description">The "track changes" problem, but for code</p>
+
+  <CalloutBox type="breakthrough" title="The Before Times">
+    Without version control: <code>project_final.py</code>, <code>project_final_v2.py</code>, <code>project_final_ACTUALLY_final.py</code>. Sound familiar? Git eliminates this chaos by tracking every change in a systematic way.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="concepts-local-vs-remote" data-jump-label="Local Computer vs GitHub">The Two Places Your Code Lives</h2>
+  <p class="section-description">Understanding local vs remote</p>
+
+  <div class="concepts-grid">
+    <div class="concept-card">
+      <h4>💻 Your Computer (Local)</h4>
+      <p>Where you do the work. Changes here are private until you share them. Claude Code works with files here.</p>
+    </div>
+    <div class="concept-card">
+      <h4>☁️ GitHub (Remote)</h4>
+      <p>The shared home for your code. Like Google Drive for code—multiple people can access and collaborate.</p>
+    </div>
+  </div>
+
+  <CalloutBox type="limitation" title="Key Insight">
+    Changes on your computer don't automatically appear on GitHub, and vice versa. You explicitly sync between them. This is a feature, not a bug—it prevents half-finished work from breaking things for others.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="concepts-core-concepts" data-jump-label="Git Vocabulary for Claude Code">Core Concepts</h2>
+  <p class="section-description">The vocabulary you need to communicate with Claude Code</p>
+
+  <div class="concepts-grid">
+    <div class="concept-card">
+      <h4>Repository (Repo)</h4>
+      <p>A project folder tracked by Git. Contains all your files plus the complete history of every change ever made.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Commit</h4>
+      <p>A save point with a description. "Fixed the login bug" or "Added new dashboard." You can always go back to any commit.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Branch</h4>
+      <p>A parallel universe for your code. Work on a new feature without affecting the main version. Merge when ready.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Push</h4>
+      <p>Upload your commits to GitHub. "Here's my work, now it's backed up and others can see it."</p>
+    </div>
+    <div class="concept-card">
+      <h4>Pull</h4>
+      <p>Download the latest changes from GitHub. "What did my teammates change while I was away?"</p>
+    </div>
+    <div class="concept-card">
+      <h4>Pull Request (PR)</h4>
+      <p>A proposal to merge your branch into main. "Here's my work—please review before it goes live."</p>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="concepts-with-claude-code" data-jump-label="Using Git via Claude Code">How This Works with Claude Code</h2>
+  <p class="section-description">You speak in concepts, Claude handles the commands</p>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">Claude Code Conversation</span>
+    </div>
+    <div class="terminal-content">
+      <span class="comment">You:</span> <span class="string">"Save my progress with a commit"</span><br><br>
+      <span class="comment">Claude:</span> <span class="output">I'll commit your changes. What message should describe this work?</span><br><br>
+      <span class="comment">You:</span> <span class="string">"Fixed the header alignment issue"</span><br><br>
+      <span class="comment">Claude:</span> <span class="output">Done. Committed with message "Fixed the header alignment issue"</span><br><br>
+      <span class="comment">You:</span> <span class="string">"Push this to GitHub"</span><br><br>
+      <span class="comment">Claude:</span> <span class="output">Pushed to origin/main. Your changes are now on GitHub.</span>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="concepts-complete-flow" data-jump-label="Typical Git Work Session">The Complete Flow</h2>
+  <p class="section-description">A typical work session with Git</p>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">Typical Workflow</span>
+    </div>
+    <div class="terminal-content">
+      <span class="comment">1. Start fresh:</span> <span class="string">"Pull the latest changes"</span><br>
+      <span class="output">   → Gets any updates your teammates made</span><br><br>
+      <span class="comment">2. Do your work:</span> <span class="string">"Create a new file called utils.py"</span><br>
+      <span class="output">   → Make your changes locally</span><br><br>
+      <span class="comment">3. Save a checkpoint:</span> <span class="string">"Commit this as 'Added utility functions'"</span><br>
+      <span class="output">   → Creates a save point you can return to</span><br><br>
+      <span class="comment">4. Share your work:</span> <span class="string">"Push to GitHub"</span><br>
+      <span class="output">   → Uploads to the shared repo</span><br><br>
+      <span class="comment">5. Collaborate:</span> <span class="string">"Create a pull request"</span><br>
+      <span class="output">   → Asks teammates to review before merging</span>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="concepts-branches" data-jump-label="Safe Experimentation with Branches">Why Branches Matter</h2>
+  <p class="section-description">Safe experimentation without breaking things</p>
+
+  <CalloutBox type="breakthrough" title="The Branch Mental Model">
+    <strong>main</strong> = the production-ready code everyone relies on<br>
+    <strong>your-branch</strong> = your private sandbox to experiment in<br><br>
+    Work on your branch, break things, fix things. Only merge to main when it's ready. If your experiment fails, just delete the branch—main is untouched.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="concepts-quick-phrases" data-jump-label="Copy-Paste Git Phrases">Quick Phrases for Claude Code</h2>
+  <p class="section-description">Copy these when you need them</p>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">Common Requests</span>
+    </div>
+    <div class="terminal-content">
+      <span class="comment"># Starting work</span><br>
+      <span class="string">"Pull the latest changes from GitHub"</span><br>
+      <span class="string">"Create a new branch called feature-x"</span><br><br>
+      <span class="comment"># Saving work</span><br>
+      <span class="string">"Commit these changes with message 'Added X'"</span><br>
+      <span class="string">"Push my branch to GitHub"</span><br><br>
+      <span class="comment"># Collaborating</span><br>
+      <span class="string">"Create a pull request for this branch"</span><br>
+      <span class="string">"Switch to the main branch"</span><br>
+      <span class="string">"Merge main into my branch"</span><br><br>
+      <span class="comment"># Fixing mistakes</span><br>
+      <span class="string">"Undo my last commit"</span><br>
+      <span class="string">"Show me what changed since my last commit"</span>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="concepts-scenarios" data-jump-label="Common Git Situations Solved">Common Scenarios</h2>
+  <p class="section-description">What to say when...</p>
+
+  <div class="concepts-grid">
+    <div class="concept-card">
+      <h4>Starting a new feature</h4>
+      <p>"Create a new branch called feature-dashboard, based on main"</p>
+    </div>
+    <div class="concept-card">
+      <h4>Saving your work</h4>
+      <p>"Commit my changes with the message 'Added user settings page'"</p>
+    </div>
+    <div class="concept-card">
+      <h4>Sharing with team</h4>
+      <p>"Push this branch and create a pull request"</p>
+    </div>
+    <div class="concept-card">
+      <h4>Getting teammates' changes</h4>
+      <p>"Pull the latest from main and merge it into my branch"</p>
+    </div>
+  </div>
+
+  <!-- PART 2: GIT TECHNICAL WORKFLOWS (from git-technical.html) -->
+
+  <CalloutBox type="breakthrough" title="Building on Intermediate Concepts">
+    In the Intermediate path, you learned Git concepts. Now let's see how they work in practice with Claude Code — you don't need to memorize commands.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="technical-common-scenarios" data-jump-label="Everyday Git Situations">Common Scenarios</h2>
+  <p class="section-description">Here's how to handle everyday Git situations with Claude Code:</p>
+
+  <table class="command-table">
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th>What to Say</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Need to switch tasks</td>
+        <td>"Save what I'm working on, I need to fix a bug"</td>
+      </tr>
+      <tr>
+        <td>Made a mistake</td>
+        <td>"Undo that last commit, I want to redo it"</td>
+      </tr>
+      <tr>
+        <td>Need current status</td>
+        <td>"What's the current status? What have I changed?"</td>
+      </tr>
+      <tr>
+        <td>Someone else made changes</td>
+        <td>"Pull the latest changes from main"</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-heading" id="technical-quick-reference" data-jump-label="Natural Language Git Commands">Quick Reference</h2>
+  <p class="section-description">Natural language commands and what Git does behind the scenes:</p>
+
+  <table class="command-table">
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>Command for Claude</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Start new work</td>
+        <td>"Create a branch for [feature name]"</td>
+      </tr>
+      <tr>
+        <td>Save progress</td>
+        <td>"Commit these changes"</td>
+      </tr>
+      <tr>
+        <td>Upload to GitHub</td>
+        <td>"Push to GitHub"</td>
+      </tr>
+      <tr>
+        <td>Propose changes</td>
+        <td>"Create a PR"</td>
+      </tr>
+      <tr>
+        <td>See status</td>
+        <td>"Show me the git status"</td>
+      </tr>
+      <tr>
+        <td>Return to main</td>
+        <td>"Switch to main branch"</td>
+      </tr>
+      <tr>
+        <td>Get latest</td>
+        <td>"Pull the latest from main"</td>
+      </tr>
+      <tr>
+        <td>Undo last save</td>
+        <td>"Undo the last commit"</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-heading" id="technical-workflow-examples" data-jump-label="Step-by-Step Git Workflows">Workflow Examples</h2>
+  <p class="section-description">Real scenarios and how to handle them:</p>
+
+  <div class="scenario-card">
+    <h4>Starting a New Feature</h4>
+    <p>You're about to start working on a new feature and want to keep your work separate from main.</p>
+    <div class="command">"Create a new branch called feature/user-authentication and switch to it"</div>
+  </div>
+
+  <div class="scenario-card">
+    <h4>Saving Your Progress</h4>
+    <p>You've made some changes and want to save them with a descriptive message.</p>
+    <div class="command">"Commit my changes with the message 'Add login form validation'"</div>
+  </div>
+
+  <div class="scenario-card">
+    <h4>Sharing Your Work</h4>
+    <p>Your feature is ready for review and you want to create a pull request.</p>
+    <div class="command">"Push this branch and create a PR to main"</div>
+  </div>
+
+  <div class="scenario-card">
+    <h4>Handling Conflicts</h4>
+    <p>Someone else made changes to the same files you're working on.</p>
+    <div class="command">"Pull the latest from main and help me resolve any conflicts"</div>
+  </div>
+
+  <CalloutBox type="breakthrough" title="Claude Translates for You">
+    You don't need to know the exact Git commands. Claude Code understands your intent and executes the right commands. Focus on what you want to accomplish, not how Git works.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="technical-say-vs-git" data-jump-label="Your Words to Git Commands">What You Say vs. What Git Does</h2>
+
+  <table class="command-table">
+    <thead>
+      <tr>
+        <th>You Say</th>
+        <th>Git Command (for reference)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>"Start a new branch for this feature"</td>
+        <td><code>git checkout -b feature-name</code></td>
+      </tr>
+      <tr>
+        <td>"Save my changes"</td>
+        <td><code>git add . && git commit -m "..."</code></td>
+      </tr>
+      <tr>
+        <td>"Upload this to GitHub"</td>
+        <td><code>git push origin branch-name</code></td>
+      </tr>
+      <tr>
+        <td>"Get the latest changes from the team"</td>
+        <td><code>git pull origin main</code></td>
+      </tr>
+      <tr>
+        <td>"I'm done, create a review request"</td>
+        <td><code>gh pr create</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="self-assessment">
+    <h3>Self-Assessment</h3>
+    <p>Before moving on, can you:</p>
+    <ul class="assessment-list">
+      <li>Explain why code lives in two places (local and GitHub)?</li>
+      <li>Describe what a commit, branch, and pull request are?</li>
+      <li>Ask Claude Code to save, push, and share your work?</li>
+      <li>Handle common scenarios like creating branches and resolving conflicts?</li>
+    </ul>
+  </div>
+
+</ModuleLayout>

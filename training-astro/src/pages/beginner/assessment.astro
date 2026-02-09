@@ -1,0 +1,160 @@
+---
+// src/pages/beginner/assessment.astro
+// ═══════════════════════════════════════
+// BEGINNER PATH ASSESSMENT
+// This is ALL the code needed for a module page.
+// Compare to the 400-line HTML original.
+// ═══════════════════════════════════════
+
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+
+const course = 'claude-training';
+const path = 'beginner';
+const module = 'assessment';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Knowledge self-assessment plus practical demonstration"
+  learningObjective="Complete this assessment after finishing all 9 modules in the Beginner path. This combines self-reflection with hands-on demonstration of your skills."
+>
+
+  <!-- ── Part 1: Knowledge Self-Assessment ───────── -->
+  <div class="part-divider">
+    <h2>Part 1: Knowledge Self-Assessment</h2>
+    <p>Rate your confidence (1-5) on each statement</p>
+  </div>
+
+  <ul class="assessment-list">
+    <li class="assessment-item">
+      <div class="assessment-number">1</div>
+      <div class="assessment-content">
+        <h4>AI Foundations</h4>
+        <p>I can explain what LLMs are and their key limitations to a colleague</p>
+      </div>
+    </li>
+    <li class="assessment-item">
+      <div class="assessment-number">2</div>
+      <div class="assessment-content">
+        <h4>Interface & Settings</h4>
+        <p>I can confidently navigate Claude Chat's interface, settings, and features</p>
+      </div>
+    </li>
+    <li class="assessment-item">
+      <div class="assessment-number">3</div>
+      <div class="assessment-content">
+        <h4>Files & Memory</h4>
+        <p>I understand file uploads, Memory, and Extended Thinking</p>
+      </div>
+    </li>
+    <li class="assessment-item">
+      <div class="assessment-number">4</div>
+      <div class="assessment-content">
+        <h4>Connectors</h4>
+        <p>I know when and how to use all 12 connectors including web search</p>
+      </div>
+    </li>
+    <li class="assessment-item">
+      <div class="assessment-number">5</div>
+      <div class="assessment-content">
+        <h4>Artifacts</h4>
+        <p>I can create, edit, iterate, and export all 7 artifact types</p>
+      </div>
+    </li>
+    <li class="assessment-item">
+      <div class="assessment-number">6</div>
+      <div class="assessment-content">
+        <h4>Prompting & Styles</h4>
+        <p>I can write CTFC-structured prompts and use/create Styles</p>
+      </div>
+    </li>
+    <li class="assessment-item">
+      <div class="assessment-number">7</div>
+      <div class="assessment-content">
+        <h4>Skills</h4>
+        <p>I understand what skills are and can call them through natural language</p>
+      </div>
+    </li>
+  </ul>
+
+  <div class="passing-criteria">
+    <h4>Passing Criteria</h4>
+    <p>No ratings below 3; average 4.0+</p>
+  </div>
+
+  <!-- ── Part 2: Practical Demonstrations ────────── -->
+  <div class="part-divider">
+    <h2>Part 2: Practical Demonstrations</h2>
+    <p>Complete ANY 3 of 6 tasks</p>
+  </div>
+
+  <div class="task-grid">
+    <div class="task-card">
+      <h4>Task A: Document Analysis</h4>
+      <ul>
+        <li>Upload a document</li>
+        <li>Ask Claude to summarize key points</li>
+        <li>Export the summary to Google Drive</li>
+      </ul>
+    </div>
+    <div class="task-card">
+      <h4>Task B: Content Creation with Artifact</h4>
+      <ul>
+        <li>Create a document or presentation artifact</li>
+        <li>Iterate on it (at least 2 versions)</li>
+        <li>Export to your preferred format</li>
+      </ul>
+    </div>
+    <div class="task-card">
+      <h4>Task C: Connector Usage</h4>
+      <ul>
+        <li>Use at least one connector to find information</li>
+        <li>Could be Drive file, email, calendar event, or Slack search</li>
+        <li>Demonstrate Claude pulling external data</li>
+      </ul>
+    </div>
+    <div class="task-card">
+      <h4>Task D: Using Skills</h4>
+      <ul>
+        <li>Find an organization skill in Settings</li>
+        <li>Trigger it through natural language</li>
+        <li>Show the skill-enhanced output</li>
+      </ul>
+    </div>
+    <div class="task-card">
+      <h4>Task E: Prompting with CTFC</h4>
+      <ul>
+        <li>Write a prompt using all four CTFC components</li>
+        <li>Show the improved result vs. a basic prompt</li>
+      </ul>
+    </div>
+    <div class="task-card">
+      <h4>Task F: Interactive Exploration</h4>
+      <ul>
+        <li>Request an interactive artifact (calculator, quiz, etc.)</li>
+        <li>Test that it actually functions</li>
+        <li>Explain what it does</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── Next Steps ──────────────────────────────── -->
+  <h2 class="section-heading" id="next-steps" data-jump-label="Next Steps">Next Steps</h2>
+
+  <div class="next-steps">
+    <h3>Based on Your Results</h3>
+    <div class="next-step-item">
+      <span class="next-step-badge ready">Average 4+</span>
+      <span class="next-step-content">You're ready for the Intermediate path!</span>
+    </div>
+    <div class="next-step-item">
+      <span class="next-step-badge review">Any 3 or below</span>
+      <span class="next-step-content">Review the specific module and try the exercises again</span>
+    </div>
+    <div class="next-step-item">
+      <span class="next-step-badge practice">Want more practice?</span>
+      <span class="next-step-content">Use Prompt Cowboy or start a Project to apply your learning</span>
+    </div>
+  </div>
+
+</ModuleLayout>

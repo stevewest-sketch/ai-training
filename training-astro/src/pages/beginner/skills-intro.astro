@@ -1,0 +1,161 @@
+---
+// src/pages/beginner/skills-intro.astro
+// ═══════════════════════════════════════
+// BEGINNER MODULE 9: Introduction to Skills
+// This is ALL the code needed for a module page.
+// Compare to the 475-line HTML original.
+// ═══════════════════════════════════════
+
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'beginner';
+const module = 'skills-intro';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Understand what skills are and how to leverage preloaded capabilities through natural language"
+  learningObjective="By the end of this module, you'll understand what skills are and how to call them through natural language—no special commands needed."
+>
+
+  <!-- ── Watch: Skills Explained ──────────────────── -->
+  <h2 class="section-heading" id="skills-video" data-jump-label="Skills Explained Video">Watch: Skills Explained</h2>
+  <p class="section-description">Skills intro, pre-built Gladly skills, markdown structure, skill creator, and nested skills.</p>
+
+  <VideoEmbed
+    title="Skills: Saved Prompts on Steroids"
+    src="https://drive.google.com/file/d/10Bz1bpAtEJlvE_tTXWqv794f2P2KpvB9/preview"
+    duration="~5.5 min"
+    presenter="Austin Reece + Emilio Di Zazzo"
+    date="Claude 101 Training • Feb 5, 2026"
+  />
+
+  <!-- ── What Are Skills? ────────────────────────── -->
+  <h2 class="section-heading" id="what-are-skills" data-jump-label="What Are Skills?">What Are Skills?</h2>
+
+  <div class="blockquote">
+    <p>"Skills are capabilities you can call upon that are preloaded into Claude... To call on those skills, you just do it in natural language."</p>
+  </div>
+
+  <p class="section-description">Think of skills as specialized abilities Claude has been trained to perform well. Some come from Anthropic, some are Gladly-specific.</p>
+
+  <!-- ── Skills vs. Connectors ───────────────────── -->
+  <h2 class="section-heading" id="skills-vs-connectors" data-jump-label="Skills vs Connectors Comparison">Skills vs. Connectors</h2>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Connectors</th>
+        <th>Skills</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>What they do</td>
+        <td>Access external data</td>
+        <td>Perform specific workflows</td>
+      </tr>
+      <tr>
+        <td>Who creates them</td>
+        <td>Built into Claude</td>
+        <td>Your organization</td>
+      </tr>
+      <tr>
+        <td>How activated</td>
+        <td>Always available</td>
+        <td>Triggered by context</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── How Skills Work ─────────────────────────── -->
+  <h2 class="section-heading" id="how-skills-work" data-jump-label="How Skills Work Naturally">How Skills Work</h2>
+  <p class="section-description">You don't need to know how skills are built—just how to use them. Simply describe what you need:</p>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">natural-language-examples.md</span>
+    </div>
+    <div class="terminal-content">
+      <span class="example">"Create a PowerPoint presentation about..."</span><br>
+      <span class="example">"Analyze this data and show me a chart..."</span><br>
+      <span class="example">"Help me structure this document using our standard template..."</span>
+    </div>
+  </div>
+
+  <p class="section-description">Claude recognizes when a skill applies and uses it automatically.</p>
+
+  <!-- ── Types of Skills ─────────────────────────── -->
+  <h2 class="section-heading" id="skill-types" data-jump-label="Types of Skills Available">Types of Skills Available</h2>
+
+  <div class="skills-list">
+    <div class="skills-category">
+      <h4>From Anthropic (Built-in):</h4>
+      <ul>
+        <li>Document creation (Word, PowerPoint, etc.)</li>
+        <li>Data analysis and visualization</li>
+        <li>Code generation and explanation</li>
+        <li>Image understanding</li>
+      </ul>
+    </div>
+    <div class="skills-category">
+      <h4>From Gladly (Custom):</h4>
+      <ul>
+        <li>Competitive positioning frameworks</li>
+        <li>Strategic messaging alignment</li>
+        <li>Presentation templates</li>
+        <li>Content formatting standards</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── Using Skills Naturally ──────────────────── -->
+  <h2 class="section-heading" id="using-skills" data-jump-label="Using Skills in Natural Language">Using Skills Naturally</h2>
+  <p class="section-description">You don't need special commands:</p>
+
+  <div class="compare-grid">
+    <div class="compare-card bad">
+      <div class="compare-label">❌ Don't do this</div>
+      <p>"Activate competitive analysis skill"</p>
+    </div>
+    <div class="compare-card good">
+      <div class="compare-label">✓ Do this instead</div>
+      <p>"Analyze Sierra AI's recent product announcements"</p>
+    </div>
+  </div>
+
+  <!-- ── Example: Using a Skill ──────────────────── -->
+  <h2 class="section-heading" id="skill-example" data-jump-label="Example Skill in Action">Example: Using a Skill</h2>
+
+  <div class="example-box">
+    <h4>Competitive Positioning Skill in Action</h4>
+    <div class="example-step">
+      <span class="example-step-label">You say:</span>
+      <span class="example-step-content">"Create a competitive comparison slide for Sierra AI vs Gladly"</span>
+    </div>
+    <div class="example-step">
+      <span class="example-step-label">What happens:</span>
+      <span class="example-step-content">
+        1. Claude recognizes this needs the competitive positioning skill<br>
+        2. Applies Gladly's framework and messaging<br>
+        3. Creates properly formatted output
+      </span>
+    </div>
+    <div class="example-step">
+      <span class="example-step-label">Key point:</span>
+      <span class="example-step-content">You didn't have to specify "use the competitive skill"—Claude figured it out from context.</span>
+    </div>
+  </div>
+
+  <CalloutBox type="breakthrough" title="Looking Ahead">
+    In the Intermediate path, you'll learn what skills actually are (they're markdown files!) and how to create your own. For now, just focus on calling them naturally.
+  </CalloutBox>
+
+</ModuleLayout>

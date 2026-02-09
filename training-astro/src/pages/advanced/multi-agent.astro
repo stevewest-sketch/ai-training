@@ -1,0 +1,105 @@
+---
+// src/pages/advanced/multi-agent.astro
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'advanced';
+const module = 'multi-agent';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Coordinate multiple agents working together"
+  learningObjective="By the end of this module, you'll understand agent swarm architecture, implement inter-agent communication, design workflow orchestration patterns, and handle conflicts between agents."
+>
+
+  <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 2rem; text-align: center;">
+    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔒</div>
+    <h3 style="color: #92400e; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Coming Soon</h3>
+    <p style="color: #78350f; font-size: 0.9375rem;">This module is under development. Check back soon for full content on multi-agent orchestration.</p>
+  </div>
+
+  <h2 class="section-heading" id="resources" data-jump-label="Swarm Patterns and Examples">Resources</h2>
+
+  <div class="resource-card">
+    <div class="resource-icon">🐙</div>
+    <div class="resource-info">
+      <h4>Compound Engineering Plugin</h4>
+      <p>Agent swarm architecture and patterns</p>
+    </div>
+    <a href="https://github.com/EveryInc/compound-engineering-plugin" target="_blank" class="resource-link">View on GitHub →</a>
+  </div>
+
+  <div class="resource-card">
+    <div class="resource-icon">📝</div>
+    <div class="resource-info">
+      <h4>Orchestration Patterns</h4>
+      <p>Multi-agent coordination patterns and examples</p>
+    </div>
+    <a href="https://gist.github.com/kieranklaassen/4f2aba89594a4aea4ad64d753984b2ea" target="_blank" class="resource-link">View Gist →</a>
+  </div>
+
+  <h2 class="section-heading" id="agent-interconnections" data-jump-label="How Agents Communicate">Agent Interconnections (9-Agent Spec)</h2>
+  <p class="section-description">How Gladly's agents will communicate with each other</p>
+
+  <div class="flow-diagram">
+    <div class="flow-title">Example: Content Distribution Flow</div>
+    <div class="flow-items">
+      <div class="flow-item">
+        <h4>Content Engine</h4>
+        <p>Creates content</p>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-item">
+        <h4>Design Automation</h4>
+        <p>Creates visuals</p>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-item">
+        <h4>Social Media</h4>
+        <p>Publishes content</p>
+      </div>
+    </div>
+  </div>
+
+  <CalloutBox type="breakthrough" title="Other Agent Connections">
+    <strong>Competitive Intel → PMM Agent:</strong> Real-time competitive updates. <strong>Customer Content Hub → Multiple agents:</strong> Central source of truth for all content-generating agents.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="key-concepts" data-jump-label="Orchestration and Conflict Resolution">Key Concepts</h2>
+
+  <div class="concepts-grid">
+    <div class="concept-card">
+      <h4>Agent Swarm Architecture</h4>
+      <p>Patterns for organizing multiple specialized agents into coordinated teams.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Inter-Agent Communication</h4>
+      <p>How agents pass information, trigger each other, and share context.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Workflow Orchestration</h4>
+      <p>Designing sequences of agent actions with proper dependencies and handoffs.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Conflict Resolution</h4>
+      <p>Handling situations where agents have competing priorities or conflicting outputs.</p>
+    </div>
+  </div>
+
+  <CalloutBox type="limitation" title="Start Simple">
+    Multi-agent systems add complexity. Start with two agents communicating, get that working reliably, then add more. Debug one connection at a time.
+  </CalloutBox>
+
+  <div class="self-assessment">
+    <h3>Self-Assessment</h3>
+    <p>Before moving on, can you:</p>
+    <ul class="assessment-list">
+      <li>Design a workflow involving multiple coordinated agents?</li>
+      <li>Implement inter-agent communication and handoffs?</li>
+      <li>Handle conflicts and errors in multi-agent systems?</li>
+    </ul>
+  </div>
+
+</ModuleLayout>

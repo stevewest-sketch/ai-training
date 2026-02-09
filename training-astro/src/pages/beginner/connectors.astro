@@ -1,0 +1,206 @@
+---
+// src/pages/beginner/connectors.astro
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'beginner';
+const module = 'connectors';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Understand all 12 connectors, master web search, and know when to use each"
+  learningObjective="By the end of this module, you'll understand how to use all 12 connectors available in Claude Chat, including when to use web search vs. other connectors."
+>
+
+  <h2 class="section-heading" id="connectors-video" data-jump-label="Connectors Overview">Watch: Connectors Overview</h2>
+  <p class="section-description">Austin introduces connectors and walks through every one available in the Gladly license.</p>
+
+  <VideoEmbed
+    title="Connectors: Linking Claude to Your Tools"
+    src="https://drive.google.com/file/d/1krrw5c0AS-LwGIUPFVHExNhcVd93XEYY/preview"
+    duration="2 min"
+    presenter="Austin Reece"
+    date="Claude 101 Training • Feb 5, 2026"
+  />
+
+  <h2 class="section-heading" id="what-connectors" data-jump-label="What Are Connectors">What Are Connectors?</h2>
+  <p class="section-description">Connectors allow Claude Chat to access external data sources and services during your conversation. Instead of copying and pasting information, Claude can pull it directly.</p>
+
+  <h2 class="section-heading" id="all-connectors" data-jump-label="All 12 Available Connectors">All 12 Available Connectors</h2>
+  <p class="section-description">Each connector gives Claude access to different data sources</p>
+
+  <table class="connector-table">
+    <thead>
+      <tr>
+        <th>Connector</th>
+        <th>What Claude Can Access</th>
+        <th>Example Use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="connector-name">Google Drive</td>
+        <td>Documents, spreadsheets, slides, files</td>
+        <td>"Summarize my Q4 planning doc"</td>
+      </tr>
+      <tr>
+        <td class="connector-name">Gmail</td>
+        <td>Read emails, search inbox, find attachments</td>
+        <td>"Find the last email from [client]"</td>
+      </tr>
+      <tr>
+        <td class="connector-name">Google Calendar</td>
+        <td>View events, check availability, meeting details</td>
+        <td>"What meetings do I have tomorrow?"</td>
+      </tr>
+      <tr>
+        <td class="connector-name">Slack</td>
+        <td>Search messages, channels, read conversations</td>
+        <td>"Find recent discussions about PMM Agent"</td>
+      </tr>
+      <tr>
+        <td class="connector-name">Notion</td>
+        <td>Pages, databases, workspace content</td>
+        <td>"Search my Notion for project specs"</td>
+      </tr>
+      <tr>
+        <td class="connector-name">Gong</td>
+        <td>Call recordings, transcripts, deal info</td>
+        <td>"Summarize last week's calls"</td>
+      </tr>
+      <tr>
+        <td class="connector-name">GitHub</td>
+        <td>Repositories, code, issues, PRs</td>
+        <td>"Check the status of open issues"</td>
+      </tr>
+      <tr>
+        <td class="connector-name">Figma</td>
+        <td>Design files, components, comments</td>
+        <td>"Review the latest mockups"</td>
+      </tr>
+      <tr>
+        <td class="connector-name">Asana</td>
+        <td>Tasks, projects, workspaces</td>
+        <td>"What tasks are due this week?"</td>
+      </tr>
+      <tr>
+        <td class="connector-name">Jira</td>
+        <td>Issues, projects, sprint info</td>
+        <td>"Show me open bugs in current sprint"</td>
+      </tr>
+      <tr>
+        <td class="connector-name">Sanity</td>
+        <td>CMS content, documents, assets</td>
+        <td>"Find recent blog drafts"</td>
+      </tr>
+      <tr>
+        <td class="connector-name">Web Search</td>
+        <td>Real-time internet search results</td>
+        <td>"What's Sierra AI announcing this week?"</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-heading" id="enable-connectors" data-jump-label="How to Enable Connectors">How to Enable Connectors</h2>
+  <p class="section-description">Set up connectors in your Claude settings</p>
+
+  <ol class="steps-list">
+    <li>Open Claude Settings (gear icon)</li>
+    <li>Navigate to "Connectors" section</li>
+    <li>Toggle on desired connectors</li>
+    <li>Authorize access when prompted</li>
+  </ol>
+
+  <h2 class="section-heading" id="live-demo" data-jump-label="Granola to Slack Workflow Demo">Watch: Live Demo — Granola to Slack Workflow</h2>
+  <p class="section-description">Connectors in action: querying Granola for meeting notes, then posting a summary to Slack.</p>
+
+  <VideoEmbed
+    title="Live Demo: Using Connectors (Granola → Slack)"
+    src="https://drive.google.com/file/d/1pkVFveJ2pXr6IRICWggGCWcT_7zExI1y/preview"
+    duration="4.5 min"
+    presenter="Austin Reece"
+    date="Claude 101 Training • Feb 5, 2026"
+  />
+
+  <h2 class="section-heading" id="using-connectors" data-jump-label="Using Connectors in Conversation">Using Connectors in Conversation</h2>
+  <p class="section-description">Once enabled, you simply mention the data you need</p>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">example-prompts.md</span>
+    </div>
+    <div class="terminal-content">
+      <span class="label">Google Drive:</span><br>
+      <span class="example">"Look at my doc called 'Q4 OKRs' and summarize the key objectives"</span><br><br>
+      <span class="label">Calendar:</span><br>
+      <span class="example">"What does my week look like? Any conflicts I should know about?"</span><br><br>
+      <span class="label">Slack:</span><br>
+      <span class="example">"Search our Slack for recent conversations about the pricing page redesign"</span><br><br>
+      <span class="label">Web Search:</span><br>
+      <span class="example">"What's Sierra AI announcing this week?"</span>
+    </div>
+  </div>
+
+  <CalloutBox type="breakthrough" title="Best Practices">
+    Be specific about which document or channel you're referencing. Claude will ask for clarification if multiple matches exist. Connectors work in Chat mode only (Cowork has direct file access instead).
+  </CalloutBox>
+
+  <h2 class="section-heading" id="web-search" data-jump-label="Web Search Deep Dive">Web Search Deep Dive</h2>
+  <p class="section-description">Understanding when and how Claude searches the web</p>
+
+  <CalloutBox type="breakthrough" title="When Claude Searches Automatically">
+    Questions about recent events, current data, topics requiring up-to-date information
+  </CalloutBox>
+
+  <CalloutBox type="limitation" title="Understanding Citations">
+    Numbered references [1], [2] link to sources. You can request explicit searches: "Search the web for recent reviews of [product]"
+  </CalloutBox>
+
+  <h2 class="section-heading" id="search-vs-connectors" data-jump-label="Web Search vs Connectors">Web Search vs. Connectors</h2>
+  <p class="section-description">Know when to use each</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Use Web Search When...</th>
+        <th>Use Connectors When...</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Information is publicly available</td>
+        <td>Information is in your workspace</td>
+      </tr>
+      <tr>
+        <td>You need current/recent data</td>
+        <td>You need historical company data</td>
+      </tr>
+      <tr>
+        <td>Researching external topics</td>
+        <td>Accessing emails, files, messages</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <CalloutBox type="limitation" title="Web Search Limitations">
+    Cannot access paywalled content, login-required pages, or real-time dynamic data
+  </CalloutBox>
+
+  <div class="callout callout-breakthrough" style="background: #f3e8ff; border-left: 3px solid #8b5cf6;">
+    <div class="callout-title" style="color: #7c3aed;">Try It Yourself</div>
+    <p style="margin-bottom: 0.75rem;">Practice enabling and using a connector:</p>
+    <ol style="padding-left: 1.25rem; color: #4b5563; font-size: 0.875rem;">
+      <li style="padding: 0.25rem 0;">Go to Settings → Connectors</li>
+      <li style="padding: 0.25rem 0;">Enable the Google Drive connector and authorize access</li>
+      <li style="padding: 0.25rem 0;">Start a new conversation and ask: "Look at my Google Drive and tell me what documents I have"</li>
+      <li style="padding: 0.25rem 0;">Try a web search: "Search the web for recent news about AI assistants"</li>
+    </ol>
+  </div>
+
+</ModuleLayout>

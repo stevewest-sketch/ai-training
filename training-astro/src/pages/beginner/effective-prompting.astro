@@ -1,0 +1,206 @@
+---
+// src/pages/beginner/effective-prompting.astro
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'beginner';
+const module = 'effective-prompting';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Master the CTFC framework, understand Styles, and create custom styles"
+  learningObjective="By the end of this module, you'll master the CTFC framework for structuring prompts, understand the built-in Styles feature, and know how to create custom styles for consistent outputs."
+>
+
+  <h2 class="section-heading" id="practice-tool" data-jump-label="Prompt Cowboy Practice Tool">Practice Tool</h2>
+  <p class="section-description">Use Prompt Cowboy to practice and improve your prompting skills</p>
+
+  <div class="resource-card">
+    <div class="resource-icon">🤠</div>
+    <div class="resource-info">
+      <h4>Prompt Cowboy</h4>
+      <p>Interactive tool for practicing and optimizing your prompts with real-time feedback</p>
+      <div class="resource-meta">
+
+        <span>🔧 Interactive Tool</span>
+      </div>
+    </div>
+    <a href="https://www.promptcowboy.ai/" target="_blank" class="resource-link">Open Tool →</a>
+  </div>
+
+  <h2 class="section-heading" id="ctfc-framework" data-jump-label="The CTFC Prompting Framework">The CTFC Framework</h2>
+  <p class="section-description">Structure your prompts with these four components for consistently better results</p>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">prompt-framework.md</span>
+    </div>
+    <div class="terminal-content">
+      <span class="label">CONTEXT:</span> <span class="example">[Who you are and what you're working on]</span><br><br>
+      <span class="label">TASK:</span> <span class="example">[Specific action you need]</span><br><br>
+      <span class="label">FORMAT:</span> <span class="example">[How you want the output structured]</span><br><br>
+      <span class="label">CONSTRAINTS:</span> <span class="example">[Any limitations or requirements]</span>
+    </div>
+  </div>
+
+  <CalloutBox type="breakthrough" title="Why This Works">
+    Giving Claude context helps it understand your perspective. Being specific about the task eliminates guesswork. Defining the format ensures you get usable output. Adding constraints prevents unwanted content.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="prompting-video" data-jump-label="Prompting Techniques Video">Watch: Prompting Techniques from Claude 101</h2>
+  <p class="section-description">Five techniques: Ask First, Few-Shot, XML Tags, Chain of Thought, Role Setting.</p>
+
+  <VideoEmbed
+    title="Prompting Techniques: Getting Better Outputs"
+    src="https://drive.google.com/file/d/1dtDIyKphK9MhrldsSWXIb7-9K-3w9xVb/preview"
+    duration="4 min"
+    presenter="Austin Reece"
+    date="Claude 101 Training • Feb 5, 2026"
+  />
+
+  <h2 class="section-heading" id="before-after" data-jump-label="Before and After Prompt Examples">Before & After Examples</h2>
+  <p class="section-description">See how applying the framework transforms prompt effectiveness</p>
+
+  <div class="compare-grid">
+    <div class="compare-card bad">
+      <div class="compare-label">❌ Vague Prompt</div>
+      <p>"Write me an email about the project update."</p>
+    </div>
+    <div class="compare-card good">
+      <div class="compare-label">✓ CTFC Prompt</div>
+      <p>"I'm a project manager updating stakeholders on Q1 progress. Write a professional email summarizing our 3 key wins and 1 risk area. Keep it under 200 words and end with next steps."</p>
+    </div>
+  </div>
+
+  <div class="compare-grid">
+    <div class="compare-card bad">
+      <div class="compare-label">❌ Vague Prompt</div>
+      <p>"Help me with this data."</p>
+    </div>
+    <div class="compare-card good">
+      <div class="compare-label">✓ CTFC Prompt</div>
+      <p>"I'm analyzing customer churn data for our monthly report. Calculate the churn rate from this CSV and create a summary table showing trends by month. Focus on accounts over $10k ARR only."</p>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="prompting-principles" data-jump-label="Key Prompting Principles">Key Prompting Principles</h2>
+  <p class="section-description">Additional tips for getting the best results</p>
+
+  <CalloutBox type="limitation" title="Be Specific About Output Format">
+    If you need a list, say "bullet points." If you need a table, describe the columns. If you need code, specify the language. Don't make Claude guess.
+  </CalloutBox>
+
+  <CalloutBox type="breakthrough" title="Provide Examples When Helpful">
+    If you want a specific style or format, show Claude an example. "Write in a tone like this: [example]" is more effective than trying to describe the tone.
+  </CalloutBox>
+
+  <CalloutBox type="limitation" title="Iterate Based on Results">
+    If the first response isn't quite right, tell Claude specifically what to change. "Make it more concise" or "Focus more on the technical details" helps Claude adjust.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="style-video" data-jump-label="Personalizing Claude Output Style">Watch: Personalizing Claude's Style</h2>
+  <p class="section-description">Team discussion on customizing output style, voice-to-text brain dumps, and providing examples.</p>
+
+  <VideoEmbed
+    title="Team Discussion: Personalizing Claude's Output Style"
+    src="https://drive.google.com/file/d/1qVHIxhqxOnDtUDoT6R2vu1AcP6KD0a_C/preview"
+    duration="4.5 min"
+    presenter="Ron Penones + Panel"
+    date="Claude 101 Training • Feb 5, 2026"
+  />
+
+  <h2 class="section-heading" id="styles-feature" data-jump-label="Built-in Styles Feature">The Styles Feature</h2>
+  <p class="section-description">Claude has built-in styles that control the tone and format of responses</p>
+
+  <table class="concept-table">
+    <thead>
+      <tr>
+        <th>Style</th>
+        <th>What It Does</th>
+        <th>Best For</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Normal</strong></td>
+        <td>Balanced, conversational</td>
+        <td>General use</td>
+      </tr>
+      <tr>
+        <td><strong>Concise</strong></td>
+        <td>Brief, direct</td>
+        <td>Quick answers</td>
+      </tr>
+      <tr>
+        <td><strong>Explanatory</strong></td>
+        <td>Detailed with context</td>
+        <td>Learning, complex topics</td>
+      </tr>
+      <tr>
+        <td><strong>Formal</strong></td>
+        <td>Professional tone</td>
+        <td>External communications</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-heading" id="custom-styles" data-jump-label="Creating Your Custom Styles">Creating Custom Styles</h2>
+  <p class="section-description">Create your own styles for consistent outputs across conversations</p>
+
+  <div class="steps-list">
+    <ol>
+      <li>Go to <strong>Settings → Styles</strong></li>
+      <li>Click <strong>Create New Style</strong></li>
+      <li>Write instructions for tone, format, approach</li>
+    </ol>
+  </div>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">Example: "Executive Brief" Style</span>
+    </div>
+    <div class="terminal-content">
+      Write for executive audiences:<br><br>
+      - Lead with the insight or recommendation<br>
+      - Max 3 paragraphs<br>
+      - Use numbers and metrics when available<br>
+      - End with clear next steps
+    </div>
+  </div>
+
+  <CalloutBox type="breakthrough" title="When to Use Custom Styles">
+    Create custom styles for recurring communication patterns: team updates, customer emails, executive summaries, technical documentation. Once created, select the style from the dropdown to apply it automatically.
+  </CalloutBox>
+
+  <div class="callout callout-breakthrough" style="background: #f3e8ff; border-left: 3px solid #8b5cf6;">
+    <div class="callout-title" style="color: #7c3aed;">Try It Yourself: CTFC Practice</div>
+    <p style="margin-bottom: 0.75rem;">Compare results using the CTFC framework:</p>
+    <ol style="padding-left: 1.25rem; color: #4b5563; font-size: 0.875rem;">
+      <li style="padding: 0.25rem 0;"><strong>Vague prompt:</strong> Ask Claude "Write an email about a meeting"</li>
+      <li style="padding: 0.25rem 0;"><strong>CTFC prompt:</strong> Now try: "I'm a team lead scheduling a planning meeting with my 5-person team. Write a casual email inviting them to a 30-minute sync next Tuesday at 2pm. Include the agenda: Q2 goals review and task assignments. Keep it under 100 words."</li>
+      <li style="padding: 0.25rem 0;">Compare the two responses—notice how much more useful the second one is</li>
+      <li style="padding: 0.25rem 0;"><strong>Bonus:</strong> Create a custom Style in Settings for your most common communication type</li>
+    </ol>
+  </div>
+
+  <div class="self-assessment">
+    <h3>Self-Assessment</h3>
+    <p>Before moving on, can you:</p>
+    <ul class="assessment-list">
+      <li>Write a prompt using Context, Task, Format, and Constraints?</li>
+      <li>Identify what's missing from a vague prompt?</li>
+      <li>Explain the difference between built-in styles?</li>
+      <li>Create a custom style for a recurring communication need?</li>
+    </ul>
+  </div>
+
+</ModuleLayout>

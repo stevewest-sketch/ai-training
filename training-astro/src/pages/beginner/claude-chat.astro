@@ -1,0 +1,606 @@
+---
+// src/pages/beginner/claude-chat.astro
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'beginner';
+const module = 'claude-chat';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Master the conversational AI interface you'll use every day"
+  learningObjective="By the end of this module, you'll use Claude Chat confidently for brainstorming, drafting, learning, and quick productivity wins."
+>
+
+  <h2 class="section-heading" id="overview" data-jump-label="Claude Chat Overview">Overview</h2>
+  <p class="section-description">In Module 1.2, you learned about Claude's three modes: Chat, Cowork, and Code. Now let's dive deep into <strong>Claude Chat</strong> — the mode you'll use most frequently.</p>
+
+  <p class="section-description"><strong>Claude Chat</strong> is where you think together with Claude. It's your always-available thinking partner — ready to brainstorm ideas, draft content, explain concepts, and help you work through problems in conversation.</p>
+
+  <div class="key-difference">
+    <p><strong>The Key Difference:</strong><br>Claude Chat is for <em>thinking together</em>.<br>Claude Cowork is for <em>working together</em>.</p>
+  </div>
+
+  <h2 class="section-heading" id="chat-different" data-jump-label="Chat vs Cowork Comparison">What Makes Chat Different?</h2>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Capability</th>
+        <th>Claude Chat</th>
+        <th>Claude Cowork</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Answer questions</td>
+        <td class="check">✓</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Draft content</td>
+        <td class="check">✓</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Brainstorm ideas</td>
+        <td class="check">✓ Best for this</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Learn and explore topics</td>
+        <td class="check">✓ Best for this</td>
+        <td>Limited</td>
+      </tr>
+      <tr>
+        <td>Back-and-forth iteration</td>
+        <td class="check">✓ Best for this</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Access cloud files (Drive, Gmail, etc.)</td>
+        <td class="check">✓ via Connectors</td>
+        <td class="cross">✗</td>
+      </tr>
+      <tr>
+        <td>Access your local files</td>
+        <td class="cross">✗ (upload instead)</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Move/organize local files</td>
+        <td class="cross">✗</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Create files on your computer</td>
+        <td class="cross">✗</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Work while you do other tasks</td>
+        <td class="cross">✗</td>
+        <td class="check">✓</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <CalloutBox type="breakthrough" title="The Mental Model">
+    <strong>Claude Chat</strong> = A brilliant colleague you can call anytime to talk through ideas<br>
+    <strong>Claude Cowork</strong> = That same colleague sitting at your desk, able to actually do the work with you
+  </CalloutBox>
+
+  <h2 class="section-heading" id="chat-best" data-jump-label="What Chat Mode Does Best">What Chat Mode Does Best</h2>
+  <p class="section-description">Chat is optimized for conversational, iterative work where you're actively engaged</p>
+
+  <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #22c55e;">✓ Quick Questions & Explanations</h3>
+  <p class="section-description">Get instant answers, clarifications, and explanations on any topic.</p>
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">example prompt</span>
+    </div>
+    <div class="terminal-content">What's the difference between ARR and MRR? Explain it simply.</div>
+  </div>
+
+  <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #22c55e;">✓ Brainstorming & Ideation</h3>
+  <p class="section-description">Generate ideas, explore possibilities, and think through problems together.</p>
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">example prompt</span>
+    </div>
+    <div class="terminal-content">I need 10 creative angles for our Q2 email campaign targeting mid-market retail.</div>
+  </div>
+
+  <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #22c55e;">✓ Content Drafting</h3>
+  <p class="section-description">Write and refine emails, documents, presentations, and more through conversation.</p>
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">example prompt</span>
+    </div>
+    <div class="terminal-content">Draft a follow-up email to a prospect who went dark after our demo. Make it warm but direct.</div>
+  </div>
+
+  <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #22c55e;">✓ Learning & Exploration</h3>
+  <p class="section-description">Understand new concepts, get context on topics, and build knowledge.</p>
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">example prompt</span>
+    </div>
+    <div class="terminal-content">Explain how vector embeddings work. I'm technical but new to AI.</div>
+  </div>
+
+  <h2 class="section-heading" id="chat-limitations" data-jump-label="Chat Mode Limitations">Chat Mode Limitations</h2>
+  <p class="section-description">Understanding these helps you know when to switch to Cowork</p>
+
+  <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #ef4444;">✗ Cannot Access Local Files</h3>
+  <p class="section-description">Chat can't browse your computer. You need to <strong>upload</strong> files directly, or use <strong>Cowork</strong> for file system access.</p>
+  <p class="section-description" style="color: #666;"><strong>Workaround:</strong> Drag-and-drop files into the chat, or use Connectors (next module).</p>
+
+  <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #ef4444;">✗ Cannot Modify Files on Your Computer</h3>
+  <p class="section-description">Chat can create content but can't save it to specific locations on your computer.</p>
+  <p class="section-description" style="color: #666;"><strong>Workaround:</strong> Copy/export from artifacts, or use Cowork for file operations.</p>
+
+  <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #ef4444;">✗ Cannot Run Long Processes Independently</h3>
+  <p class="section-description">Chat is conversational — it works <em>with</em> you, not <em>for</em> you in the background.</p>
+  <p class="section-description" style="color: #666;"><strong>When to switch:</strong> If you find yourself saying "do this while I go do something else" → Cowork.</p>
+
+  <CalloutBox type="limitation" title="Rule of Thumb">
+    If you find yourself saying "now take that and..." or "can you actually do this?" — you probably want <strong>Cowork</strong> (covered in the Intermediate path).
+  </CalloutBox>
+
+  <h2 class="section-heading" id="chat-examples" data-jump-label="Chat in Action Examples">Chat in Action: Real Examples</h2>
+  <p class="section-description">Let's look at how Chat shines in everyday work scenarios</p>
+
+  <!-- Example 1 -->
+  <div class="example-card">
+    <h4>Example 1: Quick Research & Synthesis</h4>
+    <p class="example-subtitle">You're preparing for a call with a prospect and need quick context on their industry.</p>
+
+    <div class="example-section">
+      <h5>What You'd Say:</h5>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">prompt</span>
+        </div>
+        <div class="terminal-content">I'm calling Sephora's CX team tomorrow. Give me:
+1. A quick overview of beauty retail CX trends
+2. The 3 biggest challenges their industry faces
+3. How competitors are using AI in this space</div>
+      </div>
+    </div>
+
+    <div class="example-section">
+      <h5>What Chat Does:</h5>
+      <div class="chat-response">
+        <ul>
+          <li>Synthesizes relevant information</li>
+          <li>Organizes it in a clear format</li>
+          <li>Gives you conversation-ready talking points</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="key-point">
+      <p><strong>Key Point:</strong> This is research and synthesis — Chat's sweet spot.</p>
+    </div>
+  </div>
+
+  <!-- Example 2 -->
+  <div class="example-card">
+    <h4>Example 2: Content Drafting with Iteration</h4>
+    <p class="example-subtitle">You need to write a customer case study email but want to get the tone right.</p>
+
+    <div class="example-section">
+      <h5>What You'd Say:</h5>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">prompt</span>
+        </div>
+        <div class="terminal-content">Help me write an email to our VP asking if we can publish
+their logo as a customer reference.
+
+Context:
+- They've been a customer for 8 months
+- Just renewed with expanded usage
+- We have a great relationship with the CSM
+- Never asked for reference permission before
+
+Make it warm and appreciative, not pushy.</div>
+      </div>
+    </div>
+
+    <div class="example-section">
+      <h5>You Iterate:</h5>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">follow-up prompt</span>
+        </div>
+        <div class="terminal-content">Good start. Can you:
+- Make it shorter (2 paragraphs max)
+- Add a specific mention of their NPS improvement
+- End with a softer call-to-action</div>
+      </div>
+    </div>
+
+    <div class="key-point">
+      <p><strong>Key Point:</strong> The back-and-forth iteration is what makes Chat powerful for drafting.</p>
+    </div>
+  </div>
+
+  <!-- Example 3 -->
+  <div class="example-card">
+    <h4>Example 3: Brainstorming Ideas</h4>
+    <p class="example-subtitle">You need creative angles for a webinar topic but feel stuck.</p>
+
+    <div class="example-section">
+      <h5>What You'd Say:</h5>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">prompt</span>
+        </div>
+        <div class="terminal-content">I'm planning a webinar on "AI in Customer Experience" for retail brands.
+
+Help me brainstorm:
+- 5 compelling title options
+- 3 different angles we could take
+- Discussion questions that would spark engagement
+
+Our audience is CX leaders at mid-market and enterprise retail companies.</div>
+      </div>
+    </div>
+
+    <div class="example-section">
+      <h5>What Chat Does:</h5>
+      <div class="chat-response">
+        <ul>
+          <li>Generates diverse options</li>
+          <li>Provides rationale for each</li>
+          <li>Asks follow-up questions to refine</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="key-point">
+      <p><strong>Key Point:</strong> Brainstorming is conversational by nature — Chat excels here.</p>
+    </div>
+  </div>
+
+  <!-- Example 4 -->
+  <div class="example-card">
+    <h4>Example 4: Learning a New Topic</h4>
+    <p class="example-subtitle">You need to understand a technical concept for an upcoming customer conversation.</p>
+
+    <div class="example-section">
+      <h5>What You'd Say:</h5>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">prompt</span>
+        </div>
+        <div class="terminal-content">I need to understand "customer data platforms" (CDPs) for a
+prospect conversation. I'm not technical.
+
+Explain:
+1. What a CDP is in simple terms
+2. How it's different from a CRM
+3. Why a CX team would care about CDP integration
+4. Questions I should ask about their CDP stack</div>
+      </div>
+    </div>
+
+    <div class="example-section">
+      <h5>What Chat Does:</h5>
+      <div class="chat-response">
+        <ul>
+          <li>Explains at your level</li>
+          <li>Connects concepts to your context (CX)</li>
+          <li>Prepares you for the real conversation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="key-point">
+      <p><strong>Key Point:</strong> Learning through dialogue helps you understand, not just memorize.</p>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="use-cases" data-jump-label="Common Chat Use Cases">Common Chat Use Cases at Gladly</h2>
+  <p class="section-description">Here's how your colleagues are using Chat today</p>
+
+  <table class="use-case-table">
+    <thead>
+      <tr>
+        <th>Use Case</th>
+        <th>What They're Doing</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Meeting Prep</strong></td>
+        <td>"Give me 5 questions to ask a VP of CX at a grocery chain about their AI strategy"</td>
+      </tr>
+      <tr>
+        <td><strong>Email Drafting</strong></td>
+        <td>"Help me write a follow-up to this prospect — firm but friendly"</td>
+      </tr>
+      <tr>
+        <td><strong>Competitive Intel</strong></td>
+        <td>"Compare our approach to Sierra's positioning on voice AI"</td>
+      </tr>
+      <tr>
+        <td><strong>Document Review</strong></td>
+        <td>"I'm uploading our Q4 plan. Summarize the key initiatives and flag any risks"</td>
+      </tr>
+      <tr>
+        <td><strong>Presentation Help</strong></td>
+        <td>"Help me structure a 10-slide deck on our 2025 roadmap for customers"</td>
+      </tr>
+      <tr>
+        <td><strong>Quick Learning</strong></td>
+        <td>"Explain what 'semantic search' means in the context of CX"</td>
+      </tr>
+      <tr>
+        <td><strong>Feedback Requests</strong></td>
+        <td>"Review this battlecard draft and suggest improvements"</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-heading" id="persistent-info" data-jump-label="Persistent Information Types">Three Types of Persistent Information</h2>
+  <p class="section-description">Understanding what Claude remembers and where</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>What It Stores</th>
+        <th>How to Edit</th>
+        <th>Scope</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Memory</strong></td>
+        <td>Facts Claude learns from conversations</td>
+        <td>Settings → Memory</td>
+        <td>All conversations</td>
+      </tr>
+      <tr>
+        <td><strong>Preferences</strong></td>
+        <td>Default model, language, theme</td>
+        <td>Settings → Preferences</td>
+        <td>All conversations</td>
+      </tr>
+      <tr>
+        <td><strong>Project Instructions</strong></td>
+        <td>Custom behavior rules</td>
+        <td>Project Settings</td>
+        <td>That project only</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 1rem;">Managing Memory</h3>
+
+  <div class="hotkey-box">
+    <div class="hotkey-item">
+      <span class="hotkey-key">Add to memory</span>
+      <span class="hotkey-desc">"Remember that I prefer concise responses"</span>
+    </div>
+    <div class="hotkey-item">
+      <span class="hotkey-key">Check memory</span>
+      <span class="hotkey-desc">"What do you remember about me?"</span>
+    </div>
+    <div class="hotkey-item">
+      <span class="hotkey-key">Remove from memory</span>
+      <span class="hotkey-desc">"Forget what you remember about my job title"</span>
+    </div>
+    <div class="hotkey-item">
+      <span class="hotkey-key">View/delete directly</span>
+      <span class="hotkey-desc">Settings → Memory → Click ✕ on any item</span>
+    </div>
+  </div>
+
+  <h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 1rem;">Memory vs. Project Instructions</h3>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th>Use Memory</th>
+        <th>Use Project Instructions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>"Always use formal tone with me"</td>
+        <td class="check">✓</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>"Use formal tone in this project only"</td>
+        <td></td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>"I work on the Marketing team"</td>
+        <td class="check">✓</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>"This project is for Q1 SKO"</td>
+        <td></td>
+        <td class="check">✓</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <CalloutBox type="breakthrough" title="Rule of Thumb">
+    <strong>Memory</strong> = about YOU (everywhere). <strong>Project Instructions</strong> = about the WORK (that project only).
+  </CalloutBox>
+
+  <h2 class="section-heading" id="file-uploads" data-jump-label="File Uploads in Chat">File Uploads in Chat</h2>
+  <p class="section-description">Three ways to share files: click attachment icon, drag-and-drop, or paste (⌘ + V)</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Formats</th>
+        <th>Max Size</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Documents</strong></td>
+        <td>PDF, DOCX, TXT, MD, RTF</td>
+        <td>30MB</td>
+      </tr>
+      <tr>
+        <td><strong>Spreadsheets</strong></td>
+        <td>XLSX, CSV</td>
+        <td>30MB</td>
+      </tr>
+      <tr>
+        <td><strong>Images</strong></td>
+        <td>PNG, JPG, JPEG, GIF, WEBP</td>
+        <td>30MB</td>
+      </tr>
+      <tr>
+        <td><strong>Code</strong></td>
+        <td>JS, PY, HTML, CSS, JSON, and 20+ more</td>
+        <td>30MB</td>
+      </tr>
+      <tr>
+        <td><strong>Presentations</strong></td>
+        <td>PPTX (converted to images)</td>
+        <td>30MB</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <CalloutBox type="breakthrough" title="Upload vs. Connectors">
+    Use <strong>Upload</strong> for local files on your computer. Use <strong>Connectors</strong> when files live in Google Drive, email, Notion, or other cloud services (next module).
+  </CalloutBox>
+
+  <h2 class="section-heading" id="extended-thinking" data-jump-label="Extended Thinking Preview">Extended Thinking (Preview)</h2>
+  <p class="section-description">Extended Thinking allows Claude to "think out loud" before responding for complex problems</p>
+
+  <CalloutBox type="limitation" title="When to Use Extended Thinking">
+    <strong>Use for:</strong> Complex multi-step problems, strategic analysis, code debugging, or when you want to see Claude's reasoning.<br><br>
+    <strong>How to request:</strong> "Think through this step by step before answering."
+  </CalloutBox>
+
+  <div class="exercise-box">
+    <h3>Try It Yourself: Starter Exercises</h3>
+    <p style="color: #666; font-size: 0.9375rem; margin-bottom: 1rem;">Practice using Chat for real tasks:</p>
+
+    <div class="exercise-item">
+      <h4>Exercise 1: Quick Research</h4>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">prompt</span>
+        </div>
+        <div class="terminal-content">I need context on [topic relevant to your role] for a meeting tomorrow.
+Give me a 2-minute verbal summary I could give to my manager.</div>
+      </div>
+    </div>
+
+    <div class="exercise-item">
+      <h4>Exercise 2: Email Drafting with Iteration</h4>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">prompt</span>
+        </div>
+        <div class="terminal-content">Draft an email for [real scenario you're facing].
+Then ask Claude to adjust the tone, length, or focus.</div>
+      </div>
+    </div>
+
+    <div class="exercise-item">
+      <h4>Exercise 3: Brainstorming</h4>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">prompt</span>
+        </div>
+        <div class="terminal-content">I'm stuck on [real challenge you're facing].
+Give me 5 different approaches I haven't considered.</div>
+      </div>
+    </div>
+
+    <div class="exercise-item">
+      <h4>Exercise 4: Memory Practice</h4>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">prompt</span>
+        </div>
+        <div class="terminal-content">Remember that I work at Gladly and my role is [your role].</div>
+      </div>
+      <p style="margin-top: 0.75rem; font-size: 0.875rem; color: #666;">Then start a new conversation and see if Claude remembers.</p>
+    </div>
+  </div>
+
+  <div class="takeaways">
+    <h3>Key Takeaways</h3>
+    <ol>
+      <li><strong>Chat = conversational collaboration</strong> — thinking together, not task execution</li>
+      <li><strong>Best for:</strong> Q&A, brainstorming, drafting, learning, iteration</li>
+      <li><strong>Limitations:</strong> Can't access local files (upload instead) or work independently</li>
+      <li><strong>Memory persists across conversations</strong> — use it for your preferences</li>
+      <li><strong>When you need file access or background work</strong> → Switch to Cowork (Intermediate path)</li>
+    </ol>
+  </div>
+
+  <div class="self-assessment">
+    <h3>Self-Assessment</h3>
+    <p>Before moving on, can you:</p>
+    <ul class="assessment-list">
+      <li>Explain when to use Chat vs. Cowork?</li>
+      <li>Upload a file and ask Claude to analyze it?</li>
+      <li>Add something to Claude's Memory?</li>
+      <li>Use Chat for brainstorming effectively?</li>
+    </ul>
+  </div>
+
+</ModuleLayout>

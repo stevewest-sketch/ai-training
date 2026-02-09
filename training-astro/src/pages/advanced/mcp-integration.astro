@@ -1,0 +1,114 @@
+---
+// src/pages/advanced/mcp-integration.astro
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'advanced';
+const module = 'mcp-integration';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Extend Claude with external service connections"
+  learningObjective="By the end of this module, you'll understand the Model Context Protocol (MCP) architecture, be able to use pre-built MCP servers, and know how to create custom integrations with proper authentication and error handling."
+>
+
+  <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 2rem; text-align: center;">
+    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔒</div>
+    <h3 style="color: #92400e; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Coming Soon</h3>
+    <p style="color: #78350f; font-size: 0.9375rem;">This module is under development. Check back soon for full content on Model Context Protocol integration.</p>
+  </div>
+
+  <h2 class="section-heading" id="resources" data-jump-label="MCP Docs and Tools">Resources</h2>
+
+  <div class="resource-card">
+    <div class="resource-icon">📖</div>
+    <div class="resource-info">
+      <h4>MCP Documentation</h4>
+      <p>Official Anthropic documentation for Model Context Protocol</p>
+    </div>
+    <a href="https://docs.anthropic.com" target="_blank" class="resource-link">Read Docs →</a>
+  </div>
+
+  <div class="resource-card">
+    <div class="resource-icon">🔧</div>
+    <div class="resource-info">
+      <h4>Agentation Features</h4>
+      <p>Pre-built MCP servers and integration tools</p>
+    </div>
+    <a href="https://agentation.dev/features" target="_blank" class="resource-link">Explore →</a>
+  </div>
+
+  <h2 class="section-heading" id="integrations" data-jump-label="Service Integrations for Agents">Relevant Integrations for 9 Agents</h2>
+  <p class="section-description">Key MCP integrations needed for Gladly's agent initiative</p>
+
+  <div class="integrations-grid">
+    <div class="integration-card">
+      <div class="integration-icon">☁️</div>
+      <h4>Salesforce</h4>
+      <p>PMM Agent, Analytics, Presentations</p>
+    </div>
+    <div class="integration-card">
+      <div class="integration-icon">📧</div>
+      <h4>Marketo</h4>
+      <p>Campaign Orchestration</p>
+    </div>
+    <div class="integration-card">
+      <div class="integration-icon">📊</div>
+      <h4>Google Workspace</h4>
+      <p>Presentations, Web</p>
+    </div>
+    <div class="integration-card">
+      <div class="integration-icon">🎨</div>
+      <h4>Figma</h4>
+      <p>Design Automation</p>
+    </div>
+    <div class="integration-card">
+      <div class="integration-icon">💬</div>
+      <h4>Slack</h4>
+      <p>PMM Agent</p>
+    </div>
+    <div class="integration-card">
+      <div class="integration-icon">🔗</div>
+      <h4>Custom APIs</h4>
+      <p>Any REST/GraphQL service</p>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="key-concepts" data-jump-label="MCP Architecture and Security">Key Concepts</h2>
+
+  <div class="concepts-grid">
+    <div class="concept-card">
+      <h4>MCP Architecture</h4>
+      <p>How MCP servers communicate with Claude and provide additional capabilities.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Pre-built vs Custom</h4>
+      <p>When to use existing MCP servers vs building custom integrations.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Authentication</h4>
+      <p>Securely connecting to external services with OAuth, API keys, and tokens.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Error Handling</h4>
+      <p>Gracefully handling failures and timeouts from external services.</p>
+    </div>
+  </div>
+
+  <CalloutBox type="limitation" title="Security Considerations">
+    MCP integrations handle sensitive data and credentials. Always follow security best practices: use environment variables for secrets, implement least-privilege access, and audit integration usage.
+  </CalloutBox>
+
+  <div class="self-assessment">
+    <h3>Self-Assessment</h3>
+    <p>Before moving on, can you:</p>
+    <ul class="assessment-list">
+      <li>Explain the MCP architecture and when to use it?</li>
+      <li>Set up and configure MCP servers for external services?</li>
+      <li>Handle authentication securely and recover from errors?</li>
+    </ul>
+  </div>
+
+</ModuleLayout>

@@ -1,0 +1,138 @@
+---
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+
+const course = 'claude-training';
+const path = 'intermediate';
+const module = 'building-automations';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Learn the automation complexity spectrum and build your first automation"
+  learningObjective="By the end of this module, you'll understand the automation complexity spectrum, know when to use Projects vs Skills vs full automations, and be ready to build automations that work across Cowork and beyond."
+>
+
+  <CalloutBox type="breakthrough" title="The Capstone Module">
+    This module brings everything together. You'll apply planning mode to design your automation, potentially create a skill to trigger it, and demonstrate it to the team.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="example-automations" data-jump-label="Example Automation Ideas">Example Automations</h2>
+  <p class="section-description">Ideas for your first automation project</p>
+
+  <div class="automation-cards">
+    <div class="automation-card">
+      <div class="automation-icon">🎨</div>
+      <h4>Design Review</h4>
+      <p>Analyze design files and generate structured feedback based on brand guidelines.</p>
+    </div>
+    <div class="automation-card">
+      <div class="automation-icon">📊</div>
+      <h4>Architecture Diagrams</h4>
+      <p>Generate visual diagrams from code or documentation descriptions.</p>
+    </div>
+    <div class="automation-card">
+      <div class="automation-icon">✍️</div>
+      <h4>Writing Critique</h4>
+      <p>Analyze content against style guides and provide specific improvement suggestions.</p>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="google-drive-video" data-jump-label="Outputs to Google Drive">Watch: Getting Outputs into Google Drive</h2>
+  <p class="section-description">Co-work-to-Google-Drive workflow and Chat's direct Google Drive integration.</p>
+
+  <VideoEmbed
+    url="https://drive.google.com/file/d/15SSjJAg5qIhQT69vtnLB6Z1TtqcD30Ae/preview"
+    title="Getting Outputs into Google Drive"
+    duration="~3.5 min"
+    presenter="Emilio Di Zazzo + Austin Reece"
+    date="Claude 101 Training • Feb 5, 2026"
+    topic="Google Drive"
+  />
+
+  <h2 class="section-heading" id="building-automation" data-jump-label="Five Steps to Build">Building Your Automation</h2>
+  <p class="section-description">Follow these steps to create your automation</p>
+
+  <div class="steps-list">
+    <div class="step-item">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h4>Choose Your Automation</h4>
+        <p>Pick something you do regularly that would benefit from AI assistance. Start simple—you can always add complexity later.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h4>Apply Planning Mode</h4>
+        <p>Use the planning process from Module 2. Create a SPEC, interview with Claude, and get a solid plan before building.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h4>Build Iteratively</h4>
+        <p>Work with Claude Code to implement your automation. Test each component as you build.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h4>Create a Skill (Optional)</h4>
+        <p>If your automation should be repeatable, wrap it in a Claude Skill for easy triggering.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <h4>Document & Demo</h4>
+        <p>Write a brief README explaining what it does and how to use it. Then demo it to the team.</p>
+      </div>
+    </div>
+  </div>
+
+  <CalloutBox type="limitation" title="Keep It Simple">
+    Your first automation doesn't need to be complex. A simple workflow that saves you 30 minutes a week is more valuable than an elaborate system you never finish building.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="demo-tips" data-jump-label="Presenting Your Automation Demo">Demo Tips</h2>
+  <p class="section-description">How to present your automation effectively</p>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">demo-outline.md</span>
+    </div>
+    <div class="terminal-content">
+<span class="comment"># Demo Structure (5-10 minutes)</span>
+
+<span class="command">1. The Problem</span>
+   What task were you doing manually? How long did it take?
+
+<span class="command">2. The Solution</span>
+   Show the automation in action. Run it live if possible.
+
+<span class="command">3. How It Works</span>
+   Briefly explain the key components (skill, prompts, etc.)
+
+<span class="command">4. Results</span>
+   Time saved, quality improvements, or other benefits.
+
+<span class="command">5. What's Next</span>
+   Potential improvements or extensions you're considering.
+    </div>
+  </div>
+
+  <div class="self-assessment">
+    <h3>Self-Assessment</h3>
+    <p>Before moving on, can you:</p>
+    <ul class="assessment-list">
+      <li>Plan and build a working automation using Claude Code?</li>
+      <li>Test an automation with real data and handle edge cases?</li>
+      <li>Document and explain your automation to others?</li>
+    </ul>
+  </div>
+</ModuleLayout>

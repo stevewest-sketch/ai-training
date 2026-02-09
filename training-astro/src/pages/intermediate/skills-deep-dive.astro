@@ -1,0 +1,219 @@
+---
+// src/pages/intermediate/skills-deep-dive.astro
+// ═══════════════════════════════════════
+// INTERMEDIATE MODULE 3: Skills Deep Dive
+// This is ALL the code needed for a module page.
+// Compare to the 484-line HTML original.
+// ═══════════════════════════════════════
+
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'intermediate';
+const module = 'skills-deep-dive';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Understand what skills actually are, how they're structured, and how to create your own"
+  learningObjective="By the end of this module, you'll understand what a Claude Skill is and when to use one, be able to create a skill.md with description and instructions, and tune a skill description so it triggers appropriately."
+>
+
+  <!-- ── Info Box ────────────────────────── -->
+  <div class="info-box">
+    <h3>Skills Are Just Markdown Files</h3>
+    <p>Remember from the Beginner path, skills are "capabilities you can call upon in natural language." Now let's look under the hood—skills are just markdown files with descriptions and instructions.</p>
+  </div>
+
+  <CalloutBox type="breakthrough" title="The Matrix Analogy">
+    Skills are like uploading kung fu to Neo—you're giving Claude the knowledge to do a specific repeatable task instantly, without having to explain it every time. Just trigger the skill, and Claude already knows what to do.
+  </CalloutBox>
+
+  <!-- ── Watch: Skills Explained ────────────────────────── -->
+  <h2 class="section-heading" id="watch-skills" data-jump-label="Skills Explained Video">Watch: Skills Explained</h2>
+  <p class="section-description">Learn the concepts behind Claude Skills</p>
+
+  <VideoEmbed
+    title="Claude Skills Explained"
+    src="https://www.youtube.com/embed/MZZCW179nKM?start=1421"
+    duration="YouTube"
+    presenter=""
+    date=""
+  />
+
+  <!-- ── Office Hours ────────────────────────── -->
+  <h2 class="section-heading" id="office-hours" data-jump-label="AI Office Hours Deep Dive">AI Office Hours: Skills Deep Dive</h2>
+  <p class="section-description">This video walks through skill creation in detail (2/2/26)</p>
+
+  <VideoEmbed
+    title="AI Office Hours - Skills"
+    src="https://drive.google.com/file/d/1ginxMOppnOw5kKrK35v6J-QyUZOQJ-Qw/preview"
+    duration="Google Drive"
+    presenter=""
+    date="AI Office Hours 2/2/26"
+  />
+
+  <!-- ── Creation Framework ────────────────────────── -->
+  <h2 class="section-heading" id="creation-framework" data-jump-label="Six-Step Skill Creation Framework">Skill Creation Framework</h2>
+  <p class="section-description">Follow this 6-step process to create effective skills</p>
+
+  <div class="data-table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Step</th>
+          <th>Action</th>
+          <th>Why It Matters</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="phase-badge">1</span></td>
+          <td>Identify the repetitive task</td>
+          <td>Skills save time on tasks you do frequently</td>
+        </tr>
+        <tr>
+          <td><span class="phase-badge">2</span></td>
+          <td>Document your manual process</td>
+          <td>You can't automate what you can't describe</td>
+        </tr>
+        <tr>
+          <td><span class="phase-badge">3</span></td>
+          <td>Write a clear description</td>
+          <td>This determines when the skill fires</td>
+        </tr>
+        <tr>
+          <td><span class="phase-badge">4</span></td>
+          <td>Create step-by-step instructions</td>
+          <td>Be specific about inputs, outputs, and edge cases</td>
+        </tr>
+        <tr>
+          <td><span class="phase-badge">5</span></td>
+          <td>Test with real examples</td>
+          <td>Validate against actual use cases</td>
+        </tr>
+        <tr>
+          <td><span class="phase-badge">6</span></td>
+          <td>Iterate on the description</td>
+          <td>Tune until it triggers at the right times</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── Resources ────────────────────────── -->
+  <h2 class="section-heading" id="resources" data-jump-label="Skills Directory and Resources">Additional Resources</h2>
+
+  <div class="resource-card">
+    <div class="resource-icon">📚</div>
+    <div class="resource-info">
+      <h4>Skills Directory</h4>
+      <p>Browse trending skills created by the community for inspiration</p>
+    </div>
+    <a href="https://skills.sh/trending" target="_blank" class="resource-link">Browse Skills →</a>
+  </div>
+
+  <!-- ── Skill Structure ────────────────────────── -->
+  <h2 class="section-heading" id="skill-structure" data-jump-label="Skill File Structure">Skill Structure</h2>
+  <p class="section-description">Skills are markdown files with two critical sections</p>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">skill-example.md</span>
+    </div>
+    <div class="terminal-content">
+<span class="comment"># Description</span>
+<span class="string">"This skill analyzes customer Slack channels weekly
+and surfaces important discussions, questions, and
+sentiment patterns for account review."</span>
+
+<span class="comment"># Instructions</span>
+1. Connect to the specified Slack channels
+2. Pull messages from the past 7 days
+3. Identify key themes, questions, and concerns
+4. Generate a summary report with action items
+5. Output as markdown or send to Slack channel
+    </div>
+  </div>
+
+  <CalloutBox type="limitation" title="Key Insight">
+    Focus most attention on tuning the <strong>description section</strong>—this determines when your skill fires. Claude scans all skill descriptions at the start of each conversation to decide which ones are relevant.
+  </CalloutBox>
+
+  <!-- ── Automation Progression ────────────────────────── -->
+  <h2 class="section-heading" id="automation-progression" data-jump-label="From Manual to Automated">Automation Progression</h2>
+  <p class="section-description">Skills can evolve from manual triggers to fully automated workflows</p>
+
+  <div class="data-table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Phase</th>
+          <th>Where to Run</th>
+          <th>Use Case</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="phase-badge">Phase 1</span></td>
+          <td>Chat / Cowork</td>
+          <td>Manual trigger, learning the skill</td>
+        </tr>
+        <tr>
+          <td><span class="phase-badge">Phase 2</span></td>
+          <td>Claude Code</td>
+          <td>Scheduled via cron job</td>
+        </tr>
+        <tr>
+          <td><span class="phase-badge">Phase 3</span></td>
+          <td>GitHub Actions + Slackbot</td>
+          <td>Fully automated recurring runs</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── Example Skills ────────────────────────── -->
+  <h2 class="section-heading" id="example-skills" data-jump-label="Example Skills to Practice">Example Skills to Build</h2>
+  <p class="section-description">Practice by creating skills for these common use cases</p>
+
+  <ul class="example-list">
+    <li class="example-item">
+      <div class="example-icon"></div>
+      <span>Weekly Slack channel pulse analysis across customer accounts</span>
+    </li>
+    <li class="example-item">
+      <div class="example-icon"></div>
+      <span>Turn demo notes into structured follow-up emails</span>
+    </li>
+    <li class="example-item">
+      <div class="example-icon"></div>
+      <span>Generate changelog summaries from commit history</span>
+    </li>
+    <li class="example-item">
+      <div class="example-icon"></div>
+      <span>Create meeting prep briefs from calendar and Slack context</span>
+    </li>
+  </ul>
+
+  <CalloutBox type="breakthrough" title="Pro Tips from Gladly AI Team (AI Office Hours 2/2/26)">
+    Build the skill yourself from scratch to learn better—don't just copy someone else's. Add output actions like "send a message to Slack" or "create a Google Doc" to make skills immediately useful. Focus on the description section—it's the most important part because it determines when your skill fires.
+  </CalloutBox>
+
+  <!-- ── Self Assessment ────────────────────────── -->
+  <div class="self-assessment">
+    <h3>Self-Assessment</h3>
+    <p>Before moving on, can you:</p>
+    <ul class="assessment-list">
+      <li>Explain what a Claude Skill is and when to use one?</li>
+      <li>Create a skill.md with description and instructions?</li>
+      <li>Tune a skill description so it triggers appropriately?</li>
+    </ul>
+  </div>
+
+</ModuleLayout>

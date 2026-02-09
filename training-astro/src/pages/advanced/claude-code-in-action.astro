@@ -1,0 +1,104 @@
+---
+// src/pages/advanced/claude-code-in-action.astro
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'advanced';
+const module = 'claude-code-in-action';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Master Claude Code's core tools and workflows"
+  learningObjective="By the end of this module, you'll master Claude Code's core tools, context management, hotkeys, and be able to use Plan Mode and Thinking Mode for complex tasks."
+>
+
+  <CalloutBox type="important" title="This is the most important training">
+    This official Anthropic course covers everything you need to know about Claude Code directly from the source. Complete this course before moving to other modules.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="when-to-use" data-jump-label="Video: When to Use Claude Code">Watch: When to Use Claude Code</h2>
+  <p class="section-description">Claude Code for multi-system agents. Competitive intel example. Chat → Co-work → Code escalation.</p>
+
+  <VideoEmbed
+    src="https://drive.google.com/file/d/18Jz2blr7PYcViQ3Dr4CMcshgf9jKPW5w/preview"
+    title="Claude Code: For Complex Multi-System Agents"
+    duration="~2.5 min"
+    presenter="Austin Reece"
+    date="Claude 101 Training • Feb 5, 2026"
+    platform="Google Drive"
+  />
+
+  <h2 class="section-heading" id="official-course" data-jump-label="Anthropic Skilljar Course">Official Course</h2>
+  <p class="section-description">Complete this course on Anthropic's Skilljar platform to earn your certificate</p>
+
+  <div class="resource-card">
+    <div class="resource-header">
+      <div class="resource-icon">🎓</div>
+      <h4>Claude Code in Action</h4>
+    </div>
+    <p>Comprehensive course covering Claude Code's core capabilities, best practices, and real-world workflows directly from Anthropic.</p>
+    <div class="resource-meta">
+      <span>📜 Certificate included</span>
+      <span>📍 Anthropic Skilljar</span>
+    </div>
+    <a href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank" class="resource-link">
+      Start Course →
+    </a>
+  </div>
+
+  <h2 class="section-heading" id="tool-selection" data-jump-label="Video: Chat vs Cowork vs Code">Watch: Tool Selection Recap</h2>
+  <p class="section-description">One-minute recap: "Always start with Chat and escalate when you hit limitations."</p>
+
+  <VideoEmbed
+    src="https://drive.google.com/file/d/1fyucvSbupeR4flT59Ubz2hw22mLe-pkX/preview"
+    title="When to Use Chat vs. Co-work vs. Code"
+    duration="~1 min"
+    presenter="Austin Reece"
+    date="Claude 101 Training • Feb 5, 2026"
+    platform="Google Drive"
+  />
+
+  <h2 class="section-heading" id="key-concepts" data-jump-label="Claude Code Skills You Will Learn">Key Concepts Covered</h2>
+  <p class="section-description">Topics you'll learn in this official course</p>
+
+  <div class="concepts-grid">
+    <div class="concept-card">
+      <h4>Core Tools</h4>
+      <p>File manipulation, command execution, code analysis, and working with your codebase.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Context Management</h4>
+      <p>/init command, CLAUDE.md files, @ mentions, and how to give Claude the right context.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Hotkeys & Commands</h4>
+      <p>Keyboard shortcuts and slash commands for efficient conversation flow.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Plan & Thinking Mode</h4>
+      <p>Using planning mode for complex tasks and thinking mode for detailed reasoning.</p>
+    </div>
+  </div>
+
+  <CalloutBox type="breakthrough" title="Why This Course Matters">
+    This course teaches the official, Anthropic-recommended ways to use Claude Code. Learning these patterns early will make everything else in this path much easier.
+  </CalloutBox>
+
+  <CalloutBox type="limitation" title="Prerequisite">
+    Make sure you have Claude Desktop installed and have completed the Beginner Path. You'll need hands-on access to Claude Code to follow along with the course exercises.
+  </CalloutBox>
+
+  <div class="self-assessment">
+    <h3>Self-Assessment</h3>
+    <p>Before moving on, can you:</p>
+    <ul class="assessment-list">
+      <li>Navigate files and run commands in Claude Code confidently?</li>
+      <li>Set up a project with /init and create a CLAUDE.md file?</li>
+      <li>Switch between regular, plan, and thinking modes?</li>
+    </ul>
+  </div>
+
+</ModuleLayout>

@@ -1,0 +1,97 @@
+---
+// src/pages/beginner/projects-intro.astro
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'beginner';
+const module = 'projects-intro';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Persistent workspaces with memory across conversations"
+  learningObjective="By the end of this module, you'll understand what Projects are, how they differ from regular chats, and when to use them."
+>
+
+  <h2 class="section-heading" id="projects-video" data-jump-label="Projects as Mini AI Agents">Watch: Projects as Mini AI Agents</h2>
+  <p class="section-description">Projects as persistent containers with files and custom instructions. NRF example.</p>
+
+  <VideoEmbed
+    title="Projects: Your Persistent AI Workspace"
+    src="https://drive.google.com/file/d/1gnNC_BK5RX-6WSYqPdNxfgixK_x0ZWvn/preview"
+    duration="6.5 min"
+    presenter="Austin Reece"
+    date="Claude 101 Training • Feb 5, 2026"
+  />
+
+  <h2 class="section-heading" id="what-projects" data-jump-label="What Are Projects?">What Are Projects?</h2>
+
+  <div class="blockquote">
+    <p>"Projects are just like a little agent. This is the most basic form of an AI agent—a space that has context that permeates across conversations."</p>
+    <cite>— Gladly AI Team</cite>
+  </div>
+
+  <p class="section-description">Think of Projects as persistent workspaces where Claude maintains memory and context across multiple conversations.</p>
+
+  <h2 class="section-heading" id="projects-vs-chats" data-jump-label="Projects vs Regular Chats">Projects vs. Regular Chats</h2>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Aspect</th>
+        <th>Regular Chat</th>
+        <th>Project</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Context</td>
+        <td>Resets each conversation</td>
+        <td>Persists across conversations</td>
+      </tr>
+      <tr>
+        <td>Focus</td>
+        <td>General-purpose</td>
+        <td>Topic or task-focused</td>
+      </tr>
+      <tr>
+        <td>Files</td>
+        <td>Upload per conversation</td>
+        <td>Always available</td>
+      </tr>
+      <tr>
+        <td>Knowledge</td>
+        <td>None shared</td>
+        <td>Can include reference documents</td>
+      </tr>
+      <tr>
+        <td>Instructions</td>
+        <td>Prompt each time</td>
+        <td>Set once, always applied</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-heading" id="when-to-use" data-jump-label="When to Use a Project">When to Use a Project</h2>
+  <ul class="feature-list">
+    <li><strong>Ongoing initiatives:</strong> Quarter-long projects, recurring work</li>
+    <li><strong>Reference-heavy work:</strong> Work that needs consistent access to key documents</li>
+    <li><strong>Team collaboration:</strong> Multiple people working on the same context</li>
+  </ul>
+
+  <h2 class="section-heading" id="create-project" data-jump-label="Creating Your First Project">Creating Your First Project</h2>
+  <ol class="steps-list">
+    <li>Click <strong>New Project</strong> in the sidebar</li>
+    <li>Name it descriptively (e.g., "Q1 SKO Planning")</li>
+    <li>Add project instructions (optional)</li>
+    <li>Upload reference documents (optional)</li>
+    <li>Start your first conversation</li>
+  </ol>
+
+  <CalloutBox type="breakthrough" title="Preview: Projects as Basic Agents">
+    We'll go much deeper on Projects in the Intermediate path. For now, understand that Projects are your gateway to more sophisticated AI collaboration—the bridge between simple chats and full AI agents.
+  </CalloutBox>
+
+</ModuleLayout>

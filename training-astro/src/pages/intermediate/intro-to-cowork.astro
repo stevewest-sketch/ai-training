@@ -1,0 +1,505 @@
+---
+// src/pages/intermediate/intro-to-cowork.astro
+// ═══════════════════════════════════════
+// INTERMEDIATE MODULE 1: Introduction to Claude Cowork
+// This is ALL the code needed for a module page.
+// Compare to the 880-line HTML original.
+// ═══════════════════════════════════════
+
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'intermediate';
+const module = 'intro-to-cowork';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Understand what Claude Cowork is, how it differs from Claude Chat, and when to use each mode"
+  learningObjective="By the end of this module, you'll understand when to use Cowork vs. Chat and be able to execute file-based tasks confidently."
+>
+
+  <!-- ── Watch: Cowork Introduction ──────────────────── -->
+  <h2 class="section-heading" id="intro-video" data-jump-label="Cowork Introduction from Claude 101">Watch: Co-work Introduction from Claude 101</h2>
+  <p class="section-description">Co-work as "Claude Code for non-developers" — sandbox, computer control, Chat vs. Co-work comparison.</p>
+
+  <VideoEmbed
+    title="Claude Co-work: Claude Code for Non-Developers"
+    src="https://drive.google.com/file/d/1NXwkzf3jtJn8Fu9GcaQr3obgIutFSCFe/preview"
+    duration="~4.5 min"
+    presenter="Austin Reece"
+    date="Claude 101 Training • Feb 5, 2026"
+  />
+
+  <!-- ── Overview ────────────────────────── -->
+  <h2 class="section-heading" id="overview" data-jump-label="What is Claude Cowork">Overview</h2>
+  <p class="section-description">In the Beginner path, you mastered Claude Chat — the conversational interface for thinking through problems, drafting content, and getting answers. Now it's time to level up.</p>
+
+  <p class="section-description"><strong>Claude Cowork</strong> is where Claude stops just talking and starts <em>doing</em>. It's the bridge between conversation and action — an AI collaborator that can work with your actual files, folders, and data on your computer.</p>
+
+  <div class="key-difference">
+    <p><strong>The Key Difference:</strong><br>Claude Chat is for <em>thinking together</em>.<br>Claude Cowork is for <em>working together</em>.</p>
+  </div>
+
+  <!-- ── Key Differences ────────────────────────── -->
+  <h2 class="section-heading" id="key-differences" data-jump-label="Chat vs Cowork Differences">What Makes Cowork Different?</h2>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Capability</th>
+        <th>Claude Chat</th>
+        <th>Claude Cowork</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Answer questions</td>
+        <td class="check">✓</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Draft content</td>
+        <td class="check">✓</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Access your files</td>
+        <td class="cross">✗</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Move/organize files</td>
+        <td class="cross">✗</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Read spreadsheets & data</td>
+        <td>Limited (upload only)</td>
+        <td class="check">✓ Full access</td>
+      </tr>
+      <tr>
+        <td>Create files on your computer</td>
+        <td class="cross">✗</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Execute multi-step workflows</td>
+        <td class="cross">✗</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Work while you describe the outcome</td>
+        <td class="cross">✗</td>
+        <td class="check">✓</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <CalloutBox type="breakthrough" title="The Mental Model">
+    <strong>Claude Chat</strong> = A brilliant colleague you can call anytime to talk through ideas<br>
+    <strong>Claude Cowork</strong> = That same colleague sitting at your desk, able to actually do the work with you
+  </CalloutBox>
+
+  <!-- ── Async Work ────────────────────────── -->
+  <h2 class="section-heading" id="async-work" data-jump-label="Cowork Runs While You Work">Cowork Works While You Do Other Things</h2>
+  <p class="section-description">One of Cowork's biggest advantages: it doesn't require constant attention</p>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot" style="background: #ff5f57;"></div>
+      <div class="terminal-dot" style="background: #febc2e;"></div>
+      <div class="terminal-dot" style="background: #28c840;"></div>
+      <span class="terminal-title">Example Request</span>
+    </div>
+    <div class="terminal-content">
+      <span style="color: #a5d6ff;">You:</span> "Analyze all files in my Q4 Reports folder and create a summary document. Save it to my Desktop when done."
+    </div>
+  </div>
+
+  <p class="section-description" style="margin-top: 1.5rem;"><strong>What Cowork does:</strong></p>
+  <ol style="list-style: none; counter-reset: step; padding: 0;">
+    <li style="padding: 0.75rem 0; padding-left: 2rem; position: relative; color: #4b5563; font-size: 0.9375rem; border-bottom: 1px solid #f0f0f0; counter-increment: step;"><span style="position: absolute; left: 0; width: 24px; height: 24px; background: #8b5cf6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600;">1</span> Acknowledges the task</li>
+    <li style="padding: 0.75rem 0; padding-left: 2rem; position: relative; color: #4b5563; font-size: 0.9375rem; border-bottom: 1px solid #f0f0f0; counter-increment: step;"><span style="position: absolute; left: 0; width: 24px; height: 24px; background: #8b5cf6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600;">2</span> Scans the folder</li>
+    <li style="padding: 0.75rem 0; padding-left: 2rem; position: relative; color: #4b5563; font-size: 0.9375rem; border-bottom: 1px solid #f0f0f0; counter-increment: step;"><span style="position: absolute; left: 0; width: 24px; height: 24px; background: #8b5cf6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600;">3</span> Analyzes each file</li>
+    <li style="padding: 0.75rem 0; padding-left: 2rem; position: relative; color: #4b5563; font-size: 0.9375rem; border-bottom: 1px solid #f0f0f0; counter-increment: step;"><span style="position: absolute; left: 0; width: 24px; height: 24px; background: #8b5cf6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600;">4</span> Creates summary</li>
+    <li style="padding: 0.75rem 0; padding-left: 2rem; position: relative; color: #4b5563; font-size: 0.9375rem; border-bottom: 1px solid #f0f0f0; counter-increment: step;"><span style="position: absolute; left: 0; width: 24px; height: 24px; background: #8b5cf6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600;">5</span> Saves to Desktop</li>
+    <li style="padding: 0.75rem 0; padding-left: 2rem; position: relative; color: #4b5563; font-size: 0.9375rem; counter-increment: step;"><span style="position: absolute; left: 0; width: 24px; height: 24px; background: #22c55e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600;">✓</span> Reports completion</li>
+  </ol>
+
+  <p class="section-description" style="margin-top: 1.5rem;"><strong>What you can do during this time:</strong></p>
+  <ul style="list-style: none; padding: 0;">
+    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: #4b5563; font-size: 0.9375rem;"><span style="position: absolute; left: 0; color: #22c55e; font-weight: 600;">→</span> Switch to other applications</li>
+    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: #4b5563; font-size: 0.9375rem;"><span style="position: absolute; left: 0; color: #22c55e; font-weight: 600;">→</span> Work on different tasks</li>
+    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: #4b5563; font-size: 0.9375rem;"><span style="position: absolute; left: 0; color: #22c55e; font-weight: 600;">→</span> Take a break</li>
+  </ul>
+
+  <CalloutBox type="limitation" title="Key Difference from Chat">
+    This is fundamentally different from Chat, where you're actively conversing throughout. Cowork can execute complex tasks autonomously while you focus elsewhere.
+  </CalloutBox>
+
+  <!-- ── When to Use ────────────────────────── -->
+  <h2 class="section-heading" id="when-to-use" data-jump-label="When to Use Each Mode">When to Use Cowork vs. Chat</h2>
+
+  <h3 style="font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-top: 1.5rem; margin-bottom: 0.75rem;">Use Claude Chat when you want to:</h3>
+  <ul style="list-style: none; margin-bottom: 1.5rem;">
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+      <span style="position: absolute; left: 0; color: #8b5cf6;">•</span>Brainstorm or think through a problem
+    </li>
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+      <span style="position: absolute; left: 0; color: #8b5cf6;">•</span>Draft an email, document, or message
+    </li>
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+      <span style="position: absolute; left: 0; color: #8b5cf6;">•</span>Get explanations or learn something new
+    </li>
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+      <span style="position: absolute; left: 0; color: #8b5cf6;">•</span>Have a back-and-forth conversation to refine ideas
+    </li>
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+      <span style="position: absolute; left: 0; color: #8b5cf6;">•</span>Quick questions and answers
+    </li>
+  </ul>
+
+  <h3 style="font-size: 1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem;">Use Claude Cowork when you want to:</h3>
+  <ul style="list-style: none; margin-bottom: 1.5rem;">
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+      <span style="position: absolute; left: 0; color: #22c55e;">•</span>Work with files already on your computer
+    </li>
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+      <span style="position: absolute; left: 0; color: #22c55e;">•</span>Organize, rename, or move folders
+    </li>
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+      <span style="position: absolute; left: 0; color: #22c55e;">•</span>Analyze data in spreadsheets or CSVs
+    </li>
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+      <span style="position: absolute; left: 0; color: #22c55e;">•</span>Create multiple files as part of a project
+    </li>
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+      <span style="position: absolute; left: 0; color: #22c55e;">•</span>Execute a multi-step workflow
+    </li>
+    <li style="padding: 0.375rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+      <span style="position: absolute; left: 0; color: #22c55e;">•</span>Have Claude <em>do</em> something rather than just <em>describe</em> it
+    </li>
+  </ul>
+
+  <CalloutBox type="limitation" title="Rule of Thumb">
+    If you find yourself saying "now take that and..." or "can you actually do this?" — you probably want Cowork.
+  </CalloutBox>
+
+  <!-- ── Tips Video ────────────────────────── -->
+  <h2 class="section-heading" id="tips-video" data-jump-label="Tips and Automation Workarounds">Watch: Co-work Tips from the Team</h2>
+  <p class="section-description">Andy's tips: always refresh + Slack reminder workaround for automations.</p>
+
+  <VideoEmbed
+    title="Co-work Updates & Automation Workarounds"
+    src="https://drive.google.com/file/d/1Wr7Ts45LCtwFcfAXJiv-Z5RitoIwDlbk/preview"
+    duration="~2 min"
+    presenter="Andy D'Amato + Austin Reece"
+    date="Claude 101 Training • Feb 5, 2026"
+  />
+
+  <!-- ── Examples ────────────────────────── -->
+  <h2 class="section-heading" id="examples" data-jump-label="Real-World Cowork Examples">Cowork in Action: Real Examples</h2>
+  <p class="section-description">Let's look at the types of tasks where Cowork shines. These aren't hypotheticals — they're the everyday workflows that make Cowork invaluable.</p>
+
+  <!-- Example 1: Organizing Files -->
+  <div class="example-card">
+    <h4>Example 1: Organizing Files</h4>
+    <p class="example-subtitle">You have a Downloads folder that's become a graveyard of random files. You need to organize it but keep putting it off.</p>
+
+    <div class="example-section">
+      <h5>What You'd Say:</h5>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">prompt</span>
+        </div>
+        <div class="terminal-content">I need help organizing my Downloads folder. Can you:
+1. Look at what's in there
+2. Suggest a folder structure based on file types
+3. Show me the plan before moving anything
+4. Then organize the files once I approve</div>
+      </div>
+    </div>
+
+    <div class="example-section">
+      <h5>What Cowork Does:</h5>
+      <div class="cowork-response">
+        <ul>
+          <li>Scans your Downloads folder</li>
+          <li>Identifies file types (PDFs, images, spreadsheets, documents, etc.)</li>
+          <li>Proposes a structure like: /Documents, /Images, /Spreadsheets, /Installers, /Archive</li>
+          <li>Waits for your approval</li>
+          <li>Moves files into the new structure</li>
+          <li>Reports what was moved where</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="key-point">
+      <p><strong>Key Point:</strong> Notice the approval step. Cowork plans before acting — you stay in control.</p>
+    </div>
+  </div>
+
+  <!-- Example 2: Analyzing Data -->
+  <div class="example-card">
+    <h4>Example 2: Analyzing Data</h4>
+    <p class="example-subtitle">You have a CSV export from Salesforce with 6 months of opportunity data. You need to understand win rates by segment.</p>
+
+    <div class="example-section">
+      <h5>What You'd Say:</h5>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">prompt</span>
+        </div>
+        <div class="terminal-content">I have a Salesforce export at /Users/me/Documents/Q3-Q4-opps.csv
+
+Can you analyze this and tell me:
+- Win rate by customer segment
+- Average deal size by segment
+- How win rates have trended month over month
+- Any segments where we're losing more than winning
+
+Show me the analysis and create a summary I could share with leadership.</div>
+      </div>
+    </div>
+
+    <div class="example-section">
+      <h5>What Cowork Does:</h5>
+      <div class="cowork-response">
+        <ul>
+          <li>Reads the CSV file directly</li>
+          <li>Processes the data (no upload needed — it accesses your file system)</li>
+          <li>Calculates the metrics you requested</li>
+          <li>Creates visualizations if helpful</li>
+          <li>Generates a shareable summary document</li>
+          <li>Saves the summary to your specified location</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="key-point">
+      <p><strong>Key Point:</strong> Cowork works with files <em>in place</em>. No uploading, no copy-pasting, no "here's the data" back and forth.</p>
+    </div>
+  </div>
+
+  <!-- Example 3: Multi-File Project Setup -->
+  <div class="example-card">
+    <h4>Example 3: Multi-File Project Setup</h4>
+    <p class="example-subtitle">You're starting a new enablement project and need to set up the folder structure with template files.</p>
+
+    <div class="example-section">
+      <h5>What You'd Say:</h5>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">prompt</span>
+        </div>
+        <div class="terminal-content">I'm starting a new project called "Q1 SKO Prep"
+
+Can you create a project folder structure at /Users/me/Projects/Q1-SKO-Prep with:
+- A planning folder with a blank project brief template
+- A content folder with subfolders for presentations, handouts, and videos
+- A logistics folder for venue, catering, and travel
+- A README file explaining the folder structure
+
+Use our standard project brief template if you know it, otherwise create a basic one.</div>
+      </div>
+    </div>
+
+    <div class="example-section">
+      <h5>What Cowork Does:</h5>
+      <div class="cowork-response">
+        <ul>
+          <li>Creates the folder structure</li>
+          <li>Generates template files</li>
+          <li>Writes the README</li>
+          <li>Reports back what was created</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="key-point">
+      <p><strong>Key Point:</strong> Cowork can create entire project scaffolds in seconds — work that would take you 15+ minutes of clicking and typing.</p>
+    </div>
+  </div>
+
+  <!-- Example 4: Batch File Operations -->
+  <div class="example-card">
+    <h4>Example 4: Batch File Operations</h4>
+    <p class="example-subtitle">You have 47 screenshots from a product demo that need to be renamed from "Screenshot 2024-01-15 at 3.42.17 PM.png" to something useful.</p>
+
+    <div class="example-section">
+      <h5>What You'd Say:</h5>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">prompt</span>
+        </div>
+        <div class="terminal-content">I have a folder of demo screenshots at /Users/me/Desktop/Demo-Screenshots
+
+Can you:
+1. Look at each image
+2. Rename them based on what's shown in the screenshot
+3. Add a sequence number prefix so they stay in order
+4. Show me the proposed renames before executing</div>
+      </div>
+    </div>
+
+    <div class="example-section">
+      <h5>What Cowork Does:</h5>
+      <div class="cowork-response">
+        <ul>
+          <li>Opens each image</li>
+          <li>Analyzes the content (sees "login screen", "dashboard", "settings page", etc.)</li>
+          <li>Proposes renames like: 01-login-screen.png, 02-dashboard-overview.png, 03-customer-profile.png</li>
+          <li>Shows you the plan</li>
+          <li>Executes after approval</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="key-point">
+      <p><strong>Key Point:</strong> Cowork can <em>see</em> images and make intelligent decisions based on content — not just metadata.</p>
+    </div>
+  </div>
+
+  <!-- ── Use Cases ────────────────────────── -->
+  <h2 class="section-heading" id="use-cases" data-jump-label="Common Use Cases at Gladly">Common Cowork Use Cases at Gladly</h2>
+  <p class="section-description">Here's how your colleagues are using Cowork today:</p>
+
+  <table class="use-case-table">
+    <thead>
+      <tr>
+        <th>Use Case</th>
+        <th>What They're Doing</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Meeting Prep</strong></td>
+        <td>"Read my last 5 emails from [client] and the attached documents, then create a prep brief for tomorrow's call"</td>
+      </tr>
+      <tr>
+        <td><strong>Content Audits</strong></td>
+        <td>"Go through /Content/Battlecards and identify any that reference [old competitor] or haven't been updated in 6 months"</td>
+      </tr>
+      <tr>
+        <td><strong>Data Cleanup</strong></td>
+        <td>"This CSV has duplicate rows and inconsistent formatting in the company name column. Clean it up and save a new version"</td>
+      </tr>
+      <tr>
+        <td><strong>Project Setup</strong></td>
+        <td>"Create a new project folder structure for [initiative] using our standard template"</td>
+      </tr>
+      <tr>
+        <td><strong>File Consolidation</strong></td>
+        <td>"Find all files related to [customer] across my Documents folder and copy them to a single folder"</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Context Video ────────────────────────── -->
+  <h2 class="section-heading" id="context-video" data-jump-label="Folder-Based Context Memory">Watch: How Co-work Remembers Context</h2>
+  <p class="section-description">How Co-work uses project folders as session memory.</p>
+
+  <VideoEmbed
+    title="How Co-work Remembers: Folder-Based Context"
+    src="https://drive.google.com/file/d/1ibDKGoJdLYI0adCLiilBYdlj0R9NjAIt/preview"
+    duration="~1 min"
+    presenter="Michael Galindo + Panel"
+    date="Claude 101 Training • Feb 5, 2026"
+  />
+
+  <!-- ── Limitations ────────────────────────── -->
+  <h2 class="section-heading" id="limitations" data-jump-label="Current Cowork Limitations">What Cowork Can't Do (Yet)</h2>
+  <p class="section-description">To set proper expectations:</p>
+
+  <ul class="limitation-list">
+    <li><strong>Can't access cloud storage directly</strong> — Files need to be on your local machine or synced locally</li>
+    <li><strong>Can't interact with web applications</strong> — That's Claude Code territory</li>
+    <li><strong>Can't run indefinitely</strong> — Very long operations may need to be broken into chunks</li>
+    <li><strong>Can't access files you don't have permissions for</strong> — System files, other user folders, etc.</li>
+  </ul>
+
+  <!-- ── Exercises ────────────────────────── -->
+  <div class="exercise-box">
+    <h3>Try It Yourself: Starter Exercises</h3>
+    <p style="color: #666; font-size: 0.9375rem; margin-bottom: 1rem;">Before moving to the next module, try these low-risk exercises to get comfortable with Cowork:</p>
+
+    <div class="exercise-item">
+      <h4>Exercise 1: Folder Inventory</h4>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">prompt</span>
+        </div>
+        <div class="terminal-content">Look at my Desktop folder and tell me:
+- How many files are there?
+- What types of files are most common?
+- Are there any files older than 6 months?
+- What would you recommend for better organization?</div>
+      </div>
+    </div>
+
+    <div class="exercise-item">
+      <h4>Exercise 2: Document Analysis</h4>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">prompt</span>
+        </div>
+        <div class="terminal-content">Read [path to a document you have] and give me:
+- A 3-sentence summary
+- The key points or decisions
+- Any action items mentioned</div>
+      </div>
+    </div>
+
+    <div class="exercise-item">
+      <h4>Exercise 3: Simple Rename (with approval)</h4>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">prompt</span>
+        </div>
+        <div class="terminal-content">I have some files in [folder path]. Can you:
+1. Look at what's there
+2. Suggest better, more descriptive names
+3. Show me the plan WITHOUT executing yet
+
+I'll tell you if I want to proceed.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Takeaways ────────────────────────── -->
+  <div class="takeaways">
+    <h3>Key Takeaways</h3>
+    <ol>
+      <li><strong>Cowork = Claude that can act</strong>, not just talk</li>
+      <li><strong>Use it for file operations</strong>, data analysis, and multi-step workflows</li>
+      <li><strong>Describe outcomes</strong>, not step-by-step instructions</li>
+      <li><strong>Always ask for a plan</strong> before file modifications</li>
+      <li><strong>Start with read-only tasks</strong> to build confidence</li>
+    </ol>
+  </div>
+
+</ModuleLayout>

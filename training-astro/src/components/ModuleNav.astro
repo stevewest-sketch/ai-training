@@ -1,0 +1,44 @@
+---
+// src/components/ModuleNav.astro
+// Previous / Next navigation buttons at the bottom of each module page.
+// Reads prev/next from courses.ts context.
+
+import { getModuleUrl, getPathUrl } from '../data/courses';
+import type { ModuleContext } from '../data/types';
+
+interface Props {
+  context: ModuleContext;
+}
+
+const { context } = Astro.props;
+const { course, path, prevModule, nextModule } = context;
+
+const prevUrl = prevModule
+  ? getModuleUrl(course.slug, path.slug, prevModule.slug)
+  : getPathUrl(course.slug, path.slug);
+
+const prevLabel = prevModule ? `Previous: ${prevModule.shortTitle}` : 'Back to Overview';
+
+const nextUrl = nextModule
+  ? getModuleUrl(course.slug, path.slug, nextModule.slug)
+  : null;
+
+const nextLabel = nextModule ? `Next: ${nextModule.shortTitle}` : null;
+---
+
+<div class="nav-buttons">
+  <a href={prevUrl} class="btn btn-secondary">
+    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+    </svg>
+    {prevLabel}
+  </a>
+  {nextUrl && nextLabel && (
+    <a href={nextUrl} class="btn btn-primary">
+      {nextLabel}
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </a>
+  )}
+</div>

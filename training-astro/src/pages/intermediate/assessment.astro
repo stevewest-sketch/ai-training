@@ -1,0 +1,177 @@
+---
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'intermediate';
+const module = 'assessment';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Demonstrate your Claude Cowork skills through self-reflection and practical work"
+  learningObjective="Complete this assessment after finishing all 6 modules in the Intermediate path. You'll reflect on your knowledge and complete 2 practical demonstrations."
+>
+
+  <div class="part-divider">
+    <h2>Part 1: Knowledge Self-Assessment</h2>
+    <p>Rate your confidence on each skill (1 = not confident, 5 = very confident)</p>
+  </div>
+
+  <ul class="assessment-list">
+    <li class="assessment-item">
+      <div class="assessment-number">1</div>
+      <div class="assessment-content">
+        <h4>I understand the difference between Claude Chat and Claude Cowork</h4>
+        <p>I can explain when to use file-based collaboration vs. conversational prompting</p>
+      </div>
+    </li>
+    <li class="assessment-item">
+      <div class="assessment-number">2</div>
+      <div class="assessment-content">
+        <h4>I can use Planning Mode effectively</h4>
+        <p>I know how to voice dump, create a SPEC, go through the interview process, and review plans</p>
+      </div>
+    </li>
+    <li class="assessment-item">
+      <div class="assessment-number">3</div>
+      <div class="assessment-content">
+        <h4>I understand Claude Skills structure and creation</h4>
+        <p>I can explain what a skill.md file contains and how descriptions determine when skills fire</p>
+      </div>
+    </li>
+    <li class="assessment-item">
+      <div class="assessment-number">4</div>
+      <div class="assessment-content">
+        <h4>I can design a Project as an agent</h4>
+        <p>I understand how Projects provide persistent context and can function like specialized agents</p>
+      </div>
+    </li>
+    <li class="assessment-item">
+      <div class="assessment-number">5</div>
+      <div class="assessment-content">
+        <h4>I understand Git concepts for Claude Code</h4>
+        <p>I can explain commits, branches, push/pull, and ask Claude to perform these operations</p>
+      </div>
+    </li>
+    <li class="assessment-item">
+      <div class="assessment-number">6</div>
+      <div class="assessment-content">
+        <h4>I can identify automation candidates in my workflow</h4>
+        <p>I know how to spot repetitive tasks and evaluate them for Claude automation</p>
+      </div>
+    </li>
+    <li class="assessment-item">
+      <div class="assessment-number">7</div>
+      <div class="assessment-content">
+        <h4>I have built my Daily Briefing Skill</h4>
+        <p>I can build a .skill file in Claude chat, install it, and generate daily briefings from connected systems</p>
+      </div>
+    </li>
+  </ul>
+
+  <div class="passing-criteria">
+    <h4>Self-Assessment Reflection</h4>
+    <p>If you rated any skill below 3, review that module before proceeding. The practical demonstrations will test these skills directly.</p>
+  </div>
+
+  <div class="part-divider">
+    <h2>Part 2: Practical Demonstrations</h2>
+    <p>Complete any 2 of the following 5 tasks to demonstrate your skills</p>
+  </div>
+
+  <div class="task-grid">
+    <div class="task-card">
+      <h4><span class="task-label">Task A</span> Custom Skill Creation</h4>
+      <ul>
+        <li>Identify a repetitive task in your workflow</li>
+        <li>Create a skill.md with description and instructions</li>
+        <li>Test the skill with at least 2 different inputs</li>
+        <li>Iterate on the description until it triggers correctly</li>
+      </ul>
+    </div>
+    <div class="task-card">
+      <h4><span class="task-label">Task B</span> Project Agent Design</h4>
+      <ul>
+        <li>Create a new Project for a specific use case</li>
+        <li>Add relevant context files (instructions, examples, data)</li>
+        <li>Test the Project with real tasks</li>
+        <li>Document what makes this Project effective</li>
+      </ul>
+    </div>
+    <div class="task-card">
+      <h4><span class="task-label">Task C</span> Documented Automation Candidate</h4>
+      <ul>
+        <li>Identify a process you do weekly or more often</li>
+        <li>Document the current manual steps</li>
+        <li>Write a SPEC for automating it with Claude</li>
+        <li>Identify inputs, outputs, and potential edge cases</li>
+      </ul>
+    </div>
+    <div class="task-card">
+      <h4><span class="task-label">Task D</span> Daily Briefing Skill</h4>
+      <ul>
+        <li>Build a daily briefing .skill file in a Claude chat conversation</li>
+        <li>Install the skill and connect at least 2 MCP sources (Slack, Gmail, Calendar, or Drive)</li>
+        <li>Run "Let's start our day" and get a daily briefing</li>
+        <li>Iterate on one aspect based on what's missing or too verbose</li>
+      </ul>
+    </div>
+    <div class="task-card">
+      <h4><span class="task-label">Task E</span> File-Based Cowork Task</h4>
+      <ul>
+        <li>Upload a real work file to Claude Cowork</li>
+        <li>Complete a meaningful transformation or analysis</li>
+        <li>Use @ mentions to reference specific files</li>
+        <li>Export or save the results for actual use</li>
+      </ul>
+    </div>
+  </div>
+
+  <CalloutBox type="breakthrough" title="What Counts as Complete">
+    For each task, you should have something tangible to show: a skill.md file, a Project you can demo, a documented SPEC, or output from a Cowork session. The goal is to prove you can apply these concepts to real work.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="completion-criteria" data-jump-label="Completion Criteria">Completion Criteria</h2>
+  <p class="section-description">You've successfully completed the Intermediate path when:</p>
+
+  <ul class="assessment-list">
+    <li class="assessment-item">
+      <div class="assessment-number">✓</div>
+      <div class="assessment-content">
+        <h4>All self-assessment ratings are 3 or higher</h4>
+        <p>You feel confident in the core concepts covered in each module</p>
+      </div>
+    </li>
+    <li class="assessment-item">
+      <div class="assessment-number">✓</div>
+      <div class="assessment-content">
+        <h4>You've completed 2 practical demonstrations</h4>
+        <p>You have tangible artifacts showing applied skills</p>
+      </div>
+    </li>
+    <li class="assessment-item">
+      <div class="assessment-number">✓</div>
+      <div class="assessment-content">
+        <h4>You're using Claude Cowork in your daily work</h4>
+        <p>File-based collaboration has become part of your workflow</p>
+      </div>
+    </li>
+  </ul>
+
+  <div class="next-steps">
+    <h3>What's Next?</h3>
+    <div class="next-step-item">
+      <span class="next-step-badge ready">Ready</span>
+      <span class="next-step-content"><strong>Continue to Advanced Path:</strong> Learn Claude Code, Git workflows, MCP servers, and production agent development</span>
+    </div>
+    <div class="next-step-item">
+      <span class="next-step-badge practice">Practice</span>
+      <span class="next-step-content"><strong>Build more skills:</strong> Create 3-5 skills for common tasks before moving on</span>
+    </div>
+    <div class="next-step-item">
+      <span class="next-step-badge review">Review</span>
+      <span class="next-step-content"><strong>Share with team:</strong> Demo your skills and Projects to colleagues</span>
+    </div>
+  </div>
+</ModuleLayout>

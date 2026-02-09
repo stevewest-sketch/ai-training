@@ -1,0 +1,241 @@
+---
+// src/pages/beginner/claude-desktop-app.astro
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'beginner';
+const module = 'claude-desktop-app';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Navigate the Claude Desktop application, understand its three modes, and configure your settings"
+  learningObjective="By the end of this module, you'll understand Claude's three product modes and navigate the Claude Desktop application confidently."
+>
+
+  <h2 class="section-heading" id="desktop-overview" data-jump-label="Claude Desktop Overview">Watch: Claude Desktop Overview</h2>
+  <p class="section-description">A quick tour of the Claude Desktop application and its three modes</p>
+
+  <VideoEmbed
+    title="Claude Desktop Overview"
+    src="https://www.loom.com/embed/97cb836202304912a45df619caa22f08"
+    source="Loom"
+  />
+
+  <h2 class="section-heading" id="interface-deep-dive" data-jump-label="Interface Deep Dive">Watch: Interface Deep Dive from Claude 101</h2>
+  <p class="section-description">Austin walks through the model selector, extended thinking, and configuration options.</p>
+
+  <VideoEmbed
+    title="Claude Desktop App: Key Interface Components"
+    src="https://drive.google.com/file/d/1Ditf_dmHN5w3EAuEX4CsbaGYxq0WRRwS/preview"
+    duration="2 min"
+    presenter="Austin Reece"
+    date="Claude 101 Training • Feb 5, 2026"
+  />
+
+  <h2 class="section-heading" id="product-family" data-jump-label="Claude Product Family">The Claude Product Family</h2>
+  <p class="section-description">Claude has three distinct products. This path focuses on Claude Chat.</p>
+
+  <table class="concept-table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>What It's For</th>
+        <th>Where You'll Learn It</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Claude Chat</strong></td>
+        <td>Conversational AI for questions, brainstorming, content creation</td>
+        <td>This path (Beginner)</td>
+      </tr>
+      <tr>
+        <td><strong>Claude Cowork</strong></td>
+        <td>File-based collaboration, planning, deeper automation</td>
+        <td>Intermediate path</td>
+      </tr>
+      <tr>
+        <td><strong>Claude Code</strong></td>
+        <td>Terminal-based development, building agents</td>
+        <td>Advanced path</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <CalloutBox type="breakthrough" title="Focus for This Path">
+    This Beginner path focuses on <strong>Claude Chat</strong>. The other modes are covered in later paths. In the next module, you'll dive deep into everything Chat can do.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="choosing-mode" data-jump-label="Choosing the Right Mode">Choosing the Right Mode</h2>
+  <p class="section-description">Quick reference for when to use each Claude mode</p>
+
+  <table class="concept-table">
+    <thead>
+      <tr>
+        <th>I Want To...</th>
+        <th>Use This</th>
+        <th>Why</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ask a quick question</td>
+        <td><strong>Chat</strong></td>
+        <td>Fastest for Q&A</td>
+      </tr>
+      <tr>
+        <td>Draft an email or document</td>
+        <td><strong>Chat</strong></td>
+        <td>Conversational iteration</td>
+      </tr>
+      <tr>
+        <td>Brainstorm ideas</td>
+        <td><strong>Chat</strong></td>
+        <td>Back-and-forth works well</td>
+      </tr>
+      <tr>
+        <td>Organize files on my computer</td>
+        <td><strong>Cowork</strong></td>
+        <td>Needs file system access</td>
+      </tr>
+      <tr>
+        <td>Analyze local spreadsheets</td>
+        <td><strong>Cowork</strong></td>
+        <td>Works with files directly</td>
+      </tr>
+      <tr>
+        <td>Have Claude work while I do other tasks</td>
+        <td><strong>Cowork</strong></td>
+        <td>Runs independently</td>
+      </tr>
+      <tr>
+        <td>Build an application</td>
+        <td><strong>Code</strong></td>
+        <td>Development environment</td>
+      </tr>
+      <tr>
+        <td>Work with Git/version control</td>
+        <td><strong>Code</strong></td>
+        <td>Code-level operations</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <CalloutBox type="limitation" title="Quick Decision Guide">
+    1. Quick question or conversation? → <strong>Chat</strong><br>
+    2. Need to access/modify local files? → <strong>Cowork</strong><br>
+    3. Building something with code? → <strong>Code</strong>
+  </CalloutBox>
+
+  <h2 class="section-heading" id="gemini-alongside" data-jump-label="Using Gemini Alongside Claude">Watch: Using Gemini Alongside Claude</h2>
+  <p class="section-description">Both tools available via enterprise license — use trial-and-error per task.</p>
+
+  <VideoEmbed
+    title="Using Gemini Alongside Claude"
+    src="https://drive.google.com/file/d/1vh91NMxdKwlNECv4ua_dZ3AziBw4tGfj/preview"
+    duration="1 min"
+    presenter="Lauren Giosa + Austin Reece"
+    date="Claude 101 Training • Feb 5, 2026"
+  />
+
+  <h2 class="section-heading" id="keyboard-shortcuts" data-jump-label="Essential Keyboard Shortcuts">Essential Keyboard Shortcuts</h2>
+  <p class="section-description">Master these shortcuts to work faster with Claude</p>
+
+  <div class="hotkey-box">
+    <div class="hotkey-item">
+      <span class="hotkey-key">⌘ + N</span>
+      <span class="hotkey-desc">Start a new conversation</span>
+    </div>
+    <div class="hotkey-item">
+      <span class="hotkey-key">⌘ + K</span>
+      <span class="hotkey-desc">Quick command palette</span>
+    </div>
+    <div class="hotkey-item">
+      <span class="hotkey-key">⌘ + /</span>
+      <span class="hotkey-desc">Toggle sidebar</span>
+    </div>
+    <div class="hotkey-item">
+      <span class="hotkey-key">⌘ + Shift + C</span>
+      <span class="hotkey-desc">Copy last response</span>
+    </div>
+    <div class="hotkey-item">
+      <span class="hotkey-key">⌘ + Enter</span>
+      <span class="hotkey-desc">Submit message</span>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="settings-nav" data-jump-label="Settings Navigation">Settings Navigation</h2>
+  <p class="section-description">Know where to find each feature in Claude's Settings</p>
+
+  <table class="concept-table">
+    <thead>
+      <tr>
+        <th>Settings Section</th>
+        <th>What's There</th>
+        <th>When You'll Use It</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Profile</strong></td>
+        <td>Account info, display name, avatar</td>
+        <td>Rarely - initial setup</td>
+      </tr>
+      <tr>
+        <td><strong>Preferences</strong></td>
+        <td>Default model, response language, theme</td>
+        <td>Once - set and forget</td>
+      </tr>
+      <tr>
+        <td><strong>Connectors</strong></td>
+        <td>Google Drive, Gmail, Slack, Calendar + 8 more</td>
+        <td>Module 1.4</td>
+      </tr>
+      <tr>
+        <td><strong>Skills</strong></td>
+        <td>Organization skills library</td>
+        <td>Module 1.9</td>
+      </tr>
+      <tr>
+        <td><strong>Memory</strong></td>
+        <td>What Claude remembers about you</td>
+        <td>Module 1.3 (Claude Chat)</td>
+      </tr>
+      <tr>
+        <td><strong>Styles</strong></td>
+        <td>Built-in and custom response styles</td>
+        <td>Module 1.8</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <CalloutBox type="breakthrough" title="Keep Updated">
+    Claude Desktop updates frequently with new features. Check for Updates in the menu regularly to ensure you have the latest capabilities.
+  </CalloutBox>
+
+  <div class="callout callout-breakthrough" style="background: #f3e8ff; border-left: 3px solid #8b5cf6;">
+    <div class="callout-title" style="color: #7c3aed;">Try It Yourself</div>
+    <p style="margin-bottom: 0.75rem;">Practice navigating the Claude Desktop application:</p>
+    <ol style="padding-left: 1.25rem; color: #4b5563; font-size: 0.875rem;">
+      <li style="padding: 0.25rem 0;">Open Claude Desktop and try 3 keyboard shortcuts from the list above</li>
+      <li style="padding: 0.25rem 0;">Navigate to Settings and explore each section</li>
+      <li style="padding: 0.25rem 0;">Find the mode toggle and switch between Chat, Cowork, and Code</li>
+      <li style="padding: 0.25rem 0;">Start a new conversation using the keyboard shortcut</li>
+    </ol>
+  </div>
+
+  <div class="self-assessment">
+    <h3>Self-Assessment</h3>
+    <p>Before moving on, can you:</p>
+    <ul class="assessment-list">
+      <li>Navigate between Claude's three modes?</li>
+      <li>Use at least 3 keyboard shortcuts?</li>
+      <li>Find the Settings menu and its key sections?</li>
+      <li>Explain when to use Chat vs. Cowork vs. Code?</li>
+    </ul>
+  </div>
+
+</ModuleLayout>

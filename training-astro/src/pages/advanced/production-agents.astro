@@ -1,0 +1,123 @@
+---
+// src/pages/advanced/production-agents.astro
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'advanced';
+const module = 'production-agents';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Build, test, and deploy a production agent"
+  learningObjective="This is your final module. You'll apply everything you've learned to build a real agent for Gladly's 9-agent initiative. Work with your team to select an agent and deliver it to production."
+>
+
+  <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 2rem; text-align: center;">
+    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔒</div>
+    <h3 style="color: #92400e; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Coming Soon</h3>
+    <p style="color: #78350f; font-size: 0.9375rem;">This module is under development. Check back soon for full content on building production-ready agents.</p>
+  </div>
+
+  <div class="info-box" style="background: #fef3c7; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; border-left: 4px solid #f59e0b;">
+    <h3 style="font-size: 1rem; font-weight: 600; color: #92400e; margin-bottom: 0.5rem;">The Capstone Project</h3>
+    <p style="color: #78350f; font-size: 0.9375rem;">This is your final module. You'll apply everything you've learned to build a real agent for Gladly's 9-agent initiative. Work with your team to select an agent and deliver it to production.</p>
+  </div>
+
+  <CalloutBox type="breakthrough" title="Real Impact">
+    The agent you build in this module will be used by real teams at Gladly. This is your opportunity to contribute directly to the AI transformation initiative.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="agent-development-checklist" data-jump-label="Development Checklist">Agent Development Checklist</h2>
+  <p class="section-description">Follow these steps to build a production-ready agent</p>
+
+  <div class="checklist">
+    <div class="checklist-header">Production Agent Checklist</div>
+    <div class="checklist-item">
+      <div class="checklist-number">1</div>
+      <div class="checklist-content">
+        <h4>Write SPEC.md using planning process</h4>
+        <p>Apply planning mode to define clear requirements, scope, and success criteria.</p>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-number">2</div>
+      <div class="checklist-content">
+        <h4>Define inputs, outputs, and integrations</h4>
+        <p>Document what data the agent needs, what it produces, and what systems it connects to.</p>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-number">3</div>
+      <div class="checklist-content">
+        <h4>Implement guardrails and approval workflows</h4>
+        <p>Add human-in-the-loop controls for sensitive actions and clear boundaries.</p>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-number">4</div>
+      <div class="checklist-content">
+        <h4>Build in sagansystems GitHub org</h4>
+        <p>Set up the repository following Gladly's standards and conventions.</p>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-number">5</div>
+      <div class="checklist-content">
+        <h4>Test locally with sample data</h4>
+        <p>Validate functionality, error handling, and edge cases before deployment.</p>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-number">6</div>
+      <div class="checklist-content">
+        <h4>Document usage and limitations</h4>
+        <p>Create clear documentation for users including capabilities, limitations, and examples.</p>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-number">7</div>
+      <div class="checklist-content">
+        <h4>Create user training materials</h4>
+        <p>Build guides or videos to help users understand and adopt the agent.</p>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="checklist-number">8</div>
+      <div class="checklist-content">
+        <h4>Deploy and monitor</h4>
+        <p>Launch the agent and set up monitoring for performance and issues.</p>
+      </div>
+    </div>
+  </div>
+
+  <CalloutBox type="limitation" title="Quality Bar">
+    Production agents must be reliable, secure, and well-documented. Take time to do it right—a rushed deployment causes more problems than it solves.
+  </CalloutBox>
+
+  <div class="self-assessment">
+    <h3>Self-Assessment</h3>
+    <p>Before completing this path, can you:</p>
+    <ul class="assessment-list">
+      <li>Follow the full production agent checklist independently?</li>
+      <li>Pass code review and security review standards?</li>
+      <li>Deploy and monitor an agent in production?</li>
+    </ul>
+  </div>
+
+  <div class="path-quiz">
+    <h3>Advanced Path Quiz</h3>
+    <p>Complete this quiz to earn your Agent Developer certificate:</p>
+    <a href="#" class="btn-quiz" onclick="alert('Quiz form URL coming soon. Contact your admin to set up the Google Form.'); return false;">
+      Take the Quiz →
+    </a>
+  </div>
+
+  <div class="completion-banner">
+    <h3>Congratulations, Agent Developer!</h3>
+    <p>You've completed the Advanced Path and are now certified to build production agents for Gladly.</p>
+    <a href="/" class="btn" style="background: white; color: #f59e0b;">View All Paths →</a>
+  </div>
+
+</ModuleLayout>

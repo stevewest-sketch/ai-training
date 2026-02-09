@@ -1,0 +1,118 @@
+---
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'intermediate';
+const module = 'projects-as-agents';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="See Projects not just as folders, but as the foundation for building AI agents"
+  learningObjective='"Projects are just a little agent. This is the most basic form of an AI agent—a space that has context that permeates across conversations." — Gladly AI Team'
+>
+
+  <CalloutBox type="breakthrough" title="From Folder to Agent">
+    In the Beginner path, you learned Projects as persistent workspaces. Now let's reframe them through an agent lens—Projects have persistent memory, specialized knowledge, consistent behavior, and tool access.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="key-concepts" data-jump-label="What Makes Projects Powerful">Key Concepts</h2>
+  <p class="section-description">What makes Projects powerful</p>
+
+  <div class="concepts-grid">
+    <div class="concept-card">
+      <h4>Persistent Context</h4>
+      <p>Projects remember uploaded files and instructions across conversations, so you don't restart from scratch.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Reference Materials</h4>
+      <p>Add documents, code files, and data that Claude can reference when answering questions or generating content.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Custom Instructions</h4>
+      <p>Set project-specific behavior like tone, format preferences, and domain-specific terminology.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Team Sharing</h4>
+      <p>Share projects with teammates so everyone works with the same context and instructions.</p>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="creating-project" data-jump-label="Step-by-Step Project Setup">Creating a Project</h2>
+  <p class="section-description">Step-by-step guide to setting up your first project</p>
+
+  <div class="steps-list">
+    <div class="step-item">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h4>Open Projects in Claude</h4>
+        <p>Click the Projects icon in the sidebar or go to claude.ai/projects to access your projects.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h4>Create New Project</h4>
+        <p>Click "New Project" and give it a descriptive name that reflects its purpose.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h4>Add Reference Materials</h4>
+        <p>Upload documents, paste text, or add files that Claude should know about. Think style guides, data files, or documentation.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h4>Write Custom Instructions</h4>
+        <p>Tell Claude how to behave in this project. Include role, tone, output preferences, and any domain-specific context.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <h4>Start a Conversation</h4>
+        <p>Begin chatting with Claude in your project. It now has access to all your reference materials and follows your custom instructions.</p>
+      </div>
+    </div>
+  </div>
+
+  <CalloutBox type="limitation" title="Projects vs. Skills">
+    <strong>Projects</strong> are best for ongoing work with consistent context—like a research project or content creation for a specific product. <strong>Skills</strong> are better for repeatable actions you trigger on demand—like generating a weekly report or processing data in a specific format.
+  </CalloutBox>
+
+  <h2 class="section-heading" id="project-ideas" data-jump-label="Effective Project Ideas to Try">Project Ideas</h2>
+  <p class="section-description">Examples of effective Claude Projects</p>
+
+  <div class="concepts-grid">
+    <div class="concept-card">
+      <h4>Product Knowledge Base</h4>
+      <p>Upload product docs, FAQs, and positioning guides. Ask Claude questions about the product anytime.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Content Style Guide</h4>
+      <p>Add brand guidelines, voice/tone docs, and example content. Generate on-brand content consistently.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Research Repository</h4>
+      <p>Compile research papers, interview notes, and data. Ask Claude to synthesize findings or find connections.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Code Documentation</h4>
+      <p>Upload README files, API docs, and architecture diagrams. Get help understanding or extending the codebase.</p>
+    </div>
+  </div>
+
+  <div class="self-assessment">
+    <h3>Self-Assessment</h3>
+    <p>Before moving on, can you:</p>
+    <ul class="assessment-list">
+      <li>Create a Claude Project with reference materials?</li>
+      <li>Write effective custom instructions for a project?</li>
+      <li>Explain when to use a Project vs. a Skill?</li>
+    </ul>
+  </div>
+</ModuleLayout>

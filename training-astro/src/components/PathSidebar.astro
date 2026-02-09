@@ -1,0 +1,34 @@
+---
+// src/components/PathSidebar.astro
+// Horizontal tab navigation for modules within a learning path.
+// Reads from courses.ts — never hard-code module links.
+
+import { getPath, getModuleUrl } from '../data/courses';
+
+interface Props {
+  courseSlug: string;
+  pathSlug: string;
+  activeModuleSlug?: string;
+}
+
+const { courseSlug, pathSlug, activeModuleSlug } = Astro.props;
+const path = getPath(courseSlug, pathSlug);
+if (!path) return;
+
+const pathUrl = courseSlug === 'claude-training' ? `/${pathSlug}/` : `/${courseSlug}/${pathSlug}/`;
+---
+
+<nav class="section-tabs">
+  <a href={pathUrl} class:list={['tab', { active: !activeModuleSlug }]}>
+    Overview
+  </a>
+  {path.modules.map((mod) => (
+    <a
+      href={getModuleUrl(courseSlug, pathSlug, mod.slug)}
+      class:list={['tab', { active: mod.slug === activeModuleSlug }]}
+    >
+      {mod.shortTitle}
+      {mod.status === 'coming-soon' && <span style="margin-left:0.25rem;font-size:0.75rem;">🔒</span>}
+    </a>
+  ))}
+</nav>

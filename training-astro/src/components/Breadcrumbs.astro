@@ -1,0 +1,26 @@
+---
+// src/components/Breadcrumbs.astro
+// Auto-generates breadcrumb trail from course > path > module
+
+import { getPathUrl } from '../data/courses';
+import type { ModuleContext } from '../data/types';
+
+interface Props {
+  context: ModuleContext;
+}
+
+const { context } = Astro.props;
+const { course, path, module } = context;
+
+const pathUrl = getPathUrl(course.slug, path.slug);
+---
+
+<div class="breadcrumb">
+  <div class="breadcrumb-content">
+    <a href="/">Training Hub</a>
+    <span class="breadcrumb-separator">›</span>
+    <a href={pathUrl}>{path.subtitle}</a>
+    <span class="breadcrumb-separator">›</span>
+    <span class="breadcrumb-current">{module.title}</span>
+  </div>
+</div>

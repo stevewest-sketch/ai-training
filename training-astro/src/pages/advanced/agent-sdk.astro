@@ -1,0 +1,79 @@
+---
+// src/pages/advanced/agent-sdk.astro
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+
+const course = 'claude-training';
+const path = 'advanced';
+const module = 'agent-sdk';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Build agents using Anthropic's official Agent SDK"
+  learningObjective="By the end of this module, you'll understand agent architecture patterns, be able to define tools with proper schemas, manage agent state, and test agents locally before deployment."
+>
+
+  <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 2rem; text-align: center;">
+    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔒</div>
+    <h3 style="color: #92400e; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Coming Soon</h3>
+    <p style="color: #78350f; font-size: 0.9375rem;">This module is under development. Check back soon for full content on building agents with Anthropic's official SDK.</p>
+  </div>
+
+  <h2 class="section-heading" id="workshop" data-jump-label="Video: Full SDK Workshop">Watch: Agent SDK Workshop</h2>
+  <p class="section-description">Full workshop on building agents with the official SDK</p>
+
+  <VideoEmbed
+    url="https://www.youtube.com/embed/TqC1qOfiVcQ"
+    title="Agent SDK Full Workshop"
+    platform="YouTube"
+  />
+
+  <h2 class="section-heading" id="documentation" data-jump-label="Official SDK Documentation">Documentation</h2>
+
+  <div class="resource-card">
+    <div class="resource-icon">📖</div>
+    <div class="resource-info">
+      <h4>Agent SDK Documentation</h4>
+      <p>Official Anthropic documentation for the Agent SDK</p>
+    </div>
+    <a href="https://docs.anthropic.com" target="_blank" class="resource-link">Read Docs →</a>
+  </div>
+
+  <h2 class="section-heading" id="key-concepts" data-jump-label="Agent Architecture and Tools">Key Concepts</h2>
+
+  <div class="concepts-grid">
+    <div class="concept-card">
+      <h4>Agent Architecture</h4>
+      <p>Core patterns for structuring agents including input processing, reasoning, and action execution.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Tool Definitions</h4>
+      <p>Creating tool schemas that define what actions your agent can take and their parameters.</p>
+    </div>
+    <div class="concept-card">
+      <h4>State Management</h4>
+      <p>Tracking conversation context, user preferences, and operational state across interactions.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Local Testing</h4>
+      <p>Testing agents locally with mock data before deploying to production environments.</p>
+    </div>
+  </div>
+
+  <CalloutBox type="breakthrough" title="The Foundation of Gladly's 9 Agents">
+    Every agent in Gladly's initiative will be built using these SDK patterns. Master them here to contribute to any agent project.
+  </CalloutBox>
+
+  <div class="self-assessment">
+    <h3>Self-Assessment</h3>
+    <p>Before moving on, can you:</p>
+    <ul class="assessment-list">
+      <li>Build a functional agent using the official SDK?</li>
+      <li>Define tools with proper schemas and parameters?</li>
+      <li>Implement state management across agent interactions?</li>
+    </ul>
+  </div>
+
+</ModuleLayout>

@@ -1,0 +1,72 @@
+---
+// src/components/JumpNav.astro
+// Fixed right sidebar that shows section navigation within a module page.
+// Auto-discovers h2.section-heading[id] elements on the page.
+// Highlights the current section based on scroll position.
+---
+
+<aside class="jump-nav-sidebar" id="jumpNavSidebar">
+  <div class="jump-nav-label">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2">
+      <line x1="3" y1="12" x2="21" y2="12"/>
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+    On this page
+  </div>
+  <div class="jump-nav-links" id="jumpNavLinks"></div>
+</aside>
+
+<script>
+(function () {
+  'use strict';
+  const HEADING_SELECTOR = 'main h2.section-heading[id]';
+  const MIN_SECTIONS = 2;
+  const SCROLL_OFFSET = 220;
+
+  const sidebar = document.getElementById('jumpNavSidebar');
+  const linksContainer = document.getElementById('jumpNavLinks');
+  if (!sidebar || !linksContainer) return;
+
+  const headings = document.querySelectorAll(HEADING_SELECTOR);
+  if (headings.length < MIN_SECTIONS) {
+    sidebar.hidden = true;
+    return;
+  }
+
+  headings.forEach((heading, i) => {
+    const label = heading.dataset.jumpLabel || heading.textContent.trim();
+    const link = document.createElement('a');
+    link.href = '#' + heading.id;
+    link.textContent = label;
+    if (i === 0) link.classList.add('active');
+    linksContainer.appendChild(link);
+  });
+
+  const jumpLinks = linksContainer.querySelectorAll('a');
+
+  function updateActiveLink() {
+    let currentId = '';
+    headings.forEach(h => {
+      if (h.getBoundingClientRect().top <= SCROLL_OFFSET) {
+        currentId = h.id;
+      }
+    });
+    jumpLinks.forEach(link => {
+      const isActive = link.getAttribute('href') === '#' + currentId;
+      link.classList.toggle('active', isActive);
+    });
+  }
+
+  linksContainer.addEventListener('click', e => {
+    const link = e.target.closest('a');
+    if (!link) return;
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  updateActiveLink();
+})();
+</script>

@@ -1,0 +1,30 @@
+---
+// src/components/ModuleHeader.astro
+// Displays: MODULE X OF Y indicator, title, subtitle, and learning objective box
+
+import type { ModuleContext } from '../data/types';
+
+interface Props {
+  context: ModuleContext;
+  subtitle?: string;
+  learningObjective?: string;
+}
+
+const { context, subtitle, learningObjective } = Astro.props;
+const { module, moduleNumber, totalModules } = context;
+
+const indicator = module.isAssessment
+  ? `${context.path.slug.toUpperCase()} PATH ASSESSMENT`
+  : `MODULE ${moduleNumber} OF ${totalModules}`;
+---
+
+<div class="section-indicator">{indicator}</div>
+<h1 class="page-title">{module.title}</h1>
+{subtitle && <p class="page-subtitle">{subtitle}</p>}
+
+{learningObjective && (
+  <div class="info-box">
+    <h3>Learning Objective</h3>
+    <p>{learningObjective}</p>
+  </div>
+)}

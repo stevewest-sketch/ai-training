@@ -1,0 +1,155 @@
+---
+// src/pages/advanced/planning-mode-code.astro
+import ModuleLayout from '../../layouts/ModuleLayout.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+
+const course = 'claude-training';
+const path = 'advanced';
+const module = 'planning-mode-code';
+---
+
+<ModuleLayout
+  {course} {path} {module}
+  subtitle="Master the full 6-step planning process using SPEC files and the interview prompt technique"
+  learningObjective="By the end of this module, you'll be able to apply the 6-step planning process for complex development projects using SPEC.md files and the interview prompt technique."
+>
+
+  <h2 class="section-heading" id="beyond-cowork" data-jump-label="Formalizing Plans in Claude Code">Beyond Cowork Planning</h2>
+  <p class="section-description">In the Intermediate path, you learned planning as a motion—sharing context and letting Claude propose approaches. In Claude Code, we formalize this with:</p>
+
+  <ul style="list-style: none; margin-bottom: 1.5rem;">
+    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+      <span style="position: absolute; left: 0; color: #f59e0b; font-weight: 600;">•</span><strong>SPEC.md files</strong> — Persistent planning documents
+    </li>
+    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+      <span style="position: absolute; left: 0; color: #f59e0b; font-weight: 600;">•</span><strong>The interview prompt</strong> — A specific technique for complex projects
+    </li>
+    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: #4b5563;">
+      <span style="position: absolute; left: 0; color: #f59e0b; font-weight: 600;">•</span><strong>Plan-then-execute</strong> — Approval gates before code changes
+    </li>
+  </ul>
+
+  <h2 class="section-heading" id="six-step-process" data-jump-label="The Six Planning Steps">The 6-Step Planning Process</h2>
+
+  <div class="steps-list">
+    <div class="step-item">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h4>Create SPEC.md</h4>
+        <p>Start every project with a specification file that captures what you're building, why it matters, success criteria, and known constraints.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h4>Run the Interview Prompt</h4>
+        <p>Use a structured prompt to have Claude interview you about the project until it has everything needed to create a solid plan.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h4>Answer Claude's Questions</h4>
+        <p>Claude will ask about edge cases, technical constraints, integration requirements, and testing expectations you may not have considered.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h4>Review the Proposed Plan</h4>
+        <p>Claude generates a detailed implementation plan. Review it for completeness, correct understanding, and reasonable approach.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <h4>Approve and Execute</h4>
+        <p>Once satisfied, approve the plan. Claude begins implementation, checking in at key milestones.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">6</div>
+      <div class="step-content">
+        <h4>Update SPEC as You Go</h4>
+        <p>The SPEC file becomes living documentation. Update it as requirements evolve or you learn new information.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="interview-prompt" data-jump-label="Let Claude Interview You">The Interview Prompt</h2>
+  <p class="section-description">Use this prompt to kick off the planning process:</p>
+
+  <div class="interview-prompt">
+    <h4>The Interview Prompt Pattern</h4>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="terminal-dot red"></div>
+        <div class="terminal-dot yellow"></div>
+        <div class="terminal-dot green"></div>
+        <span class="terminal-title">interview-prompt.md</span>
+      </div>
+      <div class="terminal-content">Read the SPEC.md file. Then interview me about this project.
+
+Ask questions one at a time until you have everything you need to:
+1. Understand the full scope
+2. Identify potential challenges
+3. Propose an implementation approach
+
+Don't start building until I approve your plan.</div>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="spec-template" data-jump-label="SPEC.md File Template">The SPEC.md Template</h2>
+  <p class="section-description">Use this template to start every project:</p>
+
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">SPEC.md</span>
+    </div>
+    <div class="terminal-content"><span class="heading"># Project: [Name]</span>
+
+<span class="section">## Overview</span>
+[What this project does and why it matters]
+
+<span class="section">## Goals</span>
+- [ ] Goal 1
+- [ ] Goal 2
+- [ ] Goal 3
+
+<span class="section">## Success Criteria</span>
+- [How we know it's working]
+- [Metrics or outcomes to measure]
+
+<span class="section">## Constraints</span>
+- [Technical limitations]
+- [Timeline requirements]
+- [Dependencies]
+
+<span class="section">## Open Questions</span>
+- [Things we still need to figure out]
+
+<span class="section">## Implementation Plan</span>
+<span class="comment">[Filled in after interview process]</span>
+
+<span class="section">## Progress Log</span>
+<span class="comment">[Updated as work progresses]</span></div>
+  </div>
+
+  <CalloutBox type="breakthrough" title="Why This Works">
+    SPEC files make planning persistent—context survives across sessions. The interview prompt surfaces unknowns you didn't know to ask about. Approval gates prevent runaway execution and keep you in control.
+  </CalloutBox>
+
+  <div class="takeaways">
+    <h3>Key Takeaways</h3>
+    <ol>
+      <li><strong>SPEC files make planning persistent</strong> — context survives across sessions</li>
+      <li><strong>The interview prompt surfaces unknowns</strong> — better plans through questions</li>
+      <li><strong>Approval gates prevent runaway execution</strong> — you stay in control</li>
+      <li><strong>Update specs as you learn</strong> — living documentation</li>
+    </ol>
+  </div>
+
+</ModuleLayout>
